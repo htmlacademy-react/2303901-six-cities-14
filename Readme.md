@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Артем Шмагин](https://up.htmlacademy.ru/react/14/user/2303901).
-* Наставник: `Неизвестно`.
+* Наставник: [Arthur Litovko](https://htmlacademy.ru/profile/id6927).
 
 ---
 
