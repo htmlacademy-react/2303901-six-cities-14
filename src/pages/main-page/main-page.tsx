@@ -97,7 +97,7 @@ function MainPages ({CountOffers: countOffers}: MainPagesProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                {Array.from({length: countOffers}, (_, index: number) => <CardOffer key = {index} id = {index} />)};
+                {Array.from({length: countOffers}, (_, index: number) => <CardOffer key = {index}/>)};
 
               </div>
             </section>
