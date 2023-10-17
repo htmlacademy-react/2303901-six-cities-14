@@ -1,4 +1,4 @@
-function offerNotLoggedPage () : JSX.Element {
+function OfferNotLoggedPage () : JSX.Element {
 
   return (
     <div className="page">
@@ -349,4 +349,4 @@ function offerNotLoggedPage () : JSX.Element {
   );
 }
 
-export default offerNotLoggedPage;
+export default OfferNotLoggedPage;

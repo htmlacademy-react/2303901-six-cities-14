@@ -1,13 +1,12 @@
 import CardOffer from '../../components/card-offers/card';
 
 type MainPagesProps = {
-  offerCounts: number;
+  CountOffers: number;
 }
 
-function MainPages ({offerCounts}: MainPagesProps): JSX.Element {
+function MainPages ({CountOffers: countOffers}: MainPagesProps): JSX.Element {
 
   return (
-
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
@@ -80,7 +79,7 @@ function MainPages ({offerCounts}: MainPagesProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offerCounts} places to stay in Amsterdam</b>
+              <b className="places__found"> {countOffers} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -98,11 +97,7 @@ function MainPages ({offerCounts}: MainPagesProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                <CardOffer/>
-                <CardOffer/>
-                <CardOffer/>
-                <CardOffer/>
-                <CardOffer/>
+                {Array.from({length: countOffers}, (_, index: number) => <CardOffer key = {index} id = {index} />)};
 
               </div>
             </section>
@@ -113,7 +108,6 @@ function MainPages ({offerCounts}: MainPagesProps): JSX.Element {
         </div>
       </main>
     </div>
-
   );
 }
 

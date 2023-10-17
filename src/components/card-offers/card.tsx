@@ -1,4 +1,8 @@
-function CardOffer () : JSX.Element{
+type PropsIdCard = {
+  id: number;
+}
+
+function CardOffer ({id}: PropsIdCard) : JSX.Element{
 
   return(
     <article className="cities__card place-card">
