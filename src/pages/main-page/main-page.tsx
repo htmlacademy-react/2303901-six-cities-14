@@ -1,10 +1,15 @@
 import CardOffer from '../../components/card-offers/card';
+import useDocumentTitle from '../../hooks/document-title/document-title';
+
 
 type MainPagesProps = {
   CountOffers: number;
+  Title: string;
 }
 
-function MainPages ({CountOffers: countOffers}: MainPagesProps): JSX.Element {
+function MainPages ({CountOffers: countOffers, Title: title}: MainPagesProps): JSX.Element {
+
+  useDocumentTitle(title);
 
   return (
     <div className="page page--gray page--main">

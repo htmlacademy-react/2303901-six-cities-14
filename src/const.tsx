@@ -16,5 +16,13 @@ const Offers = {
   Unknown = 'UNKNOWN'
 }
 
-export {Offers, AppRoute, AuthorizationStatus};
+enum TitleDescription {
+  MainPage = '6 cities',
+  LoginPage = '6 cities: authorization',
+  FavoritePage = '6 cities: favorites',
+  OfferPage = '6 cities: offer',
+  ErrorPage = '6 cities: error'
+}
+
+export {Offers, AppRoute, AuthorizationStatus, TitleDescription};
 

@@ -1,4 +1,12 @@
-function OfferPage () : JSX.Element {
+import useDocumentTitle from '../../hooks/document-title/document-title';
+
+type OfferPagesProps = {
+  Title: string;
+}
+
+function OfferPage ({Title: title} : OfferPagesProps) : JSX.Element {
+
+  useDocumentTitle(title);
 
   return(
     <div className="page">

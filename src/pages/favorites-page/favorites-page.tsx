@@ -1,4 +1,12 @@
-function FavoritesPage () : JSX.Element {
+import useDocumentTitle from '../../hooks/document-title/document-title';
+
+type FavoritePagesProps = {
+  Title: string;
+}
+
+function FavoritesPage ({Title: title} :FavoritePagesProps) : JSX.Element {
+
+  useDocumentTitle(title);
 
   return (
     <div className="page">
