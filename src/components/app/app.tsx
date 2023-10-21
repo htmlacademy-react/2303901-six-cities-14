@@ -6,11 +6,11 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import ErrorMessage from '../error-message/error-message';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
-import type {offers} from '../../mock/offers/offers';
+import type {Offers} from '../../mock/offers/offer-mocks';
 
 type AppOfferProps = {
   CountOffers: number;
-  OfferProps: offers;
+  OfferProps: Offers;
 }
 
 
@@ -30,8 +30,8 @@ function App({CountOffers: countOffers, OfferProps: offers}: AppOfferProps,): JS
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
-              <FavoritesPage Title = {TitleDescription.FavoritePage}/>
+            <PrivateRoute authorizationStatus = {AuthorizationStatus.Auth}>
+              <FavoritesPage Title = {TitleDescription.FavoritePage} Offers = {offers}/>
             </PrivateRoute>
           }
         />

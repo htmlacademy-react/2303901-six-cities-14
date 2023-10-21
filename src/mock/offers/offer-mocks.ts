@@ -42,9 +42,9 @@ location: OfferLocation;
 id:string;
 }
 
-type offers = Offer[]
+type Offers = Offer[]
 
-const offersMock: offers = [
+const offersMock: Offers = [
   {
     city: {
       name: 'Dusseldorf',
@@ -124,7 +124,7 @@ const offersMock: offers = [
       'https://14.react.pages.academy/static/offer/13.jpg'
     ],
     title: 'House in countryside',
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 2.8,
     type: 'room',
@@ -293,7 +293,7 @@ const offersMock: offers = [
       'https://14.react.pages.academy/static/offer/1.jpg'
     ],
     title: 'The house among olive',
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 4.4,
     type: 'house',
@@ -326,4 +326,4 @@ const offersMock: offers = [
 ];
 
 export {offersMock};
-export type {offers};
+export type {Offers, Offer};
