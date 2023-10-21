@@ -1,4 +1,4 @@
-const Offers = {
+const OffersCount = {
   CountOffers: 5,
 };
 
@@ -6,7 +6,7 @@ const Offers = {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id',
+  Offer = '/offer',
   Error = '/error'
 }
 
@@ -24,5 +24,5 @@ enum TitleDescription {
   ErrorPage = '6 cities: error'
 }
 
-export {Offers, AppRoute, AuthorizationStatus, TitleDescription};
+export {OffersCount, AppRoute, AuthorizationStatus, TitleDescription};
 

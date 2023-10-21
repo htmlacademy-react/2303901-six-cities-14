@@ -1,13 +1,14 @@
 import CardOffer from '../../components/card-offers/card';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-
+import type {offers} from '../../mock/offers/offers';
 
 type MainPagesProps = {
   CountOffers: number;
   Title: string;
+  Offers: offers;
 }
 
-function MainPages ({CountOffers: countOffers, Title: title}: MainPagesProps): JSX.Element {
+function MainPages ({CountOffers: countOffers, Title: title, Offers: offers}: MainPagesProps): JSX.Element {
 
   useDocumentTitle(title);
 
@@ -102,7 +103,7 @@ function MainPages ({CountOffers: countOffers, Title: title}: MainPagesProps): J
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                {Array.from({length: countOffers}, (_, index: number) => <CardOffer key = {index}/>)};
+                {Array.from({length: countOffers}, (_, index: number) => <CardOffer key = {index} Offers = {offers}/>)};
 
               </div>
             </section>

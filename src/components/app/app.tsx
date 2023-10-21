@@ -6,18 +6,22 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import ErrorMessage from '../error-message/error-message';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
+import type {offers} from '../../mock/offers/offers';
 
 type AppOfferProps = {
   CountOffers: number;
+  OfferProps: offers;
 }
 
-function App({CountOffers: countOffers}: AppOfferProps,): JSX.Element {
+
+function App({CountOffers: countOffers, OfferProps: offers}: AppOfferProps,): JSX.Element {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element ={<MainPages CountOffers = {countOffers} Title = {TitleDescription.MainPage} />}
+          element ={<MainPages CountOffers = {countOffers} Title = {TitleDescription.MainPage} Offers = {offers}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -26,13 +30,13 @@ function App({CountOffers: countOffers}: AppOfferProps,): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute authorizationStatus = {AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
               <FavoritesPage Title = {TitleDescription.FavoritePage}/>
             </PrivateRoute>
           }
         />
         <Route
-          path={AppRoute.Offer}
+          path={`${AppRoute.Offer}/:offerId`}
           element ={<OfferPage Title = {TitleDescription.OfferPage}/>}
         />
         <Route
