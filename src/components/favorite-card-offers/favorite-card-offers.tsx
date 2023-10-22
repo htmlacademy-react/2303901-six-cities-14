@@ -1,38 +1,22 @@
-import {Link} from 'react-router-dom';
-import {useState} from 'react';
 import type { Offer } from '../../mock/offers/offer-mocks';
-import { AppRoute } from '../../const';
 
-type CardPagesProps = {
+type FavoriteOfferProps = {
   Offer: Offer;
 }
 
+function FavoriteCardOffer ({Offer: offer}: FavoriteOfferProps): JSX.Element {
 
-function CardOffer ({Offer: offer}: CardPagesProps) : JSX.Element{
-
-  const [cardState, setCardState] = useState({
-    offerId: ''
-  });
-
-  function onGetIdCard () {
-    setCardState({
-      ...cardState,
-      offerId: offer.id,
-    });
-  }
-
-  function onChangePage () {
-  }
-
-  return(
-    <article className="cities__card place-card" onMouseOver = {onGetIdCard} onClick = {onChangePage}>
-
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Offer}/:offerId`} >
-          <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
-        </Link>
+  return (
+    <article className="favorites__card place-card">
+      <div className="place-card__mark">
+        <span>Premium</span>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__image-wrapper place-card__image-wrapper">
+        <a href="#">
+          <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image"/>
+        </a>
+      </div>
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -47,18 +31,17 @@ function CardOffer ({Offer: offer}: CardPagesProps) : JSX.Element{
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: (offer.rating / 5) * 100}}></span>
+            <span style={{width: (offer.rating / 5) * 100}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <a href="#">Nice, cozy, warm big bed apartment</a>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">Apartment</p>
       </div>
-
     </article>
   );
 }
 
-export default CardOffer;
+export default FavoriteCardOffer;
