@@ -15,7 +15,7 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
 
   useDocumentTitle(title);
 
-  console.log(idOffer)
+  console.log(idOffer);
 
   return(
     <div className="page">

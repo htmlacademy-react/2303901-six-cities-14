@@ -1,7 +1,10 @@
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 
 type CommentState = {
   comment: string;
+};
+
+type RatingState = {
   ratingOffer: string;
 };
 
@@ -10,6 +13,9 @@ function FormSendComment (): JSX.Element {
 
   const [sateComment, setStateComment] = useState<CommentState>({
     comment: '',
+  });
+
+  const[sateRatingOffer, setStateRatingOffer] = useState<RatingState>({
     ratingOffer: ''
   });
 
@@ -18,10 +24,10 @@ function FormSendComment (): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating" onChange={(evt) => {
+      <div className="reviews__rating-form form__rating" onChange={(evt: ChangeEvent<HTMLInputElement>) => {
         if (evt.target instanceof HTMLInputElement) {
-          setStateComment({
-            ...sateComment,
+          setStateRatingOffer({
+            ...sateRatingOffer,
             ratingOffer: evt.target.value
           });
         }
