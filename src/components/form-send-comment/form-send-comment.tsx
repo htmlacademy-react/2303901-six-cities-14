@@ -22,7 +22,7 @@ function FormSendComment (): JSX.Element {
         if (evt.target instanceof HTMLInputElement) {
           setStateComment({
             ...sateComment,
-            ratingOffer: evt.target.defaultValue
+            ratingOffer: evt.target.value
           });
         }
       }}

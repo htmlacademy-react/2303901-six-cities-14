@@ -5,11 +5,11 @@ import type {Offers} from '../../mock/offers/offer-mocks';
 
 type MainPagesProps = {
   CountOffers: number;
-  Title: string;
-  Offers: Offers;
+  title: string;
+  offers: Offers;
 }
 
-function MainPages ({CountOffers: countOffers, Title: title, Offers: offers}: MainPagesProps): JSX.Element {
+function MainPages ({CountOffers: countOffers, title: title, offers: offers}: MainPagesProps): JSX.Element {
 
   useDocumentTitle(title);
 
@@ -103,7 +103,7 @@ function MainPages ({CountOffers: countOffers, Title: title, Offers: offers}: Ma
                 </ul>
               </form>
 
-              <ListOffers Offers = {offers}/>
+              <ListOffers offers = {offers}/>
 
             </section>
             <div className="cities__right-section">

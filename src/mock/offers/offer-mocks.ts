@@ -125,7 +125,7 @@ const offersMock: Offers = [
     ],
     title: 'House in countryside',
     isFavorite: true,
-    isPremium: false,
+    isPremium: true,
     rating: 2.8,
     type: 'room',
     bedrooms: 1,

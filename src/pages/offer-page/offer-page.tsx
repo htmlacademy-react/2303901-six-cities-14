@@ -1,11 +1,13 @@
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
 import useDocumentTitle from '../../hooks/document-title/document-title';
+import type { Offers } from '../../mock/offers/offer-mocks';
 
 type OfferPagesProps = {
-  Title: string;
+  title: string;
+  offers: Offers;
 }
 
-function OfferPage ({Title: title} : OfferPagesProps) : JSX.Element {
+function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Element {
 
   useDocumentTitle(title);
 
