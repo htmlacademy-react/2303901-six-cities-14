@@ -4,11 +4,11 @@ import type { Offer } from '../../mock/offers/offer-mocks';
 import { AppRoute } from '../../const';
 
 type CardPagesProps = {
-  Offer: Offer;
+  offer: Offer;
 }
 
 
-function CardOffer ({Offer: offer}: CardPagesProps) : JSX.Element{
+function CardOffer ({offer: offer}: CardPagesProps) : JSX.Element{
 
   const [cardState, setCardState] = useState({
     offerId: ''

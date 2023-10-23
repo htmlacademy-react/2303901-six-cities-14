@@ -4,11 +4,11 @@ import type {Offers} from '../../mock/offers/offer-mocks';
 
 
 type FavoritePagesProps = {
-  Title: string;
-  Offers: Offers;
+  title: string;
+  offers: Offers;
 }
 
-function FavoritesPage ({Title: title, Offers: offers} :FavoritePagesProps) : JSX.Element {
+function FavoritesPage ({title: title, offers: offers} :FavoritePagesProps) : JSX.Element {
 
   const favoritesOffer = offers.filter((offer) => (offer.isFavorite) ? offer.isFavorite : '');
 
@@ -60,7 +60,7 @@ function FavoritesPage ({Title: title, Offers: offers} :FavoritePagesProps) : JS
                 </div>
                 <div className="favorites__places">
 
-                  {favoritesOffer.map((offer) => (<FavoriteCardOffer key = {offer.id} Offer = {offer}/>))}
+                  {favoritesOffer.map((offer) => (<FavoriteCardOffer key = {offer.id} offer = {offer}/>))}
 
                 </div>
               </li>

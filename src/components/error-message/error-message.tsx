@@ -3,10 +3,10 @@ import {AppRoute} from '../../const';
 import useDocumentTitle from '../../hooks/document-title/document-title';
 
 type OfferPagesProps = {
-  Title: string;
+  title: string;
 }
 
-function ErrorMessage ({Title: title} : OfferPagesProps): JSX.Element {
+function ErrorMessage ({title: title} : OfferPagesProps): JSX.Element {
 
   useDocumentTitle(title);
 
