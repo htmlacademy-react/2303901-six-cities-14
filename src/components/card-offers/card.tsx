@@ -28,7 +28,7 @@ function CardOffer ({offer: offer}: CardPagesProps) : JSX.Element{
     <article className="cities__card place-card" onMouseOver = {onGetIdCard} onClick = {onChangePage}>
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Offer}/:offerId`} >
+        <Link to={`${AppRoute.Offer}/${offer.id}`} >
           <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>

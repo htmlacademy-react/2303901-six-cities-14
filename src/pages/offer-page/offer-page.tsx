@@ -2,6 +2,7 @@ import FormSendComment from '../../components/form-send-comment/form-send-commen
 import useDocumentTitle from '../../hooks/document-title/document-title';
 import type { Offers } from '../../mock/offers/offer-mocks';
 
+
 type OfferPagesProps = {
   title: string;
   offers: Offers;
@@ -9,7 +10,12 @@ type OfferPagesProps = {
 
 function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Element {
 
+  const idOffer = location.pathname.replace('/offer/', '');
+  const offerToRender = offers.find((offer) => offer.id === idOffer);
+
   useDocumentTitle(title);
+
+  console.log(idOffer)
 
   return(
     <div className="page">
@@ -55,58 +61,27 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+
+              {offerToRender?.images.map((image) => (
+                <div key={crypto.randomUUID()} className='offer__image-wrapper' >
+                  <img
+                    className='offer__image'
+                    src={image}
+                    alt='Photo studio'
+                  />
+                </div>
+              ))}
+
             </div>
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+
+              <span>{offerToRender?.isPremium ? <div className="offer__mark">Premium </div> : ''}</span>
+
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offerToRender?.description}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -117,37 +92,28 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%'}} />
+                  <span style={{ width: (offerToRender?.rating / 5) * 100}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{offerToRender?.rating}</span>
               </div>
               <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">Apartment</li>
+                <li className="offer__feature offer__feature--entire">{offerToRender?.type}</li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {offerToRender?.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {offerToRender?.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">€120</b>
+                <b className="offer__price-value">€{offerToRender?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What &prime s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">Wi-Fi</li>
-                  <li className="offer__inside-item">Washing machine</li>
-                  <li className="offer__inside-item">Towels</li>
-                  <li className="offer__inside-item">Heating</li>
-                  <li className="offer__inside-item">Coffee machine</li>
-                  <li className="offer__inside-item">Baby seat</li>
-                  <li className="offer__inside-item">Kitchen</li>
-                  <li className="offer__inside-item">Dishwasher</li>
-                  <li className="offer__inside-item">Cabel TV</li>
-                  <li className="offer__inside-item">Fridge</li>
+                  {offerToRender?.goods.map((good) => (<li key={crypto.randomUUID()} className="offer__inside-item">{good}</li>))}
                 </ul>
               </div>
               <div className="offer__host">
