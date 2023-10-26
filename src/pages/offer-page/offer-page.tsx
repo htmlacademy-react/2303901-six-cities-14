@@ -1,3 +1,4 @@
+//import { useNavigate } from 'react-router-dom';
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
 import useDocumentTitle from '../../hooks/document-title/document-title';
 import type { Offers } from '../../mock/offers/offer-mocks';
@@ -15,8 +16,8 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
 
   useDocumentTitle(title);
 
-  console.log(idOffer);
-
+  // console.log(idOffer);
+  // console.log(useNavigate());
   return(
     <div className="page">
       <header className="header">
@@ -91,10 +92,14 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
                 </button>
               </div>
               <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: (offerToRender?.rating / 5) * 100}} />
-                  <span className="visually-hidden">Rating</span>
-                </div>
+
+                {offerToRender ? (
+                  <>
+                    <span style={{ width: (offerToRender.rating / 5) * 100 }} />
+                    <span className="visually-hidden">Rating</span>
+                  </>
+                ) : null}
+
                 <span className="offer__rating-value rating__value">{offerToRender?.rating}</span>
               </div>
               <ul className="offer__features">

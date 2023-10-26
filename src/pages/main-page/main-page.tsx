@@ -1,6 +1,10 @@
 import ListOffers from '../../components/list-offers/list-offers';
+import MapComponent from '../../components/map/map';
+import FilterCities from '../../components/filter-cities/filter-cities';
+import type {Offers, Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-import type {Offers} from '../../mock/offers/offer-mocks';
+import {Cities} from '../../const';
+import { useState } from 'react';
 
 
 type MainPagesProps = {
@@ -10,6 +14,50 @@ type MainPagesProps = {
 }
 
 function MainPages ({CountOffers: countOffers, title: title, offers: offers}: MainPagesProps): JSX.Element {
+
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+
+  function handleListItemHover (idOffer: string) {
+    offers.find((offer, index: number) => {
+
+      if (offer.id === idOffer){
+        setSelectedPoint(offers[index]);
+      }
+    });
+  }
+
+  const citiesToFilter = offers.filter((city, index) => {
+    if (city.city.name === Cities.Amsterdam) {
+
+      return offers[index];
+    }
+  });
+
+  const citiesToMap = citiesToFilter.map((offer) => {
+
+    const points = {
+      title: offer.city.name,
+      lat: offer.city.location.latitude,
+      lng: offer.city.location.longitude,
+      zoom: offer.city.location.zoom,
+    };
+
+    return points;
+  });
+
+
+  const pointsOffersToMap = citiesToFilter.map((offer) => {
+
+    const points = {
+      title: offer.city.name,
+      lat: offer.location.latitude,
+      lng: offer.location.longitude,
+      zoom: offer.location.zoom,
+      id: offer.id
+    };
+
+    return points;
+  });
 
   useDocumentTitle(title);
 
@@ -46,42 +94,9 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+
+        <FilterCities/>
+
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -103,12 +118,17 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
                 </ul>
               </form>
 
-              <ListOffers offers = {offers}/>
+              <ListOffers offers = {offers} handleIdOffer = {handleListItemHover}/>
 
             </section>
+
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+
+              <MapComponent pointsToMap={pointsOffersToMap} citiesToMap = {citiesToMap} selectedPoint={selectedPoint}/>
+
             </div>
+
+
           </div>
         </div>
       </main>

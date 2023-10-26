@@ -13,6 +13,7 @@ type AppOfferProps = {
   offerProps: Offers;
 }
 
+//const
 
 function App({CountOffers: countOffers, offerProps: offers}: AppOfferProps,): JSX.Element {
 

@@ -326,4 +326,4 @@ const offersMock: Offers = [
 ];
 
 export {offersMock};
-export type {Offers, Offer};
+export type {Offers, Offer, OfferCityLocation};
