@@ -239,7 +239,7 @@ const offersMock: Offers = [
       'https://14.react.pages.academy/static/offer/5.jpg'
     ],
     title: 'Nice, cozy, warm big bed apartment',
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 3.2,
     type: 'hotel',
