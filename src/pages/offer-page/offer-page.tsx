@@ -1,5 +1,6 @@
 //import { useNavigate } from 'react-router-dom';
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
+import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title/document-title';
 import type { Offers } from '../../mock/offers/offer-mocks';
 
@@ -23,17 +24,9 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </a>
-            </div>
+
+            <Logotype/>
+
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
