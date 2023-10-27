@@ -47,11 +47,19 @@ function MapComponent ({pointsToMap: points, citiesToMap: citiesToMap, selectedP
   }, [map, points]);
 
   return (
-    <section
-      className="cities__map map"
-      ref={mapRef}
-      style={{height: '500px'}}
-    />
+    <div className="cities__right-section">
+      <section
+        className="cities__map map"
+        ref={mapRef}
+        style={{
+          height: '100%',
+          minHeight: '500px',
+          width: '100%',
+          maxWidth: '1144px',
+          margin: '0 auto',
+        }}
+      />
+    </div>
   );
 }
 

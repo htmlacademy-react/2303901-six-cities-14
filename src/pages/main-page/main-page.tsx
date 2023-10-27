@@ -3,9 +3,8 @@ import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offers, Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-import {Cities} from '../../const';
+import { Cities} from '../../const';
 import { useState } from 'react';
-
 
 type MainPagesProps = {
   CountOffers: number;
@@ -13,18 +12,10 @@ type MainPagesProps = {
   offers: Offers;
 }
 
+
 function MainPages ({CountOffers: countOffers, title: title, offers: offers}: MainPagesProps): JSX.Element {
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-
-  function handleListItemHover (idOffer: string) {
-    offers.find((offer, index: number) => {
-
-      if (offer.id === idOffer){
-        setSelectedPoint(offers[index]);
-      }
-    });
-  }
 
   const citiesToFilter = offers.filter((city, index) => {
     if (city.city.name === Cities.Amsterdam) {
@@ -58,6 +49,21 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
 
     return points;
   });
+
+  function handleListItemHover (idOffer: string) {
+    offers.find((offer, index: number) => {
+
+      if (offer.id === idOffer){
+        setSelectedPoint(offers[index]);
+      }
+    });
+  }
+
+
+  //функция получения города при нажатии на фильтр
+  function onClickFilterCity (cityFilter: string): string {
+    return cityFilter;
+  }
 
   useDocumentTitle(title);
 
@@ -95,7 +101,7 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <FilterCities/>
+        <FilterCities onClickFilterCity = {onClickFilterCity}/>
 
         <div className="cities">
           <div className="cities__places-container container">
@@ -122,12 +128,7 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
 
             </section>
 
-            <div className="cities__right-section">
-
-              <MapComponent pointsToMap={pointsOffersToMap} citiesToMap = {citiesToMap} selectedPoint={selectedPoint}/>
-
-            </div>
-
+            <MapComponent pointsToMap={pointsOffersToMap} citiesToMap = {citiesToMap} selectedPoint={selectedPoint}/>
 
           </div>
         </div>

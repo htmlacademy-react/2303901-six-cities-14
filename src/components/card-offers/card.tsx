@@ -1,7 +1,7 @@
-import { useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useState} from 'react';
-import type { Offer } from '../../mock/offers/offer-mocks';
-import { AppRoute } from '../../const';
+import type {Offer} from '../../mock/offers/offer-mocks';
+import {AppRoute} from '../../const';
 
 
 type CardPagesProps = {
@@ -27,11 +27,16 @@ function CardOffer ({offer: offer, handleIdOffer: handleIdOffer}: CardPagesProps
 
   function onGetPointOffer () {
 
-    handleIdOffer(offer.id);
+    handleIdOffer(offer?.id);
+  }
+
+  function onLeavePointOffer () {
+
+    setCardState({offerId: ''});
   }
 
   return(
-    <article className="cities__card place-card" onMouseOver = {onGetIdCard} onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`)} onMouseEnter={onGetPointOffer}>
+    <article className="cities__card place-card" onMouseOver = {onGetIdCard} onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`)} onMouseEnter={onGetPointOffer} onMouseLeave={onLeavePointOffer}>
       <div className="cities__image-wrapper place-card__image-wrapper">
 
         <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>

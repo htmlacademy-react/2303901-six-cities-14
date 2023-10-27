@@ -64,7 +64,7 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
             <div className="offer__gallery">
 
               {offerToRender?.images.map((image) => (
-                <div key={crypto.randomUUID()} className='offer__image-wrapper' >
+                <div key={image} className='offer__image-wrapper' >
                   <img
                     className='offer__image'
                     src={image}
@@ -118,7 +118,7 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What &prime s inside</h2>
                 <ul className="offer__inside-list">
-                  {offerToRender?.goods.map((good) => (<li key={crypto.randomUUID()} className="offer__inside-item">{good}</li>))}
+                  {offerToRender?.goods.map((good) => (<li key={good} className="offer__inside-item">{good}</li>))}
                 </ul>
               </div>
               <div className="offer__host">

@@ -21,7 +21,7 @@ function App({CountOffers: countOffers, offerProps: offers}: AppOfferProps,): JS
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRoute.Main}
+          path={`${AppRoute.Main}`}
           element ={<MainPages CountOffers = {countOffers} title = {TitleDescription.MainPage} offers = {offers}/>}
         />
         <Route
