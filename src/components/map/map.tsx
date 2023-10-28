@@ -32,6 +32,7 @@ function MapComponent ({pointsToMap: points, citiesToMap: citiesToMap, selectedP
   });
 
   useEffect(() => {
+
     if (map) {
       points.forEach((point) => {
         leaflet
@@ -44,6 +45,7 @@ function MapComponent ({pointsToMap: points, citiesToMap: citiesToMap, selectedP
           .addTo(map);
       });
     }
+
   }, [map, points, selectedPoint]);
 
   return (
