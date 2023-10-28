@@ -16,11 +16,11 @@ type MainPagesProps = {
 function MainPages ({CountOffers: countOffers, title: title, offers: offers}: MainPagesProps): JSX.Element {
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-
+  const [selectedFilterCity, setSelectedFilterCity] = useState(Cities.Amsterdam);
 
   //выбор города направления
   const citiesToFilter = offers.filter((city, index) => {
-    if (city.city.name === Cities.Hamburg) {
+    if (city.city.name === selectedFilterCity) {
 
       return offers[index];
     }
@@ -37,7 +37,6 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
 
     return points;
   });
-
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
@@ -61,10 +60,9 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
     });
   }
 
-
   //функция получения города при нажатии на фильтр
-  function onClickFilterCity (cityFilter: string): string {
-    return cityFilter;
+  function onClickFilterCity (cityFilter: string) {
+    setSelectedFilterCity(cityFilter);
   }
 
   function onLeaveMouseOffer () {
