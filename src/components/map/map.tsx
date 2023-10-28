@@ -14,7 +14,7 @@ type MapComponentProp = {
 }
 
 
-function MapComponent ({pointsToMap: points, citiesToMap: citiesToMap, selectedPoint: selectedPoint}: MapComponentProp): JSX.Element {
+function MapComponent ({pointsToMap: points, citiesToMap: citiesToMap, selectedPoint: selectedPoint, }: MapComponentProp): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, citiesToMap[0]);

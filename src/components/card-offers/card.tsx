@@ -7,10 +7,11 @@ import {AppRoute} from '../../const';
 type CardPagesProps = {
   offer: Offer;
   handleIdOffer: (offerId: string) => void;
+  onLeaveMouseOffer: () => void;
 }
 
 
-function CardOffer ({offer: offer, handleIdOffer: handleIdOffer}: CardPagesProps) : JSX.Element{
+function CardOffer ({offer: offer, handleIdOffer: handleIdOffer, onLeaveMouseOffer: onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
 
   const navigate = useNavigate();
 
@@ -31,12 +32,16 @@ function CardOffer ({offer: offer, handleIdOffer: handleIdOffer}: CardPagesProps
   }
 
   function onLeavePointOffer () {
-
-    setCardState({offerId: ''});
+    onLeaveMouseOffer();
   }
 
   return(
-    <article className="cities__card place-card" onMouseOver = {onGetIdCard} onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`)} onMouseEnter={onGetPointOffer} onMouseLeave={onLeavePointOffer}>
+    <article className="cities__card place-card"
+      onMouseOver = {onGetIdCard}
+      onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`)}
+      onMouseEnter={onGetPointOffer}
+      onMouseLeave={onLeavePointOffer}
+    >
       <div className="cities__image-wrapper place-card__image-wrapper">
 
         <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>

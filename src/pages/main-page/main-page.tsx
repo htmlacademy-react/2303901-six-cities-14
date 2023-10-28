@@ -17,8 +17,10 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
 
+
+  //выбор города направления
   const citiesToFilter = offers.filter((city, index) => {
-    if (city.city.name === Cities.Amsterdam) {
+    if (city.city.name === Cities.Hamburg) {
 
       return offers[index];
     }
@@ -63,6 +65,10 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
   //функция получения города при нажатии на фильтр
   function onClickFilterCity (cityFilter: string): string {
     return cityFilter;
+  }
+
+  function onLeaveMouseOffer () {
+    setSelectedPoint(undefined);
   }
 
   useDocumentTitle(title);
@@ -124,11 +130,11 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
                 </ul>
               </form>
 
-              <ListOffers offers = {offers} handleIdOffer = {handleListItemHover}/>
+              <ListOffers offers = {offers} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
 
             </section>
 
-            <MapComponent pointsToMap={pointsOffersToMap} citiesToMap = {citiesToMap} selectedPoint={selectedPoint}/>
+            <MapComponent pointsToMap={pointsOffersToMap} citiesToMap = {citiesToMap} selectedPoint={selectedPoint} />
 
           </div>
         </div>
