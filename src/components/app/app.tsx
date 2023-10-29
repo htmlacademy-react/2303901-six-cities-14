@@ -9,43 +9,41 @@ import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
 import type {Offers} from '../../mock/offers/offer-mocks';
 
 type AppOfferProps = {
-  CountOffers: number;
-  OfferProps: Offers;
+  offerProps: Offers;
 }
 
-
-function App({CountOffers: countOffers, OfferProps: offers}: AppOfferProps,): JSX.Element {
+function App({ offerProps: offers}: AppOfferProps,): JSX.Element {
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRoute.Main}
-          element ={<MainPages CountOffers = {countOffers} Title = {TitleDescription.MainPage} Offers = {offers}/>}
+          path={`${AppRoute.Main}`}
+          element ={<MainPages title = {TitleDescription.MainPage} offers = {offers}/>}
         />
         <Route
           path={AppRoute.Login}
-          element ={<LoginPage Title = {TitleDescription.LoginPage}/>}
+          element ={<LoginPage title = {TitleDescription.LoginPage}/>}
         />
         <Route
           path={AppRoute.Favorites}
           element ={
             <PrivateRoute authorizationStatus = {AuthorizationStatus.Auth}>
-              <FavoritesPage Title = {TitleDescription.FavoritePage} Offers = {offers}/>
+              <FavoritesPage title = {TitleDescription.FavoritePage} offers = {offers}/>
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoute.Offer}/:offerId`}
-          element ={<OfferPage Title = {TitleDescription.OfferPage}/>}
+          element ={<OfferPage title = {TitleDescription.OfferPage} offers = {offers}/>}
         />
         <Route
           path={AppRoute.Error}
-          element ={<ErrorMessage Title = {TitleDescription.ErrorPage}/>}
+          element ={<ErrorMessage title = {TitleDescription.ErrorPage}/>}
         />
         <Route
           path="*"
-          element={<ErrorMessage Title = {TitleDescription.ErrorPage}/>}
+          element={<ErrorMessage title = {TitleDescription.ErrorPage}/>}
         />
       </Routes>
     </BrowserRouter>

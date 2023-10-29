@@ -1,17 +1,18 @@
-
 import type {Offers} from '../../mock/offers/offer-mocks';
 import CardOffer from '../card-offers/card';
 
-
 type ListOffersProps = {
-  Offers: Offers;
+  offers: Offers;
+  handleIdOffer: (offerId: string) => void;
+  onLeaveMouseOffer: () => void;
 }
 
-function ListOffers ({Offers: offers}: ListOffersProps): JSX.Element {
+function ListOffers ({offers: offers, handleIdOffer: handleIdOffer, onLeaveMouseOffer: onLeaveMouseOffer}: ListOffersProps): JSX.Element {
+
 
   return(
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <CardOffer key = {offer.id} Offer = {offer}/>)};
+      {offers.map((offer) => <CardOffer key = {offer.id} offer = {offer} handleIdOffer ={handleIdOffer} onLeaveMouseOffer={onLeaveMouseOffer}/>)}
     </div>
   );
 }

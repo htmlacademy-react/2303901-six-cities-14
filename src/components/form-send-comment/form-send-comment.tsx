@@ -1,7 +1,11 @@
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
+import { LengthComment } from '../../const';
 
 type CommentState = {
   comment: string;
+};
+
+type RatingState = {
   ratingOffer: string;
 };
 
@@ -10,19 +14,33 @@ function FormSendComment (): JSX.Element {
 
   const [sateComment, setStateComment] = useState<CommentState>({
     comment: '',
+  });
+
+  const[sateRatingOffer, setStateRatingOffer] = useState<RatingState>({
     ratingOffer: ''
   });
+
+  const minRating = parseInt(sateRatingOffer.ratingOffer, 10);
+
+  const isNumber = isNaN(minRating);
+  const isCommentLengthValid = !(sateComment.comment.length >= LengthComment.MIN && sateComment.comment.length <= LengthComment.MAX);
+  const blockButton = isCommentLengthValid || isNumber;
+
+
+  function onClickButtonSent(evt: React.MouseEvent<HTMLButtonElement>) {
+    evt.preventDefault();
+  }
 
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating" onChange={(evt) => {
+      <div className="reviews__rating-form form__rating" onChange={(evt: ChangeEvent<HTMLInputElement>) => {
         if (evt.target instanceof HTMLInputElement) {
-          setStateComment({
-            ...sateComment,
-            ratingOffer: evt.target.defaultValue
+          setStateRatingOffer({
+            ...sateRatingOffer,
+            ratingOffer: evt.target.value
           });
         }
       }}
@@ -97,6 +115,7 @@ function FormSendComment (): JSX.Element {
           defaultValue={1}
           id="1-star"
           type="radio"
+
         />
         <label
           htmlFor="1-star"
@@ -129,7 +148,8 @@ function FormSendComment (): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          onClick={onClickButtonSent}
+          disabled={blockButton}
         >
           Submit
         </button>
