@@ -9,7 +9,7 @@ type FilterCitiesProps = {
 function FilterCities ({onClickFilterCity: onClickFilterCity}: FilterCitiesProps) {
 
   const [stateFilter, setStateFilter] = useState({
-    city: 'Amsterdam'
+    city: 'Paris'
   });
 
   return (

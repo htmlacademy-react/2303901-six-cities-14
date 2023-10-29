@@ -7,16 +7,14 @@ import { Cities} from '../../const';
 import { useState } from 'react';
 
 type MainPagesProps = {
-  CountOffers: number;
   title: string;
   offers: Offers;
 }
 
-
-function MainPages ({CountOffers: countOffers, title: title, offers: offers}: MainPagesProps): JSX.Element {
+function MainPages ({ title: title, offers: offers}: MainPagesProps): JSX.Element {
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-  const [selectedFilterCity, setSelectedFilterCity] = useState(Cities.Amsterdam);
+  const [selectedFilterCity, setSelectedFilterCity] = useState(Cities.Paris);
 
   //выбор города направления
   const citiesToFilter = offers.filter((city, index) => {
@@ -37,6 +35,8 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
 
     return points;
   });
+
+  const cityToMap = citiesToMap[0];
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
@@ -111,7 +111,7 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {countOffers} places to stay in Amsterdam</b>
+              <b className="places__found"> {citiesToFilter.length} places to stay in {selectedFilterCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -128,11 +128,11 @@ function MainPages ({CountOffers: countOffers, title: title, offers: offers}: Ma
                 </ul>
               </form>
 
-              <ListOffers offers = {offers} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
+              <ListOffers offers = {citiesToFilter} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
 
             </section>
 
-            <MapComponent pointsToMap={pointsOffersToMap} citiesToMap = {citiesToMap} selectedPoint={selectedPoint} />
+            <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} />
 
           </div>
         </div>

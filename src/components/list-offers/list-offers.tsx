@@ -12,7 +12,7 @@ function ListOffers ({offers: offers, handleIdOffer: handleIdOffer, onLeaveMouse
 
   return(
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <CardOffer key = {offer.id} offer = {offer} handleIdOffer ={handleIdOffer} onLeaveMouseOffer={onLeaveMouseOffer}/>)};
+      {offers.map((offer) => <CardOffer key = {offer.id} offer = {offer} handleIdOffer ={handleIdOffer} onLeaveMouseOffer={onLeaveMouseOffer}/>)}
     </div>
   );
 }
