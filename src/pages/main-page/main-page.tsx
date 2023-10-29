@@ -11,7 +11,7 @@ type MainPagesProps = {
   offers: Offers;
 }
 
-function MainPages ({ title: title, offers: offers}: MainPagesProps): JSX.Element {
+function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element {
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
   const [selectedFilterCity, setSelectedFilterCity] = useState(Cities.Paris);

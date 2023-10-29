@@ -9,20 +9,17 @@ import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
 import type {Offers} from '../../mock/offers/offer-mocks';
 
 type AppOfferProps = {
-  CountOffers: number;
   offerProps: Offers;
 }
 
-//const
-
-function App({CountOffers: countOffers, offerProps: offers}: AppOfferProps,): JSX.Element {
+function App({ offerProps: offers}: AppOfferProps,): JSX.Element {
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
-          element ={<MainPages CountOffers = {countOffers} title = {TitleDescription.MainPage} offers = {offers}/>}
+          element ={<MainPages title = {TitleDescription.MainPage} offers = {offers}/>}
         />
         <Route
           path={AppRoute.Login}

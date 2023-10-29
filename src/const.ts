@@ -1,8 +1,3 @@
-
-const OffersCount = {
-  CountOffers: 5,
-};
-
  enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -41,7 +36,6 @@ const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 
 export {
-  OffersCount,
   AppRoute,
   AuthorizationStatus,
   TitleDescription,
