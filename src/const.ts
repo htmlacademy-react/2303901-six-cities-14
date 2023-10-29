@@ -53,6 +53,11 @@ const DEFAULT_DESCRIPTION = {
   zoom: 13,
 };
 
+const LengthComment = {
+  MIN: 50,
+  MAX: 300
+};
+
 
 export {
   AppRoute,
@@ -63,6 +68,7 @@ export {
   CitiesForFilter,
   DEFAULT_DESCRIPTION,
   CURRENT_ICON,
-  DEFAULT_ICON
+  DEFAULT_ICON,
+  LengthComment
 };
 

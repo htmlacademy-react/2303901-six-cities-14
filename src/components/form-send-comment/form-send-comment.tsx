@@ -1,4 +1,5 @@
 import {ChangeEvent, useState} from 'react';
+import { LengthComment } from '../../const';
 
 type CommentState = {
   comment: string;
@@ -18,6 +19,17 @@ function FormSendComment (): JSX.Element {
   const[sateRatingOffer, setStateRatingOffer] = useState<RatingState>({
     ratingOffer: ''
   });
+
+  const minRating = parseInt(sateRatingOffer.ratingOffer, 10);
+
+  const isNumber = isNaN(minRating);
+  const isCommentLengthValid = !(sateComment.comment.length >= LengthComment.MIN && sateComment.comment.length <= LengthComment.MAX);
+  const blockButton = isCommentLengthValid || isNumber;
+
+
+  function onClickButtonSent(evt: React.MouseEvent<HTMLButtonElement>) {
+    evt.preventDefault();
+  }
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -103,6 +115,7 @@ function FormSendComment (): JSX.Element {
           defaultValue={1}
           id="1-star"
           type="radio"
+
         />
         <label
           htmlFor="1-star"
@@ -135,7 +148,8 @@ function FormSendComment (): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          onClick={onClickButtonSent}
+          disabled={blockButton}
         >
           Submit
         </button>
