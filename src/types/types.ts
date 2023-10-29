@@ -12,4 +12,11 @@ type PointOfferLocation = {
   zoom: number;
   id: string;
 }
-export type {CityLocation, PointOfferLocation};
+
+type IconToMap = {
+  iconUrl: string;
+  iconSize: [number, number];
+  iconAnchor: [number, number];
+}
+
+export type {CityLocation, PointOfferLocation, IconToMap};
