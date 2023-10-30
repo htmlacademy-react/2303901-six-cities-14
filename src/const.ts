@@ -58,6 +58,13 @@ const LengthComment = {
   MAX: 300
 };
 
+const MONTH_NAMES = [
+  'January', 'February', 'March',
+  'April', 'May', 'June', 'July',
+  'August', 'September', 'October',
+  'November', 'December'
+];
+
 
 export {
   AppRoute,
@@ -69,6 +76,7 @@ export {
   DEFAULT_DESCRIPTION,
   CURRENT_ICON,
   DEFAULT_ICON,
-  LengthComment
+  LengthComment,
+  MONTH_NAMES
 };
 

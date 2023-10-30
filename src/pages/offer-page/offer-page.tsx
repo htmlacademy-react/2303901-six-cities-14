@@ -1,16 +1,17 @@
-//import { useNavigate } from 'react-router-dom';
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
+import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-import type { Offers } from '../../mock/offers/offer-mocks';
-
+import type {Offers} from '../../mock/offers/offer-mocks';
+import type {Reviews} from '../../types/types';
 
 type OfferPagesProps = {
   title: string;
   offers: Offers;
+  reviewProps: Reviews;
 }
 
-function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Element {
+function OfferPage ({title: title, offers: offers, reviewProps: reviewProps} : OfferPagesProps) : JSX.Element {
 
   const idOffer = location.pathname.replace('/offer/', '');
   const offerToRender = offers.find((offer) => offer.id === idOffer);
@@ -120,13 +121,13 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src={offerToRender?.host.avatarUrl}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">Angelina</span>
+                  <span className="offer__user-name">{offerToRender?.host.name}</span>
                   <span className="offer__user-status">Pro</span>
                 </div>
                 <div className="offer__description">
@@ -144,41 +145,10 @@ function OfferPage ({title: title, offers: offers} : OfferPagesProps) : JSX.Elem
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">1</span>
+                  Reviews · <span className="reviews__amount">{reviewProps.length}</span>
                 </h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img
-                          className="reviews__avatar user__avatar"
-                          src="img/avatar-max.jpg"
-                          width={54}
-                          height={54}
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">Max</span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%'}} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by
-                        the unique lightness of Amsterdam. The building is green and
-                        from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">
-                        April 2019
-                      </time>
-                    </div>
-                  </li>
-                </ul>
 
+                <ListReview reviewProps={reviewProps}/>
                 <FormSendComment/>
 
               </section>

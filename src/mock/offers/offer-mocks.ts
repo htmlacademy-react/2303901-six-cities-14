@@ -85,7 +85,7 @@ const offersMock: Offers = [
     ],
     host: {
       id: 25,
-      name: 'Angelina',
+      name: 'Jylia',
       isPro: true,
       avatarUrl: 'img/avatar-angelina.jpg'
     },
@@ -311,7 +311,7 @@ const offersMock: Offers = [
     ],
     host: {
       id: 25,
-      name: 'Angelina',
+      name: 'Sveta',
       isPro: true,
       avatarUrl: 'img/avatar-angelina.jpg'
     },

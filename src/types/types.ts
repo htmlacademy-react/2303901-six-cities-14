@@ -19,4 +19,22 @@ type IconToMap = {
   iconAnchor: [number, number];
 }
 
-export type {CityLocation, PointOfferLocation, IconToMap};
+type ReviewUser ={
+  id: number;
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
+}
+
+
+type Review = {
+  id: number;
+  user: ReviewUser;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
+type Reviews = Review[];
+
+export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews};
