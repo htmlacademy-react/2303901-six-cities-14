@@ -29,7 +29,7 @@ const reviewMocks: Reviews = [
   },
 
   {
-    id: 2,
+    id: 3,
     user: {
       id: 16,
       isPro: false,
@@ -42,7 +42,7 @@ const reviewMocks: Reviews = [
   },
 
   {
-    id: 3,
+    id: 4,
     user: {
       id: 12,
       isPro: true,

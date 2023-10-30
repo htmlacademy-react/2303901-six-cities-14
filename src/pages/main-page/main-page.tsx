@@ -26,21 +26,21 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
 
   const citiesToMap = citiesToFilter.map((offer) => {
 
-    const points = {
+    const cities = {
       title: offer.city.name,
       lat: offer.city.location.latitude,
       lng: offer.city.location.longitude,
       zoom: offer.city.location.zoom,
     };
 
-    return points;
+    return cities;
   });
 
   const cityToMap = citiesToMap[0];
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
-    const points = {
+    const pointsToMap = {
       title: offer.city.name,
       lat: offer.location.latitude,
       lng: offer.location.longitude,
@@ -48,7 +48,7 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
       id: offer.id
     };
 
-    return points;
+    return pointsToMap;
   });
 
   function handleListItemHover (idOffer: string) {
@@ -132,8 +132,9 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
 
             </section>
 
-            <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} />
-
+            <div className="cities__right-section">
+              <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} />
+            </div>
           </div>
         </div>
       </main>

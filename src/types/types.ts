@@ -1,8 +1,8 @@
 type CityLocation = {
-  title: string;
-  lat: number;
-  lng: number;
-  zoom: number;
+  title: string | undefined;
+  lat: number | undefined;
+  lng: number | undefined;
+  zoom: number | undefined;
 };
 
 type PointOfferLocation = {

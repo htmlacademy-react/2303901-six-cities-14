@@ -1,6 +1,7 @@
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
 import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
+import MapComponent from '../../components/map/map';
 import useDocumentTitle from '../../hooks/document-title/document-title';
 import type {Offers} from '../../mock/offers/offer-mocks';
 import type {Reviews} from '../../types/types';
@@ -15,6 +16,33 @@ function OfferPage ({title: title, offers: offers, reviewProps: reviewProps} : O
 
   const idOffer = location.pathname.replace('/offer/', '');
   const offerToRender = offers.find((offer) => offer.id === idOffer);
+
+  const getOfferPoints = offers.filter((offer) => {
+    const points = offer.city.name === offerToRender?.city.name;
+
+    return points;
+  });
+
+  const offerPoint = getOfferPoints.map((point) => {
+
+    const pointsToMap = {
+      title: point.city.name,
+      lat: point.location.latitude,
+      lng: point.location.longitude,
+      zoom: point.location.zoom,
+      id: point.id
+    };
+
+    return pointsToMap;
+
+  });
+
+  const cityToMap = {
+    title: offerToRender?.city.name,
+    lat: offerToRender?.city.location.latitude,
+    lng: offerToRender?.city.location.longitude,
+    zoom: offerToRender?.city.location.zoom,
+  };
 
   useDocumentTitle(title);
 
@@ -154,7 +182,11 @@ function OfferPage ({title: title, offers: offers, reviewProps: reviewProps} : O
               </section>
             </div>
           </div>
-          <section className="offer__map map" />
+          <section className="offer__map map" >
+
+            <MapComponent pointsToMap={offerPoint} cityToMap={cityToMap} />
+
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
