@@ -37,9 +37,15 @@ type Review = {
 
 type Reviews = Review[];
 
+type CityLocationDefault = {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+};
 
 type DefaultCityType = {
-  [key: string]: CityLocation;
+  [key: string]: CityLocationDefault;
 }
 
-export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews, DefaultCityType};
+export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews, DefaultCityType, CityLocationDefault};

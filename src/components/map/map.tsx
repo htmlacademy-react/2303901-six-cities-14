@@ -8,7 +8,7 @@ import {CURRENT_ICON, DEFAULT_ICON, DefaultCityToMap} from '../../const';
 
 type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
-  cityToMap?: CityLocation;
+  cityToMap: CityLocation;
   selectedPoint?: Offer;
   selectedFilterCity?: string;
 };
@@ -19,7 +19,7 @@ const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
 
 function MapComponent({pointsToMap: points, cityToMap: cityToMap, selectedPoint: selectedPoint, selectedFilterCity: selectedFilterCity}: MapComponentProp): JSX.Element {
 
-  const city: CityLocation = cityToMap instanceof Object ? cityToMap : DefaultCityToMap[selectedFilterCity as keyof typeof DefaultCityToMap];
+  const city = cityToMap instanceof Object ? cityToMap : DefaultCityToMap[selectedFilterCity as keyof typeof DefaultCityToMap];
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
