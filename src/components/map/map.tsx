@@ -8,7 +8,7 @@ import {CURRENT_ICON, DEFAULT_ICON, DefaultCityToMap} from '../../const';
 
 type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
-  cityToMap: CityLocation;
+  cityToMap?: CityLocation;
   selectedPoint?: Offer;
   selectedFilterCity?: string;
 };
