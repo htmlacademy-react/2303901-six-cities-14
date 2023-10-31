@@ -10,8 +10,9 @@ type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
   cityToMap: CityLocation;
   selectedPoint?: Offer;
-  selectedFilterCity: string;
+  selectedFilterCity?: string;
 };
+
 
 const defaultCustomIcon = new Icon(DEFAULT_ICON as IconToMap);
 const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
