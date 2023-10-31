@@ -3,8 +3,8 @@ import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offers, Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-import { Cities} from '../../const';
-import { useState } from 'react';
+import {Cities} from '../../const';
+import {useState} from 'react';
 
 type MainPagesProps = {
   title: string;
@@ -129,11 +129,12 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
               </form>
 
               <ListOffers offers = {citiesToFilter} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
-
             </section>
 
             <div className="cities__right-section">
+
               <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} />
+
             </div>
           </div>
         </div>

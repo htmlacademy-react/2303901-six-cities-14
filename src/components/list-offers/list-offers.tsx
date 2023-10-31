@@ -9,7 +9,6 @@ type ListOffersProps = {
 
 function ListOffers ({offers: offers, handleIdOffer: handleIdOffer, onLeaveMouseOffer: onLeaveMouseOffer}: ListOffersProps): JSX.Element {
 
-
   return(
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => <CardOffer key = {offer.id} offer = {offer} handleIdOffer ={handleIdOffer} onLeaveMouseOffer={onLeaveMouseOffer}/>)}
