@@ -1,8 +1,8 @@
 type CityLocation = {
-  title: string | undefined;
-  lat: number | undefined;
-  lng: number | undefined;
-  zoom: number | undefined;
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
 };
 
 type PointOfferLocation = {
@@ -37,4 +37,9 @@ type Review = {
 
 type Reviews = Review[];
 
-export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews};
+
+type DefaultCityType = {
+  [key: string]: CityLocation;
+}
+
+export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews, DefaultCityType};

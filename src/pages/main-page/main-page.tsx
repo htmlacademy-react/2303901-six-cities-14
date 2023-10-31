@@ -133,7 +133,7 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
 
             <div className="cities__right-section">
 
-              <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} />
+              <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} selectedFilterCity={selectedFilterCity}/>
 
             </div>
           </div>
