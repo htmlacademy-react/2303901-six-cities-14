@@ -15,7 +15,7 @@ type OfferPagesProps = {
   reviewProps: Reviews;
 }
 
-function OfferPage ({title: title, offers: offers, reviewProps: reviewProps} : OfferPagesProps) : JSX.Element {
+function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Element {
 
   const {offerId} = useParams();
   const offerToRender = offers.find((offer) => offer.id === offerId);
@@ -45,6 +45,7 @@ function OfferPage ({title: title, offers: offers, reviewProps: reviewProps} : O
     lng: offerToRender?.city.location.longitude,
     zoom: offerToRender?.city.location.zoom,
   };
+
 
   useDocumentTitle(title);
 
@@ -184,7 +185,7 @@ function OfferPage ({title: title, offers: offers, reviewProps: reviewProps} : O
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={offersPoint} cityToMap={cityToMap} />
+            <MapComponent pointsToMap={offersPoint} cityName={offerToRender?.city.name}/>
 
           </section>
         </section>

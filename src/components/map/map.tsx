@@ -1,25 +1,24 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import { useRef, useEffect } from 'react';
-import type { CityLocation, PointOfferLocation, IconToMap} from '../../types/types';
+import type {PointOfferLocation, IconToMap} from '../../types/types';
 import type { Offer } from '../../mock/offers/offer-mocks';
 import useMap from '../../hooks/use-map/use-map';
 import {CURRENT_ICON, DEFAULT_ICON, DefaultCityToMap} from '../../const';
 
 type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
-  cityToMap: CityLocation;
   selectedPoint?: Offer;
-  selectedFilterCity?: string;
+  cityName?: string;
 };
 
 
 const defaultCustomIcon = new Icon(DEFAULT_ICON as IconToMap);
 const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
 
-function MapComponent({pointsToMap: points, cityToMap: cityToMap, selectedPoint: selectedPoint, selectedFilterCity: selectedFilterCity}: MapComponentProp): JSX.Element {
+function MapComponent({pointsToMap: points, selectedPoint, cityName = 'Paris'}: MapComponentProp): JSX.Element {
 
-  const city = cityToMap instanceof Object ? cityToMap : DefaultCityToMap[selectedFilterCity as keyof typeof DefaultCityToMap];
+  const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);

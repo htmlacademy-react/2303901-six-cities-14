@@ -7,7 +7,7 @@ type ListOffersProps = {
   onLeaveMouseOffer: () => void;
 }
 
-function ListOffers ({offers: offers, handleIdOffer: handleIdOffer, onLeaveMouseOffer: onLeaveMouseOffer}: ListOffersProps): JSX.Element {
+function ListOffers ({offers, handleIdOffer, onLeaveMouseOffer}: ListOffersProps): JSX.Element {
 
   return(
     <div className="cities__places-list places__list tabs__content">

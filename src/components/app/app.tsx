@@ -15,7 +15,7 @@ type AppOfferProps = {
   reviewProps: Reviews;
 }
 
-function App({ offerProps: offers, reviewProps: reviewProps}: AppOfferProps,): JSX.Element {
+function App({ offerProps: offers, reviewProps}: AppOfferProps,): JSX.Element {
 
   return (
     <BrowserRouter>

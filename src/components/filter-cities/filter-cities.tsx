@@ -6,7 +6,7 @@ type FilterCitiesProps = {
 
 }
 
-function FilterCities ({onClickFilterCity: onClickFilterCity}: FilterCitiesProps) {
+function FilterCities ({onClickFilterCity}: FilterCitiesProps) {
 
   const [stateFilter, setStateFilter] = useState({
     city: 'Paris'

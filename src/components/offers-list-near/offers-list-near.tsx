@@ -6,7 +6,7 @@ type OfferNearProps = {
   offerPoint: Offer;
 }
 
-function OffersListNear ({offersPoint: offersPoint, offerPoint: offerPoint }: OfferNearProps) {
+function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
 
 
   const threeOffersNear = offersPoint.slice(0, 3);

@@ -4,7 +4,7 @@ type FavoriteOfferProps = {
   offer: Offer;
 }
 
-function FavoriteCardOffer ({offer: offer}: FavoriteOfferProps): JSX.Element {
+function FavoriteCardOffer ({offer}: FavoriteOfferProps): JSX.Element {
 
   return (
     <article className="favorites__card place-card">

@@ -6,7 +6,7 @@ type ReviewProps = {
 }
 
 
-function Review ({reviewProps: reviewProps}: ReviewProps) {
+function Review ({reviewProps}: ReviewProps) {
 
   const inputDate = reviewProps.date;
   const date = new Date(inputDate);

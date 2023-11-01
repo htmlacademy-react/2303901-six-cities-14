@@ -6,7 +6,7 @@ type ListReviewsProps = {
 }
 
 
-function ListReview ({reviewProps: reviewProps}: ListReviewsProps) {
+function ListReview ({reviewProps}: ListReviewsProps) {
 
   return(
     <ul className="reviews__list">

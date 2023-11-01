@@ -24,20 +24,6 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
     }
   });
 
-  const citiesToMap = citiesToFilter.map((offer) => {
-
-    const cities = {
-      title: offer.city.name,
-      lat: offer.city.location.latitude,
-      lng: offer.city.location.longitude,
-      zoom: offer.city.location.zoom,
-    };
-
-    return cities;
-  });
-
-  const cityToMap = citiesToMap[0];
-
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
     const pointsToMap = {
@@ -133,7 +119,7 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
 
             <div className="cities__right-section">
 
-              <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} selectedFilterCity={selectedFilterCity}/>
+              <MapComponent pointsToMap={pointsOffersToMap} selectedPoint={selectedPoint} cityName={selectedFilterCity}/>
 
             </div>
           </div>

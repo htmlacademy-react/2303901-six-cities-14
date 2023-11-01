@@ -11,7 +11,7 @@ type CardPagesProps = {
 }
 
 
-function CardOffer ({offer: offer, handleIdOffer: handleIdOffer, onLeaveMouseOffer: onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
+function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
 
   const navigate = useNavigate();
 
