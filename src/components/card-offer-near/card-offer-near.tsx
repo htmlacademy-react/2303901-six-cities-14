@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { Offer } from '../../mock/offers/offer-mocks';
 import {AppRoute} from '../../const';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 type CardOfferProps = {
   offersPoint: Offer;
@@ -9,22 +9,15 @@ type CardOfferProps = {
 
 function CardOfferNear ({offersPoint: offer}: CardOfferProps): JSX.Element {
 
-  const navigate = useNavigate();
-  const [cardState, setCardState] = useState({
-    offerId: ''
-  });
-
-  function onGetIdCard () {
-    setCardState({
-      ...cardState,
-      offerId: offer.id,
-    });
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },);
 
   return (
     <article className="near-places__card place-card" >
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <a onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`)} onMouseOver = {onGetIdCard}>
+
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -32,7 +25,8 @@ function CardOfferNear ({offersPoint: offer}: CardOfferProps): JSX.Element {
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
+
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -61,7 +55,7 @@ function CardOfferNear ({offersPoint: offer}: CardOfferProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`) } onMouseOver={onGetIdCard}>Wood and stone place</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
