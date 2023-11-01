@@ -37,7 +37,7 @@ function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Elemen
     };
 
     return pointsToMap;
-  }).slice(0, 3);
+  }).slice(0, 4);
 
   useDocumentTitle(title);
 
@@ -177,7 +177,7 @@ function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Elemen
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={offersPoint} cityName={offerToRender?.city.name}/>
+            <MapComponent pointsToMap={offersPoint} selectedPoint={offerToRender} cityName={offerToRender?.city.name} />
 
           </section>
         </section>
