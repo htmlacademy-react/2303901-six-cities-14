@@ -10,7 +10,7 @@ type PointOfferLocation = {
   lat: number;
   lng: number;
   zoom: number;
-  id: string;
+  id: number;
 }
 
 type IconToMap = {

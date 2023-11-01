@@ -37,7 +37,7 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
     return pointsToMap;
   });
 
-  function handleListItemHover (idOffer: string) {
+  function handleListItemHover (idOffer: number) {
     offers.find((offer, index: number) => {
 
       if (offer.id === idOffer){

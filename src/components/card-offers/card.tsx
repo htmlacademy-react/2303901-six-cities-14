@@ -6,16 +6,23 @@ import {AppRoute} from '../../const';
 
 type CardPagesProps = {
   offer: Offer;
-  handleIdOffer: (offerId: string) => void;
+  handleIdOffer: (offerId: number) => void;
   onLeaveMouseOffer: () => void;
 }
 
 
 function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
 
+  const [isFavoriteCard, setIsFavoriteCard] = useState(offer.isFavorite);
   const [cardState, setCardState] = useState({
-    offerId: ''
+    offerId: offer.id
   });
+
+  const onFavoriteButton = (): void => {
+    const updatedIsFavorite = !isFavoriteCard;
+    setIsFavoriteCard(updatedIsFavorite);
+    offer.isFavorite = updatedIsFavorite;
+  };
 
   function onGetIdCard () {
     setCardState({
@@ -40,6 +47,9 @@ function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) :
       onMouseLeave={onLeavePointOffer}
     >
       <div className="cities__image-wrapper place-card__image-wrapper">
+
+        {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
+
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
         </Link>
@@ -50,7 +60,7 @@ function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) :
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button onClick={onFavoriteButton} className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -59,7 +69,7 @@ function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) :
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: (offer.rating / 5) * 100}}></span>
+            <span style={{ width:  `${Math.round(offer.rating) * 100 / 5}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

@@ -8,8 +8,8 @@ type OfferNearProps = {
 
 function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
 
-
-  const threeOffersNear = offersPoint.slice(0, 3);
+  const threeOffersNear = offersPoint.slice(0, 4);
+  const offers = threeOffersNear.filter((offer) => offer.id !== offerPoint.id);
 
   return (
     <div className="container">
@@ -19,7 +19,7 @@ function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
         </h2>
         <div className="near-places__list places__list">
 
-          {threeOffersNear.map((offer) => <CardOfferNear key={offer.id} offersPoint={offer}/>)}
+          {offers.map((offer) => <CardOfferNear key={offer.id} offer={offer}/>)}
 
         </div>
       </section>

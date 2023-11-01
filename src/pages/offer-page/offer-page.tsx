@@ -18,7 +18,9 @@ type OfferPagesProps = {
 function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Element {
 
   const {offerId} = useParams();
-  const offerToRender = offers.find((offer) => offer.id === offerId);
+
+  const offerIdToNumber = Number(offerId);
+  const offerToRender = offers.find((offer) => offer.id === offerIdToNumber);
 
   const getOfferPoints = offers.filter((offer) => {
     const points = offer.city.name === offerToRender?.city.name;
@@ -99,7 +101,7 @@ function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Elemen
                 <h1 className="offer__name">
                   {offerToRender?.description}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button className="offer__bookmark-button button" type="button" >
                   <svg className="offer__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -107,14 +109,12 @@ function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Elemen
                 </button>
               </div>
               <div className="offer__rating rating">
-
-                {offerToRender ? (
-                  <>
-                    <span style={{ width: (offerToRender.rating / 5) * 100 }} />
-                    <span className="visually-hidden">Rating</span>
-                  </>
-                ) : null}
-
+                {offerToRender && (
+                  <div className="offer__stars rating__stars">
+                    <span style={{ width:  `${Math.round(offerToRender.rating) * 100 / 5}%`}} />
+                    <span className="visually-hidden">{offerToRender.rating}</span>
+                  </div>
+                )}
                 <span className="offer__rating-value rating__value">{offerToRender?.rating}</span>
               </div>
               <ul className="offer__features">

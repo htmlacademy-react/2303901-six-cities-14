@@ -10,7 +10,7 @@ type FavoritePagesProps = {
 
 function FavoritesPage({ title, offers }: FavoritePagesProps): JSX.Element {
 
-  type Groups = { [key: string]: Offers};
+  type Groups = {[key: string]: Offers};
 
   const groupedFavorites = offers.reduce((groups, offer) => {
     const cityName = offer.city.name;

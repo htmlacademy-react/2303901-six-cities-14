@@ -39,7 +39,7 @@ goods: string[];
 host: OfferHost;
 description:string;
 location: OfferLocation;
-id:string;
+id: number;
 }
 
 type Offers = Offer[]
@@ -95,7 +95,7 @@ const offersMock: Offers = [
       longitude: 6.779314,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 45534534
   },
   {
     city: {
@@ -124,13 +124,13 @@ const offersMock: Offers = [
       'https://14.react.pages.academy/static/offer/13.jpg'
     ],
     title: 'House in countryside',
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
     rating: 2.8,
     type: 'room',
     bedrooms: 1,
     maxAdults: 2,
-    price: 144,
+    price: 1446,
     goods: [
       'Laptop friendly workspace',
       'Breakfast',
@@ -148,7 +148,7 @@ const offersMock: Offers = [
       longitude: 4.902976,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 75256
   },
 
   {
@@ -209,7 +209,7 @@ const offersMock: Offers = [
       longitude: 4.3376969999999995,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 6453434
   },
 
   {
@@ -241,11 +241,11 @@ const offersMock: Offers = [
     title: 'Nice, cozy, warm big bed apartment',
     isFavorite: true,
     isPremium: false,
-    rating: 3.2,
+    rating: 1,
     type: 'hotel',
     bedrooms: 4,
     maxAdults: 4,
-    price: 330,
+    price: 30,
     goods: [
       'Breakfast',
       'Washer',
@@ -264,7 +264,7 @@ const offersMock: Offers = [
       longitude: 4.883976,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 6564534
   },
   {
     city: {
@@ -321,7 +321,7 @@ const offersMock: Offers = [
       longitude: 9.975654,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 7673563746
   },
 
   {
@@ -353,11 +353,11 @@ const offersMock: Offers = [
     title: 'House in countryside',
     isFavorite: true,
     isPremium: true,
-    rating: 2.8,
+    rating: 2.0,
     type: 'room',
     bedrooms: 1,
     maxAdults: 2,
-    price: 144,
+    price: 1555554,
     goods: [
       'Laptop friendly workspace',
       'Breakfast',
@@ -375,7 +375,7 @@ const offersMock: Offers = [
       longitude: 4.902976,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 486483443476
   },
 
   {
@@ -407,7 +407,7 @@ const offersMock: Offers = [
     title: 'House in countryside',
     isFavorite: true,
     isPremium: true,
-    rating: 2.8,
+    rating: 3.8,
     type: 'room',
     bedrooms: 1,
     maxAdults: 2,
@@ -429,7 +429,7 @@ const offersMock: Offers = [
       longitude: 4.902976,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 48648347254364
   },
 
   {
@@ -461,7 +461,7 @@ const offersMock: Offers = [
     title: 'House in countryside',
     isFavorite: true,
     isPremium: true,
-    rating: 2.8,
+    rating: 1.8,
     type: 'room',
     bedrooms: 1,
     maxAdults: 2,
@@ -483,7 +483,7 @@ const offersMock: Offers = [
       longitude: 4.902874,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 786732425465434
   },
 ];
 

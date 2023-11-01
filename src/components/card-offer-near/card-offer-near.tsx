@@ -4,10 +4,10 @@ import {AppRoute} from '../../const';
 import { useEffect } from 'react';
 
 type CardOfferProps = {
-  offersPoint: Offer;
+  offer: Offer;
 }
 
-function CardOfferNear ({offersPoint: offer}: CardOfferProps): JSX.Element {
+function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,6 +16,8 @@ function CardOfferNear ({offersPoint: offer}: CardOfferProps): JSX.Element {
   return (
     <article className="near-places__card place-card" >
       <div className="near-places__image-wrapper place-card__image-wrapper">
+
+        {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
 
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
@@ -50,7 +52,7 @@ function CardOfferNear ({offersPoint: offer}: CardOfferProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: (offer.rating / 5) * 100}} />
+            <span style={{ width:  `${Math.round(offer.rating) * 100 / 5}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
