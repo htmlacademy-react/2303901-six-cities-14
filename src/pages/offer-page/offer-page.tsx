@@ -39,14 +39,6 @@ function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Elemen
     return pointsToMap;
   }).slice(0, 3);
 
-  const cityToMap = {
-    title: offerToRender?.city.name,
-    lat: offerToRender?.city.location.latitude,
-    lng: offerToRender?.city.location.longitude,
-    zoom: offerToRender?.city.location.zoom,
-  };
-
-
   useDocumentTitle(title);
 
   return(
