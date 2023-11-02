@@ -6,7 +6,7 @@ type OfferPagesProps = {
   title: string;
 }
 
-function ErrorMessage ({title: title} : OfferPagesProps): JSX.Element {
+function ErrorMessage ({title} : OfferPagesProps): JSX.Element {
 
   useDocumentTitle(title);
 

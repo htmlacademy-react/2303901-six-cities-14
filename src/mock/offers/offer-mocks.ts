@@ -39,7 +39,7 @@ goods: string[];
 host: OfferHost;
 description:string;
 location: OfferLocation;
-id:string;
+id: number;
 }
 
 type Offers = Offer[]
@@ -85,7 +85,7 @@ const offersMock: Offers = [
     ],
     host: {
       id: 25,
-      name: 'Angelina',
+      name: 'Jylia',
       isPro: true,
       avatarUrl: 'img/avatar-angelina.jpg'
     },
@@ -95,7 +95,7 @@ const offersMock: Offers = [
       longitude: 6.779314,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 45534534
   },
   {
     city: {
@@ -124,13 +124,13 @@ const offersMock: Offers = [
       'https://14.react.pages.academy/static/offer/13.jpg'
     ],
     title: 'House in countryside',
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
     rating: 2.8,
     type: 'room',
     bedrooms: 1,
     maxAdults: 2,
-    price: 144,
+    price: 1446,
     goods: [
       'Laptop friendly workspace',
       'Breakfast',
@@ -148,7 +148,7 @@ const offersMock: Offers = [
       longitude: 4.902976,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 75256
   },
 
   {
@@ -209,7 +209,7 @@ const offersMock: Offers = [
       longitude: 4.3376969999999995,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 6453434
   },
 
   {
@@ -241,11 +241,11 @@ const offersMock: Offers = [
     title: 'Nice, cozy, warm big bed apartment',
     isFavorite: true,
     isPremium: false,
-    rating: 3.2,
+    rating: 1,
     type: 'hotel',
     bedrooms: 4,
     maxAdults: 4,
-    price: 330,
+    price: 30,
     goods: [
       'Breakfast',
       'Washer',
@@ -264,7 +264,7 @@ const offersMock: Offers = [
       longitude: 4.883976,
       zoom: 16
     },
-    id: crypto.randomUUID()
+    id: 6564534
   },
   {
     city: {
@@ -311,7 +311,7 @@ const offersMock: Offers = [
     ],
     host: {
       id: 25,
-      name: 'Angelina',
+      name: 'Sveta',
       isPro: true,
       avatarUrl: 'img/avatar-angelina.jpg'
     },
@@ -321,8 +321,170 @@ const offersMock: Offers = [
       longitude: 9.975654,
       zoom: 16
     },
-    id: crypto.randomUUID()
-  }
+    id: 7673563746
+  },
+
+  {
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    previewImage: 'https://14.react.pages.academy/static/offer/14.jpg',
+    images: [
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg',
+      'https://14.react.pages.academy/static/offer/14.jpg',
+      'https://14.react.pages.academy/static/offer/12.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/20.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg'
+    ],
+    title: 'House in countryside',
+    isFavorite: true,
+    isPremium: true,
+    rating: 2.0,
+    type: 'room',
+    bedrooms: 1,
+    maxAdults: 2,
+    price: 1555554,
+    goods: [
+      'Laptop friendly workspace',
+      'Breakfast',
+      'Washer'
+    ],
+    host: {
+      id: 2512,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg'
+    },
+    description: 'This is a place for dreamers to reset, reflect, and create. Designed with a slow pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
+    location: {
+      latitude: 52.388540000000006,
+      longitude: 4.902976,
+      zoom: 16
+    },
+    id: 486483443476
+  },
+
+  {
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    previewImage: 'https://14.react.pages.academy/static/offer/14.jpg',
+    images: [
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg',
+      'https://14.react.pages.academy/static/offer/14.jpg',
+      'https://14.react.pages.academy/static/offer/12.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/20.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg'
+    ],
+    title: 'House in countryside',
+    isFavorite: true,
+    isPremium: true,
+    rating: 3.8,
+    type: 'room',
+    bedrooms: 1,
+    maxAdults: 2,
+    price: 144,
+    goods: [
+      'Laptop friendly workspace',
+      'Breakfast',
+      'Washer'
+    ],
+    host: {
+      id: 258,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg'
+    },
+    description: 'This is a place for dreamers to reset, reflect, and create. Designed with a slow pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
+    location: {
+      latitude: 52.382540000000006,
+      longitude: 4.902976,
+      zoom: 16
+    },
+    id: 48648347254364
+  },
+
+  {
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    previewImage: 'https://14.react.pages.academy/static/offer/14.jpg',
+    images: [
+      'https://14.react.pages.academy/static/offer/8.jpg',
+      'https://14.react.pages.academy/static/offer/7.jpg',
+      'https://14.react.pages.academy/static/offer/17.jpg',
+      'https://14.react.pages.academy/static/offer/16.jpg',
+      'https://14.react.pages.academy/static/offer/1.jpg',
+      'https://14.react.pages.academy/static/offer/14.jpg',
+      'https://14.react.pages.academy/static/offer/12.jpg',
+      'https://14.react.pages.academy/static/offer/2.jpg',
+      'https://14.react.pages.academy/static/offer/10.jpg',
+      'https://14.react.pages.academy/static/offer/6.jpg',
+      'https://14.react.pages.academy/static/offer/20.jpg',
+      'https://14.react.pages.academy/static/offer/4.jpg',
+      'https://14.react.pages.academy/static/offer/5.jpg',
+      'https://14.react.pages.academy/static/offer/13.jpg'
+    ],
+    title: 'House in countryside',
+    isFavorite: true,
+    isPremium: true,
+    rating: 1.8,
+    type: 'room',
+    bedrooms: 1,
+    maxAdults: 2,
+    price: 144,
+    goods: [
+      'Laptop friendly workspace',
+      'Breakfast',
+      'Washer'
+    ],
+    host: {
+      id: 255,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg'
+    },
+    description: 'This is a place for dreamers to reset, reflect, and create. Designed with a slow pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
+    location: {
+      latitude: 52.38764000000006,
+      longitude: 4.902874,
+      zoom: 16
+    },
+    id: 786732425465434
+  },
 ];
 
 export {offersMock};

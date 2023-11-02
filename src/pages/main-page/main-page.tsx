@@ -3,8 +3,10 @@ import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offers, Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-import { Cities} from '../../const';
-import { useState } from 'react';
+import {Cities} from '../../const';
+import {useState} from 'react';
+import Profile from '../../components/profile/profile';
+
 
 type MainPagesProps = {
   title: string;
@@ -24,23 +26,9 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
     }
   });
 
-  const citiesToMap = citiesToFilter.map((offer) => {
-
-    const points = {
-      title: offer.city.name,
-      lat: offer.city.location.latitude,
-      lng: offer.city.location.longitude,
-      zoom: offer.city.location.zoom,
-    };
-
-    return points;
-  });
-
-  const cityToMap = citiesToMap[0];
-
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
-    const points = {
+    const pointsToMap = {
       title: offer.city.name,
       lat: offer.location.latitude,
       lng: offer.location.longitude,
@@ -48,10 +36,10 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
       id: offer.id
     };
 
-    return points;
+    return pointsToMap;
   });
 
-  function handleListItemHover (idOffer: string) {
+  function handleListItemHover (idOffer: number) {
     offers.find((offer, index: number) => {
 
       if (offer.id === idOffer){
@@ -81,23 +69,9 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+
+            <Profile/>
+
           </div>
         </div>
       </header>
@@ -132,8 +106,11 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
 
             </section>
 
-            <MapComponent pointsToMap={pointsOffersToMap} cityToMap = {cityToMap} selectedPoint={selectedPoint} />
+            <div className="cities__right-section">
 
+              <MapComponent pointsToMap={pointsOffersToMap} selectedPoint={selectedPoint} cityName={selectedFilterCity}/>
+
+            </div>
           </div>
         </div>
       </main>

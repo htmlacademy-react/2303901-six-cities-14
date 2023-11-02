@@ -1,22 +1,20 @@
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import type {Offer} from '../../mock/offers/offer-mocks';
 import {AppRoute} from '../../const';
-
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardPagesProps = {
   offer: Offer;
-  handleIdOffer: (offerId: string) => void;
+  handleIdOffer: (offerId: number) => void;
   onLeaveMouseOffer: () => void;
 }
 
 
-function CardOffer ({offer: offer, handleIdOffer: handleIdOffer, onLeaveMouseOffer: onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
-
-  const navigate = useNavigate();
+function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
 
   const [cardState, setCardState] = useState({
-    offerId: ''
+    offerId: offer.id
   });
 
   function onGetIdCard () {
@@ -38,14 +36,16 @@ function CardOffer ({offer: offer, handleIdOffer: handleIdOffer, onLeaveMouseOff
   return(
     <article className="cities__card place-card"
       onMouseOver = {onGetIdCard}
-      onClick={() => navigate(`${AppRoute.Offer}/${offer.id}`)}
       onMouseEnter={onGetPointOffer}
       onMouseLeave={onLeavePointOffer}
     >
       <div className="cities__image-wrapper place-card__image-wrapper">
 
-        <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
+        {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
 
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
+          <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -53,21 +53,18 @@ function CardOffer ({offer: offer, handleIdOffer: handleIdOffer, onLeaveMouseOff
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+
+          <FavoriteButton offer={offer}/>
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: (offer.rating / 5) * 100}}></span>
+            <span style={{ width:  `${Math.round(offer.rating) * 100 / 5}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

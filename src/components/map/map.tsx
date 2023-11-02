@@ -1,24 +1,24 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import { useRef, useEffect } from 'react';
-import type { CityLocation, PointOfferLocation, IconToMap } from '../../types/types';
+import type {PointOfferLocation, IconToMap} from '../../types/types';
 import type { Offer } from '../../mock/offers/offer-mocks';
 import useMap from '../../hooks/use-map/use-map';
-import {CURRENT_ICON, DEFAULT_DESCRIPTION, DEFAULT_ICON} from '../../const';
+import {CURRENT_ICON, DEFAULT_ICON, DefaultCityToMap} from '../../const';
 
 type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
-  cityToMap: CityLocation;
   selectedPoint?: Offer;
+  cityName?: string;
 };
 
 
 const defaultCustomIcon = new Icon(DEFAULT_ICON as IconToMap);
 const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
 
-function MapComponent({pointsToMap: points, cityToMap: cityToMap, selectedPoint: selectedPoint,}: MapComponentProp): JSX.Element {
+function MapComponent({pointsToMap: points, selectedPoint, cityName = 'Paris'}: MapComponentProp): JSX.Element {
 
-  const city = cityToMap instanceof Object ? cityToMap : DEFAULT_DESCRIPTION;
+  const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -44,25 +44,25 @@ function MapComponent({pointsToMap: points, cityToMap: cityToMap, selectedPoint:
   }, [map, points, selectedPoint]);
 
   useEffect(() => {
-    if (map && cityToMap && cityToMap.lat && cityToMap.lng) {
-      map.setView([cityToMap.lat, cityToMap.lng], cityToMap.zoom);
+    if (map && city && city.lat && city.lng) {
+      map.setView([city.lat, city.lng], city.zoom);
     }
-  }, [map, cityToMap]);
+  }, [map, city]);
 
   return (
-    <div className="cities__right-section">
-      <section
-        className="cities__map map"
-        ref={mapRef}
-        style={{
-          height: '100%',
-          minHeight: '500px',
-          width: '100%',
-          maxWidth: '1144px',
-          margin: '0 auto',
-        }}
-      />
-    </div>
+
+    <section
+      className="cities__map map"
+      ref={mapRef}
+      style={{
+        height: '100%',
+        minHeight: '500px',
+        width: '100%',
+        maxWidth: '1144px',
+        margin: '0 auto',
+      }}
+    />
+
   );
 }
 

@@ -1,8 +1,8 @@
 type CityLocation = {
-  title: string;
-  lat: number;
-  lng: number;
-  zoom: number;
+  title: string | undefined;
+  lat: number | undefined;
+  lng: number | undefined;
+  zoom: number | undefined;
 };
 
 type PointOfferLocation = {
@@ -10,7 +10,7 @@ type PointOfferLocation = {
   lat: number;
   lng: number;
   zoom: number;
-  id: string;
+  id: number;
 }
 
 type IconToMap = {
@@ -19,4 +19,33 @@ type IconToMap = {
   iconAnchor: [number, number];
 }
 
-export type {CityLocation, PointOfferLocation, IconToMap};
+type ReviewUser ={
+  id: number;
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
+}
+
+
+type Review = {
+  id: number;
+  user: ReviewUser;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
+type Reviews = Review[];
+
+type CityLocationDefault = {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+};
+
+type DefaultCityType = {
+  [key: string]: CityLocationDefault;
+}
+
+export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews, DefaultCityType, CityLocationDefault};
