@@ -113,6 +113,8 @@ const MONTH_NAMES = [
   'November', 'December'
 ];
 
+const DEFAULT_CITY = 'Paris';
+
 
 export {
   AppRoute,
@@ -127,6 +129,7 @@ export {
   LengthComment,
   MAX_LENGTH_REVIEW,
   MONTH_NAMES,
-  DefaultCityToMap
+  DefaultCityToMap,
+  DEFAULT_CITY
 };
 

@@ -4,7 +4,8 @@ import { useRef, useEffect } from 'react';
 import type {PointOfferLocation, IconToMap} from '../../types/types';
 import type { Offer } from '../../mock/offers/offer-mocks';
 import useMap from '../../hooks/use-map/use-map';
-import {CURRENT_ICON, DEFAULT_ICON, DefaultCityToMap} from '../../const';
+import {CURRENT_ICON, DEFAULT_CITY, DEFAULT_ICON, DefaultCityToMap} from '../../const';
+
 
 type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
@@ -16,7 +17,7 @@ type MapComponentProp = {
 const defaultCustomIcon = new Icon(DEFAULT_ICON as IconToMap);
 const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
 
-function MapComponent({pointsToMap: points, selectedPoint, cityName = 'Paris'}: MapComponentProp): JSX.Element {
+function MapComponent({pointsToMap: points, selectedPoint, cityName = DEFAULT_CITY}: MapComponentProp): JSX.Element {
 
   const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
 

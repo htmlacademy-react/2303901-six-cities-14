@@ -488,4 +488,4 @@ const offersMock: Offers = [
 ];
 
 export {offersMock};
-export type {Offers, Offer, OfferCityLocation};
+export type {Offers, Offer, OfferCityLocation, OfferCity};
