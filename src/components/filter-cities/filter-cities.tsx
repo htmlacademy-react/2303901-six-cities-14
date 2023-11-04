@@ -1,7 +1,7 @@
 import {CitiesForFilter} from '../../const';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import{changeCity} from '../../store/actions/action';
-import type { CurrentCity } from '../../types/type-store';
+import type {CurrentCity} from '../../types/type-store';
 
 function FilterCities () {
 
