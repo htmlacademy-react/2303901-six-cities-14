@@ -3,10 +3,10 @@ import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offers, Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title/document-title';
-import {Cities} from '../../const';
 import {useState} from 'react';
 import Profile from '../../components/profile/profile';
-
+import {useSelector} from 'react-redux';
+import type { CurrentCity } from '../../types/type-store';
 
 type MainPagesProps = {
   title: string;
@@ -16,9 +16,11 @@ type MainPagesProps = {
 function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element {
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-  const [selectedFilterCity, setSelectedFilterCity] = useState(Cities.Paris);
 
-  //выбор города направления
+  //стейт фильтра города при нажатии на фильтр
+  const selectedFilterCity = useSelector((state:CurrentCity) => state.currentCity);
+
+  //Функция получения списка офферов согласно выбранного фильта
   const citiesToFilter = offers.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
 
@@ -48,11 +50,6 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
     });
   }
 
-  //функция получения города при нажатии на фильтр
-  function onClickFilterCity (cityFilter: string) {
-    setSelectedFilterCity(cityFilter);
-  }
-
   function onLeaveMouseOffer () {
     setSelectedPoint(undefined);
   }
@@ -79,7 +76,7 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <FilterCities onClickFilterCity = {onClickFilterCity}/>
+        <FilterCities/>
 
         <div className="cities">
           <div className="cities__places-container container">
