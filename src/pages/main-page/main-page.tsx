@@ -2,23 +2,24 @@ import ListOffers from '../../components/list-offers/list-offers';
 import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offers, Offer} from '../../mock/offers/offer-mocks';
-import useDocumentTitle from '../../hooks/document-title/document-title';
+import useDocumentTitle from '../../hooks/document-title';
 import {useState} from 'react';
 import Profile from '../../components/profile/profile';
 import {useSelector} from 'react-redux';
-import type { CurrentCity } from '../../types/type-store';
+import type {StateFilterCity} from '../../types/type-store';
 
 type MainPagesProps = {
   title: string;
   offers: Offers;
 }
 
-function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element {
+function MainPages ({title, offers}: MainPagesProps): JSX.Element {
+
 
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
 
   //стейт фильтра города при нажатии на фильтр
-  const selectedFilterCity = useSelector((state:CurrentCity) => state.currentCity);
+  const selectedFilterCity = useSelector((state: StateFilterCity) => state.filterCity.city);
 
   //Функция получения списка офферов согласно выбранного фильта
   const citiesToFilter = offers.filter((city, index) => {

@@ -1,6 +1,6 @@
 import FavoriteCardOffer from '../../components/favorite-card-offers/favorite-card-offers';
 import Logotype from '../../components/logotype/logotype';
-import useDocumentTitle from '../../hooks/document-title/document-title';
+import useDocumentTitle from '../../hooks/document-title';
 import { Offers } from '../../mock/offers/offer-mocks';
 
 type FavoritePagesProps = {

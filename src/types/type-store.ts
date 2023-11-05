@@ -1,10 +1,19 @@
-import store from '../store/indexes/index';
+import {store} from '../store/index';
+import type {Offers} from '../mock/offers/offer-mocks';
 
 type State = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;
 
-type CurrentCity = {
-  currentCity: string;
+type StateOffers = {
+  offers: {
+    offers: Offers;
+  };
 }
 
-export type {State, AppDispatch, CurrentCity};
+type StateFilterCity = {
+  filterCity: {
+    city: string;
+  };
+}
+
+export type {State, AppDispatch, StateOffers, StateFilterCity};

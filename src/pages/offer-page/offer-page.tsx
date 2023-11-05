@@ -4,7 +4,7 @@ import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
 import MapComponent from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
-import useDocumentTitle from '../../hooks/document-title/document-title';
+import useDocumentTitle from '../../hooks/document-title';
 import type {Offers} from '../../mock/offers/offer-mocks';
 import type {Reviews} from '../../types/types';
 

@@ -1,11 +1,9 @@
 import type { Offer } from '../../mock/offers/offer-mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOfferList } from '../../store/actions/action';
-import type { Offers } from '../../mock/offers/offer-mocks';
 
-type StateOffers = {
-  offers: Offers;
-}
+
+import type { StateOffers } from '../../types/type-store';
 
 type ButtonProps = {
   offer: Offer;
@@ -14,7 +12,7 @@ type ButtonProps = {
 function FavoriteButton({ offer }: ButtonProps): JSX.Element {
 
   const dispatch = useDispatch();
-  const stateOffers = useSelector((state: StateOffers) => state.offers);
+  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
   const indexOffer = stateOffers.findIndex((stateOffer) => stateOffer.id === offer.id);
   const updatedStateOffers = [...stateOffers];
 

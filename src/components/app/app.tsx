@@ -6,7 +6,7 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import ErrorMessage from '../error-message/error-message';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
-import type {Offers} from '../../mock/offers/offer-mocks';
+import type {StateOffers} from '../../types/type-store';
 import type {Reviews} from '../../types/types';
 import {useSelector} from 'react-redux';
 
@@ -14,13 +14,10 @@ type AppOfferProps = {
   reviewProps: Reviews;
 }
 
-type StateOffers = {
-  offers: Offers;
-}
-
 function App({reviewProps}: AppOfferProps,): JSX.Element {
 
-  const stateOffers = useSelector((state: StateOffers) => state.offers);
+  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
+
 
   return (
     <BrowserRouter>

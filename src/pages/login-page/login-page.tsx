@@ -1,5 +1,5 @@
 import Logotype from '../../components/logotype/logotype';
-import useDocumentTitle from '../../hooks/document-title/document-title';
+import useDocumentTitle from '../../hooks/document-title';
 
 type LoginPagesProps = {
   title: string;
