@@ -1,31 +1,29 @@
 import ListOffers from '../../components/list-offers/list-offers';
 import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
-import type {Offers, Offer} from '../../mock/offers/offer-mocks';
+import type {Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title';
 import {useState} from 'react';
 import Profile from '../../components/profile/profile';
 import {useSelector} from 'react-redux';
-import type {StateFilterCity} from '../../types/type-store';
+import type {StateFilterCity, StateOffers} from '../../types/type-store';
 
 type MainPagesProps = {
   title: string;
-  offers: Offers;
 }
 
-function MainPages ({title, offers}: MainPagesProps): JSX.Element {
-
-
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+function MainPages ({title}: MainPagesProps): JSX.Element {
 
   //стейт фильтра города при нажатии на фильтр
   const selectedFilterCity = useSelector((state: StateFilterCity) => state.filterCity.city);
+  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
 
   //Функция получения списка офферов согласно выбранного фильта
-  const citiesToFilter = offers.filter((city, index) => {
+  const citiesToFilter = stateOffers.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
 
-      return offers[index];
+      return stateOffers[index];
     }
   });
 
@@ -43,10 +41,10 @@ function MainPages ({title, offers}: MainPagesProps): JSX.Element {
   });
 
   function handleListItemHover (idOffer: number) {
-    offers.find((offer, index: number) => {
+    stateOffers.find((offer, index: number) => {
 
       if (offer.id === idOffer){
-        setSelectedPoint(offers[index]);
+        setSelectedPoint(stateOffers[index]);
       }
     });
   }

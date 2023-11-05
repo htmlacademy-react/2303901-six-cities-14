@@ -1,16 +1,20 @@
+import { useSelector } from 'react-redux';
 import FavoriteCardOffer from '../../components/favorite-card-offers/favorite-card-offers';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import { Offers } from '../../mock/offers/offer-mocks';
+import type { StateOffers} from '../../types/type-store';
+
 
 type FavoritePagesProps = {
   title: string;
-  offers: Offers;
 };
 
-function FavoritesPage({ title, offers }: FavoritePagesProps): JSX.Element {
+function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
   type Groups = {[key: string]: Offers};
+
+  const offers = useSelector((state: StateOffers) => state.offers.offers);
 
   const groupedFavorites = offers.reduce((groups, offer) => {
     const cityName = offer.city.name;
