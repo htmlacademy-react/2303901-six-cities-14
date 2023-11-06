@@ -1,6 +1,6 @@
 import type { Offer } from '../../mock/offers/offer-mocks';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOfferList } from '../../store/actions/action';
+import {offersSlice} from '../../store/slices/offers-slice';
 
 
 import type { StateOffers } from '../../types/type-store';
@@ -26,7 +26,7 @@ function FavoriteButton({ offer }: ButtonProps): JSX.Element {
     };
 
     updatedStateOffers[indexOffer] = updatedOffer;
-    dispatch(addOfferList(updatedStateOffers));
+    dispatch(offersSlice.actions.addOfferList(updatedStateOffers));
   };
 
   return (
