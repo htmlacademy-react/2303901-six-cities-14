@@ -1,5 +1,6 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {Offers} from '../../mock/offers/offer-mocks';
+
 
 type OffersSort = {
   offers: Offers;
@@ -11,6 +12,7 @@ function SortList ({offers}: OffersSort) {
 
   useEffect(()=>{
     setStateSortList(false);
+    setStateSortOffers(offers);
   },[offers]);
 
   function changeOfferLowToHight (offersToSort: Offers) {
@@ -29,9 +31,15 @@ function SortList ({offers}: OffersSort) {
     setStateSortList(!stateSortList);
   }
 
-  function onClickChangeSort(evt: React.MouseEvent<HTMLLIElement>):void {
+  function onClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
 
-    switch(evt.currentTarget.tabIndex) {
+    type TabIndex = number;
+
+    const target = evt.target as HTMLElement;
+    const tabIndex: TabIndex = target.tabIndex;
+    //console.log( evt)
+
+    switch(tabIndex) {
       case 0:
         return setStateSortOffers(offers);
       case 1:
@@ -40,11 +48,10 @@ function SortList ({offers}: OffersSort) {
         return changeOfferHightToLow(offers);
       case 3:
         return changeOfferTopRatedFirst(offers);
-      default:
-        return setStateSortOffers(offers);
     }
   }
-  //console.table(stateSortOffers)
+  //console.table(stateSortOffers);
+
   return (
     <form className="places__sorting" action="#" method="get" >
       <span className="places__sorting-caption">Sort by</span>
