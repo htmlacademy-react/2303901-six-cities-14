@@ -36,14 +36,14 @@ const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 const CURRENT_ICON = {
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
 };
 
 const DEFAULT_ICON = {
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
 };
 
 const DEFAULT_DESCRIPTION = {
@@ -104,12 +104,16 @@ const LengthComment = {
   MAX: 300
 };
 
+const MAX_LENGTH_REVIEW = 10;
+
 const MONTH_NAMES = [
   'January', 'February', 'March',
   'April', 'May', 'June', 'July',
   'August', 'September', 'October',
   'November', 'December'
 ];
+
+const DEFAULT_CITY = 'Paris';
 
 
 export {
@@ -123,7 +127,9 @@ export {
   CURRENT_ICON,
   DEFAULT_ICON,
   LengthComment,
+  MAX_LENGTH_REVIEW,
   MONTH_NAMES,
-  DefaultCityToMap
+  DefaultCityToMap,
+  DEFAULT_CITY
 };
 

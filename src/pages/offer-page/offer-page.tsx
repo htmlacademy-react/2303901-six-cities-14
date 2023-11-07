@@ -4,25 +4,27 @@ import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
 import MapComponent from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
-import useDocumentTitle from '../../hooks/document-title/document-title';
-import type {Offers} from '../../mock/offers/offer-mocks';
+import useDocumentTitle from '../../hooks/document-title';
 import type {Reviews} from '../../types/types';
+import {useSelector} from 'react-redux';
+import type {StateOffers} from '../../types/type-store';
 
 
 type OfferPagesProps = {
   title: string;
-  offers: Offers;
   reviewProps: Reviews;
 }
 
-function OfferPage ({title, offers, reviewProps} : OfferPagesProps) : JSX.Element {
+function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
+
+  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
 
   const {offerId} = useParams();
 
   const offerIdToNumber = Number(offerId);
-  const offerToRender = offers.find((offer) => offer.id === offerIdToNumber);
+  const offerToRender = stateOffers.find((offer) => offer.id === offerIdToNumber);
 
-  const getOfferPoints = offers.filter((offer) => {
+  const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === offerToRender?.city.name;
 
     return points;

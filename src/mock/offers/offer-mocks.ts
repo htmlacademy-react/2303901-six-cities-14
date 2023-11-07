@@ -28,8 +28,8 @@ city: OfferCity;
 previewImage: string;
 images: string[];
 title: string;
-isFavorite:boolean;
-isPremium:boolean;
+isFavorite: boolean;
+isPremium: boolean;
 rating: number;
 type: string;
 bedrooms: number;
@@ -488,4 +488,4 @@ const offersMock: Offers = [
 ];
 
 export {offersMock};
-export type {Offers, Offer, OfferCityLocation};
+export type {Offers, Offer, OfferCityLocation, OfferCity};

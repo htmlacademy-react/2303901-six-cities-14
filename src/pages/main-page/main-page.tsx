@@ -1,30 +1,42 @@
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
 import ListOffers from '../../components/list-offers/list-offers';
 import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
-import type {Offers, Offer} from '../../mock/offers/offer-mocks';
-import useDocumentTitle from '../../hooks/document-title/document-title';
-import {Cities} from '../../const';
-import {useState} from 'react';
+import type {Offer} from '../../mock/offers/offer-mocks';
+import useDocumentTitle from '../../hooks/document-title';
 import Profile from '../../components/profile/profile';
-
+import type {StateFilterCity, StateOffers} from '../../types/type-store';
+import { SortList } from '../../components/sort-list/sort-list';
+import { sortOffersSlice } from '../../store/slices/sort-offers-slice';
+import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
+import type {StateOffersFilter, StateOffersSort} from '../../types/type-store';
 
 type MainPagesProps = {
   title: string;
-  offers: Offers;
 }
 
-function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element {
-
+function MainPages ({title}: MainPagesProps): JSX.Element {
+  //стейт фильтра города при нажатии на фильтр
+  const selectedFilterCity = useSelector((state: StateFilterCity) => state.filterCity.city);
+  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-  const [selectedFilterCity, setSelectedFilterCity] = useState(Cities.Paris);
+  const dispatch = useDispatch();
+  const offersFilter = useSelector((state: StateOffersFilter) => state.filterOffers.filterOffers);
+  const offersSort = useSelector((state: StateOffersSort) => state.sortOffers.sortOffers);
 
-  //выбор города направления
-  const citiesToFilter = offers.filter((city, index) => {
+  //Функция получения списка офферов согласно выбранного фильта
+  const citiesToFilter = stateOffers.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
 
-      return offers[index];
+      return stateOffers[index];
     }
   });
+
+  useEffect(() => {
+    dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
+    dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
+  },[selectedFilterCity, stateOffers]);
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
@@ -40,17 +52,12 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
   });
 
   function handleListItemHover (idOffer: number) {
-    offers.find((offer, index: number) => {
+    stateOffers.find((offer, index: number) => {
 
       if (offer.id === idOffer){
-        setSelectedPoint(offers[index]);
+        setSelectedPoint(stateOffers[index]);
       }
     });
-  }
-
-  //функция получения города при нажатии на фильтр
-  function onClickFilterCity (cityFilter: string) {
-    setSelectedFilterCity(cityFilter);
   }
 
   function onLeaveMouseOffer () {
@@ -79,30 +86,16 @@ function MainPages ({title: title, offers: offers}: MainPagesProps): JSX.Element
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <FilterCities onClickFilterCity = {onClickFilterCity}/>
+        <FilterCities/>
 
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {citiesToFilter.length} places to stay in {selectedFilterCity}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
+              <b className="places__found"> {offersFilter.length} places to stay in {selectedFilterCity}</b>
 
-              <ListOffers offers = {citiesToFilter} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
+              <SortList/>
+              <ListOffers offers = {offersSort} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
 
             </section>
 
