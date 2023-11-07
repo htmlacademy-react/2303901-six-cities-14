@@ -16,4 +16,33 @@ type StateFilterCity = {
   };
 }
 
-export type {State, AppDispatch, StateOffers, StateFilterCity};
+type StateSortOffers = {
+  sortOffers: Offers | null;
+}
+
+type StateFilterOffers = {
+  filterOffers: Offers | null;
+}
+
+type StateOffersFilter = {
+  filterOffers: {
+    filterOffers: Offers;
+  };
+}
+
+type StateOffersSort = {
+  sortOffers: {
+    sortOffers: Offers;
+  };
+}
+
+export type {
+  State,
+  AppDispatch,
+  StateOffers,
+  StateFilterCity,
+  StateSortOffers,
+  StateFilterOffers,
+  StateOffersSort,
+  StateOffersFilter
+};

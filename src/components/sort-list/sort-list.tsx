@@ -1,30 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import type {Offers} from '../../mock/offers/offer-mocks';
+import {useDispatch, useSelector} from 'react-redux';
+import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
+import type {StateOffersFilter, StateOffersSort} from '../../types/type-store';
 
-
-type OffersSort = {
-  offers: Offers;
-}
-
-function SortList ({offers}: OffersSort) {
+function SortList () {
   const [stateSortList, setStateSortList] = useState(false);
-  const [stateSortOffers, setStateSortOffers] = useState(offers);
 
+  const offersSort = useSelector((state: StateOffersSort) => state.sortOffers.sortOffers);
+  const offersCity = useSelector((state: StateOffersFilter) => state.filterOffers.filterOffers);
+
+  const dispatch = useDispatch();
+
+  //console.log(offersCity.filterOffers.filterOffers);
   useEffect(()=>{
     setStateSortList(false);
-    setStateSortOffers(offers);
-  },[offers]);
+    //dispatch(sortOffersSlice.actions.addSortOffers(offers));
+  },[offersCity]);
 
   function changeOfferLowToHight (offersToSort: Offers) {
-    setStateSortOffers([...offersToSort].sort((a, b) => a.price - b.price));
+    const offers = [...offersToSort].sort((a, b) => a.price - b.price);
+
+    dispatch(sortOffersSlice.actions.addSortOffers(offers));
+
   }
 
   function changeOfferHightToLow (offersToSort: Offers) {
-    setStateSortOffers([...offersToSort].sort((a, b) => b.price - a.price));
+    const offers = [...offersToSort].sort((a, b) => b.price - a.price);
+    dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
   function changeOfferTopRatedFirst (offersToSort: Offers) {
-    setStateSortOffers([...offersToSort].sort((a, b) => b.rating - a.rating));
+    const offers = [...offersToSort].sort((a, b) => b.rating - a.rating);
+    dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
   function onClickSort():void {
@@ -37,20 +45,18 @@ function SortList ({offers}: OffersSort) {
 
     const target = evt.target as HTMLElement;
     const tabIndex: TabIndex = target.tabIndex;
-    //console.log( evt)
 
     switch(tabIndex) {
       case 0:
-        return setStateSortOffers(offers);
+        return dispatch(sortOffersSlice.actions.addSortOffers(offersCity));
       case 1:
-        return changeOfferLowToHight(offers);
+        return changeOfferLowToHight(offersSort);
       case 2:
-        return changeOfferHightToLow(offers);
+        return changeOfferHightToLow(offersSort);
       case 3:
-        return changeOfferTopRatedFirst(offers);
+        return changeOfferTopRatedFirst(offersSort);
     }
   }
-  //console.table(stateSortOffers);
 
   return (
     <form className="places__sorting" action="#" method="get" >

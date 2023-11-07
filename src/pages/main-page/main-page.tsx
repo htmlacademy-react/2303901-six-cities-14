@@ -1,5 +1,5 @@
-import {useSelector} from 'react-redux';
-import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
 import ListOffers from '../../components/list-offers/list-offers';
 import MapComponent from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
@@ -8,6 +8,9 @@ import useDocumentTitle from '../../hooks/document-title';
 import Profile from '../../components/profile/profile';
 import type {StateFilterCity, StateOffers} from '../../types/type-store';
 import { SortList } from '../../components/sort-list/sort-list';
+import { sortOffersSlice } from '../../store/slices/sort-offers-slice';
+import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
+import type {StateOffersFilter, StateOffersSort} from '../../types/type-store';
 
 type MainPagesProps = {
   title: string;
@@ -19,6 +22,9 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   const selectedFilterCity = useSelector((state: StateFilterCity) => state.filterCity.city);
   const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+  const dispatch = useDispatch();
+  const offersFilter = useSelector((state: StateOffersFilter) => state.filterOffers.filterOffers);
+  const offersSort = useSelector((state: StateOffersSort) => state.sortOffers.sortOffers);
 
   //Функция получения списка офферов согласно выбранного фильта
   const citiesToFilter = stateOffers.filter((city, index) => {
@@ -27,6 +33,12 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
       return stateOffers[index];
     }
   });
+
+
+  useEffect(() => {
+    dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
+    dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
+  },[selectedFilterCity]);
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
@@ -82,10 +94,10 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {citiesToFilter.length} places to stay in {selectedFilterCity}</b>
+              <b className="places__found"> {offersFilter.length} places to stay in {selectedFilterCity}</b>
 
-              <SortList offers = {citiesToFilter}/>
-              <ListOffers offers = {citiesToFilter} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
+              <SortList/>
+              <ListOffers offers = {offersSort} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
 
             </section>
 
