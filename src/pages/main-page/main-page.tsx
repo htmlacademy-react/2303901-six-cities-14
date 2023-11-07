@@ -17,7 +17,6 @@ type MainPagesProps = {
 }
 
 function MainPages ({title}: MainPagesProps): JSX.Element {
-
   //стейт фильтра города при нажатии на фильтр
   const selectedFilterCity = useSelector((state: StateFilterCity) => state.filterCity.city);
   const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
@@ -34,11 +33,10 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
     }
   });
 
-
   useEffect(() => {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
-  },[selectedFilterCity]);
+  },[selectedFilterCity, stateOffers]);
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
