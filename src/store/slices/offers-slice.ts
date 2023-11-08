@@ -15,10 +15,19 @@ const offersSlice = createSlice({
   name: 'offers',
   initialState,
   reducers: {
-    addOfferList (state, action: PayloadAction<Offers>) {
+    addOfferList(state, action: PayloadAction<Offers>) {
       state.offers = action.payload;
+    },
+    changeFavoriteStatus(state, action: PayloadAction<number>) {
+      const idToChange = action.payload;
+
+      const foundOffer = state.offers.find((offer) => offer.id === idToChange);
+      if (foundOffer) {
+        foundOffer.isFavorite = !foundOffer.isFavorite;
+      }
     },
   },
 });
 
 export {offersSlice};
+
