@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import type {Offers} from '../../mock/offers/offer-mocks';
-import {useDispatch, useSelector} from 'react-redux';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
-import type {StateOffersFilter, StateOffersSort} from '../../types/type-store';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 
 function SortList () {
   const [stateSortList, setStateSortList] = useState(false);
 
-  const offersSort = useSelector((state: StateOffersSort) => state.sortOffers.sortOffers);
-  const offersCity = useSelector((state: StateOffersFilter) => state.filterOffers.filterOffers);
-  const dispatch = useDispatch();
+  const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
+  const offersCity = useAppSelector((state) => state.filterOffers.filterOffers);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setStateSortList(false);
@@ -55,7 +54,7 @@ function SortList () {
   }
 
   return (
-    offersCity.length ? (
+    offersCity?.length ? (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0} onClick={onClickSort}>

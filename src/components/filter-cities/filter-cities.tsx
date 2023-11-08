@@ -1,12 +1,11 @@
 import {CitiesForFilter} from '../../const';
-import {useDispatch, useSelector} from 'react-redux';
 import { filterCitySlice } from '../../store/slices/filter-city-slice';
-import type {StateFilterCity} from '../../types/type-store';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 
 function FilterCities () {
 
-  const dispatch = useDispatch();
-  const stateFilter = useSelector((state: StateFilterCity) => state.filterCity.city);
+  const dispatch = useAppDispatch();
+  const stateFilter = useAppSelector((state) => state.filterCity.city);
 
   return (
     <div className="tabs" >
