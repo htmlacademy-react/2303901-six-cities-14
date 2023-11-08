@@ -1,4 +1,3 @@
-import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import ListOffers from '../../components/list-offers/list-offers';
 import MapComponent from '../../components/map/map';
@@ -6,11 +5,10 @@ import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title';
 import Profile from '../../components/profile/profile';
-import type {StateFilterCity, StateOffers} from '../../types/type-store';
-import { SortList } from '../../components/sort-list/sort-list';
-import { sortOffersSlice } from '../../store/slices/sort-offers-slice';
+import {SortList} from '../../components/sort-list/sort-list';
+import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
-import type {StateOffersFilter, StateOffersSort} from '../../types/type-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 
 type MainPagesProps = {
   title: string;
@@ -18,12 +16,12 @@ type MainPagesProps = {
 
 function MainPages ({title}: MainPagesProps): JSX.Element {
   //стейт фильтра города при нажатии на фильтр
-  const selectedFilterCity = useSelector((state: StateFilterCity) => state.filterCity.city);
-  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
+  const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
+  const stateOffers = useAppSelector((state) => state.offers.offers);
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-  const dispatch = useDispatch();
-  const offersFilter = useSelector((state: StateOffersFilter) => state.filterOffers.filterOffers);
-  const offersSort = useSelector((state: StateOffersSort) => state.sortOffers.sortOffers);
+  const dispatch = useAppDispatch();
+  const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
+  const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
 
   //Функция получения списка офферов согласно выбранного фильта
   const citiesToFilter = stateOffers.filter((city, index) => {
@@ -92,7 +90,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offersFilter.length} places to stay in {selectedFilterCity}</b>
+              <b className="places__found"> {offersFilter?.length} places to stay in {selectedFilterCity}</b>
 
               <SortList/>
               <ListOffers offers = {offersSort} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>

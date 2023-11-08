@@ -1,13 +1,13 @@
 import type { Offer } from '../../mock/offers/offer-mocks';
-import { useDispatch} from 'react-redux';
 import {offersSlice} from '../../store/slices/offers-slice';
+import { useAppDispatch } from '../../hooks/use-store';
 
 type ButtonProps = {
   offer: Offer;
 };
 
 function FavoriteButton({offer}: ButtonProps): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer.id));

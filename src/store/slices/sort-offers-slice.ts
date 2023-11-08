@@ -4,7 +4,7 @@ import type {Offers} from '../../mock/offers/offer-mocks';
 import type {StateSortOffers } from '../../types/type-store';
 
 const initialState: StateSortOffers = {
-  sortOffers: null
+  sortOffers: []
 };
 
 const sortOffersSlice = createSlice({

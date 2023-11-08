@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
-import { Icon, Marker, layerGroup } from 'leaflet';
-import { useRef, useEffect } from 'react';
+import {Icon, Marker, layerGroup} from 'leaflet';
+import {useRef, useEffect} from 'react';
 import type {PointOfferLocation, IconToMap} from '../../types/types';
 import type { Offer } from '../../mock/offers/offer-mocks';
 import useMap from '../../hooks/use-map';

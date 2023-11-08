@@ -1,7 +1,7 @@
 import {offersMock} from '../../mock/offers/offer-mocks';
 import type {Offers} from '../../mock/offers/offer-mocks';
 import {createSlice} from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type {PayloadAction} from '@reduxjs/toolkit';
 
 type InitialState = {
   offers: Offers;

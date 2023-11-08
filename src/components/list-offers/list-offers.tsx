@@ -2,7 +2,7 @@ import type {Offers} from '../../mock/offers/offer-mocks';
 import CardOffer from '../card-offers/card';
 
 type ListOffersProps = {
-  offers: Offers;
+  offers: Offers | null;
   handleIdOffer: (offerId: number) => void;
   onLeaveMouseOffer: () => void;
 }

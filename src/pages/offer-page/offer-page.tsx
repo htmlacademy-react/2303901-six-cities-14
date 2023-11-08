@@ -6,8 +6,7 @@ import MapComponent from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';
 import type {Reviews} from '../../types/types';
-import {useSelector} from 'react-redux';
-import type {StateOffers} from '../../types/type-store';
+import { useAppSelector } from '../../hooks/use-store';
 
 
 type OfferPagesProps = {
@@ -17,7 +16,7 @@ type OfferPagesProps = {
 
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
 
-  const stateOffers = useSelector((state: StateOffers) => state.offers.offers);
+  const stateOffers = useAppSelector((state) => state.offers.offers);
 
   const {offerId} = useParams();
 
