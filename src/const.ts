@@ -30,7 +30,6 @@ const Cities = {
 };
 
 const CitiesForFilter = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
@@ -114,7 +113,8 @@ const MONTH_NAMES = [
 ];
 
 const DEFAULT_CITY = 'Paris';
-
+const URL_SERVER = 'https://14.react.pages.academy/six-cities';
+const REQUEST_TIMEOUT = 5000;
 
 export {
   AppRoute,
@@ -130,6 +130,8 @@ export {
   MAX_LENGTH_REVIEW,
   MONTH_NAMES,
   DefaultCityToMap,
-  DEFAULT_CITY
+  DEFAULT_CITY,
+  URL_SERVER,
+  REQUEST_TIMEOUT
 };
 
