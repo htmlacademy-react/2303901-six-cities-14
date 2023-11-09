@@ -4,10 +4,13 @@ import {Provider} from 'react-redux';
 import App from './components/app/app';
 import {reviewMocks} from './mock/review-mocks/review-mocks';
 import {store} from './store/index';
+import {fetchOffersAction} from './services/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+store.dispatch(fetchOffersAction());
 
 root.render(
 
@@ -17,3 +20,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
+
+
+

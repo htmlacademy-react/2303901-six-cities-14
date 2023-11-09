@@ -16,6 +16,8 @@ type MainPagesProps = {
 
 function MainPages ({title}: MainPagesProps): JSX.Element {
   //стейт фильтра города при нажатии на фильтр
+
+
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);

@@ -20,6 +20,16 @@ enum TitleDescription {
   ErrorPage = '6 cities: error'
 }
 
+enum ApiRoute {
+ Offers = '/offers',
+ OffersFavorite = '/favorite',
+ Comments = '/comments/',
+ Login = '/login',
+ Logout = '/logout'
+
+
+}
+
 const Cities = {
   Paris: 'Paris',
   Cologne: 'Cologne',
@@ -115,13 +125,14 @@ const MONTH_NAMES = [
 const DEFAULT_CITY = 'Paris';
 const URL_SERVER = 'https://14.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
-const AUTH_TOKEN_KEY_NAME = '6-cities/user';
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
 
 export {
   AppRoute,
   AuthorizationStatus,
   TitleDescription,
+  ApiRoute,
   URL_MARKER_DEFAULT,
   Cities,
   CitiesForFilter,
@@ -135,6 +146,7 @@ export {
   DEFAULT_CITY,
   URL_SERVER,
   REQUEST_TIMEOUT,
-  AUTH_TOKEN_KEY_NAME
+  AUTH_TOKEN_KEY_NAME,
+
 };
 

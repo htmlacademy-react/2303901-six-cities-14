@@ -7,6 +7,9 @@ import ErrorMessage from '../error-message/error-message';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
 import type {Reviews} from '../../types/types';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import { offersSlice } from '../../store/slices/offers-slice';
+import { useEffect } from 'react';
 
 
 type AppOfferProps = {
@@ -14,6 +17,13 @@ type AppOfferProps = {
 }
 
 function App({reviewProps}: AppOfferProps,): JSX.Element {
+
+  const getOffers = useAppSelector((state) => state.loadOffers.offers);
+  const addLoadOffersToState = useAppDispatch();
+
+  useEffect(() => {
+    addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
+  }, [addLoadOffersToState, getOffers]);
 
   return (
     <BrowserRouter>
