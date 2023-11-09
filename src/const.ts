@@ -115,6 +115,8 @@ const MONTH_NAMES = [
 const DEFAULT_CITY = 'Paris';
 const URL_SERVER = 'https://14.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
+const AUTH_TOKEN_KEY_NAME = '6-cities/user';
+
 
 export {
   AppRoute,
@@ -132,6 +134,7 @@ export {
   DefaultCityToMap,
   DEFAULT_CITY,
   URL_SERVER,
-  REQUEST_TIMEOUT
+  REQUEST_TIMEOUT,
+  AUTH_TOKEN_KEY_NAME
 };
 
