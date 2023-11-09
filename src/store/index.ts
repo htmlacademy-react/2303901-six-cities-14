@@ -4,6 +4,7 @@ import {offersSlice} from './slices/offers-slice';
 import {filterCitySlice} from './slices/filter-city-slice';
 import {sortOffersSlice} from './slices/sort-offers-slice';
 import {filterOffersSlice} from './slices/filter-offer-slice';
+import {createApi} from '../services/api';
 
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
@@ -12,8 +13,17 @@ const reducer = combineReducers({
   [filterOffersSlice.name]: filterOffersSlice.reducer
 });
 
+const api = createApi();
 
-const store = configureStore({reducer});
+const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
+});
 
 //console.log(store.getState());
 
