@@ -48,4 +48,25 @@ type DefaultCityType = {
   [key: string]: CityLocationDefault;
 }
 
-export type {CityLocation, PointOfferLocation, IconToMap, Review, Reviews, DefaultCityType, CityLocationDefault};
+type AuthData = {
+  login: string;
+  password: string;
+};
+
+type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+export type {
+  CityLocation,
+  PointOfferLocation,
+  IconToMap,
+  Review,
+  Reviews,
+  DefaultCityType,
+  CityLocationDefault,
+  AuthData,
+  UserData
+};

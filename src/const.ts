@@ -26,8 +26,6 @@ enum ApiRoute {
  Comments = '/comments/',
  Login = '/login',
  Logout = '/logout'
-
-
 }
 
 const Cities = {
