@@ -1,13 +1,16 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {loadOffersSlice} from '../store/slices/load-offers-slice';
-import {ApiRoute, AuthorizationStatus} from '../const';
+import {ApiRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import type {Offers} from '../mock/offers/offer-mocks';
 import type {State} from '../types/type-store';
 import type {AppDispatch} from '../types/type-store';
 import {authStatusSlice} from '../store/slices/auth-status-slice';
 import {dropToken, saveToken} from './token';
 import type {UserData, AuthData} from '../types/types';
+import {setErrorSlice} from '../store/slices/set-error-slice';
+import {store} from '../store';
+
 
 const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -64,4 +67,13 @@ const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export {fetchOffersAction, checkAuthAction, loginAction, logoutAction};
+const clearErrorAction = createAsyncThunk(
+  'clearError',
+  () => {
+    setTimeout(() => {
+      store.dispatch(setErrorSlice.actions.setError(''));
+    }, TIMEOUT_SHOW_ERROR);
+  }
+);
+
+export {fetchOffersAction, checkAuthAction, loginAction, logoutAction, clearErrorAction};

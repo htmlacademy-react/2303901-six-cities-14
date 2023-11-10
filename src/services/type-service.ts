@@ -1,4 +1,9 @@
 type Token = string;
 
-export type {Token};
+type DetailMessageType = {
+  type: string;
+  message: string;
+}
+
+export type {Token, DetailMessageType};
 

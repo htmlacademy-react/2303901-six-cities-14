@@ -7,6 +7,8 @@ import {filterOffersSlice} from './slices/filter-offer-slice';
 import {createApi} from '../services/api';
 import {loadOffersSlice} from './slices/load-offers-slice';
 import {authStatusSlice} from './slices/auth-status-slice';
+import {setErrorSlice} from './slices/set-error-slice';
+
 
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
@@ -14,7 +16,8 @@ const reducer = combineReducers({
   [sortOffersSlice.name]: sortOffersSlice.reducer,
   [filterOffersSlice.name]: filterOffersSlice.reducer,
   [loadOffersSlice.name]: loadOffersSlice.reducer,
-  [authStatusSlice.name]: authStatusSlice.reducer
+  [authStatusSlice.name]: authStatusSlice.reducer,
+  [setErrorSlice.name]: setErrorSlice.reducer
 });
 
 const api = createApi();
