@@ -20,8 +20,8 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offers>(ApiRoute.Offers);
-    dispatch(loadOffersSlice.actions.addLoadOffers(data));
 
+    dispatch(loadOffersSlice.actions.addLoadOffers(data));
   },
 );
 

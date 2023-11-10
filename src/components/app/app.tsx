@@ -8,9 +8,9 @@ import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
 import type {Reviews} from '../../types/types';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import { offersSlice } from '../../store/slices/offers-slice';
-import { useEffect } from 'react';
-
+import {offersSlice} from '../../store/slices/offers-slice';
+import {useEffect} from 'react';
+import {LoadingRoute} from '../loading-route/loaging-route';
 
 type AppOfferProps = {
   reviewProps: Reviews;
@@ -30,7 +30,11 @@ function App({reviewProps}: AppOfferProps,): JSX.Element {
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
-          element ={<MainPages title = {TitleDescription.MainPage}/>}
+          element ={
+            <LoadingRoute>
+              <MainPages title = {TitleDescription.MainPage}/>
+            </LoadingRoute>
+          }
         />
         <Route
           path={AppRoute.Login}
