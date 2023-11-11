@@ -2,7 +2,7 @@ import axios, {AxiosInstance, AxiosResponse, AxiosError} from 'axios';
 import {URL_SERVER, REQUEST_TIMEOUT} from '../const';
 import {getToken} from './token';
 import {StatusCodes} from 'http-status-codes';
-import { processErrorHandle } from './process-error-handle';
+import {processErrorHandle} from './process-error-handle';
 import type {DetailMessageType} from './type-service';
 
 const StatusCodeMapping: Record<number, boolean> = {
@@ -35,12 +35,13 @@ const createApi = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
+
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.message);
 
         processErrorHandle(detailMessage);
       }
-
+      //console.log(error.request.response)
       throw error;
     }
   );

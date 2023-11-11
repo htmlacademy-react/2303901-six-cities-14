@@ -3,6 +3,8 @@ import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
 import {store} from '../../store';
+//import {useAppSelector} from '../../hooks/use-store';
+
 
 type LoginPagesProps = {
   title: string;
@@ -12,6 +14,11 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const checkPassword = inputPassword.trim() === '' || /\s/.test(inputPassword);
+
+  // const statusPost = useAppSelector((state) => state.error.error);
+
+  // console.log(statusPost)
 
   type AuthData = {
     password: string ;
@@ -70,7 +77,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={onClickButton}>Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={checkPassword}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

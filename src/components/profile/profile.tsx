@@ -1,16 +1,17 @@
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-store';
-import { dropToken } from '../../services/token';
-
+import {dropToken} from '../../services/token';
+import {authStatusSlice} from '../../store/slices/auth-status-slice';
+import { store } from '../../store';
 
 function Profile () {
-  const statusAuth = useAppSelector((state) => state.authStatus.authStatus);
+  const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   function onClickButton () {
+    store.dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
     dropToken();
   }
-
 
   return (
     <nav className="header__nav">
@@ -28,11 +29,11 @@ function Profile () {
           </Link>
         </li>
         <li className="header__nav-item">
-          <a className="header__nav-link" href="#">
+          <Link to={AppRoute.Main} className="header__nav-link">
             <span className="header__signout" onClick={onClickButton}>
               { (statusAuth === AuthorizationStatus.Auth.toString()) ? 'Sign out' : ''}
             </span>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

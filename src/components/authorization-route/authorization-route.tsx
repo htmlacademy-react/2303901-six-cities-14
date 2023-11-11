@@ -7,7 +7,7 @@ type AuthorizationRouteProps = {
 }
 
 function AuthorizationRoute ({children}: AuthorizationRouteProps): JSX.Element {
-  const authStatus = useAppSelector((state) => state.authStatus.authStatus);
+  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   return authStatus === AuthorizationStatus.Auth.toString() ? <Navigate to={AppRoute.Main}/> : children;
 }
