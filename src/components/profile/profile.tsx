@@ -6,6 +6,7 @@ import {authStatusSlice} from '../../store/slices/auth-status-slice';
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const email = useAppSelector((state) => state.email.email);
   const dispatch = useAppDispatch();
 
   function onClickButton () {
@@ -22,7 +23,7 @@ function Profile () {
             </div>
             {(statusAuth === AuthorizationStatus.Auth.toString()) ?
               <>
-                <span className="header__user-name user__name">Oliver.conner@gmail.com </span>
+                <span className="header__user-name user__name">{email}</span>
                 <span className="header__favorite-count">3</span>
               </>
               : ''}
