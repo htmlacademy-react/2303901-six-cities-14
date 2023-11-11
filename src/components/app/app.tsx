@@ -11,6 +11,8 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {offersSlice} from '../../store/slices/offers-slice';
 import {useEffect} from 'react';
 import {LoadingRoute} from '../loading-route/loaging-route';
+import {AuthorizationRoute} from '../authorization-route/authorization-route';
+
 
 type AppOfferProps = {
   reviewProps: Reviews;
@@ -19,7 +21,7 @@ type AppOfferProps = {
 function App({reviewProps}: AppOfferProps,): JSX.Element {
 
   const getOffers = useAppSelector((state) => state.loadOffers.offers);
-  const getAuthStatus = useAppSelector((state) => state.authStatus.authStatus);
+
   const addLoadOffersToState = useAppDispatch();
 
   useEffect(() => {
@@ -39,12 +41,16 @@ function App({reviewProps}: AppOfferProps,): JSX.Element {
         />
         <Route
           path={AppRoute.Login}
-          element ={<LoginPage title = {TitleDescription.LoginPage}/>}
+          element ={
+            <AuthorizationRoute>
+              <LoginPage title = {TitleDescription.LoginPage}/>
+            </AuthorizationRoute>
+          }
         />
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute authorizationStatus = {getAuthStatus}>
+            <PrivateRoute>
               <FavoritesPage title = {TitleDescription.FavoritePage}/>
             </PrivateRoute>
           }

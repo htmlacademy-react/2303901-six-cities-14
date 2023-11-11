@@ -17,10 +17,8 @@ type OfferPagesProps = {
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
 
   const stateOffers = useAppSelector((state) => state.offers.offers);
-
   const {offerId} = useParams();
-
-  const offerToRender = stateOffers.find((offer) => offer.id === offerId);
+  const offerToRender = stateOffers.find((offer) => offer.id.toString() === offerId);
 
   const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === offerToRender?.city.name;

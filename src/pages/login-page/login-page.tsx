@@ -4,36 +4,35 @@ import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
 import {store} from '../../store';
 
-
 type LoginPagesProps = {
   title: string;
 }
 
 function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
-  const [password, setPassword] = useState();
+  const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const authData = {
-    password: password,
-    email: email
+  type AuthData = {
+    password: string ;
+    login: string;
+  }
+
+  const authData: AuthData = {
+    password: inputPassword,
+    login: email
   };
 
   function onClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     evt.preventDefault();
 
-    store.dispatch(loginAction({
-      login: 'Oliver.conner@gmail.com',
-      password: 'password1'
-    }));
+    store.dispatch(loginAction(authData));
   }
-
 
   function onInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
     if (evt.target instanceof HTMLInputElement) {
       const value = evt.target.value;
       setPassword(value);
-
     }
   }
 
@@ -41,12 +40,10 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
     if (evt.target instanceof HTMLInputElement) {
       const value = evt.target.value;
       setEmail(value);
-
     }
   }
 
   useDocumentTitle(title);
-
 
   return (
     <div className="page page--gray page--login">
