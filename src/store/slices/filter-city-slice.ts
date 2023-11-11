@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { DEFAULT_CITY } from '../../const';
+import type {PayloadAction} from '@reduxjs/toolkit';
+import {DEFAULT_CITY} from '../../const';
 
 type InitialState = {
   city: string;

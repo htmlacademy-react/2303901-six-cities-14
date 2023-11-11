@@ -1,15 +1,15 @@
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks/use-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dropToken} from '../../services/token';
 import {authStatusSlice} from '../../store/slices/auth-status-slice';
-import { store } from '../../store';
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const dispatch = useAppDispatch();
 
   function onClickButton () {
-    store.dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
+    dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
     dropToken();
   }
 

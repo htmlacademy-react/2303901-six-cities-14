@@ -2,7 +2,8 @@ import {useState} from 'react';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
-import {store} from '../../store';
+import { useAppDispatch } from '../../hooks/use-store';
+import { emailSlice } from '../../store/slices/email-slice';
 //import {useAppSelector} from '../../hooks/use-store';
 
 
@@ -15,9 +16,9 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const checkPassword = inputPassword.trim() === '' || /\s/.test(inputPassword);
+  const dispatch = useAppDispatch();
 
   // const statusPost = useAppSelector((state) => state.error.error);
-
   // console.log(statusPost)
 
   type AuthData = {
@@ -33,7 +34,8 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   function onClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     evt.preventDefault();
 
-    store.dispatch(loginAction(authData));
+    dispatch(loginAction(authData));
+    dispatch(emailSlice.actions.addEmail(email));
   }
 
   function onInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
