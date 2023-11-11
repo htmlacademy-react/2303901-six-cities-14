@@ -105,4 +105,4 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
   );
 }
 
-export default FavoritesPage;
+export {FavoritesPage};

@@ -1,11 +1,11 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import MainPages from '../../pages/main-page/main-page';
-import LoginPage from '../../pages/login-page/login-page';
-import FavoritesPage from '../../pages/favorites-page/favorites-page';
-import OfferPage from '../../pages/offer-page/offer-page';
+import {MainPages} from '../../pages/main-page/main-page';
+import {LoginPage} from '../../pages/login-page/login-page';
+import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
+import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
-import PrivateRoute from '../private-route/private-route';
-import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
+import {PrivateRoute} from '../private-route/private-route';
+import {AppRoute, TitleDescription} from '../../const';
 import type {Reviews} from '../../types/types';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {offersSlice} from '../../store/slices/offers-slice';
@@ -19,6 +19,7 @@ type AppOfferProps = {
 function App({reviewProps}: AppOfferProps,): JSX.Element {
 
   const getOffers = useAppSelector((state) => state.loadOffers.offers);
+  const getAuthStatus = useAppSelector((state) => state.authStatus.authStatus);
   const addLoadOffersToState = useAppDispatch();
 
   useEffect(() => {
@@ -43,7 +44,7 @@ function App({reviewProps}: AppOfferProps,): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute authorizationStatus = {AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus = {getAuthStatus}>
               <FavoritesPage title = {TitleDescription.FavoritePage}/>
             </PrivateRoute>
           }

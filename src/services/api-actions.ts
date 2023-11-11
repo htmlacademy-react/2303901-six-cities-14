@@ -49,10 +49,13 @@ const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
+
     saveToken(token);
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.Auth));
+
   },
 );
+
 
 const logoutAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

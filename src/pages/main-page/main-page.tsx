@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import ListOffers from '../../components/list-offers/list-offers';
-import MapComponent from '../../components/map/map';
+import {MapComponent} from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import type {Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title';
-import Profile from '../../components/profile/profile';
+import {Profile} from '../../components/profile/profile';
 import {SortList} from '../../components/sort-list/sort-list';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
@@ -51,7 +51,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
     return pointsToMap;
   });
 
-  function handleListItemHover (idOffer: number) {
+  function handleListItemHover (idOffer: string) {
     stateOffers.find((offer, index: number) => {
 
       if (offer.id === idOffer){
@@ -111,5 +111,5 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   );
 }
 
-export default MainPages;
+export {MainPages};
 

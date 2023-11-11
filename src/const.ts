@@ -23,7 +23,7 @@ enum TitleDescription {
 enum ApiRoute {
  Offers = '/offers',
  OffersFavorite = '/favorite',
- Comments = '/comments/',
+ Comments = '/comments',
  Login = '/login',
  Logout = '/logout'
 }

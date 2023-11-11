@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {useRef, useEffect} from 'react';
 import type {PointOfferLocation, IconToMap} from '../../types/types';
-import type { Offer } from '../../mock/offers/offer-mocks';
+import type {Offer} from '../../mock/offers/offer-mocks';
 import useMap from '../../hooks/use-map';
 import {CURRENT_ICON, DEFAULT_CITY, DEFAULT_ICON, DefaultCityToMap} from '../../const';
 
@@ -67,4 +67,4 @@ function MapComponent({pointsToMap: points, selectedPoint, cityName = DEFAULT_CI
   );
 }
 
-export default MapComponent;
+export {MapComponent};

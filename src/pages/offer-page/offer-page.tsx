@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
 import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
-import MapComponent from '../../components/map/map';
+import {MapComponent} from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';
 import type {Reviews} from '../../types/types';
@@ -20,8 +20,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
 
   const {offerId} = useParams();
 
-  const offerIdToNumber = Number(offerId);
-  const offerToRender = stateOffers.find((offer) => offer.id === offerIdToNumber);
+  const offerToRender = stateOffers.find((offer) => offer.id === offerId);
 
   const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === offerToRender?.city.name;
@@ -190,4 +189,4 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   );
 }
 
-export default OfferPage;
+export {OfferPage};
