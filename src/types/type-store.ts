@@ -12,9 +12,24 @@ type StateFilterOffers = {
   filterOffers: Offers;
 }
 
+type StateLoadOffers = {
+  offers: Offers;
+}
+
+type StateAuth = {
+  authStatus: string;
+};
+
+type StateError = {
+  error: string | null;
+}
+
 export type {
   State,
   AppDispatch,
   StateSortOffers,
   StateFilterOffers,
+  StateLoadOffers,
+  StateAuth,
+  StateError
 };

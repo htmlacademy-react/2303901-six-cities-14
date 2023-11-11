@@ -1,14 +1,15 @@
-import {offersMock} from '../../mock/offers/offer-mocks';
-import type {Offers} from '../../mock/offers/offer-mocks';
+import {type Offers} from '../../mock/offers/offer-mocks';
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
+
 
 type InitialState = {
   offers: Offers;
 }
 
 const initialState: InitialState = {
-  offers: offersMock,
+  //offers: offersMock,
+  offers: []
 };
 
 const offersSlice = createSlice({
@@ -18,7 +19,7 @@ const offersSlice = createSlice({
     addOfferList(state, action: PayloadAction<Offers>) {
       state.offers = action.payload;
     },
-    changeFavoriteStatus(state, action: PayloadAction<number>) {
+    changeFavoriteStatus(state, action: PayloadAction<string>) {
       const idToChange = action.payload;
 
       const foundOffer = state.offers.find((offer) => offer.id === idToChange);

@@ -1,12 +1,17 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import MainPages from '../../pages/main-page/main-page';
-import LoginPage from '../../pages/login-page/login-page';
-import FavoritesPage from '../../pages/favorites-page/favorites-page';
-import OfferPage from '../../pages/offer-page/offer-page';
-import ErrorMessage from '../error-message/error-message';
-import PrivateRoute from '../private-route/private-route';
-import {AppRoute, AuthorizationStatus, TitleDescription} from '../../const';
+import {MainPages} from '../../pages/main-page/main-page';
+import {LoginPage} from '../../pages/login-page/login-page';
+import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
+import {OfferPage} from '../../pages/offer-page/offer-page';
+import {ErrorMessage} from '../error-message/error-message';
+import {PrivateRoute} from '../private-route/private-route';
+import {AppRoute, TitleDescription} from '../../const';
 import type {Reviews} from '../../types/types';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {offersSlice} from '../../store/slices/offers-slice';
+import {useEffect} from 'react';
+import {LoadingRoute} from '../loading-route/loaging-route';
+import {AuthorizationRoute} from '../authorization-route/authorization-route';
 
 
 type AppOfferProps = {
@@ -15,21 +20,37 @@ type AppOfferProps = {
 
 function App({reviewProps}: AppOfferProps,): JSX.Element {
 
+  const getOffers = useAppSelector((state) => state.loadOffers.offers);
+
+  const addLoadOffersToState = useAppDispatch();
+
+  useEffect(() => {
+    addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
+  }, [addLoadOffersToState, getOffers]);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
-          element ={<MainPages title = {TitleDescription.MainPage}/>}
+          element ={
+            <LoadingRoute>
+              <MainPages title = {TitleDescription.MainPage}/>
+            </LoadingRoute>
+          }
         />
         <Route
           path={AppRoute.Login}
-          element ={<LoginPage title = {TitleDescription.LoginPage}/>}
+          element ={
+            <AuthorizationRoute>
+              <LoginPage title = {TitleDescription.LoginPage}/>
+            </AuthorizationRoute>
+          }
         />
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute authorizationStatus = {AuthorizationStatus.Auth}>
+            <PrivateRoute>
               <FavoritesPage title = {TitleDescription.FavoritePage}/>
             </PrivateRoute>
           }
@@ -51,4 +72,4 @@ function App({reviewProps}: AppOfferProps,): JSX.Element {
   );
 }
 
-export default App;
+export {App};

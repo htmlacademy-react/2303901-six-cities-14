@@ -1,9 +1,9 @@
 import FavoriteCardOffer from '../../components/favorite-card-offers/favorite-card-offers';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
-import { Offers } from '../../mock/offers/offer-mocks';
-import { useAppSelector } from '../../hooks/use-store';
-
+import {Offers} from '../../mock/offers/offer-mocks';
+import {useAppSelector} from '../../hooks/use-store';
+import {Profile} from '../../components/profile/profile';
 
 type FavoritePagesProps = {
   title: string;
@@ -36,24 +36,8 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
           <div className="header__wrapper">
 
             <Logotype/>
+            <Profile/>
 
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </header>
@@ -105,4 +89,4 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
   );
 }
 
-export default FavoritesPage;
+export {FavoritesPage};

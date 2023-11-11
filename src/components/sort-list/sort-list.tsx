@@ -12,7 +12,7 @@ function SortList () {
 
   useEffect(() => {
     setStateSortList(false);
-  },[offersCity]);
+  },[offersCity, offersSort]);
 
   function changeOfferLowToHight (offersToSort: Offers) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);

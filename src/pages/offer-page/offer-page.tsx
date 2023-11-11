@@ -2,12 +2,12 @@ import {useParams} from 'react-router-dom';
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
 import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
-import MapComponent from '../../components/map/map';
+import {MapComponent} from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';
 import type {Reviews} from '../../types/types';
-import { useAppSelector } from '../../hooks/use-store';
-
+import {useAppSelector} from '../../hooks/use-store';
+import {Profile} from '../../components/profile/profile';
 
 type OfferPagesProps = {
   title: string;
@@ -17,11 +17,8 @@ type OfferPagesProps = {
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
 
   const stateOffers = useAppSelector((state) => state.offers.offers);
-
   const {offerId} = useParams();
-
-  const offerIdToNumber = Number(offerId);
-  const offerToRender = stateOffers.find((offer) => offer.id === offerIdToNumber);
+  const offerToRender = stateOffers.find((offer) => offer.id.toString() === offerId);
 
   const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === offerToRender?.city.name;
@@ -51,28 +48,8 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           <div className="header__wrapper">
 
             <Logotype/>
+            <Profile/>
 
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </header>
@@ -190,4 +167,4 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   );
 }
 
-export default OfferPage;
+export {OfferPage};

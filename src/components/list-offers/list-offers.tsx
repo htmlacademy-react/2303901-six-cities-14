@@ -3,7 +3,7 @@ import CardOffer from '../card-offers/card';
 
 type ListOffersProps = {
   offers: Offers | null;
-  handleIdOffer: (offerId: number) => void;
+  handleIdOffer: (offerId: string) => void;
   onLeaveMouseOffer: () => void;
 }
 

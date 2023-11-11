@@ -1,7 +1,19 @@
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import {Link} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {dropToken} from '../../services/token';
+import {authStatusSlice} from '../../store/slices/auth-status-slice';
 
 function Profile () {
+  const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const email = useAppSelector((state) => state.email.email);
+  const dispatch = useAppDispatch();
+
+  function onClickButton () {
+    dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
+    dropToken();
+  }
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -9,18 +21,24 @@ function Profile () {
           <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-            <span className="header__favorite-count">3</span>
+            {(statusAuth === AuthorizationStatus.Auth.toString()) ?
+              <>
+                <span className="header__user-name user__name">{email}</span>
+                <span className="header__favorite-count">3</span>
+              </>
+              : ''}
           </Link>
         </li>
         <li className="header__nav-item">
-          <a className="header__nav-link" href="#">
-            <span className="header__signout">Sign out</span>
-          </a>
+          <Link to={AppRoute.Main} className="header__nav-link">
+            <span className="header__signout" onClick={onClickButton}>
+              { (statusAuth === AuthorizationStatus.Auth.toString()) ? 'Sign out' : ''}
+            </span>
+          </Link>
         </li>
       </ul>
     </nav>
   );
 }
 
-export default Profile;
+export {Profile};

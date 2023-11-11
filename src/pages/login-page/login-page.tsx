@@ -1,11 +1,56 @@
+import {useState} from 'react';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
+import {loginAction} from '../../services/api-actions';
+import { useAppDispatch } from '../../hooks/use-store';
+import { emailSlice } from '../../store/slices/email-slice';
+//import {useAppSelector} from '../../hooks/use-store';
+
 
 type LoginPagesProps = {
   title: string;
 }
 
 function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
+
+  const [inputPassword, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const checkPassword = inputPassword.trim() === '' || /\s/.test(inputPassword);
+  const dispatch = useAppDispatch();
+
+  // const statusPost = useAppSelector((state) => state.error.error);
+  // console.log(statusPost)
+
+  type AuthData = {
+    password: string ;
+    login: string;
+  }
+
+  const authData: AuthData = {
+    password: inputPassword,
+    login: email
+  };
+
+  function onClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    evt.preventDefault();
+
+    dispatch(loginAction(authData));
+    dispatch(emailSlice.actions.addEmail(email));
+  }
+
+  function onInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
+    if (evt.target instanceof HTMLInputElement) {
+      const value = evt.target.value;
+      setPassword(value);
+    }
+  }
+
+  function onInputEmail (evt: React.ChangeEvent<HTMLInputElement>) {
+    if (evt.target instanceof HTMLInputElement) {
+      const value = evt.target.value;
+      setEmail(value);
+    }
+  }
 
   useDocumentTitle(title);
 
@@ -25,16 +70,16 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required/>
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" onChange={onInputEmail} required/>
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required/>
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={checkPassword}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
@@ -50,4 +95,4 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   );
 }
 
-export default LoginPage;
+export {LoginPage};

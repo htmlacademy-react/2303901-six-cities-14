@@ -6,7 +6,7 @@ import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardPagesProps = {
   offer: Offer;
-  handleIdOffer: (offerId: number) => void;
+  handleIdOffer: (offerId: string) => void;
   onLeaveMouseOffer: () => void;
 }
 
