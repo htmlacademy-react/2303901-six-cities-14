@@ -1,10 +1,10 @@
-import {type Offers} from '../../mock/offers/offer-mocks';
+import type { OfferCard } from '../../types/type-store';
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 
 
 type InitialState = {
-  offers: Offers;
+  offers: OfferCard[];
 }
 
 const initialState: InitialState = {
@@ -16,7 +16,7 @@ const offersSlice = createSlice({
   name: 'offers',
   initialState,
   reducers: {
-    addOfferList(state, action: PayloadAction<Offers>) {
+    addOfferList(state, action: PayloadAction<OfferCard[]>) {
       state.offers = action.payload;
     },
     changeFavoriteStatus(state, action: PayloadAction<string>) {

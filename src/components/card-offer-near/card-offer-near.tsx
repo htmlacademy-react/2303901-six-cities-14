@@ -1,11 +1,11 @@
 import { Link} from 'react-router-dom';
-import { Offer } from '../../mock/offers/offer-mocks';
+import { OfferCard } from '../../types/type-store';
 import {AppRoute} from '../../const';
 import { useEffect } from 'react';
 import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardOfferProps = {
-  offer: Offer;
+  offer: OfferCard;
 }
 
 function CardOfferNear ({offer}: CardOfferProps): JSX.Element {

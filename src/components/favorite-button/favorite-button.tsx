@@ -1,9 +1,9 @@
-import type { Offer } from '../../mock/offers/offer-mocks';
+import type {OfferCard} from '../../types/type-store';
 import {offersSlice} from '../../store/slices/offers-slice';
 import { useAppDispatch } from '../../hooks/use-store';
 
 type ButtonProps = {
-  offer: Offer;
+  offer: OfferCard;
 };
 
 function FavoriteButton({offer}: ButtonProps): JSX.Element {

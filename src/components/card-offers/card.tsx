@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
-import type {Offer} from '../../mock/offers/offer-mocks';
+import type {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
 import FavoriteButton from '../favorite-button/favorite-button';
 import {fetchOfferAction} from '../../services/api-actions';
@@ -10,8 +10,7 @@ import { offerSlice } from '../../store/slices/offer-slice';
 
 
 type CardPagesProps = {
-  offer: Offer;
-
+  offer: OfferCard ;
 }
 
 function CardOffer ({offer}: CardPagesProps) : JSX.Element{
@@ -31,11 +30,10 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
 
   function onGetPointOffer () {
     store.dispatch(fetchOfferAction(cardState.offerId));
-
   }
 
   function onLeavePointOffer () {
-    dispatch(offerSlice.actions.addLoadOffer({}));
+    dispatch(offerSlice.actions.addLoadOffer(null));
   }
 
   return(

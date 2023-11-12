@@ -11,7 +11,7 @@ import type {UserData, AuthData} from '../types/types';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
 import {offerSlice} from '../store/slices/offer-slice';
-import type {Offer} from '../types/type-store';
+import type {OfferPage} from '../types/type-store';
 
 const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -33,7 +33,7 @@ const fetchOfferAction = createAsyncThunk<void, string, {
 }>(
   'data/fetchOffer',
   async (id, {dispatch, extra: api}) => {
-    const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
+    const {data} = await api.get<OfferPage>(`${ApiRoute.Offers}/${id}`);
 
     dispatch(offerSlice.actions.addLoadOffer(data));
   },

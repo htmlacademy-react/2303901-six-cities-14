@@ -1,16 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import type { Offer, StateOffer } from '../../types/type-store';
+import type {OfferPage, StateOffer} from '../../types/type-store';
 
 const initialState: StateOffer = {
-  offer: {},
+  offer: null,
 };
 
 const offerSlice = createSlice({
   name: 'loadOffer',
   initialState,
   reducers: {
-    addLoadOffer(state, action: PayloadAction<Offer>) {
+    addLoadOffer(state, action: PayloadAction<OfferPage>) {
       state.offer = action.payload;
     }
   }

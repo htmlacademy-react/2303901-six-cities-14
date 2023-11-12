@@ -1,10 +1,10 @@
 import CardOfferNear from '../card-offer-near/card-offer-near';
-import type { Offers} from '../../mock/offers/offer-mocks';
-import type {Offer} from '../../types/type-store';
+import type {OfferCard} from '../../types/type-store';
+import type {OfferPage} from '../../types/type-store';
 
 type OfferNearProps = {
-  offersPoint: Offers;
-  offerPoint: Offer;
+  offersPoint: OfferCard[];
+  offerPoint: OfferPage;
 }
 
 function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {

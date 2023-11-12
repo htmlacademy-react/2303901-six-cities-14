@@ -23,12 +23,12 @@ type OfferLocation = {
 
 
 type OfferHost = {
-name: string;
-avatarUrl: string;
-isPro: boolean;
-};
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  };
 
-type Offer = {
+type OfferPage = {
   id: string;
   title: string;
   type: string;
@@ -44,8 +44,20 @@ type Offer = {
   host: OfferHost;
   images: [string];
   maxAdults: number;
-  };
+};
 
+type OfferCard = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: OfferCity;
+  location: OfferLocation;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+};
 
 type StateSortOffers = {
   sortOffers: Offers;
@@ -56,7 +68,7 @@ type StateFilterOffers = {
 }
 
 type StateLoadOffers = {
-  offers: Offers;
+  offers: OfferCard[];
 }
 
 type StateAuth = {
@@ -68,7 +80,7 @@ type StateError = {
 }
 
 type StateOffer = {
-  offer: Offer;
+  offer: OfferPage | null;
 }
 
 export type {
@@ -79,6 +91,7 @@ export type {
   StateLoadOffers,
   StateAuth,
   StateError,
-  Offer,
-  StateOffer
+  OfferPage,
+  StateOffer,
+  OfferCard
 };
