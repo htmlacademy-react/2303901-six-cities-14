@@ -1,5 +1,6 @@
 import CardOfferNear from '../card-offer-near/card-offer-near';
-import type { Offers, Offer } from '../../mock/offers/offer-mocks';
+import type { Offers} from '../../mock/offers/offer-mocks';
+import type {Offer} from '../../types/type-store';
 
 type OfferNearProps = {
   offersPoint: Offers;

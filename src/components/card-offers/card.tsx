@@ -3,15 +3,20 @@ import {useState} from 'react';
 import type {Offer} from '../../mock/offers/offer-mocks';
 import {AppRoute} from '../../const';
 import FavoriteButton from '../favorite-button/favorite-button';
+import {fetchOfferAction} from '../../services/api-actions';
+import {store} from '../../store';
+import {useAppDispatch} from '../../hooks/use-store';
+import { offerSlice } from '../../store/slices/offer-slice';
+
 
 type CardPagesProps = {
   offer: Offer;
-  handleIdOffer: (offerId: string) => void;
-  onLeaveMouseOffer: () => void;
+
 }
 
+function CardOffer ({offer}: CardPagesProps) : JSX.Element{
 
-function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
+  const dispatch = useAppDispatch();
 
   const [cardState, setCardState] = useState({
     offerId: offer.id
@@ -25,12 +30,12 @@ function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) :
   }
 
   function onGetPointOffer () {
+    store.dispatch(fetchOfferAction(cardState.offerId));
 
-    handleIdOffer(offer?.id);
   }
 
   function onLeavePointOffer () {
-    onLeaveMouseOffer();
+    dispatch(offerSlice.actions.addLoadOffer({}));
   }
 
   return(

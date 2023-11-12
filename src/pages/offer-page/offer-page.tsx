@@ -1,4 +1,3 @@
-import {useParams} from 'react-router-dom';
 import FormSendComment from '../../components/form-send-comment/form-send-comment';
 import ListReview from '../../components/list-review/list-review';
 import Logotype from '../../components/logotype/logotype';
@@ -9,6 +8,7 @@ import type {Reviews} from '../../types/types';
 import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 
+
 type OfferPagesProps = {
   title: string;
   reviewProps: Reviews;
@@ -17,11 +17,10 @@ type OfferPagesProps = {
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
 
   const stateOffers = useAppSelector((state) => state.offers.offers);
-  const {offerId} = useParams();
-  const offerToRender = stateOffers.find((offer) => offer.id.toString() === offerId);
+  const stateOffer = useAppSelector((state) => state.loadOffer.offer);
 
   const getOfferPoints = stateOffers.filter((offer) => {
-    const points = offer.city.name === offerToRender?.city.name;
+    const points = offer.city.name === stateOffer?.city.name;
 
     return points;
   });
@@ -58,7 +57,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
 
-              {offerToRender?.images.map((image) => (
+              {stateOffer?.images.map((image) => (
                 <div key={image} className='offer__image-wrapper' >
                   <img
                     className='offer__image'
@@ -73,11 +72,11 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           <div className="offer__container container">
             <div className="offer__wrapper">
 
-              <span>{offerToRender?.isPremium ? <div className="offer__mark">Premium </div> : ''}</span>
+              <span>{stateOffer?.isPremium ? <div className="offer__mark">Premium </div> : ''}</span>
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {offerToRender?.description}
+                  {stateOffer?.description}
                 </h1>
                 <button className="offer__bookmark-button button" type="button" >
                   <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -87,31 +86,31 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
                 </button>
               </div>
               <div className="offer__rating rating">
-                {offerToRender && (
+                {stateOffer && (
                   <div className="offer__stars rating__stars">
-                    <span style={{ width:  `${Math.round(offerToRender.rating) * 100 / 5}%`}} />
-                    <span className="visually-hidden">{offerToRender.rating}</span>
+                    <span style={{ width:  `${Math.round(stateOffer.rating) * 100 / 5}%`}} />
+                    <span className="visually-hidden">{stateOffer.rating}</span>
                   </div>
                 )}
-                <span className="offer__rating-value rating__value">{offerToRender?.rating}</span>
+                <span className="offer__rating-value rating__value">{stateOffer?.rating}</span>
               </div>
               <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">{offerToRender?.type}</li>
+                <li className="offer__feature offer__feature--entire">{stateOffer?.type}</li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offerToRender?.bedrooms} Bedrooms
+                  {stateOffer?.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {offerToRender?.maxAdults} adults
+                  Max {stateOffer?.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">€{offerToRender?.price}</b>
+                <b className="offer__price-value">€{stateOffer ?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What &prime s inside</h2>
                 <ul className="offer__inside-list">
-                  {offerToRender?.goods.map((good) => (<li key={good} className="offer__inside-item">{good}</li>))}
+                  {stateOffer?.goods.map((good) => (<li key={good} className="offer__inside-item">{good}</li>))}
                 </ul>
               </div>
               <div className="offer__host">
@@ -120,13 +119,13 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src={offerToRender?.host.avatarUrl}
+                      src={stateOffer?.host.avatarUrl}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">{offerToRender?.host.name}</span>
+                  <span className="offer__user-name">{stateOffer?.host.name}</span>
                   <span className="offer__user-status">Pro</span>
                 </div>
                 <div className="offer__description">
@@ -155,12 +154,12 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={offersPoint} selectedPoint={offerToRender} cityName={offerToRender?.city.name} />
+            <MapComponent pointsToMap={offersPoint} cityName={stateOffer ?.city.name} />
 
           </section>
         </section>
 
-        {offerToRender && <OffersListNear offersPoint={getOfferPoints} offerPoint={offerToRender} />}
+        {stateOffer && <OffersListNear offersPoint={getOfferPoints} offerPoint={stateOffer} />}
 
       </main>
     </div>

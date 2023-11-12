@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import ListOffers from '../../components/list-offers/list-offers';
 import {MapComponent} from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
-import type {Offer} from '../../mock/offers/offer-mocks';
+
 import useDocumentTitle from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
 import {SortList} from '../../components/sort-list/sort-list';
@@ -16,14 +16,13 @@ type MainPagesProps = {
 
 function MainPages ({title}: MainPagesProps): JSX.Element {
   //стейт фильтра города при нажатии на фильтр
-
-
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
   const stateOffers = useAppSelector((state) => state.offers.offers);
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+  //const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
   const dispatch = useAppDispatch();
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
   const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
+  //const stateOffer = useAppSelector((state) => state.loadOffer.offer);
 
   //Функция получения списка офферов согласно выбранного фильта
   const citiesToFilter = stateOffers.filter((city, index) => {
@@ -50,19 +49,6 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
 
     return pointsToMap;
   });
-
-  function handleListItemHover (idOffer: string) {
-    stateOffers.find((offer, index: number) => {
-
-      if (offer.id === idOffer){
-        setSelectedPoint(stateOffers[index]);
-      }
-    });
-  }
-
-  function onLeaveMouseOffer () {
-    setSelectedPoint(undefined);
-  }
 
   useDocumentTitle(title);
 
@@ -95,13 +81,13 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
               <b className="places__found"> {offersFilter?.length} places to stay in {selectedFilterCity}</b>
 
               <SortList/>
-              <ListOffers offers = {offersSort} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
+              <ListOffers offers = {offersSort}/>
 
             </section>
 
             <div className="cities__right-section">
 
-              <MapComponent pointsToMap={pointsOffersToMap} selectedPoint={selectedPoint} cityName={selectedFilterCity}/>
+              <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/>
 
             </div>
           </div>

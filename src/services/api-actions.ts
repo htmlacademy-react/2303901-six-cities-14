@@ -10,7 +10,8 @@ import {dropToken, saveToken} from './token';
 import type {UserData, AuthData} from '../types/types';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
-
+import {offerSlice} from '../store/slices/offer-slice';
+import type {Offer} from '../types/type-store';
 
 const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -22,6 +23,19 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<Offers>(ApiRoute.Offers);
 
     dispatch(loadOffersSlice.actions.addLoadOffers(data));
+  },
+);
+
+const fetchOfferAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
+
+    dispatch(offerSlice.actions.addLoadOffer(data));
   },
 );
 
@@ -79,4 +93,4 @@ const clearErrorAction = createAsyncThunk(
   }
 );
 
-export {fetchOffersAction, checkAuthAction, loginAction, logoutAction, clearErrorAction};
+export {fetchOffersAction, checkAuthAction, loginAction, logoutAction, clearErrorAction, fetchOfferAction};

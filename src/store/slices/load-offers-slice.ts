@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import type {Offers} from '../../mock/offers/offer-mocks';
-import type { StateLoadOffers } from '../../types/type-store';
+import type {StateLoadOffers} from '../../types/type-store';
 
 const initialState: StateLoadOffers = {
   offers: []
