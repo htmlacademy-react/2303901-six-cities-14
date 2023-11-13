@@ -17,7 +17,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   const [email, setEmail] = useState('');
   const checkPassword = inputPassword.trim() === '' || /\s/.test(inputPassword);
   const dispatch = useAppDispatch();
-
   type AuthData = {
     password: string ;
     login: string;

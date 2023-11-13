@@ -10,6 +10,7 @@ import {setErrorSlice} from './slices/set-error-slice';
 import {emailSlice} from './slices/email-slice';
 import {offerSlice} from './slices/offer-slice';
 
+
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
   [filterCitySlice.name]: filterCitySlice.reducer,
@@ -20,7 +21,6 @@ const reducer = combineReducers({
   [setErrorSlice.name]: setErrorSlice.reducer,
   [emailSlice.name]: emailSlice.reducer,
   [offerSlice.name]: offerSlice.reducer
-
 });
 
 const api = createApi();

@@ -6,6 +6,7 @@ import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 
 
+
 type FavoritePagesProps = {
   title: string;
 };

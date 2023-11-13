@@ -13,6 +13,7 @@ import {fetchOfferAction} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 
+
 type OfferPagesProps = {
   title: string;
   reviewProps: Reviews;
@@ -30,6 +31,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
       dispatch(offerSlice.actions.addLoadOffer(null));
     };
   }, []);
+
 
   const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === stateOffer?.city.name;
