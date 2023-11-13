@@ -33,7 +33,7 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
   }
 
   function onLeavePointOffer () {
-    dispatch(offerSlice.actions.addLoadOffer(undefined));
+    dispatch(offerSlice.actions.addLoadOffer(null));
   }
 
   return(
