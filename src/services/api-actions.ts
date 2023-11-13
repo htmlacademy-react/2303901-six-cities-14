@@ -14,6 +14,8 @@ import type {OfferPage} from '../types/type-store';
 import type { OfferCard } from '../types/type-store';
 import {dataUserSlice} from '../store/slices/data-user-slice';
 import type {User} from './type-service';
+import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
+
 
 const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -40,6 +42,20 @@ const fetchOfferAction = createAsyncThunk<void, string | undefined, {
     const {data} = await api.get<OfferPage>(`${ApiRoute.Offers}/${id}`);
 
     dispatch(offerSlice.actions.addLoadOffer(data));
+  },
+);
+
+const fetchOffersNear = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOfferNear',
+  async (id, {dispatch, extra: api}) => {
+
+    const {data} = await api.get<OfferCard[]>(`${ApiRoute.Offers}/${id}/nearby`);
+
+    dispatch(loadOffersNearSlice.actions.addLoadOffers(data));
   },
 );
 
@@ -104,4 +120,12 @@ const clearErrorAction = createAsyncThunk(
   }
 );
 
-export {fetchOffersAction, checkAuthAction, loginAction, logoutAction, clearErrorAction, fetchOfferAction};
+export {
+  fetchOffersAction,
+  fetchOfferAction,
+  fetchOffersNear,
+  checkAuthAction,
+  loginAction,
+  logoutAction,
+  clearErrorAction,
+};

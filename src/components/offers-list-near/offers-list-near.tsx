@@ -9,7 +9,7 @@ type OfferNearProps = {
 
 function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
 
-  const threeOffersNear = offersPoint.slice(0, 4);
+  const threeOffersNear = offersPoint.slice(0, 3);
   const offers = threeOffersNear.filter((offer) => offer.id !== offerPoint.id);
 
   return (

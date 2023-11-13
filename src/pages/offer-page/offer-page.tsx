@@ -9,39 +9,34 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
 import {store} from '../../store';
-import {fetchOfferAction} from '../../services/api-actions';
+import {fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
-
 
 type OfferPagesProps = {
   title: string;
   reviewProps: Reviews;
 }
 
+
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
-  const stateOffers = useAppSelector((state) => state.offers.offers);
-  const stateOffer = useAppSelector((state) => state.loadOffer.offer);
   const id = useParams();
+  const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
+  const stateOffer = useAppSelector((state) => state.loadOffer.offer);
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
+    store.dispatch(fetchOffersNear(id.offerId));
+
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
     };
   }, []);
 
+  const points = stateOffersNear.map((point) => {
 
-  const getOfferPoints = stateOffers.filter((offer) => {
-    const points = offer.city.name === stateOffer?.city.name;
-
-    return points;
-  });
-
-  const offersPoint = getOfferPoints.map((point) => {
-
-    const pointsToMap = {
+    const pointMap = {
       title: point.city.name,
       lat: point.location.latitude,
       lng: point.location.longitude,
@@ -49,8 +44,9 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
       id: point.id
     };
 
-    return pointsToMap;
-  }).slice(0, 4);
+    return pointMap;
+  });
+
 
   useDocumentTitle(title);
 
@@ -168,12 +164,12 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={offersPoint} cityName={stateOffer ?.city.name} />
+            <MapComponent pointsToMap={points} cityName={stateOffer?.city.name} />
 
           </section>
         </section>
 
-        {stateOffer && <OffersListNear offersPoint={getOfferPoints} offerPoint={stateOffer} />}
+        {stateOffer && <OffersListNear offersPoint={stateOffersNear} offerPoint={stateOffer} />}
 
       </main>
     </div>

@@ -9,7 +9,7 @@ import {authStatusSlice} from './slices/auth-status-slice';
 import {setErrorSlice} from './slices/set-error-slice';
 import {dataUserSlice} from './slices/data-user-slice';
 import {offerSlice} from './slices/offer-slice';
-
+import {loadOffersNearSlice} from './slices/load-offer-near-slice';
 
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
@@ -20,7 +20,8 @@ const reducer = combineReducers({
   [authStatusSlice.name]: authStatusSlice.reducer,
   [setErrorSlice.name]: setErrorSlice.reducer,
   [dataUserSlice.name]: dataUserSlice.reducer,
-  [offerSlice.name]: offerSlice.reducer
+  [offerSlice.name]: offerSlice.reducer,
+  [loadOffersNearSlice.name]: loadOffersNearSlice.reducer
 });
 
 const api = createApi();
