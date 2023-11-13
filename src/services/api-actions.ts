@@ -26,7 +26,7 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
-const fetchOfferAction = createAsyncThunk<void, undefined | string, {
+const fetchOfferAction = createAsyncThunk<void, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

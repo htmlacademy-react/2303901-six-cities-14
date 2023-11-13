@@ -10,7 +10,7 @@ const offerSlice = createSlice({
   name: 'loadOffer',
   initialState,
   reducers: {
-    addLoadOffer(state, action: PayloadAction<OfferPage>) {
+    addLoadOffer(state, action: PayloadAction<OfferPage | null>) {
       state.offer = action.payload;
     }
   }
