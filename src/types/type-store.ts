@@ -82,18 +82,6 @@ type StateOffer = {
   offer: OfferPage | null;
 }
 
-type StateLoadOffers = {
-  offers: Offers;
-}
-
-type StateAuth = {
-  authStatus: string;
-};
-
-type StateError = {
-  error: string | null;
-}
-
 export type {
   State,
   AppDispatch,

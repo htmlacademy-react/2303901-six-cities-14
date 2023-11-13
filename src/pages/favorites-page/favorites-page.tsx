@@ -5,8 +5,6 @@ import type {OfferCard} from '../../types/type-store';
 import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 
-
-
 type FavoritePagesProps = {
   title: string;
 };
