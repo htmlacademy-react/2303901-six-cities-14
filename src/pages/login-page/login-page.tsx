@@ -18,9 +18,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   const checkPassword = inputPassword.trim() === '' || /\s/.test(inputPassword);
   const dispatch = useAppDispatch();
 
-  // const statusPost = useAppSelector((state) => state.error.error);
-  // console.log(statusPost)
-
   type AuthData = {
     password: string ;
     login: string;

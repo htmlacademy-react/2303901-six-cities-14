@@ -1,5 +1,4 @@
 import {store} from '../store/index';
-import type {Offers} from '../mock/offers/offer-mocks';
 
 type State = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;
@@ -60,11 +59,11 @@ type OfferCard = {
 };
 
 type StateSortOffers = {
-  sortOffers: Offers;
+  sortOffers: OfferCard[];
 }
 
 type StateFilterOffers = {
-  filterOffers: Offers;
+  filterOffers: OfferCard[];
 }
 
 type StateLoadOffers = {

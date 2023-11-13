@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import type {Offers} from '../../mock/offers/offer-mocks';
+import type {OfferCard} from '../../types/type-store';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 
 function SortList () {
   const [stateSortList, setStateSortList] = useState(false);
@@ -14,18 +14,18 @@ function SortList () {
     setStateSortList(false);
   },[offersCity, offersSort]);
 
-  function changeOfferLowToHight (offersToSort: Offers) {
+  function changeOfferLowToHight (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);
 
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
-  function changeOfferHightToLow (offersToSort: Offers) {
+  function changeOfferHightToLow (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.price - a.price);
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
-  function changeOfferTopRatedFirst (offersToSort: Offers) {
+  function changeOfferTopRatedFirst (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.rating - a.rating);
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }

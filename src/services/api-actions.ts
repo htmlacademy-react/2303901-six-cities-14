@@ -2,7 +2,6 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {loadOffersSlice} from '../store/slices/load-offers-slice';
 import {ApiRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
-import type {Offers} from '../mock/offers/offer-mocks';
 import type {State} from '../types/type-store';
 import type {AppDispatch} from '../types/type-store';
 import {authStatusSlice} from '../store/slices/auth-status-slice';
@@ -12,6 +11,7 @@ import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
 import {offerSlice} from '../store/slices/offer-slice';
 import type {OfferPage} from '../types/type-store';
+import type { OfferCard } from '../types/type-store';
 
 const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -20,13 +20,13 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Offers>(ApiRoute.Offers);
+    const {data} = await api.get<OfferCard[]>(ApiRoute.Offers);
 
     dispatch(loadOffersSlice.actions.addLoadOffers(data));
   },
 );
 
-const fetchOfferAction = createAsyncThunk<void, string, {
+const fetchOfferAction = createAsyncThunk<void, undefined | string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

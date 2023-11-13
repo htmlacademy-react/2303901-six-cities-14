@@ -5,9 +5,13 @@ import {MapComponent} from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';
 import type {Reviews} from '../../types/types';
-import {useAppSelector} from '../../hooks/use-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
-
+import {useParams} from 'react-router-dom';
+import {store} from '../../store';
+import {fetchOfferAction} from '../../services/api-actions';
+import {useEffect} from 'react';
+import {offerSlice} from '../../store/slices/offer-slice';
 
 type OfferPagesProps = {
   title: string;
@@ -15,9 +19,18 @@ type OfferPagesProps = {
 }
 
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
-
+  const dispatch = useAppDispatch();
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
+  const id = useParams();
+
+  useEffect(() => {
+    store.dispatch(fetchOfferAction(id.offerId));
+    return () => {
+      dispatch(offerSlice.actions.addLoadOffer(null));
+    };
+  }, []);
+
 
   const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === stateOffer?.city.name;

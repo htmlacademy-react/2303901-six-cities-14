@@ -1,9 +1,10 @@
 import FavoriteCardOffer from '../../components/favorite-card-offers/favorite-card-offers';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
-import {Offers} from '../../mock/offers/offer-mocks';
+import type {OfferCard} from '../../types/type-store';
 import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
+
 
 type FavoritePagesProps = {
   title: string;
@@ -11,7 +12,7 @@ type FavoritePagesProps = {
 
 function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
-  type Groups = {[key: string]: Offers};
+  type Groups = {[key: string]: OfferCard[]};
 
   const offers = useAppSelector((state) => state.offers.offers);
 
