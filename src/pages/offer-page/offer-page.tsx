@@ -18,6 +18,7 @@ type OfferPagesProps = {
   reviewProps: Reviews;
 }
 
+
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
   const stateOffers = useAppSelector((state) => state.offers.offers);
