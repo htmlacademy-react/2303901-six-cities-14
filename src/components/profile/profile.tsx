@@ -3,15 +3,18 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dropToken} from '../../services/token';
 import {authStatusSlice} from '../../store/slices/auth-status-slice';
+import {dataUserSlice} from '../../store/slices/data-user-slice';
+
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
-  const email = useAppSelector((state) => state.email.email);
+  const email = useAppSelector((state) => state.userData.data?.email);
   const dispatch = useAppDispatch();
 
   function onClickButton () {
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
     dropToken();
+    dispatch(dataUserSlice.actions.addUserData(null));
   }
 
   return (

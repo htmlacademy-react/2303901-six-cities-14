@@ -6,13 +6,14 @@ import type {State} from '../types/type-store';
 import type {AppDispatch} from '../types/type-store';
 import {authStatusSlice} from '../store/slices/auth-status-slice';
 import {dropToken, saveToken} from './token';
-import type {UserData, AuthData} from '../types/types';
+import type {UserDataLogin, AuthData} from '../types/types';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
 import {offerSlice} from '../store/slices/offer-slice';
 import type {OfferPage} from '../types/type-store';
 import type { OfferCard } from '../types/type-store';
-
+import {dataUserSlice} from '../store/slices/data-user-slice';
+import type {User} from './type-service';
 
 const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -49,6 +50,10 @@ const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<User>(ApiRoute.Login);
+
+    dispatch(dataUserSlice.actions.addUserData(data));
+
     try {
       await api.get(ApiRoute.Login);
       dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.Auth));
@@ -65,11 +70,13 @@ const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
+    const {data: {token}, data} = await api.post<UserDataLogin | User>(ApiRoute.Login, {email, password});
+
+
+    dispatch(dataUserSlice.actions.addUserData(data as User));
 
     saveToken(token);
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.Auth));
-
   },
 );
 
@@ -81,6 +88,7 @@ const logoutAction = createAsyncThunk<void, undefined, {
 }>(
   'user/logout',
   async (_arg, {dispatch, extra: api}) => {
+
     await api.delete(ApiRoute.Logout);
     dropToken();
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
@@ -97,4 +105,3 @@ const clearErrorAction = createAsyncThunk(
 );
 
 export {fetchOffersAction, checkAuthAction, loginAction, logoutAction, clearErrorAction, fetchOfferAction};
-

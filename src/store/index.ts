@@ -7,7 +7,7 @@ import {createApi} from '../services/api';
 import {loadOffersSlice} from './slices/load-offers-slice';
 import {authStatusSlice} from './slices/auth-status-slice';
 import {setErrorSlice} from './slices/set-error-slice';
-import {emailSlice} from './slices/email-slice';
+import {dataUserSlice} from './slices/data-user-slice';
 import {offerSlice} from './slices/offer-slice';
 
 
@@ -19,7 +19,7 @@ const reducer = combineReducers({
   [loadOffersSlice.name]: loadOffersSlice.reducer,
   [authStatusSlice.name]: authStatusSlice.reducer,
   [setErrorSlice.name]: setErrorSlice.reducer,
-  [emailSlice.name]: emailSlice.reducer,
+  [dataUserSlice.name]: dataUserSlice.reducer,
   [offerSlice.name]: offerSlice.reducer
 });
 

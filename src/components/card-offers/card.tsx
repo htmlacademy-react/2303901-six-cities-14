@@ -8,7 +8,6 @@ import {store} from '../../store';
 import {useAppDispatch} from '../../hooks/use-store';
 import { offerSlice } from '../../store/slices/offer-slice';
 
-
 type CardPagesProps = {
   offer: OfferCard ;
 }

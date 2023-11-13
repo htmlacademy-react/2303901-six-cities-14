@@ -2,10 +2,7 @@ import {useState} from 'react';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
-import { useAppDispatch } from '../../hooks/use-store';
-import { emailSlice } from '../../store/slices/email-slice';
-//import {useAppSelector} from '../../hooks/use-store';
-
+import {useAppDispatch} from '../../hooks/use-store';
 
 type LoginPagesProps = {
   title: string;
@@ -31,7 +28,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
     evt.preventDefault();
 
     dispatch(loginAction(authData));
-    dispatch(emailSlice.actions.addEmail(email));
   }
 
   function onInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
