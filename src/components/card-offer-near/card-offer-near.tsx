@@ -1,7 +1,7 @@
-import { Link} from 'react-router-dom';
-import { OfferCard } from '../../types/type-store';
+import {Link} from 'react-router-dom';
+import {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardOfferProps = {

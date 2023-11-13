@@ -19,18 +19,6 @@ function MapComponent({pointsToMap: points, cityName = DEFAULT_CITY}: MapCompone
   const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
   const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
   const offer = useAppSelector((state) => state.loadOffer.offer);
-
-
-  const pointToMap = {
-    title: offer?.city.name || '',
-    lat: offer?.location.latitude || 0,
-    lng: offer?.location.longitude || 0,
-    zoom: offer?.location.zoom || 0,
-    id: offer?.id || '',
-  };
-
-  const pointsToMap = [...points.slice(0, 3), pointToMap];
-
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -38,7 +26,7 @@ function MapComponent({pointsToMap: points, cityName = DEFAULT_CITY}: MapCompone
     if (map) {
       const markerLayer = layerGroup().addTo(map);
 
-      pointsToMap.forEach((point) => {
+      points.forEach((point) => {
         const marker = new Marker({
           lat: point.lat,
           lng: point.lng,

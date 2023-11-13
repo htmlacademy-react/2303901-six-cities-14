@@ -25,6 +25,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
 
+
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
     store.dispatch(fetchOffersNear(id.offerId));
@@ -32,7 +33,15 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
     };
-  }, []);
+  }, [id]);
+
+  const pointToMap = {
+    title: stateOffer?.city.name || '',
+    lat: stateOffer?.location.latitude || 0,
+    lng: stateOffer?.location.longitude || 0,
+    zoom: stateOffer?.location.zoom || 0,
+    id: stateOffer?.id || '',
+  };
 
   const points = stateOffersNear.map((point) => {
 
@@ -45,8 +54,9 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
     };
 
     return pointMap;
-  });
+  }).slice(0, 3);
 
+  const pointsToMap = [...points, pointToMap];
 
   useDocumentTitle(title);
 
@@ -164,7 +174,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={points} cityName={stateOffer?.city.name} />
+            <MapComponent pointsToMap={pointsToMap } cityName={stateOffer?.city.name} />
 
           </section>
         </section>
