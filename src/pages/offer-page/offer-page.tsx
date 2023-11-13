@@ -18,7 +18,6 @@ type OfferPagesProps = {
   reviewProps: Reviews;
 }
 
-
 function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
   const stateOffers = useAppSelector((state) => state.offers.offers);
@@ -31,7 +30,6 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
       dispatch(offerSlice.actions.addLoadOffer(null));
     };
   }, []);
-
 
   const getOfferPoints = stateOffers.filter((offer) => {
     const points = offer.city.name === stateOffer?.city.name;
