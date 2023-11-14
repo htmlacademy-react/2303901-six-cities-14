@@ -58,6 +58,14 @@ type OfferCard = {
   previewImage: string;
 };
 
+type Comment = {
+  id: string;
+  date: string;
+  user: OfferHost;
+  comment: string;
+  rating: number | null;
+  }
+
 type StateSortOffers = {
   sortOffers: OfferCard[];
 }
@@ -82,6 +90,10 @@ type StateOffer = {
   offer: OfferPage | null;
 }
 
+type StateComments = {
+  comments: Comment[] | null;
+}
+
 export type {
   State,
   AppDispatch,
@@ -91,6 +103,8 @@ export type {
   StateAuth,
   StateError,
   OfferPage,
+  Comment,
   StateOffer,
-  OfferCard
+  OfferCard,
+  StateComments
 };

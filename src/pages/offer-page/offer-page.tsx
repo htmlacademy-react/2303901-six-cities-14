@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
 import {store} from '../../store';
-import {fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
+import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 
@@ -29,6 +29,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
     store.dispatch(fetchOffersNear(id.offerId));
+    store.dispatch(fetchComments(id.offerId));
 
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
