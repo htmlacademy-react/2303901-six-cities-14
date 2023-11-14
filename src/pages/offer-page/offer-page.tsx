@@ -12,8 +12,7 @@ import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/a
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
-import {TitleDescription} from '../../const';
-
+import {AuthorizationStatus, TitleDescription} from '../../const';
 
 type OfferPagesProps = {
   title: string;
@@ -25,7 +24,8 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
   const stateComments = useAppSelector((state) => state.loadComments.comments);
-  const states = useAppSelector((state) => state.errorOffer.error);
+  const stateError = useAppSelector((state) => state.errorOffer.error);
+  const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
@@ -62,7 +62,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
   useDocumentTitle(title);
 
-  return states === 'errorNotOffer' ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
+  return stateError === 'errorNotOffer' ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
     <div className="page">
       <header className="header">
         <div className="container">
@@ -169,7 +169,8 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                 </h2>
 
                 <ListReview/>
-                <FormSendComment id={id.offerId} />
+
+                {stateAut === AuthorizationStatus.Auth.toString() ? <FormSendComment id={id.offerId}/> : ''}
 
               </section>
             </div>

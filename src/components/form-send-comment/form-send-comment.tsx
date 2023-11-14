@@ -40,6 +40,8 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
   function onClickButtonSent(evt: React.MouseEvent<HTMLButtonElement>) {
     evt.preventDefault();
+
+
     store.dispatch(sendComment(commentData));
     store.dispatch(fetchComments(id));
 
@@ -138,7 +140,6 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
           defaultValue={1}
           id="1-star"
           type="radio"
-
         />
         <label
           htmlFor="1-star"
@@ -156,6 +157,7 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
+
         onChange= {(evt) => setStateComment({
           ...sateComment,
           comment: evt.target.value
