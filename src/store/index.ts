@@ -12,6 +12,7 @@ import {offerSlice} from './slices/offer-slice';
 import {loadOffersNearSlice} from './slices/load-offer-near-slice';
 import {loadCommentsSlice} from './slices/load-comments-slice';
 import {errorOfferSlice} from './slices/error-offer-slice';
+import { sendCommentsSlice } from './slices/send-comment-slice';
 
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
@@ -25,7 +26,8 @@ const reducer = combineReducers({
   [offerSlice.name]: offerSlice.reducer,
   [loadOffersNearSlice.name]: loadOffersNearSlice.reducer,
   [loadCommentsSlice.name]: loadCommentsSlice.reducer,
-  [errorOfferSlice.name]: errorOfferSlice.reducer
+  [errorOfferSlice.name]: errorOfferSlice.reducer,
+  [sendCommentsSlice.name]: sendCommentsSlice.reducer
 });
 
 const api = createApi();

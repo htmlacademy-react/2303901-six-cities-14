@@ -21,7 +21,7 @@ type OfferPagesProps = {
 
 function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
-  const id = useParams();
+  const id = useParams<string>();
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
   const stateComments = useAppSelector((state) => state.loadComments.comments);
@@ -169,7 +169,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                 </h2>
 
                 <ListReview/>
-                <FormSendComment/>
+                <FormSendComment id={id.offerId} />
 
               </section>
             </div>

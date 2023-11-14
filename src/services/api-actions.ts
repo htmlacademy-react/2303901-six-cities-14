@@ -16,6 +16,8 @@ import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
 import type {Comment} from '../types/type-store';
 import {loadCommentsSlice} from '../store/slices/load-comments-slice';
 import {errorOfferSlice} from '../store/slices/error-offer-slice';
+import {sendCommentsSlice} from '../store/slices/send-comment-slice';
+
 
 const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
   'data/fetchOffers',
@@ -59,6 +61,24 @@ const fetchComments = createAsyncThunk<void, string | undefined, Thunk>(
     const {data} = await api.get<Comment[]>(`${ApiRoute.Comments}/${id}`);
 
     dispatch(loadCommentsSlice.actions.addLoadComments(data));
+  },
+);
+
+type SendComment = {
+  id: string | undefined;
+  comment: string;
+  rating: number;
+
+}
+
+
+const sendComment = createAsyncThunk<void, SendComment, Thunk>(
+  'data/sendComment',
+  async ({id, comment, rating}, {dispatch, extra: api}) => {
+
+    const {data} = await api.post<Comment>(`${ApiRoute.Comments}/${id}`, {comment, rating});
+
+    dispatch(sendCommentsSlice.actions.addLoadComment(data));
   },
 );
 
@@ -120,4 +140,5 @@ export {
   loginAction,
   logoutAction,
   clearErrorAction,
+  sendComment
 };

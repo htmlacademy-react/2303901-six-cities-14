@@ -1,5 +1,7 @@
 import {ChangeEvent, useState} from 'react';
-import { LengthComment } from '../../const';
+import {LengthComment} from '../../const';
+import {fetchComments, sendComment} from '../../services/api-actions';
+import {store} from '../../store';
 
 type CommentState = {
   comment: string;
@@ -9,8 +11,11 @@ type RatingState = {
   ratingOffer: string;
 };
 
+type PropsFormComment = {
+    id: string | undefined;
+}
 
-function FormSendComment (): JSX.Element {
+function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
   const [sateComment, setStateComment] = useState<CommentState>({
     comment: '',
@@ -22,6 +27,12 @@ function FormSendComment (): JSX.Element {
 
   const minRating = parseInt(sateRatingOffer.ratingOffer, 10);
 
+  const commentData = {
+    id: id,
+    comment: sateComment.comment,
+    rating:  +sateRatingOffer.ratingOffer
+  };
+
   const isNumber = isNaN(minRating);
   const isCommentLengthValid = !(sateComment.comment.length >= LengthComment.MIN && sateComment.comment.length <= LengthComment.MAX);
   const blockButton = isCommentLengthValid || isNumber;
@@ -29,6 +40,18 @@ function FormSendComment (): JSX.Element {
 
   function onClickButtonSent(evt: React.MouseEvent<HTMLButtonElement>) {
     evt.preventDefault();
+    store.dispatch(sendComment(commentData));
+    store.dispatch(fetchComments(id));
+
+    setStateComment({
+      ...sateComment,
+      comment: ''
+    });
+
+    setStateRatingOffer({
+      ...sateRatingOffer,
+      ratingOffer: ''
+    });
   }
 
   return (

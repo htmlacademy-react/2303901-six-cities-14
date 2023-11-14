@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
-import {useEffect} from 'react';
+//import {useEffect} from 'react';
 import FavoriteButton from '../favorite-button/favorite-button';
 
 type CardOfferProps = {
@@ -10,9 +10,9 @@ type CardOfferProps = {
 
 function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  },);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // },);
 
   return (
     <article className="near-places__card place-card" >

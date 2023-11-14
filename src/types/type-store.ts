@@ -94,6 +94,10 @@ type StateComments = {
   comments: Comment[] | null;
 }
 
+type StateComment = {
+  comments: Comment | null;
+}
+
 export type {
   State,
   AppDispatch,
@@ -106,5 +110,6 @@ export type {
   Comment,
   StateOffer,
   OfferCard,
-  StateComments
+  StateComments,
+  StateComment
 };
