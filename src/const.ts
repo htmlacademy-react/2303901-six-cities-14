@@ -126,6 +126,8 @@ const REQUEST_TIMEOUT = 5000;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const TIMEOUT_SHOW_ERROR = 2000;
 
+const ERROR_NOT_OFFER = 'errorNotOffer';
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -145,6 +147,7 @@ export {
   URL_SERVER,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
-  TIMEOUT_SHOW_ERROR
+  TIMEOUT_SHOW_ERROR,
+  ERROR_NOT_OFFER
 };
 

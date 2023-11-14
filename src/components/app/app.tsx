@@ -19,7 +19,8 @@ function App(): JSX.Element {
 
   useEffect(() => {
     addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
-  }, [addLoadOffersToState, getOffers]);
+
+  }, [getOffers, addLoadOffersToState]);
 
   return (
     <BrowserRouter>
@@ -49,7 +50,7 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path= {`${AppRoute.Offer}/:offerId`}
+          path= { `${AppRoute.Offer}/:offerId`}
           element ={<OfferPage title = {TitleDescription.OfferPage}/>}
         />
         <Route

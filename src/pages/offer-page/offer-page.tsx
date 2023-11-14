@@ -11,11 +11,13 @@ import {store} from '../../store';
 import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
+import {ErrorMessage} from '../../components/error-message/error-message';
+import {TitleDescription} from '../../const';
+
 
 type OfferPagesProps = {
   title: string;
 }
-
 
 function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,6 +25,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
   const stateComments = useAppSelector((state) => state.loadComments.comments);
+  const states = useAppSelector((state) => state.errorOffer.error);
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
@@ -59,7 +62,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
   useDocumentTitle(title);
 
-  return(
+  return states === 'errorNotOffer' ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
     <div className="page">
       <header className="header">
         <div className="container">
