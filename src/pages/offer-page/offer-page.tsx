@@ -25,7 +25,6 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
 
-
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
     store.dispatch(fetchOffersNear(id.offerId));

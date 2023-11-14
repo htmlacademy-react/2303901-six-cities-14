@@ -1,8 +1,9 @@
 import { MONTH_NAMES } from '../../const';
 import type {Review} from '../../types/types';
+import type {Comment} from '../../types/type-store';
 
 type ReviewProps = {
-  reviewProps: Review;
+  reviewProps:Comment;
 }
 
 

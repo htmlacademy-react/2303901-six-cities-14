@@ -63,7 +63,7 @@ type Comment = {
   date: string;
   user: OfferHost;
   comment: string;
-  rating: number | null;
+  rating: number;
   }
 
 type StateSortOffers = {
