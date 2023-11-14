@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import type { OfferCard } from '../../types/type-store';
+import type {OfferCard} from '../../types/type-store';
 import type {StateFilterOffers} from '../../types/type-store';
 
 const initialState: StateFilterOffers = {

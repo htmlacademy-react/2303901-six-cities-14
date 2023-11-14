@@ -4,7 +4,6 @@ import Logotype from '../../components/logotype/logotype';
 import {MapComponent} from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';
-import type {Reviews} from '../../types/types';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
@@ -15,15 +14,15 @@ import {offerSlice} from '../../store/slices/offer-slice';
 
 type OfferPagesProps = {
   title: string;
-  reviewProps: Reviews;
 }
 
 
-function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
+function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
   const id = useParams();
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
+  const stateComments = useAppSelector((state) => state.loadComments.comments);
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
@@ -163,10 +162,10 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">{reviewProps.length}</span>
+                  Reviews <span className="reviews__amount">{stateComments?.length}</span>
                 </h2>
 
-                <ListReview reviewProps={reviewProps}/>
+                <ListReview/>
                 <FormSendComment/>
 
               </section>
@@ -174,7 +173,7 @@ function OfferPage ({title, reviewProps} : OfferPagesProps) : JSX.Element {
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={pointsToMap } cityName={stateOffer?.city.name} />
+            <MapComponent pointsToMap={pointsToMap} cityName={stateOffer?.city.name} />
 
           </section>
         </section>

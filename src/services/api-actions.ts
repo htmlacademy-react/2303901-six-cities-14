@@ -24,7 +24,6 @@ const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
 
     const {data} = await api.get<OfferCard[]>(ApiRoute.Offers);
 
-
     dispatch(loadOffersSlice.actions.addLoadOffers(data));
   },
 );
