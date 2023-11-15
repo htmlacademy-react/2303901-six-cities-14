@@ -35,6 +35,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   useEffect(() => {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
+    dispatch(fetchOffersFavorite());
   },[selectedFilterCity, stateOffers]);
 
 

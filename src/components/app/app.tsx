@@ -6,21 +6,21 @@ import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
 import {PrivateRoute} from '../private-route/private-route';
 import {AppRoute, TitleDescription} from '../../const';
-import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {offersSlice} from '../../store/slices/offers-slice';
-import {useEffect} from 'react';
+// import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+// import {offersSlice} from '../../store/slices/offers-slice';
+// import {useEffect} from 'react';
 import {LoadingRoute} from '../loading-route/loaging-route';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
 
 function App(): JSX.Element {
 
-  const getOffers = useAppSelector((state) => state.loadOffers.offers);
-  const addLoadOffersToState = useAppDispatch();
+  // const getOffers = useAppSelector((state) => state.loadOffers.offers);
+  // const addLoadOffersToState = useAppDispatch();
 
-  useEffect(() => {
-    addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
+  // useEffect(() => {
+  //   addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
 
-  }, [getOffers, addLoadOffersToState]);
+  // }, [getOffers, addLoadOffersToState]);
 
   return (
     <BrowserRouter>

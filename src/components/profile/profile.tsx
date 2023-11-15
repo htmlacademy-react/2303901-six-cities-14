@@ -4,17 +4,20 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dropToken} from '../../services/token';
 import {authStatusSlice} from '../../store/slices/auth-status-slice';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
-
+import {fetchOffersAction} from '../../services/api-actions';
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const email = useAppSelector((state) => state.userData.data?.email);
   const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offersFavorite.offers);
+
 
   function onClickButton () {
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
     dropToken();
     dispatch(dataUserSlice.actions.addUserData(null));
+    dispatch(fetchOffersAction());
   }
 
   return (
@@ -27,7 +30,7 @@ function Profile () {
             {(statusAuth === AuthorizationStatus.Auth.toString()) ?
               <>
                 <span className="header__user-name user__name">{email}</span>
-                <span className="header__favorite-count">3</span>
+                <span className="header__favorite-count">{offers.length}</span>
               </>
               : ''}
           </Link>
