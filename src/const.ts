@@ -128,6 +128,8 @@ const TIMEOUT_SHOW_ERROR = 2000;
 
 const ERROR_NOT_OFFER = 'errorNotOffer';
 
+const ENDING = 2;
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -148,6 +150,7 @@ export {
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
   TIMEOUT_SHOW_ERROR,
-  ERROR_NOT_OFFER
+  ERROR_NOT_OFFER,
+  ENDING
 };
 

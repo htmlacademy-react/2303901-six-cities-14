@@ -12,7 +12,7 @@ import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/a
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
-import {AuthorizationStatus, TitleDescription} from '../../const';
+import {AuthorizationStatus, ENDING, TitleDescription} from '../../const';
 
 type OfferPagesProps = {
   title: string;
@@ -98,7 +98,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {stateOffer?.description}
+                  {stateOffer?.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button" >
                   <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -119,10 +119,10 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">{stateOffer?.type}</li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {stateOffer?.bedrooms} Bedrooms
+                  {stateOffer?.bedrooms} Bedroom{stateOffer?.bedrooms !== undefined && stateOffer.bedrooms >= ENDING ? 's' : ''}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {stateOffer?.maxAdults} adults
+                  Max {stateOffer?.maxAdults} adult{stateOffer?.maxAdults !== undefined && stateOffer.maxAdults >= ENDING ? 's' : ''}
                 </li>
               </ul>
               <div className="offer__price">
@@ -148,19 +148,10 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                     />
                   </div>
                   <span className="offer__user-name">{stateOffer?.host.name}</span>
-                  <span className="offer__user-status">Pro</span>
+                  <span className="offer__user-status">{stateOffer?.host.isPro ? 'Pro' : ''}</span>
                 </div>
                 <div className="offer__description">
-                  <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the
-                    unique lightness of Amsterdam. The building is green and from
-                    18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
-                  </p>
+                  <p className="offer__text">{stateOffer?.description}</p>
                 </div>
               </div>
               <section className="offer__reviews reviews">
