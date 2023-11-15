@@ -1,15 +1,16 @@
 import {useEffect} from 'react';
-import ListOffers from '../../components/list-offers/list-offers';
 import {MapComponent} from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
 import useDocumentTitle from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
-import {SortList} from '../../components/sort-list/sort-list';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {AuthorizationStatus } from '../../const';
 import {fetchOffersFavorite} from '../../services/api-actions';
+import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
+import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
+
 
 type MainPagesProps = {
   title: string;
@@ -21,7 +22,6 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const dispatch = useAppDispatch();
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
-  const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
 
@@ -83,19 +83,13 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
         <FilterCities/>
 
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offersFilter?.length} places to stay in {selectedFilterCity}</b>
+          <div className={`cities__places-container container ${offersFilter.length === 0 ? 'cities__places-container--empty' : ''}`}>
 
-              <SortList/>
-              <ListOffers offers = {offersSort}/>
-
-            </section>
+            {offersFilter.length !== 0 ? <CitiesPlaceComponent/> : <NoPlacesLeftComponent/>}
 
             <div className="cities__right-section">
 
-              <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/>
+              {offersFilter.length !== 0 ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : ''}
 
             </div>
           </div>
