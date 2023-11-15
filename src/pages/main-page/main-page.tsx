@@ -8,6 +8,8 @@ import {SortList} from '../../components/sort-list/sort-list';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {AuthorizationStatus } from '../../const';
+import {fetchOffersFavorite} from '../../services/api-actions';
 
 type MainPagesProps = {
   title: string;
@@ -20,6 +22,8 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   const dispatch = useAppDispatch();
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
   const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
+  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
+
 
   const citiesToFilter = stateOffers.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
@@ -32,6 +36,13 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
   },[selectedFilterCity, stateOffers]);
+
+
+  useEffect(() => {
+    if (authStatus === AuthorizationStatus.Auth.toString()) {
+      dispatch(fetchOffersFavorite());
+    }
+  },[authStatus]);
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 

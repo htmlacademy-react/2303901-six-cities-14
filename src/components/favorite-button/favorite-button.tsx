@@ -1,6 +1,6 @@
 import type {OfferCard, OfferPage} from '../../types/type-store';
 import {offersSlice} from '../../store/slices/offers-slice';
-import { useAppDispatch } from '../../hooks/use-store';
+import {useAppDispatch} from '../../hooks/use-store';
 
 type ButtonProps = {
   offer: OfferCard | OfferPage;
@@ -27,4 +27,4 @@ function FavoriteButton({offer}: ButtonProps): JSX.Element {
   );
 }
 
-export default FavoriteButton;
+export {FavoriteButton};

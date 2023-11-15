@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
-import FavoriteButton from '../favorite-button/favorite-button';
+import {FavoriteButton} from '../favorite-button/favorite-button';
 import {fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
 import {store} from '../../store';
 import {useAppDispatch} from '../../hooks/use-store';

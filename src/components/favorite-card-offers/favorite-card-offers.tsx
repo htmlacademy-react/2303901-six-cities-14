@@ -1,5 +1,5 @@
 import type {OfferCard} from '../../types/type-store';
-import FavoriteButton from '../favorite-button/favorite-button';
+import {FavoriteButton} from '../favorite-button/favorite-button';
 
 type FavoriteOfferProps = {
   offer: OfferCard;

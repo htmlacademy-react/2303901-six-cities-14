@@ -1,10 +1,9 @@
 import {useState} from 'react';
-
 import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
 import {fetchComments, sendComment} from '../../services/api-actions';
-import { useAppDispatch } from '../../hooks/use-store';
-import { RatingComponent } from '../rating-component';
+import {useAppDispatch} from '../../hooks/use-store';
+import {RatingComponent} from '../rating-component';
 
 type PropsFormComment = {
     id: string | undefined;
@@ -32,10 +31,10 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
       setComment('');
       setRating(0);
     });
+
     dispatch(fetchComments(id));
 
     setComment(comment);
-
     setRating(rating);
   }
 
@@ -80,5 +79,5 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
 }
 
 
-export default FormSendComment;
+export {FormSendComment};
 

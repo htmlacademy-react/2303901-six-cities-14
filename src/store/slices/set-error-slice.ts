@@ -12,6 +12,9 @@ const setErrorSlice = createSlice({
   reducers: {
     setError(state, action:PayloadAction<string>) {
       state.error = action.payload;
+    },
+    setErrorForm(state, action:PayloadAction<string>) {
+      state.error = action.payload;
     }
   }
 });

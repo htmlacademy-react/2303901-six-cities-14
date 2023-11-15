@@ -17,6 +17,7 @@ import type {Comment} from '../types/type-store';
 import {loadCommentsSlice} from '../store/slices/load-comments-slice';
 import {errorOfferSlice} from '../store/slices/error-offer-slice';
 import {sendCommentsSlice} from '../store/slices/send-comment-slice';
+import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
 
 
 const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
@@ -52,6 +53,16 @@ const fetchOffersNear = createAsyncThunk<void, string | undefined, Thunk>(
 
     dispatch(loadOffersNearSlice.actions.addLoadOffers(data));
   },
+);
+
+const fetchOffersFavorite = createAsyncThunk<void, string | undefined, Thunk>(
+  'data/fetchOfferFavorite',
+  async(_, {dispatch, extra: api}) => {
+
+    const {data} = await api.get<OfferCard[]>(`${ApiRoute.OffersFavorite}`);
+
+    dispatch(offersFavoriteSlice.actions.addFavoriteOffers(data));
+  }
 );
 
 const fetchComments = createAsyncThunk<void, string | undefined, Thunk>(
@@ -136,6 +147,7 @@ export {
   fetchOfferAction,
   fetchOffersNear,
   fetchComments,
+  fetchOffersFavorite,
   checkAuthAction,
   loginAction,
   logoutAction,
