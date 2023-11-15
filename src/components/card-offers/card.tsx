@@ -31,13 +31,13 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
       ...cardState,
       offerId: offer.id,
     });
-    store.dispatch(fetchOfferAction(cardState.offerId));
-    store.dispatch(fetchOffersNear(cardState.offerId));
+    store.dispatch(fetchOfferAction(offer.id));
+    store.dispatch(fetchOffersNear(offer.id));
   }
 
   function onGetPointOffer () {
     //dispatch(offerSlice.actions.addLoadOffer(offer));
-    store.dispatch(fetchOfferAction(cardState.offerId));
+    store.dispatch(fetchOfferAction(offer.id));
   }
 
   return(

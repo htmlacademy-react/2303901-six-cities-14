@@ -1,15 +1,8 @@
 import {ChangeEvent, useState} from 'react';
+import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
 import {fetchComments, sendComment} from '../../services/api-actions';
-import {store} from '../../store';
-
-type CommentState = {
-  comment: string;
-};
-
-type RatingState = {
-  ratingOffer: string;
-};
+import { useAppDispatch } from '../../hooks/use-store';
 
 type PropsFormComment = {
     id: string | undefined;
@@ -17,63 +10,49 @@ type PropsFormComment = {
 
 function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
-  const [sateComment, setStateComment] = useState<CommentState>({
-    comment: '',
-  });
+  const dispatch = useAppDispatch();
+  const [comment, setComment] = useState<string>('');
+  const[rating, setRating] = useState(0);
 
-  const[sateRatingOffer, setStateRatingOffer] = useState<RatingState>({
-    ratingOffer: ''
-  });
+  const isCommentLengthValid = !(comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
+  const blockButton = isCommentLengthValid || rating === 0;
 
-  const minRating = parseInt(sateRatingOffer.ratingOffer, 10);
-
-  const commentData = {
-    id: id,
-    comment: sateComment.comment,
-    rating:  +sateRatingOffer.ratingOffer
+  const handleChecked = (evt: ChangeEvent<HTMLInputElement>) => {
+    setRating(Number(evt.target.value));
   };
 
-  const isNumber = isNaN(minRating);
-  const isCommentLengthValid = !(sateComment.comment.length >= LengthComment.MIN && sateComment.comment.length <= LengthComment.MAX);
-  const blockButton = isCommentLengthValid || isNumber;
-
-
-  function onClickButtonSent(evt: React.MouseEvent<HTMLButtonElement>) {
+  function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
+    const commentData = {
+      id,
+      comment,
+      rating
+    };
 
-    store.dispatch(sendComment(commentData));
-    store.dispatch(fetchComments(id));
-
-    setStateComment({
-      ...sateComment,
-      comment: ''
+    dispatch(sendComment(commentData)).unwrap().then(() => {
+      setComment('');
+      setRating(0);
     });
+    dispatch(fetchComments(id));
 
-    setStateRatingOffer({
-      ...sateRatingOffer,
-      ratingOffer: ''
-    });
+    setComment(comment);
+
+    setRating(rating);
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={onClickButtonSent}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating" onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-        if (evt.target instanceof HTMLInputElement) {
-          setStateRatingOffer({
-            ...sateRatingOffer,
-            ratingOffer: evt.target.value
-          });
-        }
-      }}
-      >
+      <div className="reviews__rating-form form__rating">
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          defaultValue={5}
+          value={5}
+          checked={rating === 5}
+          onChange={handleChecked}
           id="5-stars"
           type="radio"
         />
@@ -89,7 +68,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          defaultValue={4}
+          value={4}
+          checked={rating === 4}
+          onChange={handleChecked}
           id="4-stars"
           type="radio"
         />
@@ -105,7 +86,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          defaultValue={3}
+          value={3}
+          checked={rating === 3}
+          onChange={handleChecked}
           id="3-stars"
           type="radio"
         />
@@ -121,7 +104,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          defaultValue={2}
+          value={2}
+          checked={rating === 2}
+          onChange={handleChecked}
           id="2-stars"
           type="radio"
         />
@@ -137,7 +122,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          defaultValue={1}
+          value={1}
+          checked={rating === 1}
+          onChange={handleChecked}
           id="1-star"
           type="radio"
         />
@@ -156,12 +143,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
+        value={comment}
 
-        onChange= {(evt) => setStateComment({
-          ...sateComment,
-          comment: evt.target.value
-        })}
+        onChange= {(evt) => setComment(evt.target.value)}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -173,7 +157,6 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          onClick={onClickButtonSent}
           disabled={blockButton}
         >
           Submit
