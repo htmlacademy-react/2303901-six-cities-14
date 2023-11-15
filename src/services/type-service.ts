@@ -27,6 +27,10 @@ type Thunk = {
   extra: AxiosInstance;
 }
 
+ type FavoriteStatus = {
+  id: string;
+  status: number;
+ }
 
-export type {Token, DetailMessageType, UserData, User, Thunk};
+export type {Token, DetailMessageType, UserData, User, Thunk, FavoriteStatus};
 

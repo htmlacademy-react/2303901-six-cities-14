@@ -1,6 +1,7 @@
 import type {OfferCard, OfferPage} from '../../types/type-store';
 import {offersSlice} from '../../store/slices/offers-slice';
 import {useAppDispatch} from '../../hooks/use-store';
+import { sendFavoriteOffer } from '../../services/api-actions';
 
 type ButtonProps = {
   offer: OfferCard | OfferPage;
@@ -9,8 +10,15 @@ type ButtonProps = {
 function FavoriteButton({offer}: ButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const sdf = {
+    id: offer.id,
+    status: (!offer.isFavorite) ? 1 : 0,
+  };
+
   const onFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer.id));
+    dispatch(sendFavoriteOffer(sdf));
+
   };
 
   return (

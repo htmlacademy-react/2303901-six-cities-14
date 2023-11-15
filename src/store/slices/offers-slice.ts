@@ -2,7 +2,6 @@ import type { OfferCard } from '../../types/type-store';
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 
-
 type InitialState = {
   offers: OfferCard[];
 }

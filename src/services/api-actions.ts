@@ -18,6 +18,7 @@ import {loadCommentsSlice} from '../store/slices/load-comments-slice';
 import {errorOfferSlice} from '../store/slices/error-offer-slice';
 import {sendCommentsSlice} from '../store/slices/send-comment-slice';
 import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
+import type {FavoriteStatus} from './type-service';
 
 
 const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
@@ -63,6 +64,19 @@ const fetchOffersFavorite = createAsyncThunk<void, string | undefined, Thunk>(
 
     dispatch(offersFavoriteSlice.actions.addFavoriteOffers(data));
   }
+);
+
+const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
+
+  'sendFavoriteOffer',
+
+  async ({id, status}, {dispatch, extra: api}) => {
+
+    const {data} = await api.post<OfferCard>(`${ApiRoute.OffersFavorite}/${id}/${status}`);
+
+
+    dispatch(offersFavoriteSlice.actions.sendFavoriteStatus(data));
+  },
 );
 
 const fetchComments = createAsyncThunk<void, string | undefined, Thunk>(
@@ -148,6 +162,7 @@ export {
   fetchOffersNear,
   fetchComments,
   fetchOffersFavorite,
+  sendFavoriteOffer ,
   checkAuthAction,
   loginAction,
   logoutAction,
