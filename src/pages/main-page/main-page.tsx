@@ -1,31 +1,32 @@
-import {useEffect, useState} from 'react';
-import ListOffers from '../../components/list-offers/list-offers';
+import {useEffect} from 'react';
 import {MapComponent} from '../../components/map/map';
 import FilterCities from '../../components/filter-cities/filter-cities';
-import type {Offer} from '../../mock/offers/offer-mocks';
 import useDocumentTitle from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
-import {SortList} from '../../components/sort-list/sort-list';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {AuthorizationStatus } from '../../const';
+import {fetchOffersFavorite} from '../../services/api-actions';
+import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
+import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
+import Logotype from '../../components/logotype/logotype';
+import {SettingLogoHeader} from '../../const';
+
 
 type MainPagesProps = {
   title: string;
 }
 
 function MainPages ({title}: MainPagesProps): JSX.Element {
-  //стейт фильтра города при нажатии на фильтр
-
 
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
   const stateOffers = useAppSelector((state) => state.offers.offers);
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
   const dispatch = useAppDispatch();
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
-  const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
+  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
-  //Функция получения списка офферов согласно выбранного фильта
+
   const citiesToFilter = stateOffers.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
 
@@ -36,7 +37,15 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   useEffect(() => {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
+    dispatch(fetchOffersFavorite());
   },[selectedFilterCity, stateOffers]);
+
+
+  useEffect(() => {
+    if (authStatus === AuthorizationStatus.Auth.toString()) {
+      dispatch(fetchOffersFavorite());
+    }
+  },[authStatus]);
 
   const pointsOffersToMap = citiesToFilter.map((offer) => {
 
@@ -51,19 +60,6 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
     return pointsToMap;
   });
 
-  function handleListItemHover (idOffer: string) {
-    stateOffers.find((offer, index: number) => {
-
-      if (offer.id === idOffer){
-        setSelectedPoint(stateOffers[index]);
-      }
-    });
-  }
-
-  function onLeaveMouseOffer () {
-    setSelectedPoint(undefined);
-  }
-
   useDocumentTitle(title);
 
   return (
@@ -72,9 +68,9 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+
+              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+
             </div>
 
             <Profile/>
@@ -89,19 +85,13 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
         <FilterCities/>
 
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {offersFilter?.length} places to stay in {selectedFilterCity}</b>
+          <div className={`cities__places-container container ${offersFilter.length === 0 ? 'cities__places-container--empty' : ''}`}>
 
-              <SortList/>
-              <ListOffers offers = {offersSort} handleIdOffer = {handleListItemHover} onLeaveMouseOffer={onLeaveMouseOffer}/>
-
-            </section>
+            {offersFilter.length !== 0 ? <CitiesPlaceComponent/> : <NoPlacesLeftComponent/>}
 
             <div className="cities__right-section">
 
-              <MapComponent pointsToMap={pointsOffersToMap} selectedPoint={selectedPoint} cityName={selectedFilterCity}/>
+              {offersFilter.length !== 0 ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : ''}
 
             </div>
           </div>

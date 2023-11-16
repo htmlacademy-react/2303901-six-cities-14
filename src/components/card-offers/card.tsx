@@ -1,41 +1,44 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
-import type {Offer} from '../../mock/offers/offer-mocks';
+import type {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
-import FavoriteButton from '../favorite-button/favorite-button';
+import {FavoriteButton} from '../favorite-button/favorite-button';
+import {fetchOfferAction} from '../../services/api-actions';
+import {useAppDispatch} from '../../hooks/use-store';
+import {offerSlice} from '../../store/slices/offer-slice';
+
 
 type CardPagesProps = {
-  offer: Offer;
-  handleIdOffer: (offerId: string) => void;
-  onLeaveMouseOffer: () => void;
+  offer: OfferCard ;
 }
 
+function CardOffer ({offer}: CardPagesProps) : JSX.Element{
 
-function CardOffer ({offer, handleIdOffer, onLeaveMouseOffer}: CardPagesProps) : JSX.Element{
+  const dispatch = useAppDispatch();
 
   const [cardState, setCardState] = useState({
     offerId: offer.id
   });
 
-  function onGetIdCard () {
+  function onLeavePointOffer () {
+    dispatch(offerSlice.actions.addLoadOffer(null));
+  }
+
+  function onClickCard () {
     setCardState({
       ...cardState,
       offerId: offer.id,
     });
+    dispatch(fetchOfferAction(offer.id));
   }
 
   function onGetPointOffer () {
-
-    handleIdOffer(offer?.id);
-  }
-
-  function onLeavePointOffer () {
-    onLeaveMouseOffer();
+    dispatch(fetchOfferAction(offer.id));
   }
 
   return(
     <article className="cities__card place-card"
-      onMouseOver = {onGetIdCard}
+      onClick = {onClickCard}
       onMouseEnter={onGetPointOffer}
       onMouseLeave={onLeavePointOffer}
     >

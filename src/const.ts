@@ -121,10 +121,28 @@ const MONTH_NAMES = [
 ];
 
 const DEFAULT_CITY = 'Paris';
-const URL_SERVER = 'https://14.react.pages.academy/six-cities';
+const URL_SERVER = 'https://14.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const TIMEOUT_SHOW_ERROR = 2000;
+
+const ERROR_NOT_OFFER = 'errorNotOffer';
+
+const ENDING = 2;
+
+const SettingLogoHeader = {
+  className: 'header',
+  width: 81,
+  height: 41,
+
+};
+
+const SettingLogoFooter = {
+  className: 'footer',
+  width: 64,
+  height: 33,
+
+};
 
 export {
   AppRoute,
@@ -145,6 +163,10 @@ export {
   URL_SERVER,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
-  TIMEOUT_SHOW_ERROR
+  TIMEOUT_SHOW_ERROR,
+  ERROR_NOT_OFFER,
+  ENDING,
+  SettingLogoHeader,
+  SettingLogoFooter
 };
 

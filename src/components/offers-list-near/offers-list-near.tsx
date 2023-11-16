@@ -1,14 +1,15 @@
 import CardOfferNear from '../card-offer-near/card-offer-near';
-import type { Offers, Offer } from '../../mock/offers/offer-mocks';
+import type {OfferCard} from '../../types/type-store';
+import type {OfferPage} from '../../types/type-store';
 
 type OfferNearProps = {
-  offersPoint: Offers;
-  offerPoint: Offer;
+  offersPoint: OfferCard[];
+  offerPoint: OfferPage;
 }
 
 function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
 
-  const threeOffersNear = offersPoint.slice(0, 4);
+  const threeOffersNear = offersPoint.slice(0, 3);
   const offers = threeOffersNear.filter((offer) => offer.id !== offerPoint.id);
 
   return (

@@ -1,19 +1,81 @@
 import {store} from '../store/index';
-import type {Offers} from '../mock/offers/offer-mocks';
 
 type State = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;
 
+type CityLocation ={
+  latitude: number;
+  longitude: number;
+  zoom: number;
+};
+
+type OfferCity = {
+  name: string;
+  location: CityLocation;
+};
+
+type OfferLocation = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  };
+
+
+type OfferHost = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+  };
+
+type OfferPage = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: OfferCity;
+  location: OfferLocation;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  description: string;
+  bedrooms: number;
+  goods: [string];
+  host: OfferHost;
+  images: [string];
+  maxAdults: number;
+};
+
+type OfferCard = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: OfferCity;
+  location: OfferLocation;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+};
+
+type Comment = {
+  id: string;
+  date: string;
+  user: OfferHost;
+  comment: string;
+  rating: number;
+  }
+
 type StateSortOffers = {
-  sortOffers: Offers;
+  sortOffers: OfferCard[];
 }
 
 type StateFilterOffers = {
-  filterOffers: Offers;
+  filterOffers: OfferCard[];
 }
 
 type StateLoadOffers = {
-  offers: Offers;
+  offers: OfferCard[];
 }
 
 type StateAuth = {
@@ -24,6 +86,18 @@ type StateError = {
   error: string | null;
 }
 
+type StateOffer = {
+  offer: OfferPage | null;
+}
+
+type StateComments = {
+  comments: Comment[] | null;
+}
+
+type StateComment = {
+  comments: Comment | null;
+}
+
 export type {
   State,
   AppDispatch,
@@ -31,5 +105,11 @@ export type {
   StateFilterOffers,
   StateLoadOffers,
   StateAuth,
-  StateError
+  StateError,
+  OfferPage,
+  Comment,
+  StateOffer,
+  OfferCard,
+  StateComments,
+  StateComment
 };

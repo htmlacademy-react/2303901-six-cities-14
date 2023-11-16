@@ -53,7 +53,7 @@ type AuthData = {
   password: string;
 };
 
-type UserData = {
+type UserDataLogin = {
   id: number;
   email: string;
   token: string;
@@ -68,5 +68,5 @@ export type {
   DefaultCityType,
   CityLocationDefault,
   AuthData,
-  UserData
+  UserDataLogin
 };

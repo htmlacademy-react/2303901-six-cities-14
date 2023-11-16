@@ -1,142 +1,63 @@
-import {ChangeEvent, useState} from 'react';
-import { LengthComment } from '../../const';
+import {useState} from 'react';
+import type {FormEvent} from 'react';
+import {LengthComment} from '../../const';
+import {fetchComments, sendComment} from '../../services/api-actions';
+import {useAppDispatch} from '../../hooks/use-store';
+import {RatingComponent} from '../rating-component';
 
-type CommentState = {
-  comment: string;
-};
+type PropsFormComment = {
+    id: string | undefined;
+}
 
-type RatingState = {
-  ratingOffer: string;
-};
+function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
+  const dispatch = useAppDispatch();
+  const [comment, setComment] = useState<string>('');
+  const[rating, setRating] = useState(0);
 
-function FormSendComment (): JSX.Element {
+  const isCommentLengthValid = !(comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
+  const blockButton = isCommentLengthValid || rating === 0;
 
-  const [sateComment, setStateComment] = useState<CommentState>({
-    comment: '',
-  });
-
-  const[sateRatingOffer, setStateRatingOffer] = useState<RatingState>({
-    ratingOffer: ''
-  });
-
-  const minRating = parseInt(sateRatingOffer.ratingOffer, 10);
-
-  const isNumber = isNaN(minRating);
-  const isCommentLengthValid = !(sateComment.comment.length >= LengthComment.MIN && sateComment.comment.length <= LengthComment.MAX);
-  const blockButton = isCommentLengthValid || isNumber;
-
-
-  function onClickButtonSent(evt: React.MouseEvent<HTMLButtonElement>) {
+  function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
+
+    const commentData = {
+      id,
+      comment,
+      rating
+    };
+
+    dispatch(sendComment(commentData)).unwrap().then(() => {
+      setComment('');
+      setRating(0);
+    });
+
+    dispatch(fetchComments(id));
+
+    setComment(comment);
+    setRating(rating);
   }
 
+  function getRatingFromComponent(ratingFromComponent: number): void {
+
+    setRating(ratingFromComponent);
+  }
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={onClickButtonSent}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <div className="reviews__rating-form form__rating" onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-        if (evt.target instanceof HTMLInputElement) {
-          setStateRatingOffer({
-            ...sateRatingOffer,
-            ratingOffer: evt.target.value
-          });
-        }
-      }}
-      >
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={5}
-          id="5-stars"
-          type="radio"
-        />
-        <label
-          htmlFor="5-stars"
-          className="reviews__rating-label form__rating-label"
-          title="perfect"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={4}
-          id="4-stars"
-          type="radio"
-        />
-        <label
-          htmlFor="4-stars"
-          className="reviews__rating-label form__rating-label"
-          title="good"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={3}
-          id="3-stars"
-          type="radio"
-        />
-        <label
-          htmlFor="3-stars"
-          className="reviews__rating-label form__rating-label"
-          title="not bad"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={2}
-          id="2-stars"
-          type="radio"
-        />
-        <label
-          htmlFor="2-stars"
-          className="reviews__rating-label form__rating-label"
-          title="badly"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          defaultValue={1}
-          id="1-star"
-          type="radio"
 
-        />
-        <label
-          htmlFor="1-star"
-          className="reviews__rating-label form__rating-label"
-          title="terribly"
-        >
-          <svg className="form__star-image" width={37} height={33}>
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-      </div>
+      <RatingComponent rating={rating} setRating={getRatingFromComponent}/>
+
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
-        onChange= {(evt) => setStateComment({
-          ...sateComment,
-          comment: evt.target.value
-        })}
+        value={comment}
+
+        onChange= {(evt) => setComment(evt.target.value)}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -148,7 +69,6 @@ function FormSendComment (): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          onClick={onClickButtonSent}
           disabled={blockButton}
         >
           Submit
@@ -159,4 +79,5 @@ function FormSendComment (): JSX.Element {
 }
 
 
-export default FormSendComment;
+export {FormSendComment};
+

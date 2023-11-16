@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {MainPages} from '../../pages/main-page/main-page';
 import {LoginPage} from '../../pages/login-page/login-page';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
@@ -6,30 +6,26 @@ import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
 import {PrivateRoute} from '../private-route/private-route';
 import {AppRoute, TitleDescription} from '../../const';
-import type {Reviews} from '../../types/types';
-import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {offersSlice} from '../../store/slices/offers-slice';
-import {useEffect} from 'react';
+// import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+// import {offersSlice} from '../../store/slices/offers-slice';
+// import {useEffect} from 'react';
 import {LoadingRoute} from '../loading-route/loaging-route';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
+import HistoryRouter from '../history-browser/history-router';
+import {browserHistory} from '../../history-browser';
 
+function App(): JSX.Element {
 
-type AppOfferProps = {
-  reviewProps: Reviews;
-}
+  // const getOffers = useAppSelector((state) => state.loadOffers.offers);
+  // const addLoadOffersToState = useAppDispatch();
 
-function App({reviewProps}: AppOfferProps,): JSX.Element {
+  // useEffect(() => {
+  //   addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
 
-  const getOffers = useAppSelector((state) => state.loadOffers.offers);
-
-  const addLoadOffersToState = useAppDispatch();
-
-  useEffect(() => {
-    addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
-  }, [addLoadOffersToState, getOffers]);
+  // }, [getOffers, addLoadOffersToState]);
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
@@ -56,8 +52,8 @@ function App({reviewProps}: AppOfferProps,): JSX.Element {
           }
         />
         <Route
-          path={`${AppRoute.Offer}/:offerId`}
-          element ={<OfferPage title = {TitleDescription.OfferPage} reviewProps = {reviewProps}/>}
+          path= { `${AppRoute.Offer}/:offerId`}
+          element ={<OfferPage title = {TitleDescription.OfferPage}/>}
         />
         <Route
           path={AppRoute.Error}
@@ -68,7 +64,7 @@ function App({reviewProps}: AppOfferProps,): JSX.Element {
           element={<ErrorMessage title = {TitleDescription.ErrorPage}/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
