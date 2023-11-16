@@ -6,8 +6,6 @@ import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {SettingLogoFooter, SettingLogoHeader} from '../../const';
 
-
-
 type FavoritePagesProps = {
   title: string;
 };

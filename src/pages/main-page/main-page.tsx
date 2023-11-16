@@ -71,7 +71,6 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
 
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
 
-
             </div>
 
             <Profile/>

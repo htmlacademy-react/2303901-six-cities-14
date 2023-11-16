@@ -18,9 +18,7 @@ function Logotype ({className, width, height}: Props): JSX.Element {
 
   }
 
-
   return (
-
 
     <Link to={AppRoute.Main} className={`${className}__logo-link ${className}__logo-link--active`}>
       <img

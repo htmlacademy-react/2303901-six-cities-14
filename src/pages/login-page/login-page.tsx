@@ -3,6 +3,7 @@ import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
+import {SettingLogoHeader} from '../../const';
 
 type LoginPagesProps = {
   title: string;
@@ -12,8 +13,9 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const checkPassword = inputPassword.trim() === '' || /\s/.test(inputPassword);
+  const checkPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/.test(inputPassword);
   const dispatch = useAppDispatch();
+
   type AuthData = {
     password: string ;
     login: string;
@@ -51,9 +53,10 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
+            <div className="header__left">
 
-            <Logotype/>
-
+              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+            </div>
           </div>
         </div>
       </header>
@@ -71,7 +74,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={checkPassword}>Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
