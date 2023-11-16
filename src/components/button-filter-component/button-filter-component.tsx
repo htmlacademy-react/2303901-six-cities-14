@@ -15,7 +15,7 @@ function ButtonFilterComponent ({city}: Props) {
 
   return (
 
-    <li className="locations__item">
+    <div className="locations__item">
       <a className={`locations__item-link tabs__item ${city === stateFilter ? 'tabs__item--active' : ''}`}
         onClick={() => {
           dispatch(filterCitySlice.actions.changeCity(city));
@@ -23,7 +23,7 @@ function ButtonFilterComponent ({city}: Props) {
       >
         <span>{city}</span>
       </a>
-    </li>
+    </div>
   );
 }
 

@@ -39,15 +39,13 @@ function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Ele
   }
 
   return(
-    <article className={`${className}__card place-card"`}
+    <article className={`${className}__card place-card`}
       onClick = {onClickCard}
       onMouseEnter={onGetPointOffer}
       onMouseLeave={onLeavePointOffer}
     >
-      <div className={`${className}__image-wrapper place-card__image-wrapper"`}>
-
-        {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
-
+      {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img className="place-card__image" src= {offer.previewImage} width={width} height={height} alt="Place image"/>
         </Link>

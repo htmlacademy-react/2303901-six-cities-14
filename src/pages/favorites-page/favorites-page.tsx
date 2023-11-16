@@ -5,6 +5,7 @@ import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {SettingFavoriteCard, SettingLogoFooter, SettingLogoHeader} from '../../const';
 import {CardOffer} from '../../components/card-offers/card';
+import { ButtonFilterComponent } from '../../components/button-filter-component/button-filter-component';
 
 type FavoritePagesProps = {
   title: string;
@@ -61,18 +62,12 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
                 return (
                   <li className="favorites__locations-items" key={cityName}>
                     <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{cityName}</span>
-                        </a>
-                      </div>
+                      <ButtonFilterComponent city={cityName}/>
                     </div>
                     <div className="favorites__places">
-
                       {favoriteCityOffers.map((offer) => (
-                        <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.class} width={SettingFavoriteCard.width} height={SettingFavoriteCard.height}/>
+                        <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.className} width={SettingFavoriteCard.width} height={SettingFavoriteCard.height}/>
                       ))}
-
                     </div>
                   </li>
                 );

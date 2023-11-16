@@ -11,7 +11,7 @@ function ListOffers ({offers}: ListOffersProps): JSX.Element {
 
   return(
     <div className="cities__places-list places__list tabs__content">
-      {offers?.map((offer) => <CardOffer key={offer.id} offer={offer} className={SettingCardCities.class} width={SettingCardCities.width} height={SettingCardCities.height}/>)}
+      {offers?.map((offer) => <CardOffer key={offer.id} offer={offer} className={SettingCardCities.className} width={SettingCardCities.width} height={SettingCardCities.height}/>)}
     </div>
   );
 }

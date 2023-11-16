@@ -145,13 +145,13 @@ const SettingLogoFooter = {
 
 
 const SettingFavoriteCard = {
-  class: 'favorites',
+  className: 'favorites',
   width: 150,
   height: 110
 };
 
 const SettingCardCities = {
-  class: 'cities',
+  className: 'cities',
   width: 260,
   height: 200
 };
