@@ -1,10 +1,10 @@
-import FavoriteCardOffer from '../../components/favorite-card-offers/favorite-card-offers';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import type {OfferCard} from '../../types/type-store';
 import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
-import {SettingLogoFooter, SettingLogoHeader} from '../../const';
+import {SettingFavoriteCard, SettingLogoFooter, SettingLogoHeader} from '../../const';
+import {CardOffer} from '../../components/card-offers/card';
 
 type FavoritePagesProps = {
   title: string;
@@ -70,7 +70,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
                     <div className="favorites__places">
 
                       {favoriteCityOffers.map((offer) => (
-                        <FavoriteCardOffer key={offer.id} offer={offer} />
+                        <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.class} width={SettingFavoriteCard.width} height={SettingFavoriteCard.height}/>
                       ))}
 
                     </div>

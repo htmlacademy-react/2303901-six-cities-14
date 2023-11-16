@@ -141,7 +141,19 @@ const SettingLogoFooter = {
   className: 'footer',
   width: 64,
   height: 33,
+};
 
+
+const SettingFavoriteCard = {
+  class: 'favorites',
+  width: 150,
+  height: 110
+};
+
+const SettingCardCities = {
+  class: 'cities',
+  width: 260,
+  height: 200
 };
 
 export {
@@ -167,6 +179,8 @@ export {
   ERROR_NOT_OFFER,
   ENDING,
   SettingLogoHeader,
-  SettingLogoFooter
+  SettingLogoFooter,
+  SettingFavoriteCard,
+  SettingCardCities
 };
 

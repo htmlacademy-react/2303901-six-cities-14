@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/use-store';
-import ListOffers from '../list-offers/list-offers';
+import {ListOffers} from '../list-offers/list-offers';
 import {SortList} from '../sort-list/sort-list';
 
 

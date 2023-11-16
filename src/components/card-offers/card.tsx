@@ -7,12 +7,14 @@ import {fetchOfferAction} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
 
-
 type CardPagesProps = {
-  offer: OfferCard ;
+  offer: OfferCard;
+  className: string;
+  width: number;
+  height: number;
 }
 
-function CardOffer ({offer}: CardPagesProps) : JSX.Element{
+function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Element{
 
   const dispatch = useAppDispatch();
 
@@ -37,20 +39,20 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
   }
 
   return(
-    <article className="cities__card place-card"
+    <article className={`${className}__card place-card"`}
       onClick = {onClickCard}
       onMouseEnter={onGetPointOffer}
       onMouseLeave={onLeavePointOffer}
     >
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${className}__image-wrapper place-card__image-wrapper"`}>
 
         {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
 
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
-          <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src= {offer.previewImage} width={width} height={height} alt="Place image"/>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className= {`${className === 'cities' ? 'place-card__info' : 'favorites__card-info place-card__info'}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -76,4 +78,4 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
   );
 }
 
-export default CardOffer;
+export {CardOffer};
