@@ -1,7 +1,7 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 // import {loadOffersSlice} from '../store/slices/load-offers-slice';
-import {ApiRoute, AppRoute, AuthorizationStatus, ERROR_NOT_OFFER, TIMEOUT_SHOW_ERROR} from '../const';
+import {ApiRoute, AuthorizationStatus, ERROR_NOT_OFFER, TIMEOUT_SHOW_ERROR} from '../const';
 import {authStatusSlice} from '../store/slices/auth-status-slice';
 import {dropToken, saveToken} from './token';
 import type {UserDataLogin, AuthData} from '../types/types';
@@ -20,8 +20,6 @@ import {sendCommentsSlice} from '../store/slices/send-comment-slice';
 import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
 import type {FavoriteStatus} from './type-service';
 import { offersSlice } from '../store/slices/offers-slice';
-import { redirectToRoute } from '../components/history-browser/action-main-page';
-
 
 const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
   'data/fetchOffers',
