@@ -29,11 +29,12 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(id.offerId));
-    store.dispatch(fetchOffersNear(id.offerId));
-    store.dispatch(fetchComments(id.offerId));
 
+    store.dispatch(fetchComments(id.offerId));
+    store.dispatch(fetchOffersNear(id.offerId));
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
+
     };
   }, [id]);
 
@@ -145,7 +146,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                       src={stateOffer?.host.avatarUrl}
                       width={74}
                       height={74}
-                      alt="Host avatar"
+                      alt={stateOffer?.host.name}
                     />
                   </div>
                   <span className="offer__user-name">{stateOffer?.host.name}</span>

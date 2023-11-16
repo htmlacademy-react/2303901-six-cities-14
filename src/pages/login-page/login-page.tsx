@@ -3,7 +3,9 @@ import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
-import {SettingLogoHeader} from '../../const';
+import {DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {filterCitySlice} from '../../store/slices/filter-city-slice';
+
 
 type LoginPagesProps = {
   title: string;
@@ -30,6 +32,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
     evt.preventDefault();
 
     dispatch(loginAction(authData));
+    dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
   }
 
   function onInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {

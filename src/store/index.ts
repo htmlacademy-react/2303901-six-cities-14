@@ -14,6 +14,7 @@ import {loadCommentsSlice} from './slices/load-comments-slice';
 import {errorOfferSlice} from './slices/error-offer-slice';
 import {sendCommentsSlice} from './slices/send-comment-slice';
 import {offersFavoriteSlice} from './slices/load-offers-favorite';
+import { redirect } from './redirect';
 
 
 const reducer = combineReducers({
@@ -43,9 +44,9 @@ const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }),
+    }).concat(redirect),
 });
 
 //console.log(store.getState());
 
-export {store};
+export {store, reducer};

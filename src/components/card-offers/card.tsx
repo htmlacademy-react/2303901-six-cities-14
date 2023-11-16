@@ -3,8 +3,7 @@ import {useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
-import {fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
-import {store} from '../../store';
+import {fetchOfferAction} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
 
@@ -23,7 +22,6 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
 
   function onLeavePointOffer () {
     dispatch(offerSlice.actions.addLoadOffer(null));
-    //store.dispatch(fetchOfferAction(''));
   }
 
   function onClickCard () {
@@ -31,13 +29,11 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
       ...cardState,
       offerId: offer.id,
     });
-    store.dispatch(fetchOfferAction(offer.id));
-    store.dispatch(fetchOffersNear(offer.id));
+    dispatch(fetchOfferAction(offer.id));
   }
 
   function onGetPointOffer () {
-    //dispatch(offerSlice.actions.addLoadOffer(offer));
-    store.dispatch(fetchOfferAction(offer.id));
+    dispatch(fetchOfferAction(offer.id));
   }
 
   return(

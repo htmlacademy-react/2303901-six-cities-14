@@ -3,6 +3,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
 import {fetchOffersAction, logoutAction} from '../../services/api-actions';
+import {useEffect} from 'react';
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
@@ -10,6 +11,7 @@ function Profile () {
 
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
+  const update = useAppSelector((state) => state.offersFavorite.offers);
 
 
   function onClickButton () {
@@ -17,7 +19,7 @@ function Profile () {
     dispatch(dataUserSlice.actions.addUserData(null));
     dispatch(fetchOffersAction());
   }
-
+  useEffect(() => {}, [update]);
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

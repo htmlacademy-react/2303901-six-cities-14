@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {MainPages} from '../../pages/main-page/main-page';
 import {LoginPage} from '../../pages/login-page/login-page';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
@@ -11,6 +11,8 @@ import {AppRoute, TitleDescription} from '../../const';
 // import {useEffect} from 'react';
 import {LoadingRoute} from '../loading-route/loaging-route';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
+import HistoryRouter from '../history-browser/history-router';
+import {browserHistory} from '../../history-browser';
 
 function App(): JSX.Element {
 
@@ -23,7 +25,7 @@ function App(): JSX.Element {
   // }, [getOffers, addLoadOffersToState]);
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
@@ -62,7 +64,7 @@ function App(): JSX.Element {
           element={<ErrorMessage title = {TitleDescription.ErrorPage}/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
