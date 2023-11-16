@@ -4,7 +4,13 @@ import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import { useAppDispatch } from '../../hooks/use-store';
 
 
-function Logotype (): JSX.Element {
+type Props = {
+  className: string;
+  width: number;
+  height: number;
+}
+
+function Logotype ({className, width, height}: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   function onClickLogo () {
@@ -15,18 +21,18 @@ function Logotype (): JSX.Element {
 
   return (
 
-    <div className="header__left">
-      <Link to={AppRoute.Main} className="header__logo-link header__logo-link--active">
-        <img
-          className="header__logo"
-          src="img/logo.svg"
-          alt="6 cities logo"
-          width={81}
-          height={41}
-          onClick={onClickLogo}
-        />
-      </Link>
-    </div>
+
+    <Link to={AppRoute.Main} className={`${className}__logo-link ${className}__logo-link--active`}>
+      <img
+        className={`${className}__logo`}
+        src="img/logo.svg"
+        alt="6 cities logo"
+        width={width}
+        height={height}
+        onClick={onClickLogo}
+      />
+    </Link>
+
   );
 }
 

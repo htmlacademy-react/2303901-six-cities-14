@@ -12,7 +12,7 @@ import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/a
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
-import {AuthorizationStatus, ENDING, TitleDescription} from '../../const';
+import {AuthorizationStatus, ENDING, SettingLogoHeader, TitleDescription} from '../../const';
 
 type OfferPagesProps = {
   title: string;
@@ -67,8 +67,9 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-
-            <Logotype/>
+            <div className="header__left">
+              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+            </div>
             <Profile/>
 
           </div>

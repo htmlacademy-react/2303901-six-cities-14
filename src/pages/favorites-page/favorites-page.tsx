@@ -4,6 +4,9 @@ import useDocumentTitle from '../../hooks/document-title';
 import type {OfferCard} from '../../types/type-store';
 import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
+import {SettingLogoFooter, SettingLogoHeader} from '../../const';
+
+
 
 type FavoritePagesProps = {
   title: string;
@@ -34,8 +37,9 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-
-            <Logotype/>
+            <div className="header__left">
+              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+            </div>
             <Profile/>
 
           </div>
@@ -81,9 +85,9 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
       </main>
 
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
+
+        <Logotype className={SettingLogoFooter.className} width={SettingLogoFooter.width} height={SettingLogoFooter.height}/>
+
       </footer>
     </div>
   );

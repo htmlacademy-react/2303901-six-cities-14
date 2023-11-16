@@ -130,6 +130,20 @@ const ERROR_NOT_OFFER = 'errorNotOffer';
 
 const ENDING = 2;
 
+const SettingLogoHeader = {
+  className: 'header',
+  width: 81,
+  height: 41,
+
+};
+
+const SettingLogoFooter = {
+  className: 'footer',
+  width: 64,
+  height: 33,
+
+};
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -151,6 +165,8 @@ export {
   AUTH_TOKEN_KEY_NAME,
   TIMEOUT_SHOW_ERROR,
   ERROR_NOT_OFFER,
-  ENDING
+  ENDING,
+  SettingLogoHeader,
+  SettingLogoFooter
 };
 

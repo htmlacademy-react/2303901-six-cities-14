@@ -11,6 +11,7 @@ import {fetchOffersFavorite} from '../../services/api-actions';
 import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
 import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
 import Logotype from '../../components/logotype/logotype';
+import {SettingLogoHeader} from '../../const';
 
 
 type MainPagesProps = {
@@ -68,7 +69,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
           <div className="header__wrapper">
             <div className="header__left">
 
-              <Logotype/>
+              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
 
 
             </div>
