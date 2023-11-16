@@ -156,7 +156,8 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews <span className="reviews__amount">{stateComments?.length}</span>
+                  {stateComments && stateComments.length >= ENDING && stateComments.length !== undefined ? 'Reviews ' : 'Review '}
+                  <span className="reviews__amount">{stateComments?.length}</span>
                 </h2>
 
                 <ListReview/>
