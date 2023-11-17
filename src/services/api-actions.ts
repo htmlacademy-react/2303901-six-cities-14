@@ -74,7 +74,6 @@ const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
 
     const {data} = await api.post<OfferCard>(`${ApiRoute.OffersFavorite}/${id}/${status}`);
 
-
     dispatch(offersFavoriteSlice.actions.sendFavoriteStatus(data));
   },
 );
@@ -93,7 +92,6 @@ type SendComment = {
   id: string | undefined;
   comment: string;
   rating: number;
-
 }
 
 

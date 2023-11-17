@@ -1,6 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import type {OfferCard} from '../../types/type-store';
+//import { fetchOffersFavorite } from '../../services/api-actions';
+
 
 type OfferFavorite = {
   offers: OfferCard[];
@@ -28,6 +30,12 @@ const offersFavoriteSlice = createSlice({
     sendFavoriteStatus(state, action: PayloadAction<OfferCard>){
       state.status = action.payload;
     }
+    // },
+    // extraReducers: (builder) => {
+    //   builder.addCase(fetchOffersFavorite.fulfilled, (state, action) => {
+    //     state.offers = action.payload;
+    //   })
+
   }
 });
 

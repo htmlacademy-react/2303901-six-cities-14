@@ -7,7 +7,6 @@ import useDocumentTitle from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
-import {store} from '../../store';
 import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
@@ -28,10 +27,10 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   useEffect(() => {
-    store.dispatch(fetchOfferAction(id.offerId));
+    dispatch(fetchOfferAction(id.offerId));
 
-    store.dispatch(fetchComments(id.offerId));
-    store.dispatch(fetchOffersNear(id.offerId));
+    dispatch(fetchComments(id.offerId));
+    dispatch(fetchOffersNear(id.offerId));
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
 

@@ -20,7 +20,11 @@ function FavoriteButton({offer}: ButtonProps): JSX.Element {
   const onFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer.id));
     dispatch(sendFavoriteOffer(data));
-    dispatch(fetchOffersFavorite());
+
+    setTimeout(() => {
+      dispatch(fetchOffersFavorite());
+    }, 500);
+
   };
 
   return (

@@ -2,24 +2,22 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
-import {fetchOffersAction, logoutAction} from '../../services/api-actions';
-import {useEffect} from 'react';
+import {fetchOffersAction, fetchOffersFavorite, logoutAction} from '../../services/api-actions';
+
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const user = useAppSelector((state) => state.userData.data);
-
-  const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
-  const update = useAppSelector((state) => state.offersFavorite.offers);
-
+  const dispatch = useAppDispatch();
 
   function onClickButton () {
     dispatch(logoutAction());
     dispatch(dataUserSlice.actions.addUserData(null));
     dispatch(fetchOffersAction());
+    dispatch(fetchOffersFavorite());
   }
-  useEffect(() => {}, [update]);
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
