@@ -9,8 +9,8 @@ function CitiesPlaceComponent () {
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
   return (
     <section className="cities__places places">
-      <h2 className="visually-hidden">Places</h2>
-      <b className="places__found"> {offersFilter?.length} places to stay in {selectedFilterCity}</b>
+      <h2 className="visually-hidden">{`${offersFilter?.length === 1 ? 'Place' : 'Places'}`} </h2>
+      <b className="places__found"> {offersFilter?.length} {`${offersFilter?.length === 1 ? 'Place' : 'Places'}`} to stay in {selectedFilterCity}</b>
       <SortList/>
       <ListOffers offers = {offersSort}/>
     </section>

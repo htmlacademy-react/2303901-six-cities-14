@@ -5,14 +5,15 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 
 function SortList () {
   const [stateSortList, setStateSortList] = useState(false);
+  const [filter, setFilter] = useState('Popular');
 
   const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
   const offersCity = useAppSelector((state) => state.filterOffers.filterOffers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setStateSortList(false);
-  },[offersCity, offersSort]);
+    setFilter('Popular');
+  },[offersCity]);
 
   function changeOfferLowToHight (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);
@@ -22,24 +23,29 @@ function SortList () {
 
   function changeOfferHightToLow (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.price - a.price);
+
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
   function changeOfferTopRatedFirst (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.rating - a.rating);
+
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
   function onClickSort():void {
+
     setStateSortList(!stateSortList);
   }
 
   function onClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
 
-    type TabIndex = number;
-
     const target = evt.target as HTMLElement;
-    const tabIndex: TabIndex = target.tabIndex;
+    const tabIndex: number = target.tabIndex;
+    const text: string = (evt.target as HTMLElement).textContent || '';
+
+    setFilter(text);
+    setStateSortList(false);
 
     switch(tabIndex) {
       case 0:
@@ -58,7 +64,7 @@ function SortList () {
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0} onClick={onClickSort}>
-          Popular
+          {filter}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
           </svg>

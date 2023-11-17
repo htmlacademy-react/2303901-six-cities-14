@@ -2,10 +2,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
-import {fetchOffersAction, fetchOffersFavorite, logoutAction} from '../../services/api-actions';
-import { offersFavoriteSlice } from '../../store/slices/load-offers-favorite';
-
-
+import {logoutAction} from '../../services/api-actions';
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);

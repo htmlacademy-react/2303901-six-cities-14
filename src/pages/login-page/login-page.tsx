@@ -2,7 +2,7 @@ import {useState} from 'react';
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
-import {useAppDispatch} from '../../hooks/use-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 
@@ -15,7 +15,8 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const checkPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/.test(inputPassword);
+  const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(inputPassword);
+  const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
 
   type AuthData = {
@@ -83,7 +84,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+                <span>{city}</span>
               </a>
             </div>
           </section>
