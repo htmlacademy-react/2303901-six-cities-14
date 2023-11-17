@@ -3,8 +3,9 @@ import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {AppRoute, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
+import { Link } from 'react-router-dom';
 
 
 type LoginPagesProps = {
@@ -83,9 +84,9 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link to={AppRoute.Main} className="locations__item-link">
                 <span>{city}</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>

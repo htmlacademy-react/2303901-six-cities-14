@@ -10,13 +10,13 @@ function FavoriteCardComponents() {
 
   const offers = useAppSelector((state) => state.offers.offers);
 
-  const groupedFavorites = offers.reduce((groups, offer) => {
+  const groupedFavorites = offers?.reduce((groups, offer) => {
     const cityName = offer.city.name;
 
     if (!groups[cityName]) {
       groups[cityName] = [];
     }
-    groups[cityName].push(offer);
+    groups[cityName]?.push(offer);
 
     return groups;
   }, {} as Groups);
@@ -27,11 +27,11 @@ function FavoriteCardComponents() {
         <h1 className="favorites__title">Saved listing</h1>
         <ul className="favorites__list">
 
-          {Object.entries(groupedFavorites).map(([cityName, cityOffers]) => {
+          {groupedFavorites && Object.entries(groupedFavorites).map(([cityName, cityOffers]) => {
 
-            const favoriteCityOffers = cityOffers.filter((offer) => offer.isFavorite);
+            const favoriteCityOffers = cityOffers?.filter((offer) => offer.isFavorite);
 
-            if (favoriteCityOffers.length === 0) {
+            if (favoriteCityOffers?.length === 0) {
 
               return null;
             }
@@ -41,7 +41,7 @@ function FavoriteCardComponents() {
                   <ButtonFilterComponent city={cityName}/>
                 </div>
                 <div className="favorites__places">
-                  {favoriteCityOffers.map((offer) => (
+                  {favoriteCityOffers?.map((offer) => (
                     <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.className} width={SettingFavoriteCard.width} height={SettingFavoriteCard.height}/>
                   ))}
                 </div>

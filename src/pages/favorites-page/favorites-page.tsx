@@ -14,8 +14,6 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
   const offers = useAppSelector((state) => state.offersFavorite.offers);
 
-
-
   useDocumentTitle(title);
 
   return (
