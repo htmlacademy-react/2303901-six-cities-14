@@ -1,11 +1,10 @@
 import Logotype from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
-import type {OfferCard} from '../../types/type-store';
-import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
-import {SettingFavoriteCard, SettingLogoFooter, SettingLogoHeader} from '../../const';
-import {CardOffer} from '../../components/card-offers/card';
-import { ButtonFilterComponent } from '../../components/button-filter-component/button-filter-component';
+import { FavoriteCardComponents } from '../../components/favorite-cards-component/favorite-cards-component';
+import { SettingLogoFooter, SettingLogoHeader } from '../../const';
+import {useAppSelector} from '../../hooks/use-store';
+import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards-component/empty-favorite-cards-component';
 
 type FavoritePagesProps = {
   title: string;
@@ -13,20 +12,9 @@ type FavoritePagesProps = {
 
 function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
-  type Groups = {[key: string]: OfferCard[]};
+  const offers = useAppSelector((state) => state.offersFavorite.offers);
 
-  const offers = useAppSelector((state) => state.offers.offers);
 
-  const groupedFavorites = offers.reduce((groups, offer) => {
-    const cityName = offer.city.name;
-
-    if (!groups[cityName]) {
-      groups[cityName] = [];
-    }
-    groups[cityName].push(offer);
-
-    return groups;
-  }, {} as Groups);
 
   useDocumentTitle(title);
 
@@ -46,35 +34,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
       </header>
 
       <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-
-              {Object.entries(groupedFavorites).map(([cityName, cityOffers]) => {
-
-                const favoriteCityOffers = cityOffers.filter((offer) => offer.isFavorite);
-
-                if (favoriteCityOffers.length === 0) {
-
-                  return null;
-                }
-                return (
-                  <li className="favorites__locations-items" key={cityName}>
-                    <div className="favorites__locations locations locations--current">
-                      <ButtonFilterComponent city={cityName}/>
-                    </div>
-                    <div className="favorites__places">
-                      {favoriteCityOffers.map((offer) => (
-                        <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.className} width={SettingFavoriteCard.width} height={SettingFavoriteCard.height}/>
-                      ))}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        </div>
+        {offers.length === 0 ? <EmptyFavoriteCardsComponent/> : <FavoriteCardComponents/>}
       </main>
 
       <footer className="footer container">
