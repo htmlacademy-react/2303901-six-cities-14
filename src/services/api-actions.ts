@@ -126,14 +126,11 @@ const loginAction = createAsyncThunk<void, AuthData, Thunk>(
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data: {token}, data} = await api.post<UserDataLogin | User>(ApiRoute.Login, {email, password});
 
-
     dispatch(dataUserSlice.actions.addUserData(data as User));
-
     saveToken(token);
-
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.Auth));
 
-    //dispatch(redirectToRoute(AppRoute.Main));
+    //dispatch(redirectToRoute(AppRoute.Login));
   },
 );
 
@@ -143,6 +140,7 @@ const logoutAction = createAsyncThunk<void, undefined, Thunk>(
   async (_arg, {dispatch, extra: api}) => {
 
     await api.delete(ApiRoute.Logout);
+
     dropToken();
     dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
   },

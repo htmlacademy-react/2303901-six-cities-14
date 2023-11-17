@@ -9,7 +9,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-store.dispatch(fetchOffersAction());
+setTimeout(() => {
+  store.dispatch(fetchOffersAction());
+}, 500);
 store.dispatch(checkAuthAction());
 
 root.render(

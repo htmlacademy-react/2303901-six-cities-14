@@ -3,19 +3,20 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
 import {fetchOffersAction, fetchOffersFavorite, logoutAction} from '../../services/api-actions';
+import { offersFavoriteSlice } from '../../store/slices/load-offers-favorite';
+
 
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const user = useAppSelector((state) => state.userData.data);
-  const offers = useAppSelector((state) => state.offersFavorite.offers);
   const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offersFavorite.offers);
+
 
   function onClickButton () {
     dispatch(logoutAction());
     dispatch(dataUserSlice.actions.addUserData(null));
-    dispatch(fetchOffersAction());
-    dispatch(fetchOffersFavorite());
   }
 
   return (
@@ -27,7 +28,7 @@ function Profile () {
               <img src={user?.avatarUrl}></img>
             </div>
             <span className="header__user-name user__name">{statusAuth === AuthorizationStatus.Auth.toString() ? user?.email : 'Login'}</span>
-            <span className="header__favorite-count">{offers.length}</span>
+            <span className="header__favorite-count">{statusAuth === AuthorizationStatus.Auth.toString() ? offers.length : 0}</span>
 
           </Link>
         </li>

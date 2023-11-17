@@ -41,7 +41,7 @@ const createApi = (): AxiosInstance => {
 
         processErrorHandle(detailMessage);
       }
-      //console.log(error.request.response)
+      //console.log(error.message)
       throw error;
     }
   );
