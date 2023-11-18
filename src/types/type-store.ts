@@ -88,6 +88,7 @@ type StateError = {
 
 type StateOffer = {
   offer: OfferPage | null;
+  error: string | null;
 }
 
 type StateComments = {

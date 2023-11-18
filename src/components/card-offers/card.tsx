@@ -3,9 +3,10 @@ import {useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
 import {AppRoute} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
-import {fetchOfferAction} from '../../services/api-actions';
+
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
+import { fetchOfferAction } from '../../services/thunk/fech-offer';
 
 type CardPagesProps = {
   offer: OfferCard;

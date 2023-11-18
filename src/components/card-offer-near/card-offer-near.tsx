@@ -4,7 +4,8 @@ import {AppRoute} from '../../const';
 //import {useEffect} from 'react';
 import {FavoriteButton} from '../favorite-button/favorite-button';
 import { useAppDispatch } from '../../hooks/use-store';
-import { fetchOfferAction, fetchOffersNear } from '../../services/api-actions';
+import { fetchOffersNear } from '../../services/api-actions';
+import { fetchOfferAction } from '../../services/thunk/fech-offer';
 
 
 type CardOfferProps = {

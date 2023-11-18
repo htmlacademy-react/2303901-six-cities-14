@@ -1,16 +1,13 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 // import {loadOffersSlice} from '../store/slices/load-offers-slice';
-import {ApiRoute, ERROR_NOT_OFFER, TIMEOUT_SHOW_ERROR} from '../const';
+import {ApiRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
-import {offerSlice} from '../store/slices/offer-slice';
-import type {OfferPage} from '../types/type-store';
 import type {OfferCard} from '../types/type-store';
 import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
 import type {Comment} from '../types/type-store';
 import {loadCommentsSlice} from '../store/slices/load-comments-slice';
-import {errorOfferSlice} from '../store/slices/error-offer-slice';
 import {sendCommentsSlice} from '../store/slices/send-comment-slice';
 import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
 import type {FavoriteStatus} from './type-service';
@@ -23,21 +20,6 @@ const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
     const {data} = await api.get<OfferCard[]>(ApiRoute.Offers);
 
     dispatch(offersSlice.actions.addOfferList(data));
-  },
-);
-
-const fetchOfferAction = createAsyncThunk<void, string | undefined, Thunk>(
-  'data/fetchOffer',
-  async (id, {dispatch, extra: api}) => {
-
-    try{
-      const {data} = await api.get<OfferPage>(`${ApiRoute.Offers}/${id}`);
-
-      dispatch(offerSlice.actions.addLoadOffer(data));
-      dispatch(errorOfferSlice.actions.addErrorOffer(''));
-    } catch {
-      dispatch(errorOfferSlice.actions.addErrorOffer(ERROR_NOT_OFFER));
-    }
   },
 );
 
@@ -109,7 +91,6 @@ const clearErrorAction = createAsyncThunk(
 
 export {
   fetchOffersAction,
-  fetchOfferAction,
   fetchOffersNear,
   fetchComments,
   fetchOffersFavorite,
