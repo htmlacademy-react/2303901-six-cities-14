@@ -4,7 +4,6 @@ import {filterCitySlice} from './slices/filter-city-slice';
 import {sortOffersSlice} from './slices/sort-offers-slice';
 import {filterOffersSlice} from './slices/filter-offer-slice';
 import {createApi} from '../services/api';
-import {loadOffersSlice} from './slices/load-offers-slice';
 import {authStatusSlice} from './slices/auth-status-slice';
 import {setErrorSlice} from './slices/set-error-slice';
 import {dataUserSlice} from './slices/data-user-slice';
@@ -22,7 +21,6 @@ const reducer = combineReducers({
   [filterCitySlice.name]: filterCitySlice.reducer,
   [sortOffersSlice.name]: sortOffersSlice.reducer,
   [filterOffersSlice.name]: filterOffersSlice.reducer,
-  [loadOffersSlice.name]: loadOffersSlice.reducer,
   [authStatusSlice.name]: authStatusSlice.reducer,
   [setErrorSlice.name]: setErrorSlice.reducer,
   [dataUserSlice.name]: dataUserSlice.reducer,
