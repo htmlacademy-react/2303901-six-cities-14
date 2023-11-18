@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {loginAction} from '../../services/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';

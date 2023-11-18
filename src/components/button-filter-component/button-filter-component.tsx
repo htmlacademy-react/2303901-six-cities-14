@@ -1,14 +1,15 @@
 
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 
 type Props = {
   city: string;
 }
 
-
 function ButtonFilterComponent ({city}: Props) {
-
 
   const dispatch = useAppDispatch();
   const stateFilter = useAppSelector((state) => state.filterCity.city);
@@ -16,13 +17,13 @@ function ButtonFilterComponent ({city}: Props) {
   return (
 
     <div className="locations__item">
-      <a className={`locations__item-link tabs__item ${city === stateFilter ? 'tabs__item--active' : ''}`}
+      <Link to={AppRoute.Main} className={`locations__item-link tabs__item ${city === stateFilter ? 'tabs__item--active' : ''}`}
         onClick={() => {
           dispatch(filterCitySlice.actions.changeCity(city));
         }}
       >
         <span>{city}</span>
-      </a>
+      </Link>
     </div>
   );
 }

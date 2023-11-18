@@ -1,6 +1,6 @@
 import {FormSendComment} from '../../components/form-send-comment/form-send-comment';
 import ListReview from '../../components/list-review/list-review';
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import {MapComponent} from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';

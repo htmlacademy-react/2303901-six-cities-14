@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {fetchOffersFavorite} from '../../services/api-actions';
 import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
 import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import {SettingLogoHeader} from '../../const';
 import type {OfferCard} from '../../types/type-store';
 

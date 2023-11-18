@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute, DEFAULT_CITY} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import { useAppDispatch } from '../../hooks/use-store';
-
+import { memo } from 'react';
 
 type Props = {
   className: string;
@@ -10,7 +10,7 @@ type Props = {
   height: number;
 }
 
-function Logotype ({className, width, height}: Props): JSX.Element {
+function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   function onClickLogo () {
@@ -34,4 +34,7 @@ function Logotype ({className, width, height}: Props): JSX.Element {
   );
 }
 
-export default Logotype;
+const Logotype = memo(MemoizedLogotype);
+
+
+export {Logotype};

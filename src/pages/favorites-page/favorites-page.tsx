@@ -1,4 +1,4 @@
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
 import { FavoriteCardComponents } from '../../components/favorite-cards-component/favorite-cards-component';
