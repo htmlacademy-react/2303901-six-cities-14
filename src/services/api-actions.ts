@@ -1,8 +1,7 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 // import {loadOffersSlice} from '../store/slices/load-offers-slice';
-import {ApiRoute, AuthorizationStatus, ERROR_NOT_OFFER, TIMEOUT_SHOW_ERROR} from '../const';
-import {authStatusSlice} from '../store/slices/auth-status-slice';
+import {ApiRoute, ERROR_NOT_OFFER, TIMEOUT_SHOW_ERROR} from '../const';
 import {dropToken, saveToken} from './token';
 import type {UserDataLogin, AuthData} from '../types/types';
 import {setErrorSlice} from '../store/slices/set-error-slice';
@@ -110,14 +109,10 @@ const checkAuthAction = createAsyncThunk<void, undefined, Thunk>(
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<User>(ApiRoute.Login);
 
+    await api.get(ApiRoute.Login);
+
     dispatch(dataUserSlice.actions.addUserData(data));
 
-    try {
-      await api.get(ApiRoute.Login);
-      dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
-    }
   },
 );
 
@@ -128,7 +123,6 @@ const loginAction = createAsyncThunk<void, AuthData, Thunk>(
 
     dispatch(dataUserSlice.actions.addUserData(data as User));
     saveToken(token);
-    dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.Auth));
 
     //dispatch(redirectToRoute(AppRoute.Login));
   },
@@ -142,7 +136,6 @@ const logoutAction = createAsyncThunk<void, undefined, Thunk>(
     await api.delete(ApiRoute.Logout);
 
     dropToken();
-    dispatch(authStatusSlice.actions.addAuthStatus(AuthorizationStatus.NoAuth));
   },
 );
 
