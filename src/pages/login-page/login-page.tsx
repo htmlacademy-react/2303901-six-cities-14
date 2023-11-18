@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
-import {loginAction} from '../../services/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {AppRoute, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import { Link } from 'react-router-dom';
+import { loginAction } from '../../services/thunk/login-action';
 
 
 type LoginPagesProps = {

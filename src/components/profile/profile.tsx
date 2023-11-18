@@ -2,7 +2,8 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
-import {logoutAction} from '../../services/api-actions';
+import { logoutAction } from '../../services/thunk/logout-action';
+
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);

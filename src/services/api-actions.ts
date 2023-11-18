@@ -2,15 +2,11 @@ import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 // import {loadOffersSlice} from '../store/slices/load-offers-slice';
 import {ApiRoute, ERROR_NOT_OFFER, TIMEOUT_SHOW_ERROR} from '../const';
-import {dropToken, saveToken} from './token';
-import type {UserDataLogin, AuthData} from '../types/types';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
 import {offerSlice} from '../store/slices/offer-slice';
 import type {OfferPage} from '../types/type-store';
 import type {OfferCard} from '../types/type-store';
-import {dataUserSlice} from '../store/slices/data-user-slice';
-import type {User} from './type-service';
 import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
 import type {Comment} from '../types/type-store';
 import {loadCommentsSlice} from '../store/slices/load-comments-slice';
@@ -66,9 +62,7 @@ const fetchOffersFavorite = createAsyncThunk<void, string | undefined, Thunk>(
 );
 
 const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
-
   'sendFavoriteOffer',
-
   async ({id, status}, {dispatch, extra: api}) => {
 
     const {data} = await api.post<OfferCard>(`${ApiRoute.OffersFavorite}/${id}/${status}`);
@@ -104,41 +98,6 @@ const sendComment = createAsyncThunk<void, SendComment, Thunk>(
   },
 );
 
-const checkAuthAction = createAsyncThunk<void, undefined, Thunk>(
-  'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<User>(ApiRoute.Login);
-
-    await api.get(ApiRoute.Login);
-
-    dispatch(dataUserSlice.actions.addUserData(data));
-
-  },
-);
-
-const loginAction = createAsyncThunk<void, AuthData, Thunk>(
-  'user/login',
-  async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token}, data} = await api.post<UserDataLogin | User>(ApiRoute.Login, {email, password});
-
-    dispatch(dataUserSlice.actions.addUserData(data as User));
-    saveToken(token);
-
-    //dispatch(redirectToRoute(AppRoute.Login));
-  },
-);
-
-
-const logoutAction = createAsyncThunk<void, undefined, Thunk>(
-  'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
-
-    await api.delete(ApiRoute.Logout);
-
-    dropToken();
-  },
-);
-
 const clearErrorAction = createAsyncThunk(
   'clearError',
   () => {
@@ -155,9 +114,6 @@ export {
   fetchComments,
   fetchOffersFavorite,
   sendFavoriteOffer ,
-  checkAuthAction,
-  loginAction,
-  logoutAction,
   clearErrorAction,
   sendComment
 };
