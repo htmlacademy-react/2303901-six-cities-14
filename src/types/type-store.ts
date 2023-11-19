@@ -88,14 +88,19 @@ type StateError = {
 
 type StateOffer = {
   offer: OfferPage | null;
+  error: string | null;
 }
 
 type StateComments = {
   comments: Comment[] | null;
+  error: string | null;
+  isLoading: boolean | null;
 }
 
 type StateComment = {
-  comments: Comment | null;
+  comment: Comment | null;
+  error: string | false;
+  isLoading: boolean;
 }
 
 export type {

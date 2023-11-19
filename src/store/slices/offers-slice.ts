@@ -3,12 +3,11 @@ import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 
 type InitialState = {
-  offers: OfferCard[];
+  offers: OfferCard[] | null;
 }
 
 const initialState: InitialState = {
-  //offers: offersMock,
-  offers: []
+  offers: null
 };
 
 const offersSlice = createSlice({
@@ -21,7 +20,7 @@ const offersSlice = createSlice({
     changeFavoriteStatus(state, action: PayloadAction<string>) {
       const idToChange = action.payload;
 
-      const foundOffer = state.offers.find((offer) => offer.id === idToChange);
+      const foundOffer = state.offers?.find((offer) => offer.id === idToChange);
       if (foundOffer) {
         foundOffer.isFavorite = !foundOffer.isFavorite;
       }

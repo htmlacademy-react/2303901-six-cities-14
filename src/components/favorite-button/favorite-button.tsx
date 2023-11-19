@@ -6,46 +6,55 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { Link } from 'react-router-dom';
 
 type ButtonProps = {
-  offer: OfferCard | OfferPage;
+  offer: OfferCard | OfferPage | null;
+  className: string;
+  width: number;
+  height: number;
 };
 
-function FavoriteButton({offer}: ButtonProps): JSX.Element {
+function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Element {
+
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
+
   const data = {
-    id: offer.id,
-    status: (!offer.isFavorite) ? 1 : 0,
+    id:  offer?.id || '',
+    status: (!offer?.isFavorite) ? 1 : 0,
   };
 
   const onFavoriteButton = (): void => {
-    dispatch(offersSlice.actions.changeFavoriteStatus(offer.id));
+    dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));
     dispatch(sendFavoriteOffer(data));
-    dispatch(fetchOffersFavorite());
+
+    setTimeout(() => {
+      dispatch(fetchOffersFavorite());
+    }, 500);
+
   };
 
   return (
     (authStatus === AuthorizationStatus.Unknown.toString() || authStatus === AuthorizationStatus.NoAuth.toString()) ? (
       <Link to={AppRoute.Login} className="link">
         <button
-          className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+          className={`place-card__bookmark-button ${offer?.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
           type="button"
         >
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
-          <span className="visually-hidden">In bookmarks</span>
+          <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
         </button>
       </Link>
     ) :
       <button
         onClick={onFavoriteButton}
-        className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+        className={`${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
         type="button"
       >
-        <svg className="place-card__bookmark-icon" width="18" height="19">
+        <svg className="place-card__bookmark-icon" width={width} height={height}>
           <use xlinkHref="#icon-bookmark"></use>
         </svg>
-        <span className="visually-hidden">In bookmarks</span>
+        <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
       </button>
   );
 }

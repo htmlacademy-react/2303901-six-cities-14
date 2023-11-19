@@ -1,10 +1,10 @@
-import FavoriteCardOffer from '../../components/favorite-card-offers/favorite-card-offers';
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
-import type {OfferCard} from '../../types/type-store';
-import {useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
-import {SettingLogoFooter, SettingLogoHeader} from '../../const';
+import { FavoriteCardComponents } from '../../components/favorite-cards-component/favorite-cards-component';
+import { SettingLogoFooter, SettingLogoHeader } from '../../const';
+import {useAppSelector} from '../../hooks/use-store';
+import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards-component/empty-favorite-cards-component';
 
 type FavoritePagesProps = {
   title: string;
@@ -12,20 +12,7 @@ type FavoritePagesProps = {
 
 function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
-  type Groups = {[key: string]: OfferCard[]};
-
-  const offers = useAppSelector((state) => state.offers.offers);
-
-  const groupedFavorites = offers.reduce((groups, offer) => {
-    const cityName = offer.city.name;
-
-    if (!groups[cityName]) {
-      groups[cityName] = [];
-    }
-    groups[cityName].push(offer);
-
-    return groups;
-  }, {} as Groups);
+  const offers = useAppSelector((state) => state.offersFavorite.offers);
 
   useDocumentTitle(title);
 
@@ -45,41 +32,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
       </header>
 
       <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-
-              {Object.entries(groupedFavorites).map(([cityName, cityOffers]) => {
-
-                const favoriteCityOffers = cityOffers.filter((offer) => offer.isFavorite);
-
-                if (favoriteCityOffers.length === 0) {
-
-                  return null;
-                }
-                return (
-                  <li className="favorites__locations-items" key={cityName}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{cityName}</span>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="favorites__places">
-
-                      {favoriteCityOffers.map((offer) => (
-                        <FavoriteCardOffer key={offer.id} offer={offer} />
-                      ))}
-
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        </div>
+        {offers.length === 0 ? <EmptyFavoriteCardsComponent/> : <FavoriteCardComponents/>}
       </main>
 
       <footer className="footer container">

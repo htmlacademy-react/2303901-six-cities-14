@@ -2,24 +2,21 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
-import {fetchOffersAction, logoutAction} from '../../services/api-actions';
-import {useEffect} from 'react';
+import { logoutAction } from '../../services/thunk/logout-action';
+
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const user = useAppSelector((state) => state.userData.data);
-
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
-  const update = useAppSelector((state) => state.offersFavorite.offers);
 
 
   function onClickButton () {
     dispatch(logoutAction());
     dispatch(dataUserSlice.actions.addUserData(null));
-    dispatch(fetchOffersAction());
   }
-  useEffect(() => {}, [update]);
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -29,7 +26,7 @@ function Profile () {
               <img src={user?.avatarUrl}></img>
             </div>
             <span className="header__user-name user__name">{statusAuth === AuthorizationStatus.Auth.toString() ? user?.email : 'Login'}</span>
-            <span className="header__favorite-count">{offers.length}</span>
+            <span className="header__favorite-count">{statusAuth === AuthorizationStatus.Auth.toString() ? offers.length : 0}</span>
 
           </Link>
         </li>

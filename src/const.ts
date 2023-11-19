@@ -141,7 +141,31 @@ const SettingLogoFooter = {
   className: 'footer',
   width: 64,
   height: 33,
+};
 
+
+const SettingFavoriteCard = {
+  className: 'favorites',
+  width: 150,
+  height: 110
+};
+
+const SettingCardCities = {
+  className: 'cities',
+  width: 260,
+  height: 200
+};
+
+const SettingFavoriteButtonOfferPage = {
+  className: 'offer__bookmark-button button',
+  width: 31,
+  height: 33
+};
+
+const SettingFavoriteButtonCard = {
+  className: 'place-card__bookmark-icon',
+  width: 18,
+  height: 19
 };
 
 export {
@@ -167,6 +191,10 @@ export {
   ERROR_NOT_OFFER,
   ENDING,
   SettingLogoHeader,
-  SettingLogoFooter
+  SettingLogoFooter,
+  SettingFavoriteCard,
+  SettingCardCities,
+  SettingFavoriteButtonOfferPage,
+  SettingFavoriteButtonCard
 };
 

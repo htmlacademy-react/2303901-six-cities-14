@@ -1,22 +1,24 @@
 import {useState} from 'react';
 import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
-import {fetchComments, sendComment} from '../../services/api-actions';
-import {useAppDispatch} from '../../hooks/use-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
+import { sendComment } from '../../services/thunk/send-comment';
+import { fetchComments } from '../../services/thunk/fech-comments';
 
 type PropsFormComment = {
     id: string | undefined;
 }
 
 function FormSendComment ({id}: PropsFormComment): JSX.Element {
-
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
-  const[rating, setRating] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [button, setButton] = useState(false);
 
-  const isCommentLengthValid = !(comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
-  const blockButton = isCommentLengthValid || rating === 0;
+  const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
+  const loadingComment = useAppSelector((state) => state.loadComment.isLoading);
+  const isValid = !(isCommentLengthValid && rating !== 0 && (loadingComment === null || true));
 
   function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -30,10 +32,13 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
     dispatch(sendComment(commentData)).unwrap().then(() => {
       setComment('');
       setRating(0);
+      dispatch(fetchComments(id));
+      setButton(false);
+    }) .catch(() => {
+      setButton(false);
     });
 
-    dispatch(fetchComments(id));
-
+    setButton(true);
     setComment(comment);
     setRating(rating);
   }
@@ -69,7 +74,7 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={blockButton}
+          disabled={button || isValid}
         >
           Submit
         </button>

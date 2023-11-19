@@ -1,19 +1,23 @@
 import {FormSendComment} from '../../components/form-send-comment/form-send-comment';
 import ListReview from '../../components/list-review/list-review';
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import {MapComponent} from '../../components/map/map';
 import OffersListNear from '../../components/offers-list-near/offers-list-near';
 import useDocumentTitle from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
-import {store} from '../../store';
-import {fetchComments, fetchOfferAction, fetchOffersNear} from '../../services/api-actions';
+import {fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
-import {AuthorizationStatus, ENDING, SettingLogoHeader, TitleDescription} from '../../const';
+import {AuthorizationStatus, ENDING, SettingFavoriteButtonOfferPage, SettingLogoHeader, TitleDescription} from '../../const';
+import { fetchOfferAction } from '../../services/thunk/fech-offer';
+import { FavoriteButton } from '../../components/favorite-button/favorite-button';
 
+import type { OfferCard } from '../../types/type-store';
+import type { OfferPage } from '../../types/type-store';
+import { fetchComments } from '../../services/thunk/fech-comments';
 type OfferPagesProps = {
   title: string;
 }
@@ -24,14 +28,19 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
   const stateOffer = useAppSelector((state) => state.loadOffer.offer);
   const stateComments = useAppSelector((state) => state.loadComments.comments);
-  const stateError = useAppSelector((state) => state.errorOffer.error);
+  const stateError = useAppSelector((state) => state.loadOffer.error);
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
 
   useEffect(() => {
-    store.dispatch(fetchOfferAction(id.offerId));
+    dispatch(fetchOfferAction(id.offerId));
 
-    store.dispatch(fetchComments(id.offerId));
-    store.dispatch(fetchOffersNear(id.offerId));
+
+    dispatch(fetchComments(id.offerId));
+
+
+    dispatch(fetchOffersNear(id.offerId));
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
 
@@ -63,7 +72,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
   useDocumentTitle(title);
 
-  return stateError === 'errorNotOffer' ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
+  return stateError !== null ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
     <div className="page">
       <header className="header">
         <div className="container">
@@ -89,7 +98,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                     alt='Photo studio'
                   />
                 </div>
-              ))}
+              )).slice(0, 6)}
 
             </div>
           </div>
@@ -102,12 +111,14 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                 <h1 className="offer__name">
                   {stateOffer?.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button" >
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+
+                <FavoriteButton
+                  offer={offer as OfferCard}
+                  className={SettingFavoriteButtonOfferPage.className}
+                  width={SettingFavoriteButtonOfferPage.width}
+                  height={SettingFavoriteButtonOfferPage.height}
+                />
+
               </div>
               <div className="offer__rating rating">
                 {stateOffer && (
@@ -171,7 +182,11 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={pointsToMap} cityName={stateOffer?.city.name} />
+            <MapComponent
+              pointsToMap={pointsToMap}
+
+              cityName={stateOffer?.city.name}
+            />
 
           </section>
         </section>

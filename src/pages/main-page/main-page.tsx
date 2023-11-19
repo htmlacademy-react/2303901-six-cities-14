@@ -6,13 +6,12 @@ import {Profile} from '../../components/profile/profile';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {AuthorizationStatus } from '../../const';
 import {fetchOffersFavorite} from '../../services/api-actions';
 import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
 import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
-import Logotype from '../../components/logotype/logotype';
+import {Logotype} from '../../components/logotype/logotype';
 import {SettingLogoHeader} from '../../const';
-
+import type {OfferCard} from '../../types/type-store';
 
 type MainPagesProps = {
   title: string;
@@ -24,15 +23,12 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const dispatch = useAppDispatch();
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
-  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
-
-  const citiesToFilter = stateOffers.filter((city, index) => {
+  const citiesToFilter: OfferCard[] = stateOffers?.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
-
       return stateOffers[index];
     }
-  });
+  }) || [];
 
   useEffect(() => {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
@@ -41,13 +37,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   },[selectedFilterCity, stateOffers]);
 
 
-  useEffect(() => {
-    if (authStatus === AuthorizationStatus.Auth.toString()) {
-      dispatch(fetchOffersFavorite());
-    }
-  },[authStatus]);
-
-  const pointsOffersToMap = citiesToFilter.map((offer) => {
+  const pointsOffersToMap = citiesToFilter?.map((offer) => {
 
     const pointsToMap = {
       title: offer.city.name,
@@ -79,7 +69,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main className= {`${offersFilter.length !== 0 ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
 
         <FilterCities/>

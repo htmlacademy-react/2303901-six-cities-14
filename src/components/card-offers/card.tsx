@@ -1,18 +1,20 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
-import {AppRoute} from '../../const';
+import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
-import {fetchOfferAction} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
-
+import { fetchOfferAction } from '../../services/thunk/fech-offer';
 
 type CardPagesProps = {
-  offer: OfferCard ;
+  offer: OfferCard;
+  className: string;
+  width: number;
+  height: number;
 }
 
-function CardOffer ({offer}: CardPagesProps) : JSX.Element{
+function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Element{
 
   const dispatch = useAppDispatch();
 
@@ -37,27 +39,29 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
   }
 
   return(
-    <article className="cities__card place-card"
+    <article className={`${className}__card place-card`}
       onClick = {onClickCard}
       onMouseEnter={onGetPointOffer}
       onMouseLeave={onLeavePointOffer}
     >
-      <div className="cities__image-wrapper place-card__image-wrapper">
-
-        {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
-
+      {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
-          <img className="place-card__image" src= {offer.previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src= {offer.previewImage} width={width} height={height} alt="Place image"/>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className= {`${className === 'cities' ? 'place-card__info' : 'favorites__card-info place-card__info'}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <FavoriteButton offer={offer}/>
+          <FavoriteButton offer={offer}
+            className={SettingFavoriteButtonCard.className}
+            width={SettingFavoriteButtonCard.width}
+            height={SettingFavoriteButtonCard.height}
+          />
 
         </div>
         <div className="place-card__rating rating">
@@ -76,4 +80,4 @@ function CardOffer ({offer}: CardPagesProps) : JSX.Element{
   );
 }
 
-export default CardOffer;
+export {CardOffer};

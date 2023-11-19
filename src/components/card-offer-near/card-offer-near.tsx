@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
 import {OfferCard} from '../../types/type-store';
-import {AppRoute} from '../../const';
+import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 //import {useEffect} from 'react';
 import {FavoriteButton} from '../favorite-button/favorite-button';
 import { useAppDispatch } from '../../hooks/use-store';
-import { fetchOfferAction, fetchOffersNear } from '../../services/api-actions';
-
+import { fetchOffersNear } from '../../services/api-actions';
+import { fetchOfferAction } from '../../services/thunk/fech-offer';
 
 type CardOfferProps = {
   offer: OfferCard;
@@ -48,7 +48,12 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
 
-          <FavoriteButton offer={offer}/>
+          <FavoriteButton
+            offer={offer}
+            className={SettingFavoriteButtonCard.className}
+            width={SettingFavoriteButtonCard.width}
+            height={SettingFavoriteButtonCard.height}
+          />
 
         </div>
         <div className="place-card__rating rating">
