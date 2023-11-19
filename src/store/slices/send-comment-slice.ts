@@ -12,7 +12,11 @@ const initialState: StateComment = {
 const sendCommentsSlice = createSlice({
   name: 'loadComment',
   initialState,
-  reducers: {},
+  reducers: {
+    addComment(state, action: PayloadAction<Comment>) {
+      state.comment = action.payload;
+    }
+  },
   extraReducers (builder) {
     builder
       .addCase(sendComment.fulfilled, (state, action: PayloadAction<Comment>) => {

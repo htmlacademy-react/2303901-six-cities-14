@@ -5,7 +5,7 @@ import { fetchComments } from '../../services/thunk/fech-comments';
 const initialState: StateComments = {
   comments: null,
   error: null,
-  isLoading: false
+  isLoading: null
 };
 
 const loadCommentsSlice = createSlice({
@@ -16,9 +16,11 @@ const loadCommentsSlice = createSlice({
     builder
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.comments = action.payload;
+        state.isLoading = false;
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.error = action.error.message || 'Unknown error';
+        state.isLoading = false;
       })
       .addCase(fetchComments.pending, (state) => {
         state.isLoading = true;

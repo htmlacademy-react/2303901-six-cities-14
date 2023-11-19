@@ -94,7 +94,7 @@ type StateOffer = {
 type StateComments = {
   comments: Comment[] | null;
   error: string | null;
-  isLoading: boolean;
+  isLoading: boolean | null;
 }
 
 type StateComment = {
