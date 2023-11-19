@@ -4,6 +4,7 @@ import {LengthComment} from '../../const';
 import {fetchComments, sendComment} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
+import {useEffect} from 'react';
 
 type PropsFormComment = {
     id: string | undefined;
@@ -17,6 +18,12 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
   const isCommentLengthValid = !(comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
   const blockButton = isCommentLengthValid || rating === 0;
+
+
+  useEffect(() => () => {
+    setComment('');
+    setRating(0);
+  }, [id]);
 
   function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();

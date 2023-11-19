@@ -7,9 +7,12 @@ import { Link } from 'react-router-dom';
 
 type ButtonProps = {
   offer: OfferCard | OfferPage | null;
+  className: string;
+  width: number;
+  height: number;
 };
 
-function FavoriteButton({offer}: ButtonProps): JSX.Element {
+function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
@@ -45,10 +48,10 @@ function FavoriteButton({offer}: ButtonProps): JSX.Element {
     ) :
       <button
         onClick={onFavoriteButton}
-        className={`place-card__bookmark-button ${offer?.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+        className={`${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
         type="button"
       >
-        <svg className="place-card__bookmark-icon" width="18" height="19">
+        <svg className="place-card__bookmark-icon" width={width} height={height}>
           <use xlinkHref="#icon-bookmark"></use>
         </svg>
         <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>

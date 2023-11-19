@@ -1,9 +1,8 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
-import {AppRoute} from '../../const';
+import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
-
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
 import { fetchOfferAction } from '../../services/thunk/fech-offer';
@@ -58,7 +57,11 @@ function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Ele
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <FavoriteButton offer={offer}/>
+          <FavoriteButton offer={offer}
+            className={SettingFavoriteButtonCard.className}
+            width={SettingFavoriteButtonCard.width}
+            height={SettingFavoriteButtonCard.height}
+          />
 
         </div>
         <div className="place-card__rating rating">

@@ -156,6 +156,18 @@ const SettingCardCities = {
   height: 200
 };
 
+const SettingFavoriteButtonOfferPage = {
+  className: 'offer__bookmark-button button',
+  width: 31,
+  height: 33
+};
+
+const SettingFavoriteButtonCard = {
+  className: 'place-card__bookmark-icon',
+  width: 18,
+  height: 19
+};
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -181,6 +193,8 @@ export {
   SettingLogoHeader,
   SettingLogoFooter,
   SettingFavoriteCard,
-  SettingCardCities
+  SettingCardCities,
+  SettingFavoriteButtonOfferPage,
+  SettingFavoriteButtonCard
 };
 

@@ -11,7 +11,7 @@ import {fetchComments, fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
-import {AuthorizationStatus, ENDING, SettingLogoHeader, TitleDescription} from '../../const';
+import {AuthorizationStatus, ENDING, SettingFavoriteButtonOfferPage, SettingLogoHeader, TitleDescription} from '../../const';
 import { fetchOfferAction } from '../../services/thunk/fech-offer';
 import { FavoriteButton } from '../../components/favorite-button/favorite-button';
 
@@ -37,7 +37,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
     setTimeout(() => {
       dispatch(fetchComments(id.offerId));
-    },1000);
+    },500);
 
     dispatch(fetchOffersNear(id.offerId));
     return () => {
@@ -111,7 +111,12 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                   {stateOffer?.title}
                 </h1>
 
-                <FavoriteButton offer={offer as OfferCard}/>
+                <FavoriteButton
+                  offer={offer as OfferCard}
+                  className={SettingFavoriteButtonOfferPage.className}
+                  width={SettingFavoriteButtonOfferPage.width}
+                  height={SettingFavoriteButtonOfferPage.height}
+                />
 
               </div>
               <div className="offer__rating rating">
@@ -176,7 +181,11 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
           </div>
           <section className="offer__map map" >
 
-            <MapComponent pointsToMap={pointsToMap} cityName={stateOffer?.city.name} />
+            <MapComponent
+              pointsToMap={pointsToMap}
+
+              cityName={stateOffer?.city.name}
+            />
 
           </section>
         </section>
