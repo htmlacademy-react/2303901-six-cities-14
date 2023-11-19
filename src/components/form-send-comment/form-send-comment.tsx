@@ -1,10 +1,11 @@
 import {useState} from 'react';
 import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
-import {fetchComments, sendComment} from '../../services/api-actions';
+import {fetchComments} from '../../services/api-actions';
 import {useAppDispatch} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
 import {useEffect} from 'react';
+import { sendComment } from '../../services/thunk/send-comment';
 
 type PropsFormComment = {
     id: string | undefined;

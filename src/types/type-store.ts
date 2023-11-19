@@ -96,7 +96,9 @@ type StateComments = {
 }
 
 type StateComment = {
-  comments: Comment | null;
+  comment: Comment | null;
+  error: string | null;
+  isLoading: null | boolean;
 }
 
 export type {
