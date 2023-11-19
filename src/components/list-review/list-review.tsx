@@ -1,16 +1,15 @@
 import Review from '../review/review';
-import {MAX_LENGTH_REVIEW} from '../../const';
-import {useAppSelector} from '../../hooks/use-store';
-import {useEffect} from 'react';
+import { MAX_LENGTH_REVIEW } from '../../const';
+import { useAppSelector } from '../../hooks/use-store';
+import { useEffect } from 'react';
 import type { Comment } from '../../types/type-store';
 
-function ListReview () {
+function ListReview() {
   const comments = useAppSelector((state) => state.loadComments.comments);
-  const reviews = comments?.slice(0, MAX_LENGTH_REVIEW);
 
   useEffect(() => {
-  }, [comments, reviews]);
 
+  }, [comments]);
 
   function compareDates(a: Comment, b: Comment): number {
     const dateA = new Date(a.date);
@@ -18,11 +17,14 @@ function ListReview () {
     return dateB.getTime() - dateA.getTime();
   }
 
-  const sort = reviews?.sort(compareDates);
+  const sortedComments = comments ? [...comments].sort(compareDates) : [];
+  const slicedComments = sortedComments.slice(0, MAX_LENGTH_REVIEW);
 
-  return(
+  return (
     <ul className="reviews__list">
-      {sort?.map((review) => <Review key={review.id} reviewProps={review}/>)}
+      {slicedComments.map((review) => (
+        <Review key={review.id} reviewProps={review} />
+      ))}
     </ul>
   );
 }
