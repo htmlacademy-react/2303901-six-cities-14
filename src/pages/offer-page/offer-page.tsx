@@ -98,7 +98,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                     alt='Photo studio'
                   />
                 </div>
-              ))}
+              )).slice(0, 6)}
 
             </div>
           </div>

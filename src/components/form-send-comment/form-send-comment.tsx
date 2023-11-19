@@ -18,7 +18,6 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
   const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
   const loadingComment = useAppSelector((state) => state.loadComment.isLoading);
-  const errorStatus = useAppSelector((state) => state.loadComment.error);
   const isValid = !(isCommentLengthValid && rating !== 0 && (loadingComment === null || true));
 
   function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
@@ -30,17 +29,16 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
       rating
     };
 
+    dispatch(sendComment(commentData)).unwrap().then(() => {
+      setComment('');
+      setRating(0);
+      dispatch(fetchComments(id));
+      setButton(false);
+    }) .catch(() => {
+      setButton(false);
+    });
+
     setButton(true);
-
-    if(errorStatus === null){
-      dispatch(sendComment(commentData)).unwrap().then(() => {
-        setComment('');
-        setRating(0);
-        dispatch(fetchComments(id));
-        setButton(false);
-      });
-    }
-
     setComment(comment);
     setRating(rating);
   }

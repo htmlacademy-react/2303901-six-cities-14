@@ -99,7 +99,7 @@ type StateComments = {
 
 type StateComment = {
   comment: Comment | null;
-  error: string | null;
+  error: string | false;
   isLoading: boolean;
 }
 
