@@ -36,9 +36,9 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
 
-    setTimeout(() => {
-      dispatch(fetchComments(id.offerId));
-    },500);
+
+    dispatch(fetchComments(id.offerId));
+
 
     dispatch(fetchOffersNear(id.offerId));
     return () => {

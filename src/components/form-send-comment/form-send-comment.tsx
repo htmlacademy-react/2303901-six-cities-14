@@ -12,11 +12,9 @@ type PropsFormComment = {
 }
 
 function FormSendComment ({id}: PropsFormComment): JSX.Element {
-
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
   const[rating, setRating] = useState(0);
-
   const isCommentLengthValid = !(comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
   const blockButton = isCommentLengthValid || rating === 0;
 
@@ -38,9 +36,8 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
     dispatch(sendComment(commentData)).unwrap().then(() => {
       setComment('');
       setRating(0);
+      dispatch(fetchComments(id));
     });
-
-    dispatch(fetchComments(id));
 
     setComment(comment);
     setRating(rating);
