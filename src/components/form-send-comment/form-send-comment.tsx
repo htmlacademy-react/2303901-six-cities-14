@@ -5,6 +5,8 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
 import { sendComment } from '../../services/thunk/send-comment';
 import { fetchComments } from '../../services/thunk/fech-comments';
+import { sendCommentsSlice } from '../../store/slices/send-comment-slice';
+
 
 type PropsFormComment = {
     id: string | undefined;
@@ -16,9 +18,16 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
   const [rating, setRating] = useState(0);
   const [button, setButton] = useState(false);
 
+
   const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
   const loadingComment = useAppSelector((state) => state.loadComment.isLoading);
   const isValid = !(isCommentLengthValid && rating !== 0 && (loadingComment === null || true));
+
+
+  const errorMessage = useAppSelector((state) => state.loadComment.error);
+  const [error, setError] = useState();
+
+
 
   function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -36,6 +45,7 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
       setButton(false);
     }) .catch(() => {
       setButton(false);
+
     });
 
     setButton(true);
@@ -47,6 +57,7 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
 
     setRating(ratingFromComponent);
   }
+
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={onClickButtonSent}>
       <label className="reviews__label form__label" htmlFor="review">
@@ -79,6 +90,11 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
           Submit
         </button>
       </div>
+
+      {errorMessage === false ? '' :
+        <div className="error-message" style={{color: 'red'}}>
+          {errorMessage}
+        </div>}
     </form>
   );
 }
