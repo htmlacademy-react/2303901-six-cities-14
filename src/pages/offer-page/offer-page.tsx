@@ -13,7 +13,10 @@ import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
 import {AuthorizationStatus, ENDING, SettingLogoHeader, TitleDescription} from '../../const';
 import { fetchOfferAction } from '../../services/thunk/fech-offer';
+import { FavoriteButton } from '../../components/favorite-button/favorite-button';
 
+import type { OfferCard } from '../../types/type-store';
+import type { OfferPage } from '../../types/type-store';
 type OfferPagesProps = {
   title: string;
 }
@@ -26,11 +29,16 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateComments = useAppSelector((state) => state.loadComments.comments);
   const stateError = useAppSelector((state) => state.loadOffer.error);
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
 
-    dispatch(fetchComments(id.offerId));
+    setTimeout(() => {
+      dispatch(fetchComments(id.offerId));
+    },1000);
+
     dispatch(fetchOffersNear(id.offerId));
     return () => {
       dispatch(offerSlice.actions.addLoadOffer(null));
@@ -102,12 +110,9 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                 <h1 className="offer__name">
                   {stateOffer?.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button" >
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+
+                <FavoriteButton offer={offer as OfferCard}/>
+
               </div>
               <div className="offer__rating rating">
                 {stateOffer && (

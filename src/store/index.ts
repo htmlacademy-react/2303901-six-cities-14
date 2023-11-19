@@ -10,7 +10,6 @@ import {dataUserSlice} from './slices/data-user-slice';
 import {offerSlice} from './slices/offer-slice';
 import {loadOffersNearSlice} from './slices/load-offer-near-slice';
 import {loadCommentsSlice} from './slices/load-comments-slice';
-import {errorOfferSlice} from './slices/error-offer-slice';
 import {sendCommentsSlice} from './slices/send-comment-slice';
 import {offersFavoriteSlice} from './slices/load-offers-favorite';
 import { redirect } from './redirect';
@@ -27,7 +26,6 @@ const reducer = combineReducers({
   [offerSlice.name]: offerSlice.reducer,
   [loadOffersNearSlice.name]: loadOffersNearSlice.reducer,
   [loadCommentsSlice.name]: loadCommentsSlice.reducer,
-  [errorOfferSlice.name]: errorOfferSlice.reducer,
   [sendCommentsSlice.name]: sendCommentsSlice.reducer,
   [offersFavoriteSlice.name]: offersFavoriteSlice.reducer
 
