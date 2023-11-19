@@ -7,7 +7,7 @@ import useDocumentTitle from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
-import {fetchComments, fetchOffersNear} from '../../services/api-actions';
+import {fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
@@ -17,6 +17,7 @@ import { FavoriteButton } from '../../components/favorite-button/favorite-button
 
 import type { OfferCard } from '../../types/type-store';
 import type { OfferPage } from '../../types/type-store';
+import { fetchComments } from '../../services/thunk/fech-comments';
 type OfferPagesProps = {
   title: string;
 }

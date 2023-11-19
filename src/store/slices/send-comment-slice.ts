@@ -6,7 +6,7 @@ import { sendComment } from '../../services/thunk/send-comment';
 const initialState: StateComment = {
   comment: null,
   error: null,
-  isLoading: null
+  isLoading: false
 };
 
 const sendCommentsSlice = createSlice({
