@@ -7,6 +7,7 @@ import { fetchOfferAction } from '../../services/thunk/fetch-offer';
 const initialState: StateOffer = {
   offer: null,
   error: null,
+  loading: null
 };
 
 const offerSlice = createSlice({
@@ -15,7 +16,6 @@ const offerSlice = createSlice({
   reducers: {
     addLoadOffer(state, action: PayloadAction<OfferPage | null>) {
       state.offer = action.payload;
-      state.error = null;
     },
   },
   extraReducers(builder) {
@@ -23,9 +23,14 @@ const offerSlice = createSlice({
       .addCase(fetchOfferAction.fulfilled, (state, action: PayloadAction<OfferPage>) => {
         state.offer = action.payload;
         state.error = null;
+        state.loading = false;
       })
       .addCase(fetchOfferAction.rejected, (state, action) => {
         state.error = action.error.message || 'Unknown error';
+        state.loading = false;
+      })
+      .addCase(fetchOfferAction.pending, (state) => {
+        state.loading = true;
       });
   },
 });

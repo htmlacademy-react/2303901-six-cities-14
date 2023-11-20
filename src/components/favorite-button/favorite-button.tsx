@@ -24,12 +24,11 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const onFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));
-    dispatch(sendFavoriteOffer(data));
 
-    setTimeout(() => {
+    dispatch(sendFavoriteOffer(data)).unwrap().then(() => {
+
       dispatch(fetchOffersFavorite());
-    }, 500);
-
+    });
   };
 
   return (

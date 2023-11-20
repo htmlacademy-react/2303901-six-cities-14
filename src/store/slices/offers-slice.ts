@@ -35,11 +35,11 @@ const offersSlice = createSlice({
     builder
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.loadingStatus = true;
+        state.loadingStatus = false;
         state.error = null;
       })
       .addCase(fetchOffersAction.pending, (state) => {
-        state.loadingStatus = false;
+        state.loadingStatus = true;
         state.error = null;
       })
       .addCase(fetchOffersAction.rejected, (state, action) => {

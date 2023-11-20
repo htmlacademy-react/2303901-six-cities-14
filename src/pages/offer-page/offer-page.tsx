@@ -9,15 +9,14 @@ import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
 import {fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
-import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
 import {AuthorizationStatus, ENDING, SettingFavoriteButtonOfferPage, SettingLogoHeader, TitleDescription} from '../../const';
-import { fetchOfferAction } from '../../services/thunk/fetch-offer';
-import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import {fetchOfferAction} from '../../services/thunk/fetch-offer';
+import {FavoriteButton} from '../../components/favorite-button/favorite-button';
+import type {OfferCard} from '../../types/type-store';
+import type {OfferPage} from '../../types/type-store';
+import {fetchComments} from '../../services/thunk/fech-comments';
 
-import type { OfferCard } from '../../types/type-store';
-import type { OfferPage } from '../../types/type-store';
-import { fetchComments } from '../../services/thunk/fech-comments';
 type OfferPagesProps = {
   title: string;
 }
@@ -36,16 +35,10 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
-
-
     dispatch(fetchComments(id.offerId));
-
     dispatch(fetchOffersNear(id.offerId));
-    return () => {
-      dispatch(offerSlice.actions.addLoadOffer(null));
 
-    };
-  }, [id]);
+  }, [title]);
 
   const pointToMap = {
     title: stateOffer?.city.name || '',

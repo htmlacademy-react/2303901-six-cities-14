@@ -90,6 +90,7 @@ type StateError = {
 type StateOffer = {
   offer: OfferPage | null;
   error: string | null;
+  loading: boolean | null;
 }
 
 type StateComments = {
