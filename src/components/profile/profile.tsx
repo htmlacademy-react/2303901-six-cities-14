@@ -11,11 +11,13 @@ function Profile () {
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
 
+
   function onClickButtonOut () {
     dispatch(logoutAction()).unwrap().then(() => {
       dispatch(fetchOffersAction());
     });
     dispatch(dataUserSlice.actions.addUserData(null));
+
 
   }
 
