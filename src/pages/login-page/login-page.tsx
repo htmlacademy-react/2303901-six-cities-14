@@ -7,6 +7,7 @@ import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../services/thunk/login-action';
 import { useEffect} from 'react';
+import {fetchOffersAction} from '../../services/api-actions';
 
 type LoginPagesProps = {
   title: string;
@@ -44,7 +45,9 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   function onClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     evt.preventDefault();
 
-    dispatch(loginAction(authData));
+    dispatch(loginAction(authData)).unwrap().then(() => {
+      dispatch(fetchOffersAction());
+    });
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
   }
 

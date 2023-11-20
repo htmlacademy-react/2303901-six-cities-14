@@ -3,7 +3,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
 import { logoutAction } from '../../services/thunk/logout-action';
-
+import { fetchOffersAction } from '../../services/api-actions';
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
@@ -11,10 +11,12 @@ function Profile () {
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
 
-
-  function onClickButton () {
-    dispatch(logoutAction());
+  function onClickButtonOut () {
+    dispatch(logoutAction()).unwrap().then(() => {
+      dispatch(fetchOffersAction());
+    });
     dispatch(dataUserSlice.actions.addUserData(null));
+
   }
 
   return (
@@ -32,7 +34,7 @@ function Profile () {
         </li>
         <li className="header__nav-item">
           <Link to={AppRoute.Main} className="header__nav-link">
-            <span className="header__signout" onClick={onClickButton}>
+            <span className="header__signout" onClick={onClickButtonOut}>
               { (statusAuth === AuthorizationStatus.Auth.toString()) ? 'Sign out' : ''}
             </span>
           </Link>
