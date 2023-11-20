@@ -80,6 +80,7 @@ type StateLoadOffers = {
 
 type StateAuth = {
   authStatus: string;
+  error: string | null;
 };
 
 type StateError = {

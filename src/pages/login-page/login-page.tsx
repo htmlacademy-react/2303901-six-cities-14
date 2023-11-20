@@ -21,10 +21,8 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(inputPassword);
   const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
-
-
   const cityArray = Object.values(Cities);
-
+  const error = useAppSelector((state) => state.authorizationStatus.error);
 
   useEffect(() => {
     const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
@@ -92,6 +90,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
+                {error === null ? '' : `${error}`}
               </div>
               <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword}>Sign in</button>
             </form>
