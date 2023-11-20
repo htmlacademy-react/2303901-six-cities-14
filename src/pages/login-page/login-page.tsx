@@ -6,8 +6,9 @@ import {AppRoute, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../services/thunk/login-action';
-import { useEffect} from 'react';
-import {fetchOffersAction} from '../../services/api-actions';
+import {useEffect} from 'react';
+import {fetchOffersAction} from '../../services/thunk/fetch-offers';
+
 
 type LoginPagesProps = {
   title: string;
@@ -26,7 +27,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
 
   useEffect(() => {
-    // Вызывать только при монтировании компонента
     const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
     dispatch(filterCitySlice.actions.changeCity(randomCity));
   }, []);

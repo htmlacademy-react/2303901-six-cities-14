@@ -8,17 +8,6 @@ import type {OfferCard} from '../types/type-store';
 import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
 import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
 import type {FavoriteStatus} from './type-service';
-import { offersSlice } from '../store/slices/offers-slice';
-
-const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
-  'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-
-    const {data} = await api.get<OfferCard[]>(ApiRoute.Offers);
-
-    dispatch(offersSlice.actions.addOfferList(data));
-  },
-);
 
 const fetchOffersNear = createAsyncThunk<void, string | undefined, Thunk>(
   'data/fetchOfferNear',
@@ -60,7 +49,6 @@ const clearErrorAction = createAsyncThunk(
 );
 
 export {
-  fetchOffersAction,
   fetchOffersNear,
   fetchOffersFavorite,
   sendFavoriteOffer ,

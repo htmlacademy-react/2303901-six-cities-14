@@ -3,7 +3,8 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
 import { logoutAction } from '../../services/thunk/logout-action';
-import { fetchOffersAction } from '../../services/api-actions';
+import {fetchOffersAction} from '../../services/thunk/fetch-offers';
+
 
 function Profile () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);

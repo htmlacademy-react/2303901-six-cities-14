@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {App} from './components/app/app';
 import {store} from './store/index';
-import {fetchOffersAction} from './services/api-actions';
-import { checkAuthAction } from './services/thunk/check-auth-action';
+import {checkAuthAction} from './services/thunk/check-auth-action';
+import {fetchOffersAction} from './services/thunk/fetch-offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -5,7 +5,7 @@ import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
-import { fetchOfferAction } from '../../services/thunk/fech-offer';
+import { fetchOfferAction } from '../../services/thunk/fetch-offer';
 
 type CardPagesProps = {
   offer: OfferCard;

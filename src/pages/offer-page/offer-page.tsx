@@ -12,7 +12,7 @@ import {useEffect} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
 import {AuthorizationStatus, ENDING, SettingFavoriteButtonOfferPage, SettingLogoHeader, TitleDescription} from '../../const';
-import { fetchOfferAction } from '../../services/thunk/fech-offer';
+import { fetchOfferAction } from '../../services/thunk/fetch-offer';
 import { FavoriteButton } from '../../components/favorite-button/favorite-button';
 
 import type { OfferCard } from '../../types/type-store';
