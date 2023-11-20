@@ -3,10 +3,8 @@ import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
-import { sendComment } from '../../services/thunk/send-comment';
-import { fetchComments } from '../../services/thunk/fech-comments';
-import { sendCommentsSlice } from '../../store/slices/send-comment-slice';
-
+import {sendComment} from '../../services/thunk/send-comment';
+import {fetchComments} from '../../services/thunk/fech-comments';
 
 type PropsFormComment = {
     id: string | undefined;
@@ -18,16 +16,11 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
   const [rating, setRating] = useState(0);
   const [button, setButton] = useState(false);
 
-
   const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
   const loadingComment = useAppSelector((state) => state.loadComment.isLoading);
   const isValid = !(isCommentLengthValid && rating !== 0 && (loadingComment === null || true));
 
-
   const errorMessage = useAppSelector((state) => state.loadComment.error);
-  const [error, setError] = useState();
-
-
 
   function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -77,9 +70,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set{''}
+          To submit review please make sure to set {''}
           <span className="reviews__star">rating</span> and describe
-          your stay with at least{''}
+          your stay with at least {''}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button

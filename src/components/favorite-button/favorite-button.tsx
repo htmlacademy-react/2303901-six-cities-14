@@ -36,10 +36,10 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
     (authStatus === AuthorizationStatus.Unknown.toString() || authStatus === AuthorizationStatus.NoAuth.toString()) ? (
       <Link to={AppRoute.Login} className="link">
         <button
-          className={`place-card__bookmark-button ${offer?.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+          className={`${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
           type="button"
         >
-          <svg className="place-card__bookmark-icon" width="18" height="19">
+          <svg className="place-card__bookmark-icon" width={width} height={height}>
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>

@@ -2,11 +2,11 @@ import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {AppRoute, DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {AppRoute, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
-import { Link } from 'react-router-dom';
-import { loginAction } from '../../services/thunk/login-action';
-
+import {Link} from 'react-router-dom';
+import {loginAction} from '../../services/thunk/login-action';
+import { useEffect} from 'react';
 
 type LoginPagesProps = {
   title: string;
@@ -19,6 +19,19 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(inputPassword);
   const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
+
+
+  const cityArray = Object.values(Cities);
+
+
+  useEffect(() => {
+    // Вызывать только при монтировании компонента
+    const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
+    dispatch(filterCitySlice.actions.changeCity(randomCity));
+  }, []);
+
+
+
 
   type AuthData = {
     password: string ;

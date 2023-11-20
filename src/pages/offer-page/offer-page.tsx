@@ -23,6 +23,7 @@ type OfferPagesProps = {
 }
 
 function OfferPage ({title} : OfferPagesProps) : JSX.Element {
+
   const dispatch = useAppDispatch();
   const id = useParams<string>();
   const stateOffersNear = useAppSelector((state) => state.OffersNear.offers);
@@ -32,6 +33,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
   const offers = useAppSelector((state) => state.offers.offers);
   const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
+
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
