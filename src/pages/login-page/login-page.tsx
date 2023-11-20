@@ -31,8 +31,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   }, []);
 
 
-
-
   type AuthData = {
     password: string ;
     login: string;
