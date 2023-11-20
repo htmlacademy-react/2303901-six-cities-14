@@ -3,8 +3,10 @@ import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
+
 import {sendComment} from '../../services/thunk/send-comment';
 import {fetchComments} from '../../services/thunk/fech-comments';
+
 
 type PropsFormComment = {
     id: string | undefined;
@@ -16,11 +18,13 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
   const [rating, setRating] = useState(0);
   const [button, setButton] = useState(false);
 
+
   const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
   const loadingComment = useAppSelector((state) => state.loadComment.isLoading);
   const isValid = !(isCommentLengthValid && rating !== 0 && (loadingComment === null || true));
 
   const errorMessage = useAppSelector((state) => state.loadComment.error);
+
 
   function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -39,7 +43,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
     }) .catch(() => {
       setButton(false);
 
+
     });
+
 
     setButton(true);
     setComment(comment);

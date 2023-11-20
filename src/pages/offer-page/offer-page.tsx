@@ -35,11 +35,13 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
 
 
+
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
 
 
     dispatch(fetchComments(id.offerId));
+
 
 
     dispatch(fetchOffersNear(id.offerId));
