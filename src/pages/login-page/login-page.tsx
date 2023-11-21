@@ -2,19 +2,19 @@ import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {AppRoute, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {AppRoute, AuthorizationStatus, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../services/thunk/login-action';
 import {useEffect} from 'react';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
-
+import '../../pages/login-page/styleLogin.css';
 
 type LoginPagesProps = {
   title: string;
 }
 
-function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
+function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
 
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -23,6 +23,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   const dispatch = useAppDispatch();
   const cityArray = Object.values(Cities);
   const error = useAppSelector((state) => state.authorizationStatus.error);
+  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   useEffect(() => {
     const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
@@ -65,8 +66,8 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
   useDocumentTitle(title);
 
-  return (
-    <div className="page page--gray page--login">
+  return authStatus === AuthorizationStatus.NoAuth.toString() ? (
+    <div className= "page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -105,7 +106,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
         </div>
       </main>
     </div>
-  );
+  ) : '';
 }
 
 export {LoginPage};

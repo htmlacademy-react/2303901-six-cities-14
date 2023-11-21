@@ -1,7 +1,6 @@
 import {CitiesForFilter} from '../../const';
 import {ButtonFilterComponent} from '../button-filter-component/button-filter-component';
 
-
 function FilterCities () {
 
   return (

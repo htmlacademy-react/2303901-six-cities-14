@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute, DEFAULT_CITY} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import { useAppDispatch } from '../../hooks/use-store';
-import { memo } from 'react';
+import {memo} from 'react';
 
 type Props = {
   className: string;
