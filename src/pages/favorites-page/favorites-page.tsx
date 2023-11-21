@@ -1,13 +1,12 @@
 import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
-import { FavoriteCardComponents } from '../../components/favorite-cards-component/favorite-cards-component';
-import { SettingLogoFooter, SettingLogoHeader } from '../../const';
+import {FavoriteCardComponents} from '../../components/favorite-cards-component/favorite-cards-component';
+import {SettingLogoFooter, SettingLogoHeader} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards-component/empty-favorite-cards-component';
-import { LoadingComponent } from '../../components/loading-component/loading-component';
-import { useEffect } from 'react';
-import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
+import {useEffect} from 'react';
+import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 
 type FavoritePagesProps = {
   title: string;
@@ -45,7 +44,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
       </header>
 
       <main className="page__main page__main--favorites">
-        {offers.length && !statusOffers ? <FavoriteCardComponents/> : <EmptyFavoriteCardsComponent/>}
+        {offers.length && !statusOffers ? <FavoriteCardComponents offers={offers}/> : <EmptyFavoriteCardsComponent/>}
       </main>
 
       <footer className="footer container">

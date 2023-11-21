@@ -2,13 +2,16 @@ import { SettingFavoriteCard } from '../../const';
 import {ButtonFilterComponent} from '../button-filter-component/button-filter-component';
 import {CardOffer} from '../card-offers/card';
 import type {OfferCard} from '../../types/type-store';
-import {useAppSelector} from '../../hooks/use-store';
 
-function FavoriteCardComponents() {
+type props ={
+  offers: OfferCard[];
+}
+
+function FavoriteCardComponents({offers}: props) {
 
   type Groups = {[key: string]: OfferCard[]};
 
-  const offers = useAppSelector((state) => state.offers.offers);
+  //const offers = useAppSelector((state) => state.offers.offers);
 
   const groupedFavorites = offers?.reduce((groups, offer) => {
     const cityName = offer.city.name;
