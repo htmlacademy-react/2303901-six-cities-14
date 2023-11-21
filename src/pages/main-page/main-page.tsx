@@ -6,13 +6,13 @@ import {Profile} from '../../components/profile/profile';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {fetchOffersFavorite} from '../../services/api-actions';
 import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
 import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
 import {Logotype} from '../../components/logotype/logotype';
 import {SettingLogoHeader} from '../../const';
 import type {OfferCard} from '../../types/type-store';
 import { NoPlacesRightComponent } from '../../components/no-places/no-places-right';
+import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
 
 type MainPagesProps = {
   title: string;

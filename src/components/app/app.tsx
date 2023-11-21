@@ -1,20 +1,21 @@
-import {Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {MainPages} from '../../pages/main-page/main-page';
 import {LoginPage} from '../../pages/login-page/login-page';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
 import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
-import {PrivateRoute} from '../private-route/private-route';
+//import {PrivateRoute} from '../private-route/private-route';
 import {AppRoute, TitleDescription} from '../../const';
 import {LoadingRoute} from '../loading-route/loaging-route';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
-import HistoryRouter from '../history-browser/history-router';
-import {browserHistory} from '../../history-browser';
+//import HistoryRouter from '../history-browser/history-router';
+//import {browserHistory} from '../../history-browser';
+
 
 function App(): JSX.Element {
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <BrowserRouter>
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
@@ -35,9 +36,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute>
-              <FavoritesPage title = {TitleDescription.FavoritePage}/>
-            </PrivateRoute>
+            <FavoritesPage title = {TitleDescription.FavoritePage}/>
           }
         />
         <Route
@@ -55,7 +54,7 @@ function App(): JSX.Element {
           element={<ErrorMessage title = {TitleDescription.ErrorPage}/>}
         />
       </Routes>
-    </HistoryRouter>
+    </BrowserRouter>
   );
 }
 

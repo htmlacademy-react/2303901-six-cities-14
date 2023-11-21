@@ -19,16 +19,6 @@ const fetchOffersNear = createAsyncThunk<void, string | undefined, Thunk>(
   },
 );
 
-const fetchOffersFavorite = createAsyncThunk<void, string | undefined, Thunk>(
-  'data/fetchOfferFavorite',
-  async(_, {dispatch, extra: api}) => {
-
-    const {data} = await api.get<OfferCard[]>(`${ApiRoute.OffersFavorite}`);
-
-    dispatch(offersFavoriteSlice.actions.addFavoriteOffers(data));
-  }
-);
-
 const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
   'sendFavoriteOffer',
   async ({id, status}, {dispatch, extra: api}) => {
@@ -50,7 +40,6 @@ const clearErrorAction = createAsyncThunk(
 
 export {
   fetchOffersNear,
-  fetchOffersFavorite,
   sendFavoriteOffer ,
   clearErrorAction,
 };

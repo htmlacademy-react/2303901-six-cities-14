@@ -1,9 +1,10 @@
 import type {OfferCard, OfferPage} from '../../types/type-store';
 import {offersSlice} from '../../store/slices/offers-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {fetchOffersFavorite, sendFavoriteOffer} from '../../services/api-actions';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { Link } from 'react-router-dom';
+import {sendFavoriteOffer} from '../../services/api-actions';
+import { AppRoute, AuthorizationStatus} from '../../const';
+import {Link} from 'react-router-dom';
+import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 
 type ButtonProps = {
   offer: OfferCard | OfferPage | null;
