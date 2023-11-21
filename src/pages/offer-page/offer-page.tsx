@@ -16,6 +16,7 @@ import {FavoriteButton} from '../../components/favorite-button/favorite-button';
 import type {OfferCard} from '../../types/type-store';
 import type {OfferPage} from '../../types/type-store';
 import {fetchComments} from '../../services/thunk/fech-comments';
+import { LoadingComponent } from '../../components/loading-component/loading-component';
 
 type OfferPagesProps = {
   title: string;
@@ -32,13 +33,14 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
   const offers = useAppSelector((state) => state.offers.offers);
   const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
+  const offerStatus = useAppSelector((state) => state.loadOffer.loading);
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
     dispatch(fetchComments(id.offerId));
     dispatch(fetchOffersNear(id.offerId));
 
-  }, [title]);
+  },[title]);
 
   const pointToMap = {
     title: stateOffer?.city.name || '',
@@ -64,6 +66,11 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const pointsToMap = [...points, pointToMap];
 
   useDocumentTitle(title);
+
+  if(offerStatus){
+
+    return <LoadingComponent/>;
+  }
 
   return stateError !== null ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
     <div className="page">
