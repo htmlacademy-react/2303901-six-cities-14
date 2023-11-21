@@ -12,6 +12,7 @@ import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left
 import {Logotype} from '../../components/logotype/logotype';
 import {SettingLogoHeader} from '../../const';
 import type {OfferCard} from '../../types/type-store';
+import { NoPlacesRightComponent } from '../../components/no-places/no-places-right';
 
 type MainPagesProps = {
   title: string;
@@ -81,7 +82,7 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
 
             <div className="cities__right-section">
 
-              {offersFilter.length !== 0 ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : ''}
+              {offersFilter.length !== 0 ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : <NoPlacesRightComponent/>}
 
             </div>
           </div>
