@@ -6,7 +6,7 @@ import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
-import {memo} from 'react';
+//import {memo} from 'react';
 
 type CardPagesProps = {
   offer: OfferCard;
@@ -15,7 +15,7 @@ type CardPagesProps = {
   height: number;
 }
 
-function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX.Element{
+function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Element{
 
   const dispatch = useAppDispatch();
 
@@ -81,6 +81,6 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
   );
 }
 
-const CardOffer = memo(CardOfferMemo);
+//const CardOffer = memo(CardOfferMemo);
 
 export {CardOffer};

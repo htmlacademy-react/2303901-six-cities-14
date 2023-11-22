@@ -22,14 +22,13 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
     dispatch(fetchOffersFavorite());
   },[]);
 
+  const className = offers.length && !statusOffers ? 'page__main page__main--favorites' : ' page__main page__main--favorites page__main--favorites-empty';
+
   useDocumentTitle(title);
 
-  // if(statusOffers) {
-  //   return <LoadingComponent/>;
-  // }
-
+  console.log(offers.length);
   return (
-    <div className="page">
+    <div className= {offers.length && !statusOffers ? 'page' : 'page page--favorites-empty'}>
 
       <header className="header">
         <div className="container">
@@ -43,7 +42,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
         </div>
       </header>
 
-      <main className="page__main page__main--favorites">
+      <main className={className}>
         {offers.length && !statusOffers ? <FavoriteCardComponents offers={offers}/> : <EmptyFavoriteCardsComponent/>}
       </main>
 

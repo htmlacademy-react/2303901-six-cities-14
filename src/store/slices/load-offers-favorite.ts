@@ -1,14 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import type {OfferCard} from '../../types/type-store';
-import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
+import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 
 type OfferFavorite = {
   offers: OfferCard[];
   status: object;
   loading: boolean;
 }
-
 
 const initialState: OfferFavorite = {
   offers: [],
@@ -18,7 +17,6 @@ const initialState: OfferFavorite = {
   },
   loading: false
 };
-
 
 const offersFavoriteSlice = createSlice({
   name:'offersFavorite',
