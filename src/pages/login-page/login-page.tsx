@@ -66,6 +66,10 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
 
   useDocumentTitle(title);
 
+  if(authStatus === AuthorizationStatus.Auth.toString()) {
+    return '';
+  }
+
   return authStatus === AuthorizationStatus.NoAuth.toString() ? (
     <div className= "page page--gray page--login">
       <header className="header">

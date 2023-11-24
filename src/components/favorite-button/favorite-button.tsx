@@ -17,6 +17,8 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
+  //const checkClassName = `${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active button' : 'place-card__bookmark-button button'}`;
+  const checkClassName = `${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
 
   const data = {
     id:  offer?.id || '',
@@ -36,7 +38,7 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
     (authStatus === AuthorizationStatus.Unknown.toString() || authStatus === AuthorizationStatus.NoAuth.toString()) ? (
       <Link to={AppRoute.Login} className="link">
         <button
-          className={`${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`}
+          className={checkClassName}
           type="button"
         >
           <svg className="place-card__bookmark-icon" width={width} height={height}>
@@ -48,7 +50,7 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
     ) :
       <button
         onClick={onFavoriteButton}
-        className={`${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`}
+        className={checkClassName}
         type="button"
       >
         <svg className="place-card__bookmark-icon" width={width} height={height}>

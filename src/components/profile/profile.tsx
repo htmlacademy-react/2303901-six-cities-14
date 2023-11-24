@@ -14,11 +14,13 @@ function Profile () {
 
 
   function onClickButtonOut () {
-    dispatch(logoutAction()).unwrap().then(() => {
-      dispatch(fetchOffersAction());
-    });
-    dispatch(dataUserSlice.actions.addUserData(null));
 
+    if(statusAuth === AuthorizationStatus.Auth.toString()) {
+      dispatch(logoutAction()).unwrap().then(() => {
+        dispatch(fetchOffersAction());
+      });
+      dispatch(dataUserSlice.actions.addUserData(null));
+    }
 
   }
 
@@ -30,15 +32,15 @@ function Profile () {
             <div className="header__avatar-wrapper user__avatar-wrapper">
               <img src={user?.avatarUrl}></img>
             </div>
-            <span className="header__user-name user__name">{statusAuth === AuthorizationStatus.Auth.toString() ? user?.email : 'Login'}</span>
+            <span className="header__user-name user__name">{statusAuth === AuthorizationStatus.Auth.toString() ? user?.email : ''}</span>
             <span className="header__favorite-count">{statusAuth === AuthorizationStatus.Auth.toString() ? offers.length : 0}</span>
 
           </Link>
         </li>
         <li className="header__nav-item">
-          <Link to={AppRoute.Main} className="header__nav-link">
-            <span className="header__signout" onClick={onClickButtonOut}>
-              { (statusAuth === AuthorizationStatus.Auth.toString()) ? 'Sign out' : ''}
+          <Link to={statusAuth === AuthorizationStatus.Auth.toString() ? AppRoute.Main : AppRoute.Login} className="header__nav-link">
+            <span className= {statusAuth === AuthorizationStatus.Auth.toString() ? 'header__signout' : 'header__login'} onClick={onClickButtonOut}>
+              { (statusAuth === AuthorizationStatus.Auth.toString()) ? 'Sign out' : 'Sign in'}
             </span>
           </Link>
         </li>

@@ -26,7 +26,6 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
   useDocumentTitle(title);
 
-  console.log(offers.length);
   return (
     <div className= {offers.length && !statusOffers ? 'page' : 'page page--favorites-empty'}>
 

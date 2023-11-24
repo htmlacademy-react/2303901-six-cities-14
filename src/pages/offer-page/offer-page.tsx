@@ -17,6 +17,8 @@ import type {OfferCard} from '../../types/type-store';
 import type {OfferPage} from '../../types/type-store';
 import {fetchComments} from '../../services/thunk/fech-comments';
 import { LoadingComponent } from '../../components/loading-component/loading-component';
+import { ProfileNotLoggedComponent } from '../../components/profile-not-loggeg/profile-not-logged';
+
 
 type OfferPagesProps = {
   title: string;
@@ -34,6 +36,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const offers = useAppSelector((state) => state.offers.offers);
   const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
   const offerStatus = useAppSelector((state) => state.loadOffer.loading);
+  const checkStatus = stateAut === AuthorizationStatus.Auth.toString();
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
@@ -80,7 +83,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
             <div className="header__left">
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
             </div>
-            <Profile/>
+            {checkStatus ? <Profile/> : <ProfileNotLoggedComponent/>}
 
           </div>
         </div>
