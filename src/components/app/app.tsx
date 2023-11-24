@@ -4,15 +4,11 @@ import {LoginPage} from '../../pages/login-page/login-page';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
 import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
-//import {PrivateRoute} from '../private-route/private-route';
 import {AppRoute, TitleDescription} from '../../const';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
 import { useAppDispatch } from '../../hooks/use-store';
 import { fetchOffersAction } from '../../services/thunk/fetch-offers';
 import { checkAuthAction } from '../../services/thunk/check-auth-action';
-//import HistoryRouter from '../history-browser/history-router';
-//import {browserHistory} from '../../history-browser';
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,7 +38,9 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element ={
+
             <FavoritesPage title = {TitleDescription.FavoritePage}/>
+
           }
         />
         <Route

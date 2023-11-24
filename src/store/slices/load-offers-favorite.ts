@@ -7,6 +7,7 @@ type OfferFavorite = {
   offers: OfferCard[];
   status: object;
   loading: boolean;
+  error : string | boolean;
 }
 
 const initialState: OfferFavorite = {
@@ -15,7 +16,8 @@ const initialState: OfferFavorite = {
     id: '',
     status: 0,
   },
-  loading: false
+  loading: false,
+  error: false
 };
 
 const offersFavoriteSlice = createSlice({
@@ -37,6 +39,9 @@ const offersFavoriteSlice = createSlice({
     });
     builder.addCase(fetchOffersFavorite.pending, (state) => {
       state.loading = true;
+    });
+    builder.addCase(fetchOffersFavorite.rejected, (state, action) => {
+      state.error = action.error.message || 'Unknown error';
     });
   }
 });

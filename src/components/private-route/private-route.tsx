@@ -2,18 +2,18 @@
 // import {AuthorizationStatus, AppRoute} from '../../const';
 // import { useAppSelector } from '../../hooks/use-store';
 
-// type PrivateRouteProps = {
+// type MainRouteProps = {
 //   children: JSX.Element;
 // }
 
-// function PrivateRoute ({ children}: PrivateRouteProps): JSX.Element {
+// function LoginRoute ({children}: MainRouteProps): JSX.Element {
 
-//   const getAuthStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
+//   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
 //   return (
-//     AuthorizationStatus.Auth.toString() === getAuthStatus ?
+//     AuthorizationStatus.Auth.toString() === authStatus ?
 //       children : <Navigate to={AppRoute.Login} />
 //   );
 // }
 
-// export {PrivateRoute};
+// export {LoginRoute};

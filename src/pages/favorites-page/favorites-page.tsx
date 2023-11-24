@@ -2,12 +2,14 @@ import {Logotype} from '../../components/logotype/logotype';
 import useDocumentTitle from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
 import {FavoriteCardComponents} from '../../components/favorite-cards-component/favorite-cards-component';
-import {SettingLogoFooter, SettingLogoHeader} from '../../const';
+import {AppRoute, AuthorizationStatus, SettingLogoFooter, SettingLogoHeader} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards-component/empty-favorite-cards-component';
 import {useEffect} from 'react';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
-import { LoadingComponent } from '../../components/loading-component/loading-component';
+import {LoadingComponent} from '../../components/loading-component/loading-component';
+// import {MainPages} from '../main-page/main-page';
+import { useNavigate } from 'react-router-dom';
 
 type FavoritePagesProps = {
   title: string;
@@ -17,7 +19,10 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
   const offers = useAppSelector((state) => state.offersFavorite.offers);
   const statusOffers = useAppSelector((state) => state.offersFavorite.loading);
+  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
   const dispatch = useAppDispatch();
+  const error = useAppSelector((state) => state.offersFavorite.error);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchOffersFavorite());
@@ -27,8 +32,14 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
   useDocumentTitle(title);
 
-  if(statusOffers){
+
+  if(statusOffers && !error){
+
     return <LoadingComponent/>;
+  }
+
+  if(authStatus !== AuthorizationStatus.Auth.toString()) {
+    navigate(AppRoute.Login);
   }
 
   return (
