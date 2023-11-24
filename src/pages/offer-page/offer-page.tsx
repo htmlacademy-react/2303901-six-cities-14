@@ -18,7 +18,7 @@ import type {OfferPage} from '../../types/type-store';
 import {fetchComments} from '../../services/thunk/fech-comments';
 import { LoadingComponent } from '../../components/loading-component/loading-component';
 import { ProfileNotLoggedComponent } from '../../components/profile-not-loggeg/profile-not-logged';
-
+import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
 
 type OfferPagesProps = {
   title: string;
@@ -42,6 +42,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
     dispatch(fetchOfferAction(id.offerId));
     dispatch(fetchComments(id.offerId));
     dispatch(fetchOffersNear(id.offerId));
+    dispatch(fetchOffersFavorite());
 
   },[title]);
 

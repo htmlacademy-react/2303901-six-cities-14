@@ -9,10 +9,12 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
 import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
 import {Logotype} from '../../components/logotype/logotype';
-import {SettingLogoHeader} from '../../const';
+import {SettingLogoHeader, TitleDescription} from '../../const';
 import type {OfferCard} from '../../types/type-store';
 import { NoPlacesRightComponent } from '../../components/no-places/no-places-right';
 import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
+import { ErrorMessage } from '../../components/error-message/error-message';
+import { LoadingComponent } from '../../components/loading-component/loading-component';
 
 type MainPagesProps = {
   title: string;
@@ -24,6 +26,8 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const dispatch = useAppDispatch();
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
+  const error = useAppSelector((state) => state.offers.error);
+  const loading = useAppSelector((state) => state.offers.loadingStatus);
 
   const citiesToFilter: OfferCard[] = stateOffers?.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
@@ -52,6 +56,14 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
   });
 
   useDocumentTitle(title);
+
+  if(error !== null){
+    return <ErrorMessage title={TitleDescription.ErrorPage}/>;
+  }
+
+  if(loading){
+    return <LoadingComponent/>;
+  }
 
   return (
     <div className="page page--gray page--main">

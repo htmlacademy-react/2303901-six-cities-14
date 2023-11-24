@@ -6,13 +6,19 @@ import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
 //import {PrivateRoute} from '../private-route/private-route';
 import {AppRoute, TitleDescription} from '../../const';
-import {LoadingRoute} from '../loading-route/loaging-route';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
+import { useAppDispatch } from '../../hooks/use-store';
+import { fetchOffersAction } from '../../services/thunk/fetch-offers';
+import { checkAuthAction } from '../../services/thunk/check-auth-action';
 //import HistoryRouter from '../history-browser/history-router';
 //import {browserHistory} from '../../history-browser';
 
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  dispatch(fetchOffersAction());
+  dispatch(checkAuthAction());
 
   return (
     <BrowserRouter>
@@ -20,9 +26,9 @@ function App(): JSX.Element {
         <Route
           path={`${AppRoute.Main}`}
           element ={
-            <LoadingRoute>
-              <MainPages title = {TitleDescription.MainPage}/>
-            </LoadingRoute>
+
+            <MainPages title = {TitleDescription.MainPage}/>
+
           }
         />
         <Route
