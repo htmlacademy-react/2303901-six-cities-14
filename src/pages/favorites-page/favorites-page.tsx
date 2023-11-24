@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards-component/empty-favorite-cards-component';
 import {useEffect} from 'react';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
+import { LoadingComponent } from '../../components/loading-component/loading-component';
 
 type FavoritePagesProps = {
   title: string;
@@ -22,12 +23,16 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
     dispatch(fetchOffersFavorite());
   },[]);
 
-  const className = offers.length && !statusOffers ? 'page__main page__main--favorites' : ' page__main page__main--favorites page__main--favorites-empty';
+  const className = offers.length ? 'page__main page__main--favorites' : ' page__main page__main--favorites page__main--favorites-empty';
 
   useDocumentTitle(title);
 
+  if(statusOffers){
+    return <LoadingComponent/>;
+  }
+
   return (
-    <div className= {offers.length && !statusOffers ? 'page' : 'page page--favorites-empty'}>
+    <div className= {offers.length ? 'page' : 'page page--favorites-empty'}>
 
       <header className="header">
         <div className="container">
@@ -42,7 +47,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
       </header>
 
       <main className={className}>
-        {offers.length && !statusOffers ? <FavoriteCardComponents offers={offers}/> : <EmptyFavoriteCardsComponent/>}
+        {offers.length ? <FavoriteCardComponents offers={offers}/> : <EmptyFavoriteCardsComponent/>}
       </main>
 
       <footer className="footer container">
