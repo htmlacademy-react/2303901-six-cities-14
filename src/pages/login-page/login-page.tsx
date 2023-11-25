@@ -19,6 +19,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(inputPassword);
+  const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
   const cityArray = Object.values(Cities);
@@ -97,7 +98,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
                 {error === null ? '' : `${error}`}
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword}>Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword || !checkEmail}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
