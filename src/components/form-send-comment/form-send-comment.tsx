@@ -3,7 +3,6 @@ import type {FormEvent} from 'react';
 import {LengthComment} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
-
 import {sendComment} from '../../services/thunk/send-comment';
 import {fetchComments} from '../../services/thunk/fech-comments';
 
