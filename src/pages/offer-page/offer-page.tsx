@@ -37,6 +37,8 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
   const offerStatus = useAppSelector((state) => state.loadOffer.loading);
   const checkStatus = stateAut === AuthorizationStatus.Auth.toString();
+  const statusUser = stateOffer?.host.isPro;
+  const isUserPro = statusUser ? '--pro' : '';
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
@@ -155,7 +157,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`offer__avatar-wrapper offer__avatar-wrapper${isUserPro} user__avatar-wrapper`}>
                     <img
                       className="offer__avatar user__avatar"
                       src={stateOffer?.host.avatarUrl}
@@ -165,7 +167,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                     />
                   </div>
                   <span className="offer__user-name">{stateOffer?.host.name}</span>
-                  <span className="offer__user-status">{stateOffer?.host.isPro ? 'Pro' : ''}</span>
+                  {statusUser ? <span className="offer__user-status">Pro</span> : ''}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">{stateOffer?.description}</p>
