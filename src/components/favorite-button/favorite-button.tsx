@@ -4,7 +4,8 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {sendFavoriteOffer} from '../../services/api-actions';
 import { AppRoute, AuthorizationStatus} from '../../const';
 import {Link} from 'react-router-dom';
-import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
+import { offersFavoriteSlice } from '../../store/slices/load-offers-favorite';
+
 
 type ButtonProps = {
   offer: OfferCard | OfferPage | null;
@@ -27,11 +28,8 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const onFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));
-
-    dispatch(sendFavoriteOffer(data)).unwrap().then(() => {
-
-      dispatch(fetchOffersFavorite());
-    });
+    dispatch(offersFavoriteSlice.actions.deleteFavoriteOffer(offer?.id ? offer.id : ''));
+    dispatch(sendFavoriteOffer(data));
   };
 
   return (
