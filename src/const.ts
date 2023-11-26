@@ -157,7 +157,7 @@ const SettingCardCities = {
 };
 
 const SettingFavoriteButtonOfferPage = {
-  className: 'offer__bookmark-button button',
+  className: 'offer__bookmark-button',
   width: 31,
   height: 33
 };

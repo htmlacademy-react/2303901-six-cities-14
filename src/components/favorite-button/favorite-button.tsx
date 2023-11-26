@@ -18,8 +18,10 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const favoriteStatus = offer?.isFavorite;
   //const checkClassName = `${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active button' : 'place-card__bookmark-button button'}`;
-  const checkClassName = `${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
+
+  const checkClassName = `${className}${favoriteStatus && className === SettingFavoriteButtonOfferPage.className ? '--active' : ''}  ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
 
   const data = {
     id:  offer?.id || '',
