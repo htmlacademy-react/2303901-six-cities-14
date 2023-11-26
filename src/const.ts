@@ -163,7 +163,7 @@ const SettingFavoriteButtonOfferPage = {
 };
 
 const SettingFavoriteButtonCard = {
-  className: 'place-card__bookmark-icon',
+  className: 'place-card__bookmark-button',
   width: 18,
   height: 19
 };
