@@ -18,8 +18,8 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
   const [button, setButton] = useState(false);
 
   const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
-  const loadingComment = useAppSelector((state) => state.loadComment.isLoading);
-  const isValid = !(isCommentLengthValid && rating !== 0 && (loadingComment === null || true));
+  const isLoading = useAppSelector((state) => state.loadComment.isLoading);
+  const isValid = !(isCommentLengthValid && rating !== 0 && (isLoading === null || true));
 
   const errorMessage = useAppSelector((state) => state.loadComment.error);
 
@@ -39,11 +39,9 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
       dispatch(fetchComments(id));
       setButton(false);
     }) .catch(() => {
+
       setButton(false);
-
-
     });
-
 
     setButton(true);
     setComment(comment);
@@ -69,7 +67,7 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
-
+        disabled={isLoading}
         onChange= {(evt) => setComment(evt.target.value)}
       />
       <div className="reviews__button-wrapper">

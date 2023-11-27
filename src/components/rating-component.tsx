@@ -1,5 +1,6 @@
 import {ChangeEvent} from 'react';
 import React from 'react';
+import { useAppSelector } from '../hooks/use-store';
 
 
 type RatingComponentProps = {
@@ -12,6 +13,8 @@ function RatingComponent ({rating, setRating}: RatingComponentProps) {
   const handleChecked = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
   };
+
+  const isLoading = useAppSelector((state) => state.loadComment.isLoading);
 
   const OPTIONS = [
     {label: 'perfect', value: 5},
@@ -33,6 +36,7 @@ function RatingComponent ({rating, setRating}: RatingComponentProps) {
             onChange={handleChecked}
             id={`${option.value}-stars`}
             type="radio"
+            disabled = {isLoading}
           />
           <label
             htmlFor={`${option.value}-stars`}

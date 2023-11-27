@@ -5,7 +5,7 @@ import { fetchComments } from '../../services/thunk/fech-comments';
 const initialState: StateComments = {
   comments: null,
   error: null,
-  isLoading: null
+  isLoading: false
 };
 
 const loadCommentsSlice = createSlice({
