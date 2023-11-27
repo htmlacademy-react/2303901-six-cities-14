@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
-import useDocumentTitle from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {AppRoute, AuthorizationStatus, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
@@ -9,13 +9,13 @@ import {loginAction} from '../../services/thunk/login-action';
 import {useEffect} from 'react';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 import '../../pages/login-page/styleLogin.css';
+import type {AuthData} from '../../types/types';
 
 type LoginPagesProps = {
   title: string;
 }
 
 function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
-
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(inputPassword);
@@ -30,12 +30,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
     const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
     dispatch(filterCitySlice.actions.changeCity(randomCity));
   }, []);
-
-
-  type AuthData = {
-    password: string ;
-    login: string;
-  }
 
   const authData: AuthData = {
     password: inputPassword,
@@ -83,7 +77,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
           </div>
         </div>
       </header>
-
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

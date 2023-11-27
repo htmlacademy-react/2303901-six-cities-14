@@ -1,7 +1,7 @@
-import type { OfferCard } from '../../types/type-store';
+import type {OfferCard} from '../../types/type-store';
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import { fetchOffersAction } from '../../services/thunk/fetch-offers';
+import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 
 type InitialState = {
   offers: OfferCard[] | null;

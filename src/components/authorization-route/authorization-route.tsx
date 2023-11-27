@@ -2,7 +2,6 @@ import { Navigate } from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks/use-store';
 
-
 type AuthorizationRouteProps = {
   children: JSX.Element;
 }

@@ -15,11 +15,9 @@ function Logotype ({className, width, height}: Props): JSX.Element {
 
   function onClickLogo () {
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
-
   }
 
   return (
-
     <Link to={AppRoute.Main} className={`${className}__logo-link ${className}__logo-link--active`}>
       <img
         className={`${className}__logo`}
@@ -30,11 +28,9 @@ function Logotype ({className, width, height}: Props): JSX.Element {
         onClick={onClickLogo}
       />
     </Link>
-
   );
 }
 
 //const Logotype = memo(MemoizedLogotype);
-
 
 export {Logotype};

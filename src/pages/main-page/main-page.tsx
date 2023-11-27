@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {MapComponent} from '../../components/map/map';
-import FilterCities from '../../components/filter-cities/filter-cities';
-import useDocumentTitle from '../../hooks/document-title';
+import {FilterCities} from '../../components/filter-cities/filter-cities';
+import {useDocumentTitle} from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
@@ -21,7 +21,6 @@ type MainPagesProps = {
 }
 
 function MainPages ({title}: MainPagesProps): JSX.Element {
-
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const dispatch = useAppDispatch();
@@ -43,7 +42,6 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
 
 
   const pointsOffersToMap = citiesToFilter?.map((offer) => {
-
     const pointsToMap = {
       title: offer.city.name,
       lat: offer.location.latitude,
@@ -71,31 +69,20 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
-
             </div>
-
             <Profile/>
-
           </div>
         </div>
       </header>
-
       <main className= {`${offersFilter.length !== 0 ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
-
         <FilterCities/>
-
         <div className="cities">
           <div className={`cities__places-container container ${offersFilter.length === 0 ? 'cities__places-container--empty' : ''}`}>
-
             {offersFilter.length !== 0 ? <CitiesPlaceComponent/> : <NoPlacesLeftComponent/>}
-
             <div className="cities__right-section">
-
               {offersFilter.length !== 0 ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : <NoPlacesRightComponent/>}
-
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
-import CardOfferNear from '../card-offer-near/card-offer-near';
+import {CardOfferNear} from '../card-offer-near/card-offer-near';
 import type {OfferCard} from '../../types/type-store';
 import type {OfferPage} from '../../types/type-store';
+import {DEFAULT_VALUE_NULL, MAX_LENGTH_OFFERS_NEAR} from '../../const';
 
 type OfferNearProps = {
   offersPoint: OfferCard[];
@@ -8,8 +9,7 @@ type OfferNearProps = {
 }
 
 function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
-
-  const threeOffersNear = offersPoint.slice(0, 3);
+  const threeOffersNear = offersPoint.slice(DEFAULT_VALUE_NULL, MAX_LENGTH_OFFERS_NEAR);
   const offers = threeOffersNear.filter((offer) => offer.id !== offerPoint.id);
 
   return (
@@ -28,4 +28,4 @@ function OffersListNear ({offersPoint, offerPoint}: OfferNearProps) {
   );
 }
 
-export default OffersListNear;
+export {OffersListNear};

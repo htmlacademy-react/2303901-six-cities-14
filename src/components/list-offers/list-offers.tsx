@@ -2,7 +2,6 @@ import { SettingCardCities } from '../../const';
 import type {OfferCard} from '../../types/type-store';
 import {CardOffer} from '../card-offers/card';
 
-
 type ListOffersProps = {
   offers: OfferCard[] | null;
 }

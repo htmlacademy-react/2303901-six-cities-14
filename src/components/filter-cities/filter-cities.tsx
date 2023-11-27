@@ -14,4 +14,4 @@ function FilterCities () {
   );
 }
 
-export default FilterCities;
+export {FilterCities};

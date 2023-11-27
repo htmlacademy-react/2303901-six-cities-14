@@ -2,7 +2,7 @@ import type {OfferCard, OfferPage} from '../../types/type-store';
 import {offersSlice} from '../../store/slices/offers-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {sendFavoriteOffer} from '../../services/api-actions';
-import { AppRoute, AuthorizationStatus, SettingFavoriteButtonOfferPage} from '../../const';
+import { AppRoute, AuthorizationStatus, SettingFavoriteButtonOfferPage, statusFavoriteToServer} from '../../const';
 import {Link} from 'react-router-dom';
 import {offersFavoriteSlice} from '../../store/slices/load-offers-favorite';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
@@ -15,17 +15,16 @@ type ButtonProps = {
 };
 
 function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Element {
-
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
   const favoriteStatus = offer?.isFavorite;
-  //const checkClassName = `${className} ${offer?.isFavorite ? 'place-card__bookmark-button--active button' : 'place-card__bookmark-button button'}`;
-
-  const checkClassName = `${className}${favoriteStatus && className === SettingFavoriteButtonOfferPage.className ? '--active' : ''}  ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
+  const checkClassName = `${className}${favoriteStatus && className === SettingFavoriteButtonOfferPage.className ?
+    '--active' : ''}  ${offer?.isFavorite ?
+    'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
 
   const data = {
     id:  offer?.id || '',
-    status: (!offer?.isFavorite) ? 1 : 0,
+    status: (!offer?.isFavorite) ? statusFavoriteToServer.favorite : statusFavoriteToServer.noFavorite,
   };
 
   const onFavoriteButton = (): void => {
@@ -37,8 +36,6 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
         dispatch(fetchOffersFavorite());
       }
     });
-
-
   };
 
   return (

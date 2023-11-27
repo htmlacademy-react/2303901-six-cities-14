@@ -1,15 +1,12 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import useDocumentTitle from '../../hooks/document-title';
-//import { useAppSelector } from '../../hooks/use-store';
+import {useDocumentTitle} from '../../hooks/document-title';
 
 type OfferPagesProps = {
   title: string;
 }
 
 function ErrorMessage ({title} : OfferPagesProps): JSX.Element | null {
-
-  // const error = useAppSelector((state) => state.error.error);
   useDocumentTitle(title);
 
   return(

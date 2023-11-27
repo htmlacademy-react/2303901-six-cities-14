@@ -1,3 +1,52 @@
+const DEFAULT_CITY = 'Paris';
+const URL_SERVER = 'https://14.design.pages.academy/six-cities';
+const REQUEST_TIMEOUT = 5000;
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+const TIMEOUT_SHOW_ERROR = 2000;
+const DEFAULT_VALUE_NULL = 0;
+const ERROR_NOT_OFFER = 'errorNotOffer';
+const ENDING = 2;
+const MAX_LENGTH_REVIEW = 10;
+const URL_MARKER_DEFAULT = 'img/pin.svg';
+const URL_MARKER_CURRENT = 'img/pin-active.svg';
+const MAX_LENGTH_OFFERS_NEAR = 3;
+const MAX_LENGTH_OFFER_PHOTO = 6;
+const MAX_LENGTH_POINT_NEAR = 3;
+
+const CURRENT_ICON = {
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
+};
+
+const DEFAULT_ICON = {
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
+};
+
+const DEFAULT_DESCRIPTION = {
+  title: 'Paris',
+  lat: 52.37454,
+  lng: 4.897976,
+  zoom: 13,
+};
+
+const MONTH_NAMES = [
+  'January', 'February', 'March',
+  'April', 'May', 'June', 'July',
+  'August', 'September', 'October',
+  'November', 'December'
+];
+
+const OPTIONS = [
+  {label: 'perfect', value: 5},
+  {label: 'good', value: 4},
+  {label: 'not bad', value: 3},
+  {label: 'badly', value: 2},
+  {label: 'terribly', value: 1},
+];
+
  enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -38,27 +87,6 @@ const Cities = {
 };
 
 const CitiesForFilter = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-const URL_MARKER_DEFAULT = 'img/pin.svg';
-const URL_MARKER_CURRENT = 'img/pin-active.svg';
-
-const CURRENT_ICON = {
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [27, 39],
-  iconAnchor: [13.5, 39],
-};
-
-const DEFAULT_ICON = {
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [27, 39],
-  iconAnchor: [13.5, 39],
-};
-
-const DEFAULT_DESCRIPTION = {
-  title: 'Paris',
-  lat: 52.37454,
-  lng: 4.897976,
-  zoom: 13,
-};
 
 
 const DefaultCityToMap = {
@@ -111,25 +139,6 @@ const LengthComment = {
   MAX: 300
 };
 
-const MAX_LENGTH_REVIEW = 10;
-
-const MONTH_NAMES = [
-  'January', 'February', 'March',
-  'April', 'May', 'June', 'July',
-  'August', 'September', 'October',
-  'November', 'December'
-];
-
-const DEFAULT_CITY = 'Paris';
-const URL_SERVER = 'https://14.design.pages.academy/six-cities';
-const REQUEST_TIMEOUT = 5000;
-const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
-const TIMEOUT_SHOW_ERROR = 2000;
-
-const ERROR_NOT_OFFER = 'errorNotOffer';
-
-const ENDING = 2;
-
 const SettingLogoHeader = {
   className: 'header',
   width: 81,
@@ -142,7 +151,6 @@ const SettingLogoFooter = {
   width: 64,
   height: 33,
 };
-
 
 const SettingFavoriteCard = {
   className: 'favorites',
@@ -166,6 +174,11 @@ const SettingFavoriteButtonCard = {
   className: 'place-card__bookmark-button',
   width: 18,
   height: 19
+};
+
+const statusFavoriteToServer = {
+  favorite: 1,
+  noFavorite: 0
 };
 
 export {
@@ -195,6 +208,12 @@ export {
   SettingFavoriteCard,
   SettingCardCities,
   SettingFavoriteButtonOfferPage,
-  SettingFavoriteButtonCard
+  SettingFavoriteButtonCard,
+  statusFavoriteToServer,
+  DEFAULT_VALUE_NULL,
+  MAX_LENGTH_OFFERS_NEAR,
+  MAX_LENGTH_OFFER_PHOTO,
+  MAX_LENGTH_POINT_NEAR,
+  OPTIONS
 };
 

@@ -1,7 +1,7 @@
 import {ChangeEvent} from 'react';
 import React from 'react';
-import { useAppSelector } from '../hooks/use-store';
-
+import {useAppSelector} from '../hooks/use-store';
+import {OPTIONS} from '../const';
 
 type RatingComponentProps = {
   rating: number;
@@ -9,20 +9,10 @@ type RatingComponentProps = {
 };
 
 function RatingComponent ({rating, setRating}: RatingComponentProps) {
-
+  const isLoading = useAppSelector((state) => state.loadComment.isLoading);
   const handleChecked = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
   };
-
-  const isLoading = useAppSelector((state) => state.loadComment.isLoading);
-
-  const OPTIONS = [
-    {label: 'perfect', value: 5},
-    {label: 'good', value: 4},
-    {label: 'not bad', value: 3},
-    {label: 'badly', value: 2},
-    {label: 'terribly', value: 1},
-  ];
 
   return (
     <div className="reviews__rating-form form__rating">

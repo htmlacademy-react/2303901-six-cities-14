@@ -1,18 +1,16 @@
-import { SettingFavoriteCard } from '../../const';
+import { DEFAULT_VALUE_NULL, SettingFavoriteCard } from '../../const';
 import {ButtonFilterComponent} from '../button-filter-component/button-filter-component';
 import {CardOffer} from '../card-offers/card';
 import type {OfferCard} from '../../types/type-store';
+
 
 type props ={
   offers: OfferCard[];
 }
 
+type Groups = {[key: string]: OfferCard[]};
+
 function FavoriteCardComponents({offers}: props) {
-
-  type Groups = {[key: string]: OfferCard[]};
-
-  //const offers = useAppSelector((state) => state.offers.offers);
-
   const groupedFavorites = offers?.reduce((groups, offer) => {
     const cityName = offer.city.name;
 
@@ -31,13 +29,13 @@ function FavoriteCardComponents({offers}: props) {
         <ul className="favorites__list">
 
           {groupedFavorites && Object.entries(groupedFavorites).map(([cityName, cityOffers]) => {
-
             const favoriteCityOffers = cityOffers?.filter((offer) => offer.isFavorite);
 
-            if (favoriteCityOffers?.length === 0) {
+            if (favoriteCityOffers?.length === DEFAULT_VALUE_NULL) {
 
               return null;
             }
+
             return (
               <li className="favorites__locations-items" key={cityName}>
                 <div className="favorites__locations locations locations--current">

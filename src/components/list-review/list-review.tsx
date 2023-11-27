@@ -1,14 +1,13 @@
-import Review from '../review/review';
-import { MAX_LENGTH_REVIEW } from '../../const';
-import { useAppSelector } from '../../hooks/use-store';
-import { useEffect } from 'react';
-import type { Comment } from '../../types/type-store';
+import {Review} from '../review/review';
+import {DEFAULT_VALUE_NULL, MAX_LENGTH_REVIEW} from '../../const';
+import {useAppSelector} from '../../hooks/use-store';
+import {useEffect} from 'react';
+import type {Comment} from '../../types/type-store';
 
 function ListReview() {
   const comments = useAppSelector((state) => state.loadComments.comments);
 
   useEffect(() => {
-
   }, [comments]);
 
   function compareDates(a: Comment, b: Comment): number {
@@ -18,7 +17,7 @@ function ListReview() {
   }
 
   const sortedComments = comments ? [...comments].sort(compareDates) : [];
-  const slicedComments = sortedComments.slice(0, MAX_LENGTH_REVIEW);
+  const slicedComments = sortedComments.slice(DEFAULT_VALUE_NULL, MAX_LENGTH_REVIEW);
 
   return (
     <ul className="reviews__list">
@@ -29,5 +28,5 @@ function ListReview() {
   );
 }
 
-export default ListReview;
+export {ListReview};
 

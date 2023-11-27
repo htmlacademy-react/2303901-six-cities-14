@@ -1,7 +1,6 @@
 import { useAppSelector } from '../../hooks/use-store';
 
 function NoPlacesLeftComponent () {
-
   const city = useAppSelector((state) => state.filterCity.city);
 
   return (

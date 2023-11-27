@@ -14,8 +14,6 @@ const loginAction = createAsyncThunk<void, AuthData, Thunk>(
 
     dispatch(dataUserSlice.actions.addUserData(data as User));
     saveToken(token);
-
-    //dispatch(redirectToRoute(AppRoute.Login));
   },
 );
 

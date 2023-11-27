@@ -1,8 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import type { OfferPage, StateOffer } from '../../types/type-store';
-import { fetchOfferAction } from '../../services/thunk/fetch-offer';
-
+import {createSlice} from '@reduxjs/toolkit';
+import type {PayloadAction} from '@reduxjs/toolkit';
+import type {OfferPage, StateOffer} from '../../types/type-store';
+import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 
 const initialState: StateOffer = {
   offer: null,
@@ -35,4 +34,4 @@ const offerSlice = createSlice({
   },
 });
 
-export { offerSlice };
+export {offerSlice};

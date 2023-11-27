@@ -1,5 +1,5 @@
 import {Logotype} from '../../components/logotype/logotype';
-import useDocumentTitle from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/document-title';
 import {Profile} from '../../components/profile/profile';
 import {FavoriteCardComponents} from '../../components/favorite-cards-component/favorite-cards-component';
 import {AppRoute, AuthorizationStatus, SettingLogoFooter, SettingLogoHeader} from '../../const';
@@ -8,7 +8,6 @@ import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards
 import {useEffect} from 'react';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
-// import {MainPages} from '../main-page/main-page';
 import { useNavigate } from 'react-router-dom';
 
 type FavoritePagesProps = {
@@ -16,22 +15,19 @@ type FavoritePagesProps = {
 };
 
 function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
-
   const offers = useAppSelector((state) => state.offersFavorite.offers);
   const statusOffers = useAppSelector((state) => state.offersFavorite.loading);
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
   const dispatch = useAppDispatch();
   const error = useAppSelector((state) => state.offersFavorite.error);
   const navigate = useNavigate();
+  const className = offers.length ? 'page__main page__main--favorites' : ' page__main page__main--favorites page__main--favorites-empty';
 
   useEffect(() => {
     dispatch(fetchOffersFavorite());
   },[]);
 
-  const className = offers.length ? 'page__main page__main--favorites' : ' page__main page__main--favorites page__main--favorites-empty';
-
   useDocumentTitle(title);
-
 
   if(statusOffers && !error){
 
@@ -44,7 +40,6 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
 
   return (
     <div className= {offers.length ? 'page' : 'page page--favorites-empty'}>
-
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -52,19 +47,14 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
             </div>
             <Profile/>
-
           </div>
         </div>
       </header>
-
       <main className={className}>
         {offers.length ? <FavoriteCardComponents offers={offers}/> : <EmptyFavoriteCardsComponent/>}
       </main>
-
       <footer className="footer container">
-
         <Logotype className={SettingLogoFooter.className} width={SettingLogoFooter.width} height={SettingLogoFooter.height}/>
-
       </footer>
     </div>
   );

@@ -1,6 +1,5 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-// import {loadOffersSlice} from '../store/slices/load-offers-slice';
 import {ApiRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
