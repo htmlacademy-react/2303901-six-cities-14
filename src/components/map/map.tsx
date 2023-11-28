@@ -5,20 +5,19 @@ import type {PointOfferLocation, IconToMap} from '../../types/types';
 import useMap from '../../hooks/use-map';
 import {CURRENT_ICON, DEFAULT_CITY, DEFAULT_ICON, DefaultCityToMap} from '../../const';
 import {useAppSelector} from '../../hooks/use-store';
-
+import {memo} from 'react';
 
 type MapComponentProp = {
   pointsToMap: PointOfferLocation[];
   cityName?: string;
 };
 
-
-function MapComponent({pointsToMap: points, cityName = DEFAULT_CITY}: MapComponentProp): JSX.Element {
-
+function MapComponentMemo ({pointsToMap: points, cityName = DEFAULT_CITY}: MapComponentProp): JSX.Element {
   const defaultCustomIcon = new Icon(DEFAULT_ICON as IconToMap);
   const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
   const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
   const offer = useAppSelector((state) => state.loadOffer.offer);
+
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -49,7 +48,6 @@ function MapComponent({pointsToMap: points, cityName = DEFAULT_CITY}: MapCompone
   }, [map, city]);
 
   return (
-
     <section
       className="cities__map map"
       ref={mapRef}
@@ -61,8 +59,9 @@ function MapComponent({pointsToMap: points, cityName = DEFAULT_CITY}: MapCompone
         margin: '0 auto',
       }}
     />
-
   );
 }
+
+const MapComponent = memo(MapComponentMemo);
 
 export {MapComponent};

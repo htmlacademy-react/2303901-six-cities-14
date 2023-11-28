@@ -1,14 +1,13 @@
-import { MONTH_NAMES } from '../../const';
+import {MONTH_NAMES} from '../../const';
 import type {Review} from '../../types/types';
 import type {Comment} from '../../types/type-store';
+import {getRating} from '../../utils';
 
 type ReviewProps = {
   reviewProps:Comment;
 }
 
-
 function Review ({reviewProps}: ReviewProps) {
-
   const inputDate = reviewProps.date;
   const date = new Date(inputDate);
   const month = MONTH_NAMES[date.getMonth()];
@@ -32,7 +31,7 @@ function Review ({reviewProps}: ReviewProps) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width:  `${Math.round(reviewProps.rating) * 100 / 5}%`}} />
+            <span style={{ width:  `${getRating(reviewProps.rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -47,4 +46,4 @@ function Review ({reviewProps}: ReviewProps) {
   );
 }
 
-export default Review;
+export {Review};

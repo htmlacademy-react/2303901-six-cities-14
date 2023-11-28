@@ -1,23 +1,26 @@
 import {FormSendComment} from '../../components/form-send-comment/form-send-comment';
-import ListReview from '../../components/list-review/list-review';
+import {ListReview} from '../../components/list-review/list-review';
 import {Logotype} from '../../components/logotype/logotype';
 import {MapComponent} from '../../components/map/map';
-import OffersListNear from '../../components/offers-list-near/offers-list-near';
-import useDocumentTitle from '../../hooks/document-title';
+import {OffersListNear} from '../../components/offers-list-near/offers-list-near';
+import {useDocumentTitle} from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
 import {fetchOffersNear} from '../../services/api-actions';
 import {useEffect} from 'react';
-import {offerSlice} from '../../store/slices/offer-slice';
 import {ErrorMessage} from '../../components/error-message/error-message';
-import {AuthorizationStatus, ENDING, SettingFavoriteButtonOfferPage, SettingLogoHeader, TitleDescription} from '../../const';
-import { fetchOfferAction } from '../../services/thunk/fech-offer';
-import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import {AuthorizationStatus, DEFAULT_VALUE_NULL, ENDING, MAX_LENGTH_OFFER_PHOTO, MAX_LENGTH_POINT_NEAR, SettingFavoriteButtonOfferPage, SettingLogoHeader, TitleDescription} from '../../const';
+import {fetchOfferAction} from '../../services/thunk/fetch-offer';
+import {FavoriteButton} from '../../components/favorite-button/favorite-button';
+import type {OfferCard} from '../../types/type-store';
+import type {OfferPage} from '../../types/type-store';
+import {fetchComments} from '../../services/thunk/fech-comments';
+import {LoadingComponent} from '../../components/loading-component/loading-component';
+import {ProfileNotLoggedComponent} from '../../components/profile-not-loggeg/profile-not-logged';
+import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
+import {getRating} from '../../utils';
 
-import type { OfferCard } from '../../types/type-store';
-import type { OfferPage } from '../../types/type-store';
-import { fetchComments } from '../../services/thunk/fech-comments';
 type OfferPagesProps = {
   title: string;
 }
@@ -32,26 +35,24 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
   const offers = useAppSelector((state) => state.offers.offers);
   const offer = offers?.find((offerItem) => offerItem.id === id.offerId);
+  const offerStatus = useAppSelector((state) => state.loadOffer.loading);
+  const checkStatus = stateAut === AuthorizationStatus.Auth.toString();
+  const statusUser = stateOffer?.host.isPro;
+  const isUserPro = statusUser ? '--pro' : '';
 
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
-
-
     dispatch(fetchComments(id.offerId));
-
-
     dispatch(fetchOffersNear(id.offerId));
-    return () => {
-      dispatch(offerSlice.actions.addLoadOffer(null));
+    dispatch(fetchOffersFavorite());
 
-    };
-  }, [id]);
+  },[title]);
 
   const pointToMap = {
     title: stateOffer?.city.name || '',
-    lat: stateOffer?.location.latitude || 0,
-    lng: stateOffer?.location.longitude || 0,
-    zoom: stateOffer?.location.zoom || 0,
+    lat: stateOffer?.location.latitude || DEFAULT_VALUE_NULL,
+    lng: stateOffer?.location.longitude || DEFAULT_VALUE_NULL,
+    zoom: stateOffer?.location.zoom || DEFAULT_VALUE_NULL,
     id: stateOffer?.id || '',
   };
 
@@ -66,11 +67,16 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
     };
 
     return pointMap;
-  }).slice(0, 3);
+  }).slice(DEFAULT_VALUE_NULL, MAX_LENGTH_POINT_NEAR);
 
   const pointsToMap = [...points, pointToMap];
 
   useDocumentTitle(title);
+
+  if(offerStatus){
+
+    return <LoadingComponent/>;
+  }
 
   return stateError !== null ? <ErrorMessage title = {TitleDescription.ErrorPage}/> : (
     <div className="page">
@@ -80,8 +86,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
             <div className="header__left">
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
             </div>
-            <Profile/>
-
+            {checkStatus ? <Profile/> : <ProfileNotLoggedComponent/>}
           </div>
         </div>
       </header>
@@ -89,7 +94,6 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-
               {stateOffer?.images.map((image) => (
                 <div key={image} className='offer__image-wrapper' >
                   <img
@@ -98,32 +102,27 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                     alt='Photo studio'
                   />
                 </div>
-              )).slice(0, 6)}
-
+              )).slice(DEFAULT_VALUE_NULL, MAX_LENGTH_OFFER_PHOTO)}
             </div>
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-
               <span>{stateOffer?.isPremium ? <div className="offer__mark">Premium </div> : ''}</span>
-
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   {stateOffer?.title}
                 </h1>
-
                 <FavoriteButton
                   offer={offer as OfferCard}
                   className={SettingFavoriteButtonOfferPage.className}
                   width={SettingFavoriteButtonOfferPage.width}
                   height={SettingFavoriteButtonOfferPage.height}
                 />
-
               </div>
               <div className="offer__rating rating">
                 {stateOffer && (
                   <div className="offer__stars rating__stars">
-                    <span style={{ width:  `${Math.round(stateOffer.rating) * 100 / 5}%`}} />
+                    <span style={{ width:  `${getRating(stateOffer.rating)}%`}} />
                     <span className="visually-hidden">{stateOffer.rating}</span>
                   </div>
                 )}
@@ -151,7 +150,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`offer__avatar-wrapper offer__avatar-wrapper${isUserPro} user__avatar-wrapper`}>
                     <img
                       className="offer__avatar user__avatar"
                       src={stateOffer?.host.avatarUrl}
@@ -161,7 +160,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                     />
                   </div>
                   <span className="offer__user-name">{stateOffer?.host.name}</span>
-                  <span className="offer__user-status">{stateOffer?.host.isPro ? 'Pro' : ''}</span>
+                  {statusUser ? <span className="offer__user-status">Pro</span> : ''}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">{stateOffer?.description}</p>
@@ -172,27 +171,19 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                   {stateComments && stateComments.length >= ENDING && stateComments.length !== undefined ? 'Reviews ' : 'Review '}
                   <span className="reviews__amount">{stateComments?.length}</span>
                 </h2>
-
                 <ListReview/>
-
                 {stateAut === AuthorizationStatus.Auth.toString() ? <FormSendComment id={id.offerId}/> : ''}
-
               </section>
             </div>
           </div>
           <section className="offer__map map" >
-
             <MapComponent
               pointsToMap={pointsToMap}
-
               cityName={stateOffer?.city.name}
             />
-
           </section>
         </section>
-
         {stateOffer && <OffersListNear offersPoint={stateOffersNear} offerPoint={stateOffer} />}
-
       </main>
     </div>
   );

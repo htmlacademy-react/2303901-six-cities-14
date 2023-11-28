@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {Comment,StateComment} from '../../types/type-store';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import { sendComment } from '../../services/thunk/send-comment';
+import {sendComment} from '../../services/thunk/send-comment';
 
 const initialState: StateComment = {
   comment: null,

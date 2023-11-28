@@ -1,12 +1,13 @@
 import { useAppSelector } from '../../hooks/use-store';
 import {ListOffers} from '../list-offers/list-offers';
 import {SortList} from '../sort-list/sort-list';
+import {memo} from 'react';
 
-
-function CitiesPlaceComponent () {
+function CitiesPlaceComponentMemo () {
   const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">{`${offersFilter?.length === 1 ? 'Place' : 'Places'}`} </h2>
@@ -16,5 +17,7 @@ function CitiesPlaceComponent () {
     </section>
   );
 }
+
+const CitiesPlaceComponent = memo(CitiesPlaceComponentMemo);
 
 export {CitiesPlaceComponent};

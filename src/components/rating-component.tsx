@@ -1,6 +1,7 @@
 import {ChangeEvent} from 'react';
 import React from 'react';
-
+import {useAppSelector} from '../hooks/use-store';
+import {OPTIONS} from '../const';
 
 type RatingComponentProps = {
   rating: number;
@@ -8,28 +9,29 @@ type RatingComponentProps = {
 };
 
 function RatingComponent ({rating, setRating}: RatingComponentProps) {
-
+  const isLoading = useAppSelector((state) => state.loadComment.isLoading);
   const handleChecked = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));
   };
 
   return (
     <div className="reviews__rating-form form__rating">
-      {[5,4,3,2,1,].map((value) => (
-        < React.Fragment key={value}>
+      {OPTIONS.map((option) => (
+        < React.Fragment key={option.value}>
           <input
             className="form__rating-input visually-hidden"
             name="rating"
-            value={value}
-            checked={rating === value}
+            value={option.value}
+            checked={rating === option.value}
             onChange={handleChecked}
-            id={`${value}-stars`}
+            id={`${option.value}-stars`}
             type="radio"
+            disabled = {isLoading}
           />
           <label
-            htmlFor={`${value}-stars`}
+            htmlFor={`${option.value}-stars`}
             className="reviews__rating-label form__rating-label"
-            title="perfect"
+            title={option.label}
           >
             <svg className="form__star-image" width={37} height={33}>
               <use xlinkHref="#icon-star" />

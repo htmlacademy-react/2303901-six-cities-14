@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import {CitiesForFilter} from '../../const';
 import {ButtonFilterComponent} from '../button-filter-component/button-filter-component';
 
 
-function FilterCities () {
+function FilterCitiesMemo () {
 
   return (
     <div className="tabs" >
@@ -15,4 +16,5 @@ function FilterCities () {
   );
 }
 
-export default FilterCities;
+const FilterCities = memo(FilterCitiesMemo);
+export {FilterCities};

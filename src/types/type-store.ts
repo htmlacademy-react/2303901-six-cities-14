@@ -80,6 +80,7 @@ type StateLoadOffers = {
 
 type StateAuth = {
   authStatus: string;
+  error: string | null;
 };
 
 type StateError = {
@@ -89,6 +90,7 @@ type StateError = {
 type StateOffer = {
   offer: OfferPage | null;
   error: string | null;
+  loading: boolean | null;
 }
 
 type StateComments = {

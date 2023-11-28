@@ -1,16 +1,15 @@
-import Review from '../review/review';
-import {MAX_LENGTH_REVIEW} from '../../const';
+import {Review} from '../review/review';
+import {DEFAULT_VALUE_NULL, MAX_LENGTH_REVIEW} from '../../const';
 import {useAppSelector} from '../../hooks/use-store';
 import {useEffect} from 'react';
-import type { Comment } from '../../types/type-store';
+import type {Comment} from '../../types/type-store';
+import {memo} from 'react';
 
-function ListReview () {
+function ListReviewMemo() {
   const comments = useAppSelector((state) => state.loadComments.comments);
-  const reviews = comments?.slice(0, MAX_LENGTH_REVIEW);
 
   useEffect(() => {
-  }, [comments, reviews]);
-
+  }, [comments]);
 
   function compareDates(a: Comment, b: Comment): number {
     const dateA = new Date(a.date);
@@ -18,14 +17,19 @@ function ListReview () {
     return dateB.getTime() - dateA.getTime();
   }
 
-  const sort = reviews?.sort(compareDates);
+  const sortedComments = comments ? [...comments].sort(compareDates) : [];
+  const slicedComments = sortedComments.slice(DEFAULT_VALUE_NULL, MAX_LENGTH_REVIEW);
 
-  return(
+  return (
     <ul className="reviews__list">
-      {sort?.map((review) => <Review key={review.id} reviewProps={review}/>)}
+      {slicedComments.map((review) => (
+        <Review key={review.id} reviewProps={review} />
+      ))}
     </ul>
   );
 }
 
-export default ListReview;
+const ListReview = memo(ListReviewMemo);
+
+export {ListReview};
 

@@ -1,25 +1,19 @@
 import {Link} from 'react-router-dom';
 import {OfferCard} from '../../types/type-store';
 import {AppRoute, SettingFavoriteButtonCard} from '../../const';
-//import {useEffect} from 'react';
 import {FavoriteButton} from '../favorite-button/favorite-button';
-import { useAppDispatch } from '../../hooks/use-store';
-import { fetchOffersNear } from '../../services/api-actions';
-import { fetchOfferAction } from '../../services/thunk/fech-offer';
+import {useAppDispatch} from '../../hooks/use-store';
+import {fetchOffersNear} from '../../services/api-actions';
+import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 
 type CardOfferProps = {
   offer: OfferCard;
 }
 
 function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // },);
   const dispatch = useAppDispatch();
 
   function onClick () {
-
     dispatch(fetchOfferAction(offer.id));
     dispatch(fetchOffersNear(offer.id));
   }
@@ -27,9 +21,7 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
   return (
     <article className="near-places__card place-card" onClick={onClick} >
       <div className="near-places__image-wrapper place-card__image-wrapper">
-
         {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
-
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
@@ -39,7 +31,6 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
             alt="Place image"
           />
         </Link>
-
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -47,14 +38,12 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-
           <FavoriteButton
             offer={offer}
             className={SettingFavoriteButtonCard.className}
             width={SettingFavoriteButtonCard.width}
             height={SettingFavoriteButtonCard.height}
           />
-
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -71,4 +60,4 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
   );
 }
 
-export default CardOfferNear;
+export {CardOfferNear};

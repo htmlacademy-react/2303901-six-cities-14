@@ -12,8 +12,6 @@ import {loadOffersNearSlice} from './slices/load-offer-near-slice';
 import {loadCommentsSlice} from './slices/load-comments-slice';
 import {sendCommentsSlice} from './slices/send-comment-slice';
 import {offersFavoriteSlice} from './slices/load-offers-favorite';
-import { redirect } from './redirect';
-
 
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
@@ -28,7 +26,6 @@ const reducer = combineReducers({
   [loadCommentsSlice.name]: loadCommentsSlice.reducer,
   [sendCommentsSlice.name]: sendCommentsSlice.reducer,
   [offersFavoriteSlice.name]: offersFavoriteSlice.reducer
-
 });
 
 const api = createApi();
@@ -40,9 +37,7 @@ const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }).concat(redirect),
+    }),
 });
-
-//console.log(store.getState());
 
 export {store, reducer};

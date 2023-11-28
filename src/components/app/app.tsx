@@ -1,38 +1,29 @@
-import {Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {MainPages} from '../../pages/main-page/main-page';
 import {LoginPage} from '../../pages/login-page/login-page';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page';
 import {OfferPage} from '../../pages/offer-page/offer-page';
 import {ErrorMessage} from '../error-message/error-message';
-import {PrivateRoute} from '../private-route/private-route';
 import {AppRoute, TitleDescription} from '../../const';
-// import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-// import {offersSlice} from '../../store/slices/offers-slice';
-// import {useEffect} from 'react';
-import {LoadingRoute} from '../loading-route/loaging-route';
 import {AuthorizationRoute} from '../authorization-route/authorization-route';
-import HistoryRouter from '../history-browser/history-router';
-import {browserHistory} from '../../history-browser';
+import {useAppDispatch} from '../../hooks/use-store';
+import {fetchOffersAction} from '../../services/thunk/fetch-offers';
+import {checkAuthAction} from '../../services/thunk/check-auth-action';
+import { RedirectFavoriteComponent } from '../redirect-favorite.tsx/redirect-favoritr';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-  // const getOffers = useAppSelector((state) => state.loadOffers.offers);
-  // const addLoadOffersToState = useAppDispatch();
-
-  // useEffect(() => {
-  //   addLoadOffersToState(offersSlice.actions.addOfferList(getOffers));
-
-  // }, [getOffers, addLoadOffersToState]);
+  dispatch(fetchOffersAction());
+  dispatch(checkAuthAction());
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <BrowserRouter>
       <Routes>
         <Route
           path={`${AppRoute.Main}`}
           element ={
-            <LoadingRoute>
-              <MainPages title = {TitleDescription.MainPage}/>
-            </LoadingRoute>
+            <MainPages title = {TitleDescription.MainPage}/>
           }
         />
         <Route
@@ -46,14 +37,16 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element ={
-            <PrivateRoute>
+            <RedirectFavoriteComponent>
               <FavoritesPage title = {TitleDescription.FavoritePage}/>
-            </PrivateRoute>
+            </RedirectFavoriteComponent>
           }
         />
         <Route
           path= { `${AppRoute.Offer}/:offerId`}
-          element ={<OfferPage title = {TitleDescription.OfferPage}/>}
+          element={
+            <OfferPage title = {TitleDescription.OfferPage}/>
+          }
         />
         <Route
           path={AppRoute.Error}
@@ -64,7 +57,7 @@ function App(): JSX.Element {
           element={<ErrorMessage title = {TitleDescription.ErrorPage}/>}
         />
       </Routes>
-    </HistoryRouter>
+    </BrowserRouter>
   );
 }
 

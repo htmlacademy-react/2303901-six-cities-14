@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute, DEFAULT_CITY} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import { useAppDispatch } from '../../hooks/use-store';
-import { memo } from 'react';
+import {memo} from 'react';
 
 type Props = {
   className: string;
@@ -15,11 +15,9 @@ function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
 
   function onClickLogo () {
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
-
   }
 
   return (
-
     <Link to={AppRoute.Main} className={`${className}__logo-link ${className}__logo-link--active`}>
       <img
         className={`${className}__logo`}
@@ -30,11 +28,9 @@ function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
         onClick={onClickLogo}
       />
     </Link>
-
   );
 }
 
 const Logotype = memo(MemoizedLogotype);
-
 
 export {Logotype};

@@ -59,6 +59,7 @@ type UserDataLogin = {
   token: string;
 };
 
+
 export type {
   CityLocation,
   PointOfferLocation,

@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {memo} from 'react';
 
-function SortList () {
+function SortListMemo () {
   const [stateSortList, setStateSortList] = useState(false);
   const [filter, setFilter] = useState('Popular');
 
@@ -85,5 +86,7 @@ function SortList () {
 
   );
 }
+
+const SortList = memo(SortListMemo);
 
 export {SortList};

@@ -1,29 +1,35 @@
 import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
-import useDocumentTitle from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {AppRoute, DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {AppRoute, AuthorizationStatus, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
-import { Link } from 'react-router-dom';
-import { loginAction } from '../../services/thunk/login-action';
-
+import {Link} from 'react-router-dom';
+import {loginAction} from '../../services/thunk/login-action';
+import {useEffect} from 'react';
+import {fetchOffersAction} from '../../services/thunk/fetch-offers';
+import '../../pages/login-page/styleLogin.css';
+import type {AuthData} from '../../types/types';
 
 type LoginPagesProps = {
   title: string;
 }
 
-function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
-
+function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
   const [inputPassword, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const checkPassword = /^(?=.*[A-Za-zА-Яа-я])(?=.*\d).+$/.test(inputPassword);
+  const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
+  const cityArray = Object.values(Cities);
+  const error = useAppSelector((state) => state.authorizationStatus.error);
+  const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
-  type AuthData = {
-    password: string ;
-    login: string;
-  }
+  useEffect(() => {
+    const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
+    dispatch(filterCitySlice.actions.changeCity(randomCity));
+  }, []);
 
   const authData: AuthData = {
     password: inputPassword,
@@ -33,7 +39,9 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
   function onClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     evt.preventDefault();
 
-    dispatch(loginAction(authData));
+    dispatch(loginAction(authData)).unwrap().then(() => {
+      dispatch(fetchOffersAction());
+    });
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
   }
 
@@ -53,8 +61,12 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
 
   useDocumentTitle(title);
 
-  return (
-    <div className="page page--gray page--login">
+  if(authStatus === AuthorizationStatus.Auth.toString()) {
+    return '';
+  }
+
+  return authStatus === AuthorizationStatus.NoAuth.toString() ? (
+    <div className= "page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -65,7 +77,6 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
           </div>
         </div>
       </header>
-
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -78,8 +89,9 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
+                {error === null ? '' : `${error}`}
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword}>Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword || !checkEmail}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
@@ -92,7 +104,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element {
         </div>
       </main>
     </div>
-  );
+  ) : '';
 }
 
 export {LoginPage};

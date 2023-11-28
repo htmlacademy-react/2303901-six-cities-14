@@ -1,6 +1,5 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-// import {loadOffersSlice} from '../store/slices/load-offers-slice';
 import {ApiRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {setErrorSlice} from '../store/slices/set-error-slice';
 import {store} from '../store';
@@ -8,17 +7,6 @@ import type {OfferCard} from '../types/type-store';
 import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
 import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
 import type {FavoriteStatus} from './type-service';
-import { offersSlice } from '../store/slices/offers-slice';
-
-const fetchOffersAction = createAsyncThunk<void, undefined, Thunk>(
-  'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-
-    const {data} = await api.get<OfferCard[]>(ApiRoute.Offers);
-
-    dispatch(offersSlice.actions.addOfferList(data));
-  },
-);
 
 const fetchOffersNear = createAsyncThunk<void, string | undefined, Thunk>(
   'data/fetchOfferNear',
@@ -28,16 +16,6 @@ const fetchOffersNear = createAsyncThunk<void, string | undefined, Thunk>(
 
     dispatch(loadOffersNearSlice.actions.addLoadOffers(data));
   },
-);
-
-const fetchOffersFavorite = createAsyncThunk<void, string | undefined, Thunk>(
-  'data/fetchOfferFavorite',
-  async(_, {dispatch, extra: api}) => {
-
-    const {data} = await api.get<OfferCard[]>(`${ApiRoute.OffersFavorite}`);
-
-    dispatch(offersFavoriteSlice.actions.addFavoriteOffers(data));
-  }
 );
 
 const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
@@ -60,9 +38,7 @@ const clearErrorAction = createAsyncThunk(
 );
 
 export {
-  fetchOffersAction,
   fetchOffersNear,
-  fetchOffersFavorite,
   sendFavoriteOffer ,
   clearErrorAction,
 };
