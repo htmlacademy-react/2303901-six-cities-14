@@ -9,12 +9,13 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
 import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
 import {Logotype} from '../../components/logotype/logotype';
-import {SettingLogoHeader, TitleDescription} from '../../const';
+import {AuthorizationStatus, SettingLogoHeader, TitleDescription} from '../../const';
 import type {OfferCard} from '../../types/type-store';
 import { NoPlacesRightComponent } from '../../components/no-places/no-places-right';
 import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
 import { ErrorMessage } from '../../components/error-message/error-message';
 import { LoadingComponent } from '../../components/loading-component/loading-component';
+import {ProfileNotLoggedComponent} from '../../components/profile-not-loggeg/profile-not-logged';
 
 
 type MainPagesProps = {
@@ -28,6 +29,8 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
   const error = useAppSelector((state) => state.offers.error);
   const loading = useAppSelector((state) => state.offers.loadingStatus);
+  const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
+  const checkStatus = stateAut === AuthorizationStatus.Auth.toString();
 
   const citiesToFilter: OfferCard[] = stateOffers?.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
@@ -72,7 +75,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
             <div className="header__left">
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
             </div>
-            <Profile/>
+            {checkStatus ? <Profile/> : <ProfileNotLoggedComponent/>}
           </div>
         </div>
       </header>
