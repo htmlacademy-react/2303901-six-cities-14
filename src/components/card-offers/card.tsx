@@ -4,11 +4,10 @@ import type {OfferCard} from '../../types/type-store';
 import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
-import {offerSlice} from '../../store/slices/offer-slice';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 import {getRating} from '../../utils';
 
-//import {memo} from 'react';
+import {memo} from 'react';
 
 type CardPagesProps = {
   offer: OfferCard;
@@ -17,14 +16,18 @@ type CardPagesProps = {
   height: number;
 }
 
-function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Element{
+function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX.Element{
   const dispatch = useAppDispatch();
   const [cardState, setCardState] = useState({
     offerId: offer.id
   });
 
+  function onGetPointOffer () {
+    dispatch(fetchOfferAction(offer.id));
+  }
+
   function onLeavePointOffer () {
-    dispatch(offerSlice.actions.addLoadOffer(null));
+    dispatch(fetchOfferAction(''));
   }
 
   function onClickCard () {
@@ -32,10 +35,6 @@ function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Ele
       ...cardState,
       offerId: offer.id,
     });
-    dispatch(fetchOfferAction(offer.id));
-  }
-
-  function onGetPointOffer () {
     dispatch(fetchOfferAction(offer.id));
   }
 
@@ -79,6 +78,6 @@ function CardOffer ({offer, className, width, height}: CardPagesProps) : JSX.Ele
   );
 }
 
-//const CardOffer = memo(CardOfferMemo);
+const CardOffer = memo(CardOfferMemo);
 
 export {CardOffer};

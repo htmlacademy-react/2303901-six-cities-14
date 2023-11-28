@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {sendFavoriteOffer} from '../../services/api-actions';
 import { AppRoute, AuthorizationStatus, SettingFavoriteButtonOfferPage, statusFavoriteToServer} from '../../const';
 import {Link} from 'react-router-dom';
-import {offersFavoriteSlice} from '../../store/slices/load-offers-favorite';
+//import {offersFavoriteSlice} from '../../store/slices/load-offers-favorite';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 
 type ButtonProps = {
@@ -29,13 +29,19 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const onFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));
-    dispatch(offersFavoriteSlice.actions.deleteFavoriteOffer(offer?.id ? offer.id : ''));
-    dispatch(sendFavoriteOffer(data)).unwrap().then(() => {
-      if(className === SettingFavoriteButtonOfferPage.className){
+    //dispatch(offersFavoriteSlice.actions.deleteFavoriteOffer(offer?.id ? offer.id : ''));
 
-        dispatch(fetchOffersFavorite());
-      }
+    dispatch(sendFavoriteOffer(data)).unwrap().then(() => {
+      // if(className === SettingFavoriteButtonOfferPage.className){
+
+      //   dispatch(fetchOffersFavorite());
+      // }
+      dispatch(fetchOffersFavorite());
     });
+
+    // setTimeout(() => {
+    //   dispatch(fetchOffersFavorite());
+    // }, 500);
   };
 
   return (

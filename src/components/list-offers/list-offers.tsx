@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import { SettingCardCities } from '../../const';
 import type {OfferCard} from '../../types/type-store';
 import {CardOffer} from '../card-offers/card';
@@ -6,7 +7,7 @@ type ListOffersProps = {
   offers: OfferCard[] | null;
 }
 
-function ListOffers ({offers}: ListOffersProps): JSX.Element {
+function ListOffersMemo ({offers}: ListOffersProps): JSX.Element {
 
   return(
     <div className="cities__places-list places__list tabs__content">
@@ -15,4 +16,5 @@ function ListOffers ({offers}: ListOffersProps): JSX.Element {
   );
 }
 
+const ListOffers = memo(ListOffersMemo);
 export {ListOffers};

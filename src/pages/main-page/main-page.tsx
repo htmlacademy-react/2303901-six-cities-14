@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {memo, useEffect} from 'react';
 import {MapComponent} from '../../components/map/map';
 import {FilterCities} from '../../components/filter-cities/filter-cities';
 import {useDocumentTitle} from '../../hooks/document-title';
@@ -16,11 +16,12 @@ import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite'
 import { ErrorMessage } from '../../components/error-message/error-message';
 import { LoadingComponent } from '../../components/loading-component/loading-component';
 
+
 type MainPagesProps = {
   title: string;
 }
 
-function MainPages ({title}: MainPagesProps): JSX.Element {
+function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
   const stateOffers = useAppSelector((state) => state.offers.offers);
   const dispatch = useAppDispatch();
@@ -90,6 +91,8 @@ function MainPages ({title}: MainPagesProps): JSX.Element {
     </div>
   );
 }
+
+const MainPages = memo(MainPagesMemo);
 
 export {MainPages};
 

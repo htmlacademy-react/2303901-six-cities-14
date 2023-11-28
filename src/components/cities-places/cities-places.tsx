@@ -1,9 +1,9 @@
 import { useAppSelector } from '../../hooks/use-store';
 import {ListOffers} from '../list-offers/list-offers';
 import {SortList} from '../sort-list/sort-list';
-//import {memo} from 'react';
+import {memo} from 'react';
 
-function CitiesPlaceComponent () {
+function CitiesPlaceComponentMemo () {
   const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
   const offersFilter = useAppSelector((state) => state.filterOffers.filterOffers);
   const selectedFilterCity = useAppSelector((state) => state.filterCity.city);
@@ -18,5 +18,6 @@ function CitiesPlaceComponent () {
   );
 }
 
-//const CitiesPlaceComponent = memo(CitiesPlaceComponentMemo);
+const CitiesPlaceComponent = memo(CitiesPlaceComponentMemo);
+
 export {CitiesPlaceComponent};

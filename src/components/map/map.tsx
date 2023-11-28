@@ -16,6 +16,7 @@ function MapComponent({pointsToMap: points, cityName = DEFAULT_CITY}: MapCompone
   const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
   const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
   const offer = useAppSelector((state) => state.loadOffer.offer);
+
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 

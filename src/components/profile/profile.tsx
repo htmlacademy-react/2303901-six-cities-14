@@ -5,9 +5,9 @@ import {dataUserSlice} from '../../store/slices/data-user-slice';
 import {logoutAction} from '../../services/thunk/logout-action';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 
-//import {memo} from 'react';
+import {memo} from 'react';
 
-function Profile () {
+function ProfileMemo () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const user = useAppSelector((state) => state.userData.data);
   const dispatch = useAppDispatch();
@@ -48,6 +48,6 @@ function Profile () {
   );
 }
 
-//const Profile = memo(ProfileMemo);
+const Profile = memo(ProfileMemo);
 
 export {Profile};
