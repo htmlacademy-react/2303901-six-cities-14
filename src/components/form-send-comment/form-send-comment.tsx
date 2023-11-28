@@ -5,13 +5,13 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
 import {sendComment} from '../../services/thunk/send-comment';
 import {fetchComments} from '../../services/thunk/fech-comments';
-
+import {memo} from 'react';
 
 type PropsFormComment = {
     id: string | undefined;
 }
 
-function FormSendComment ({id}: PropsFormComment): JSX.Element {
+function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState(DEFAULT_VALUE_NULL);
@@ -86,6 +86,8 @@ function FormSendComment ({id}: PropsFormComment): JSX.Element {
     </form>
   );
 }
+
+const FormSendComment = memo(FormSendCommentMemo);
 
 export {FormSendComment};
 

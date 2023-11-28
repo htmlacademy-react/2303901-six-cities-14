@@ -6,6 +6,7 @@ import {logoutAction} from '../../services/thunk/logout-action';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 
 import {memo} from 'react';
+import { authStatusSlice } from '../../store/slices/auth-status-slice';
 
 function ProfileMemo () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
@@ -16,6 +17,7 @@ function ProfileMemo () {
   function onClickButtonOut () {
 
     if(statusAuth === AuthorizationStatus.Auth.toString()) {
+      dispatch(authStatusSlice.actions.addUserStatus(AuthorizationStatus.NoAuth));
       dispatch(logoutAction()).unwrap().then(() => {
         dispatch(fetchOffersAction());
       });

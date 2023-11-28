@@ -3,8 +3,9 @@ import {DEFAULT_VALUE_NULL, MAX_LENGTH_REVIEW} from '../../const';
 import {useAppSelector} from '../../hooks/use-store';
 import {useEffect} from 'react';
 import type {Comment} from '../../types/type-store';
+import {memo} from 'react';
 
-function ListReview() {
+function ListReviewMemo() {
   const comments = useAppSelector((state) => state.loadComments.comments);
 
   useEffect(() => {
@@ -27,6 +28,8 @@ function ListReview() {
     </ul>
   );
 }
+
+const ListReview = memo(ListReviewMemo);
 
 export {ListReview};
 

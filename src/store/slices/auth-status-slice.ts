@@ -4,6 +4,7 @@ import type {StateAuth} from '../../types/type-store';
 import { checkAuthAction } from '../../services/thunk/check-auth-action';
 import {loginAction} from '../../services/thunk/login-action';
 import {logoutAction} from '../../services/thunk/logout-action';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: StateAuth = {
   authStatus: AuthorizationStatus.Unknown,
@@ -13,7 +14,11 @@ const initialState: StateAuth = {
 const authStatusSlice = createSlice({
   name: 'authorizationStatus',
   initialState,
-  reducers: {},
+  reducers: {
+    addUserStatus(state, action: PayloadAction<string>) {
+      state.authStatus = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state) => {
