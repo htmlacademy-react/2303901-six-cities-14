@@ -5,6 +5,7 @@ import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
 import {fetchOffersNear} from '../../services/api-actions';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
+import { getRating } from '../../utils';
 
 type CardOfferProps = {
   offer: OfferCard;
@@ -47,7 +48,7 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width:  `${Math.round(offer.rating) * 100 / 5}%`}} />
+            <span style={{ width:  `${getRating(offer.rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
