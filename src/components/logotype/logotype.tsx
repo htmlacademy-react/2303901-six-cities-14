@@ -3,6 +3,7 @@ import {AppRoute, DEFAULT_CITY} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import { useAppDispatch } from '../../hooks/use-store';
 import {memo} from 'react';
+import { offerSlice } from '../../store/slices/offer-slice';
 
 type Props = {
   className: string;
@@ -15,6 +16,7 @@ function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
 
   function onClickLogo () {
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
+    dispatch(offerSlice.actions.addLoadOffer(null));
   }
 
   return (
