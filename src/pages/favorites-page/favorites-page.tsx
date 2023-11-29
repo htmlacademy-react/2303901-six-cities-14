@@ -8,7 +8,7 @@ import {EmptyFavoriteCardsComponent} from '../../components/empty-favorite-cards
 import {useEffect} from 'react';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 type FavoritePagesProps = {
   title: string;
@@ -27,15 +27,17 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
     dispatch(fetchOffersFavorite());
   },[]);
 
+  useEffect(() => {
+    if (authStatus !== AuthorizationStatus.Auth.toString()) {
+      navigate(AppRoute.Login);
+    }
+  }, [authStatus, navigate]);
+
   useDocumentTitle(title);
 
   if(statusOffers && !error){
 
     return <LoadingComponent/>;
-  }
-
-  if(authStatus !== AuthorizationStatus.Auth.toString()) {
-    navigate(AppRoute.Login);
   }
 
   return (

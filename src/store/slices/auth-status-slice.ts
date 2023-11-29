@@ -8,7 +8,8 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: StateAuth = {
   authStatus: AuthorizationStatus.Unknown,
-  error: null
+  error: null,
+  isLoading: false
 };
 
 const authStatusSlice = createSlice({
@@ -23,9 +24,14 @@ const authStatusSlice = createSlice({
     builder
       .addCase(checkAuthAction.fulfilled, (state) => {
         state.authStatus = AuthorizationStatus.Auth;
+        state.isLoading = false;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authStatus = AuthorizationStatus.NoAuth;
+        state.isLoading = false;
+      })
+      .addCase(checkAuthAction.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(loginAction.fulfilled, (state) => {
         state.authStatus = AuthorizationStatus.Auth;

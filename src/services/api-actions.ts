@@ -1,8 +1,7 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {ApiRoute, TIMEOUT_SHOW_ERROR} from '../const';
-import {setErrorSlice} from '../store/slices/set-error-slice';
-import {store} from '../store';
+import {ApiRoute} from '../const';
+
 import type {OfferCard} from '../types/type-store';
 import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
 import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
@@ -28,17 +27,7 @@ const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
   },
 );
 
-const clearErrorAction = createAsyncThunk(
-  'clearError',
-  () => {
-    setTimeout(() => {
-      store.dispatch(setErrorSlice.actions.setError(''));
-    }, TIMEOUT_SHOW_ERROR);
-  }
-);
-
 export {
   fetchOffersNear,
   sendFavoriteOffer ,
-  clearErrorAction,
 };

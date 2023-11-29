@@ -1,25 +1,39 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, DEFAULT_VALUE_NULL} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {dataUserSlice} from '../../store/slices/data-user-slice';
 import {logoutAction} from '../../services/thunk/logout-action';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
-
 import {memo} from 'react';
-import { authStatusSlice } from '../../store/slices/auth-status-slice';
+import {LoadingComponent} from '../loading-component/loading-component';
+import {authStatusSlice} from '../../store/slices/auth-status-slice';
 
 function ProfileMemo () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const user = useAppSelector((state) => state.userData.data);
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
+  const isLoading = useAppSelector((state) => state.authorizationStatus.isLoading);
+  const navigate = useNavigate();
+  const currentPathname = window.location.pathname;
 
   function onClickButtonOut () {
+    dispatch(authStatusSlice.actions.addUserStatus(AuthorizationStatus.NoAuth));
 
     if(statusAuth === AuthorizationStatus.Auth.toString()) {
-      dispatch(authStatusSlice.actions.addUserStatus(AuthorizationStatus.NoAuth));
+
       dispatch(logoutAction()).unwrap().then(() => {
         dispatch(fetchOffersAction());
+
+        if(isLoading){
+          return <LoadingComponent/>;
+        }
+      }).then(() => {
+
+        if(currentPathname === AppRoute.Favorites.toString()){
+          navigate(AppRoute.Login);
+        }
+
       });
       dispatch(dataUserSlice.actions.addUserData(null));
     }
