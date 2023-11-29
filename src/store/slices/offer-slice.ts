@@ -1,12 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import type {OfferPage, StateOffer} from '../../types/type-store';
+import type {OfferCard, OfferPage, StateOffer} from '../../types/type-store';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 
 const initialState: StateOffer = {
   offer: null,
   error: null,
-  loading: null
+  loading: null,
+  offerCard: null
 };
 
 const offerSlice = createSlice({
@@ -15,6 +16,9 @@ const offerSlice = createSlice({
   reducers: {
     addLoadOffer(state, action: PayloadAction<OfferPage | null>) {
       state.offer = action.payload;
+    },
+    addLoadOfferCard(state, action: PayloadAction<OfferCard | null | OfferPage>) {
+      state.offerCard = action.payload;
     },
   },
   extraReducers(builder) {
