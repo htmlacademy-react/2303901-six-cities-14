@@ -40,12 +40,12 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const statusUser = stateOffer?.host.isPro;
   const isUserPro = statusUser ? '--pro' : '';
 
+
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
     dispatch(fetchComments(id.offerId));
     dispatch(fetchOffersNear(id.offerId));
     dispatch(fetchOffersFavorite());
-
   },[title]);
 
   const pointToMap = {

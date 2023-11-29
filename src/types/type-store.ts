@@ -81,6 +81,7 @@ type StateLoadOffers = {
 type StateAuth = {
   authStatus: string;
   error: string | null;
+  isLoading: boolean;
 };
 
 type StateError = {

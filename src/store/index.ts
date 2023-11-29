@@ -5,7 +5,6 @@ import {sortOffersSlice} from './slices/sort-offers-slice';
 import {filterOffersSlice} from './slices/filter-offer-slice';
 import {createApi} from '../services/api';
 import {authStatusSlice} from './slices/auth-status-slice';
-import {setErrorSlice} from './slices/set-error-slice';
 import {dataUserSlice} from './slices/data-user-slice';
 import {offerSlice} from './slices/offer-slice';
 import {loadOffersNearSlice} from './slices/load-offer-near-slice';
@@ -19,7 +18,6 @@ const reducer = combineReducers({
   [sortOffersSlice.name]: sortOffersSlice.reducer,
   [filterOffersSlice.name]: filterOffersSlice.reducer,
   [authStatusSlice.name]: authStatusSlice.reducer,
-  [setErrorSlice.name]: setErrorSlice.reducer,
   [dataUserSlice.name]: dataUserSlice.reducer,
   [offerSlice.name]: offerSlice.reducer,
   [loadOffersNearSlice.name]: loadOffersNearSlice.reducer,

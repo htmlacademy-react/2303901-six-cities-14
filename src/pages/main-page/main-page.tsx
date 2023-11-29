@@ -42,6 +42,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
     dispatch(fetchOffersFavorite());
+
   },[selectedFilterCity, stateOffers]);
 
 
