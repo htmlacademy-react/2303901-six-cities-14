@@ -1,5 +1,5 @@
-import {offersMock, offersMockChange} from '../../mock/offers/offer-mocks';
-import {offersSlice} from './offers-slice';
+import {offersMock, offersMockChange} from '../../../mock/offers/offer-mocks';
+import {offersSlice} from '../offers-slice';
 
 
 describe('Offer Slice', () => {
@@ -37,12 +37,15 @@ describe('Offer Slice', () => {
       error: '',
     };
 
-    const action = offersSlice.actions.changeFavoriteStatus('45534534');
-    const result = offersSlice.reducer(initialState, action);
+    const expectedState = {
+      offers: offersMockChange,
+      loadingStatus: true,
+      error: '',
+    };
 
-    expect(result.offers).toEqual(offersMockChange);
-    expect(result.loadingStatus).toEqual(true);
-    expect(result.error).toEqual('');
+    const result = offersSlice.reducer(initialState, offersSlice.actions.changeFavoriteStatus('45534534'));
+
+    expect(result).toEqual(expectedState);
   });
 
   it('should do nothing if the offer with the specified id is not found', () => {
@@ -57,7 +60,5 @@ describe('Offer Slice', () => {
 
     expect(result).toEqual(initialState);
   });
-
-
 });
 
