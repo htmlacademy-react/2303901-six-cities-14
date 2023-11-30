@@ -20,6 +20,7 @@ import {LoadingComponent} from '../../components/loading-component/loading-compo
 import {ProfileNotLoggedComponent} from '../../components/profile-not-loggeg/profile-not-logged';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {getRating} from '../../utils';
+import { offerSlice } from '../../store/slices/offer-slice';
 
 type OfferPagesProps = {
   title: string;
@@ -39,6 +40,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const checkStatus = stateAut === AuthorizationStatus.Auth.toString();
   const statusUser = stateOffer?.host.isPro;
   const isUserPro = statusUser ? '--pro' : '';
+  const state = useAppSelector((stat) => stat.loadOffer.offer);
 
 
   useEffect(() => {
@@ -47,6 +49,8 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
     dispatch(fetchOffersNear(id.offerId));
     dispatch(fetchOffersFavorite());
   },[title]);
+
+  dispatch(offerSlice.actions.addLoadOfferCard(state));
 
   const pointToMap = {
     title: stateOffer?.city.name || '',

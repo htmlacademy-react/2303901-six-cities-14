@@ -7,7 +7,9 @@ import {useAppDispatch} from '../../hooks/use-store';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 import {getRating} from '../../utils';
 
+
 import {memo} from 'react';
+import { offerSlice } from '../../store/slices/offer-slice';
 
 type CardPagesProps = {
   offer: OfferCard;
@@ -18,16 +20,20 @@ type CardPagesProps = {
 
 function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX.Element{
   const dispatch = useAppDispatch();
+
   const [cardState, setCardState] = useState({
     offerId: offer.id
   });
 
   function onGetPointOffer () {
-    dispatch(fetchOfferAction(offer.id));
+
+    dispatch(offerSlice.actions.addLoadOfferCard(offer));
+    //dispatch(fetchOfferAction(offer.id));
   }
 
   function onLeavePointOffer () {
-    dispatch(fetchOfferAction(''));
+    dispatch(offerSlice.actions.addLoadOfferCard(null));
+    //dispatch(fetchOfferAction(''));
   }
 
   function onClickCard () {

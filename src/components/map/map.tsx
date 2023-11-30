@@ -16,7 +16,7 @@ function MapComponentMemo ({pointsToMap: points, cityName = DEFAULT_CITY}: MapCo
   const defaultCustomIcon = new Icon(DEFAULT_ICON as IconToMap);
   const currentCustomIcon = new Icon(CURRENT_ICON as IconToMap);
   const city = DefaultCityToMap[cityName as keyof typeof DefaultCityToMap];
-  const offer = useAppSelector((state) => state.loadOffer.offer);
+  const offer = useAppSelector((state) => state.loadOffer.offerCard);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);

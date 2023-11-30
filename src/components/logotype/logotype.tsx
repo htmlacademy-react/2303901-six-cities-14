@@ -16,7 +16,7 @@ function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
 
   function onClickLogo () {
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
-    dispatch(offerSlice.actions.addLoadOffer(null));
+    dispatch(offerSlice.actions.addLoadOfferCard(null));
   }
 
   return (

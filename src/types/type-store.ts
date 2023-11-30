@@ -92,6 +92,7 @@ type StateOffer = {
   offer: OfferPage | null;
   error: string | null;
   loading: boolean | null;
+  offerCard: OfferCard | null | OfferPage ;
 }
 
 type StateComments = {
