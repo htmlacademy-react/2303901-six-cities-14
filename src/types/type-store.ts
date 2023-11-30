@@ -39,9 +39,9 @@ type OfferPage = {
   rating: number;
   description: string;
   bedrooms: number;
-  goods: [string];
+  goods: string[];
   host: OfferHost;
-  images: [string];
+  images: string[];
   maxAdults: number;
 };
 
