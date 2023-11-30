@@ -28,17 +28,6 @@ const offersFavoriteSlice = createSlice({
       state.offers = action.payload;
     },
 
-    // deleteFavoriteOffer(state, action: PayloadAction<string>) {
-
-    //   const idOffer = action.payload;
-    //   const indexToDelete = state.offers.findIndex((offer) => offer.id === idOffer);
-
-    //   if (indexToDelete !== -1) {
-
-    //     state.offers.splice(indexToDelete, 1);
-    //   }
-    // },
-
     sendFavoriteStatus(state, action: PayloadAction<OfferCard>){
       state.status = action.payload;
     }

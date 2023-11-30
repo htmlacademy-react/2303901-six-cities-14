@@ -1,5 +1,5 @@
-import { DEFAULT_CITY } from '../../../const';
-import { filterCitySlice } from '../filter-city-slice';
+import {DEFAULT_CITY} from '../../../const';
+import {filterCitySlice} from '../filter-city-slice';
 
 describe('filter city slice', () => {
   it('should return initial state with empty action', () => {
