@@ -1,19 +1,21 @@
-import {createApi} from '../../api';
+import {createApi} from '../api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import {Action} from 'redux';
-import {State} from '../../../types/type-store';
+import {State} from '../../types/type-store';
 import {ThunkDispatch} from 'redux-thunk';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {ApiRoute} from '../../../const';
-import {checkAuthAction} from '../check-auth-action';
-import {offersMock} from '../../../mock/offers/offer-mocks';
-import {fetchOffersAction} from '../fetch-offers';
-import {fetchOfferAction} from '../fetch-offer';
-import {offer} from '../../../mock/offer/offer';
-import {fetchComments} from '../fetch-comments';
-import {commentMock, mockComments} from '../../../mock/comments/comment';
-import {sendComment} from '../send-comment';
+import {ApiRoute} from '../../const';
+import {checkAuthAction} from '../thunk/check-auth-action';
+import {offersMock} from '../../mock/offers/offer-mocks';
+import {fetchOffersAction} from '../thunk/fetch-offers';
+import {fetchOfferAction} from '../thunk/fetch-offer';
+import {offer} from '../../mock/offer/offer';
+import {fetchComments} from '../thunk/fetch-comments';
+import {commentMock, mockComments} from '../../mock/comments/comment';
+import {sendComment} from '../thunk/send-comment';
+import {fetchOffersFavorite} from '../thunk/fetch-offers-favorite';
+import {fetchOffersNear, sendFavoriteOffer} from '../api-actions';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>
 
@@ -196,6 +198,111 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         sendComment.pending.type,
         sendComment.rejected.type,
+      ]);
+    });
+  });
+
+  describe('fetchOffersFavoriteAction', () => {
+    it('should dispatch "fetchOffersFavoriteAction.pending", when server response 200', async() => {
+
+      const mockOffers = [offersMock];
+
+      mockAxiosAdapter.onGet(ApiRoute.OffersFavorite).reply(200, mockOffers);
+
+      await store.dispatch(fetchOffersFavorite());
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchOffersFavoriteActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOffersFavorite.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        fetchOffersFavorite.pending.type,
+        fetchOffersFavorite.fulfilled.type,
+      ]);
+
+      expect(fetchOffersFavoriteActionFulfilled.payload)
+        .toEqual(mockOffers);
+    });
+
+    it('should dispatch "fetchOffersFavoriteAction.pending", "fetchOffersFavoriteAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet(ApiRoute.OffersFavorite).reply(400, []);
+
+      await store.dispatch(fetchOffersFavorite());
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        fetchOffersFavorite.pending.type,
+        fetchOffersFavorite.rejected.type,
+      ]);
+    });
+  });
+
+  describe('postOfferFavoriteAction', () => {
+    //   it('should dispatch "postOfferFavoriteAction.pending", when server response 201', async() => {
+
+    //     mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${0}`).reply(201, offersMock[1]);
+
+    //     await store.dispatch(sendFavoriteOffer({id: offersMock[1].id, status: 0}));
+
+    //     const emittedActions = store.getActions();
+    //     const extractedActionsTypes = extractActionsTypes(emittedActions);
+    //     const send = emittedActions[1] as ReturnType<typeof sendFavoriteOffer.fulfilled>;
+
+    //     expect(extractedActionsTypes).toEqual([
+
+    //       sendFavoriteOffer.pending.type,
+    //       sendFavoriteOffer.fulfilled.type,
+    //     ]);
+
+    //     expect(send.payload)
+    //       .toEqual([offersMock[1]]);
+    //   });
+
+    it('should dispatch "postOfferFavoriteAction.pending", "postOfferFavoriteAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${1}`).reply(400, []);
+
+      await store.dispatch(sendFavoriteOffer({id: offersMock[0].id, status: 1}));
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        sendFavoriteOffer.pending.type,
+        sendFavoriteOffer.rejected.type,
+      ]);
+    });
+  });
+
+  describe('fetchOffersNearAction', () => {
+    it('should dispatch "fetchOffersNearAction.pending", when server response 200', async() => {
+
+      const mockOffers = offersMock;
+
+      mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${offer.id}/nearby`).reply(200, mockOffers);
+
+      await store.dispatch(fetchOffersNear(offer.id));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchOffersNearActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOffersNear.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        fetchOffersNear.pending.type,
+        fetchOffersNear.fulfilled.type,
+      ]);
+
+      expect(fetchOffersNearActionFulfilled.payload)
+        .toEqual(mockOffers);
+    });
+
+    it('should dispatch "fetchOffersNearAction.pending", "fetchOffersAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet(ApiRoute.Offers).reply(400, []);
+
+      await store.dispatch(fetchOffersAction());
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        fetchOffersAction.pending.type,
+        fetchOffersAction.rejected.type,
       ]);
     });
   });
