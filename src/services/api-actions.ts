@@ -13,11 +13,13 @@ const fetchOffersNear = createAsyncThunk<OfferCard[], string | undefined, Thunk>
   },
 );
 
-const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
+const sendFavoriteOffer = createAsyncThunk<OfferCard, FavoriteStatus , Thunk>(
   'sendFavoriteOffer',
   async ({id, status}, {extra: api}) => {
 
-    await api.post<OfferCard>(`${ApiRoute.OffersFavorite}/${id}/${status}`);
+    const {data} = await api.post<OfferCard>(`${ApiRoute.OffersFavorite}/${id}/${status}`);
+
+    return data;
   },
 );
 

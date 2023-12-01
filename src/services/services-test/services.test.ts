@@ -5,7 +5,7 @@ import {Action} from 'redux';
 import {State} from '../../types/type-store';
 import {ThunkDispatch} from 'redux-thunk';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {ApiRoute} from '../../const';
+import {ApiRoute, DEFAULT_VALUE_NULL} from '../../const';
 import {checkAuthAction} from '../thunk/check-auth-action';
 import {offersMock} from '../../mock/offers/offer-mocks';
 import {fetchOffersAction} from '../thunk/fetch-offers';
@@ -16,6 +16,11 @@ import {commentMock, mockComments} from '../../mock/comments/comment';
 import {sendComment} from '../thunk/send-comment';
 import {fetchOffersFavorite} from '../thunk/fetch-offers-favorite';
 import {fetchOffersNear, sendFavoriteOffer} from '../api-actions';
+import { AuthData } from '../../types/types';
+import { loginAction } from '../thunk/login-action';
+import * as tokenStorage from '../token';
+import { logoutAction } from '../thunk/logout-action';
+
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>
 
@@ -238,25 +243,25 @@ describe('Async actions', () => {
   });
 
   describe('postOfferFavoriteAction', () => {
-    //   it('should dispatch "postOfferFavoriteAction.pending", when server response 201', async() => {
+    it('should dispatch "postOfferFavoriteAction.pending", when server response 201', async() => {
 
-    //     mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${0}`).reply(201, offersMock[1]);
+      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offersMock[DEFAULT_VALUE_NULL].id}/${DEFAULT_VALUE_NULL}`).reply(201, offersMock);
 
-    //     await store.dispatch(sendFavoriteOffer({id: offersMock[1].id, status: 0}));
+      await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status: DEFAULT_VALUE_NULL}));
 
-    //     const emittedActions = store.getActions();
-    //     const extractedActionsTypes = extractActionsTypes(emittedActions);
-    //     const send = emittedActions[1] as ReturnType<typeof sendFavoriteOffer.fulfilled>;
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const send = emittedActions[1] as ReturnType<typeof sendFavoriteOffer.fulfilled>;
 
-    //     expect(extractedActionsTypes).toEqual([
+      expect(extractedActionsTypes).toEqual([
 
-    //       sendFavoriteOffer.pending.type,
-    //       sendFavoriteOffer.fulfilled.type,
-    //     ]);
+        sendFavoriteOffer.pending.type,
+        sendFavoriteOffer.fulfilled.type,
+      ]);
 
-    //     expect(send.payload)
-    //       .toEqual([offersMock[1]]);
-    //   });
+      expect(send.payload)
+        .toEqual(offersMock);
+    });
 
     it('should dispatch "postOfferFavoriteAction.pending", "postOfferFavoriteAction.rejected" when server response 400', async () => {
       mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${1}`).reply(400, []);
@@ -304,6 +309,60 @@ describe('Async actions', () => {
         fetchOffersAction.pending.type,
         fetchOffersAction.rejected.type,
       ]);
+    });
+  });
+
+  describe('loginAction', () => {
+    it('should dispatch "loginAction.pending", "loginAction.fulfilled", and addUserData when server response 200', async () => {
+      const fakeUser: AuthData = { login: 'test@test.ru', password: '123456' };
+      const fakeServerReplay = { token: 'secret' };
+
+      mockAxiosAdapter.onPost(ApiRoute.Login).reply(200, fakeServerReplay);
+
+      await store.dispatch(loginAction(fakeUser));
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        loginAction.pending.type,
+        loginAction.fulfilled.type,
+
+      ]);
+    });
+
+    it('should call "saveToken" once with the received token', async () => {
+      const fakeUser: AuthData = { login: 'test@test.ru', password: '123456' };
+      const fakeServerReplay = { token: 'secret' };
+      mockAxiosAdapter.onPost(ApiRoute.Login).reply(200, fakeServerReplay);
+      const mockSaveToken = vi.spyOn(tokenStorage, 'saveToken');
+
+      await store.dispatch(loginAction(fakeUser));
+
+      expect(mockSaveToken).toBeCalledTimes(1);
+      expect(mockSaveToken).toBeCalledWith(fakeServerReplay.token);
+    });
+
+    describe('logoutAction', () => {
+      it('should dispatch "logoutAction.pending", "logoutAction.fulfilled" when server response 204', async() => {
+        mockAxiosAdapter.onDelete(ApiRoute.Logout).reply(204);
+
+        await store.dispatch(logoutAction());
+        const actions = extractActionsTypes(store.getActions());
+
+        expect(actions).toEqual([
+          logoutAction.pending.type,
+          logoutAction.fulfilled.type,
+        ]);
+      });
+
+      it('should one call "dropToken" with "logoutAction"', async () => {
+        mockAxiosAdapter.onDelete(ApiRoute.Logout).reply(204);
+        const mockDropToken = vi.spyOn(tokenStorage, 'dropToken');
+
+        await store.dispatch(logoutAction());
+
+        expect(mockDropToken).toBeCalledTimes(1);
+      });
     });
   });
 });
