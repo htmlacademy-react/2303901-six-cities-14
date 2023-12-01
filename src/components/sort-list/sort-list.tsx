@@ -34,12 +34,12 @@ function SortListMemo () {
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
   }
 
-  function onClickSort():void {
+  function handleClickSort():void {
 
     setStateSortList(!stateSortList);
   }
 
-  function onClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
+  function handleClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
 
     const target = evt.target as HTMLElement;
     const tabIndex: number = target.tabIndex;
@@ -64,7 +64,7 @@ function SortListMemo () {
     offersCity?.length ? (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
-        <span className="places__sorting-type" tabIndex={0} onClick={onClickSort}>
+        <span className="places__sorting-type" tabIndex={0} onClick={handleClickSort}>
           {filter}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
@@ -74,7 +74,7 @@ function SortListMemo () {
           className={`places__options places__options--custom
             stateSortList
             ${stateSortList ? 'places__options--opened' : ''}`}
-          onClick={onClickChangeSort}
+          onClick={handleClickChangeSort}
         >
           <li className="places__option places__option--active" tabIndex={0}>Popular</li>
           <li className="places__option" tabIndex={1}>Price: low to high</li>

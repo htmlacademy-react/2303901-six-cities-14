@@ -25,18 +25,15 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
     offerId: offer.id
   });
 
-  function onGetPointOffer () {
-
+  function handelPointOffer () {
     dispatch(offerSlice.actions.addLoadOfferCard(offer));
-    //dispatch(fetchOfferAction(offer.id));
   }
 
-  function onLeavePointOffer () {
+  function handelLeavePointOffer () {
     dispatch(offerSlice.actions.addLoadOfferCard(null));
-    //dispatch(fetchOfferAction(''));
   }
 
-  function onClickCard () {
+  function handelClickCard () {
     setCardState({
       ...cardState,
       offerId: offer.id,
@@ -46,9 +43,9 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
 
   return(
     <article className={`${className}__card place-card`}
-      onClick = {onClickCard}
-      onMouseEnter={onGetPointOffer}
-      onMouseLeave={onLeavePointOffer}
+      onClick = {handelClickCard}
+      onMouseEnter={handelPointOffer}
+      onMouseLeave={handelLeavePointOffer}
     >
       {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>

@@ -24,7 +24,7 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
     status: (!offer?.isFavorite) ? statusFavoriteToServer.favorite : statusFavoriteToServer.noFavorite,
   };
 
-  const onFavoriteButton = (): void => {
+  const handleFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));
 
     dispatch(sendFavoriteOffer(data)).unwrap().then(() => {
@@ -48,7 +48,7 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
       </Link>
     ) :
       <button
-        onClick={onFavoriteButton}
+        onClick={handleFavoriteButton}
         className={checkClassName}
         type="button"
       >

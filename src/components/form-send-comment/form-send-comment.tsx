@@ -21,7 +21,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
   const isValid = !(isCommentLengthValid && rating !== DEFAULT_VALUE_NULL && (isLoading === null || true));
   const errorMessage = useAppSelector((state) => state.loadComment.error);
 
-  function onClickButtonSent(evt: FormEvent<HTMLFormElement>) {
+  function handleClickButtonSent(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
     const commentData = {
@@ -50,7 +50,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={onClickButtonSent}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleClickButtonSent}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
