@@ -11,6 +11,8 @@ import {offersMock} from '../../../mock/offers/offer-mocks';
 import {fetchOffersAction} from '../fetch-offers';
 import {fetchOfferAction} from '../fetch-offer';
 import {offer} from '../../../mock/offer/offer';
+import { fetchComments } from '../fech-comments';
+import { mockComments } from '../../../mock/comments/comment';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>
 
@@ -92,9 +94,9 @@ describe('Async actions', () => {
 
       const mockOffer = offer;
 
-      mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${offer.id}`).reply(200, offer);
+      mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${mockOffer.id}`).reply(200, mockOffer);
 
-      await store.dispatch(fetchOfferAction(offer.id));
+      await store.dispatch(fetchOfferAction(mockOffer.id));
 
       const emittedActions = store.getActions();
       const extractedActionsTypes = extractActionsTypes(emittedActions);
@@ -120,6 +122,42 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         fetchOfferAction.pending.type,
         fetchOfferAction.rejected.type,
+      ]);
+    });
+  });
+
+  describe('fetchCommentsAction', () => {
+    it('should dispatch "fetchCommentsAction.pending", when server response 200', async() => {
+
+      const comments = mockComments;
+
+      mockAxiosAdapter.onGet(`${ApiRoute.Comments}/${offer.id}`).reply(200, comments);
+
+      await store.dispatch(fetchComments(offer.id));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchCommentsActionFulfilled = emittedActions[1] as ReturnType<typeof fetchComments.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+
+        fetchComments.pending.type,
+        fetchComments.fulfilled.type,
+      ]);
+
+      expect(fetchCommentsActionFulfilled.payload)
+        .toEqual(comments);
+    });
+
+    it('should dispatch "fetchOfferAction.pending", "fetchOffersAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet(`${ApiRoute.Comments}/${offer.id}`).reply(400, []);
+
+      await store.dispatch(fetchComments(offer.id));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        fetchComments.pending.type,
+        fetchComments.rejected.type,
       ]);
     });
   });
