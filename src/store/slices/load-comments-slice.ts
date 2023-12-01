@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {StateComments} from '../../types/type-store';
-import { fetchComments } from '../../services/thunk/fech-comments';
+import {fetchComments} from '../../services/thunk/fetch-comments';
 
 const initialState: StateComments = {
   comments: null,

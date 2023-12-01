@@ -4,7 +4,7 @@ import {DEFAULT_VALUE_NULL, LengthComment} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {RatingComponent} from '../rating-component';
 import {sendComment} from '../../services/thunk/send-comment';
-import {fetchComments} from '../../services/thunk/fech-comments';
+import {fetchComments} from '../../services/thunk/fetch-comments';
 import {memo} from 'react';
 
 type PropsFormComment = {

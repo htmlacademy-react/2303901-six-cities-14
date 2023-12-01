@@ -11,8 +11,9 @@ import {offersMock} from '../../../mock/offers/offer-mocks';
 import {fetchOffersAction} from '../fetch-offers';
 import {fetchOfferAction} from '../fetch-offer';
 import {offer} from '../../../mock/offer/offer';
-import { fetchComments } from '../fech-comments';
-import { mockComments } from '../../../mock/comments/comment';
+import {fetchComments} from '../fetch-comments';
+import {commentMock, mockComments} from '../../../mock/comments/comment';
+import {sendComment} from '../send-comment';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>
 
@@ -24,6 +25,7 @@ describe('Async actions', () => {
   const middleware = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
   let store: ReturnType<typeof mockStoreCreator>;
+  const comment = commentMock;
 
   beforeEach(() => {
     store = mockStoreCreator({});
@@ -158,6 +160,42 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         fetchComments.pending.type,
         fetchComments.rejected.type,
+      ]);
+    });
+  });
+
+
+  describe('postCommentAction', () => {
+    it('should dispatch "sendCommentAction.pending", when server response 200', async() => {
+
+      mockAxiosAdapter.onPost(`${ApiRoute.Comments}/${offer.id}`, {comment: comment.comment, rating: comment.rating}).reply(200, comment);
+
+      await store.dispatch(sendComment({id: offer.id, comment: comment.comment, rating: comment.rating}));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const sendCommentActionFulfilled = emittedActions[1] as ReturnType<typeof sendComment.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+
+        sendComment.pending.type,
+        sendComment.fulfilled.type,
+      ]);
+
+      expect(sendCommentActionFulfilled.payload)
+        .toEqual(comment);
+    });
+
+    it('should dispatch "sendCommentAction.pending", "sendCommentAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(`${ApiRoute.Comments}/${offer.id}`, {comment: comment.comment, rating: comment.rating}).reply(400, []);
+
+      await store.dispatch(sendComment({id: offer.id, comment: comment.comment, rating: comment.rating}));
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        sendComment.pending.type,
+        sendComment.rejected.type,
       ]);
     });
   });

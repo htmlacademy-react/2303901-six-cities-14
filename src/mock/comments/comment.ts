@@ -24,4 +24,16 @@ const mockComments = [
   }
 ];
 
-export {mockComments};
+const commentMock = {
+  id: 'string',
+  date: 'string',
+  user: {
+    name: 'string',
+    avatarUrl: 'string',
+    isPro: true,
+  },
+  comment: 'string',
+  rating: 2,
+};
+
+export {mockComments, commentMock};

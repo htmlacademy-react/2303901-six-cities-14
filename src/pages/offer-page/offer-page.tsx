@@ -15,7 +15,7 @@ import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 import {FavoriteButton} from '../../components/favorite-button/favorite-button';
 import type {OfferCard} from '../../types/type-store';
 import type {OfferPage} from '../../types/type-store';
-import {fetchComments} from '../../services/thunk/fech-comments';
+import {fetchComments} from '../../services/thunk/fetch-comments';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
 import {ProfileNotLoggedComponent} from '../../components/profile-not-loggeg/profile-not-logged';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';

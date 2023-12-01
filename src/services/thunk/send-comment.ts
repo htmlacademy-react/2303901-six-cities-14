@@ -1,7 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Thunk} from '../type-service';
-import { ApiRoute } from '../../const';
-import type { Comment } from '../../types/type-store';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import type {Thunk} from '../type-service';
+import {ApiRoute} from '../../const';
+import type {Comment} from '../../types/type-store';
 
 type SendComment = {
   id: string | undefined;
