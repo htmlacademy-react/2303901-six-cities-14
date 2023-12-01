@@ -9,6 +9,8 @@ import {ApiRoute} from '../../../const';
 import {checkAuthAction} from '../check-auth-action';
 import {offersMock} from '../../../mock/offers/offer-mocks';
 import {fetchOffersAction} from '../fetch-offers';
+import {fetchOfferAction} from '../fetch-offer';
+import {offer} from '../../../mock/offer/offer';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>
 
@@ -50,11 +52,10 @@ describe('Async actions', () => {
     ]);
   });
 
-
-  describe('fetchQuestionAction', () => {
+  describe('fetchOffersAction', () => {
     it('should dispatch "fetchOffersAction.pending", when server response 200', async() => {
 
-      const mockOffers = offersMock;
+      const mockOffers = [offersMock];
 
       mockAxiosAdapter.onGet(ApiRoute.Offers).reply(200, mockOffers);
 
@@ -62,14 +63,14 @@ describe('Async actions', () => {
 
       const emittedActions = store.getActions();
       const extractedActionsTypes = extractActionsTypes(emittedActions);
-      const fetchQuestionsActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOffersAction.fulfilled>;
+      const fetchOffersActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOffersAction.fulfilled>;
 
       expect(extractedActionsTypes).toEqual([
         fetchOffersAction.pending.type,
         fetchOffersAction.fulfilled.type,
       ]);
 
-      expect(fetchQuestionsActionFulfilled.payload)
+      expect(fetchOffersActionFulfilled.payload)
         .toEqual(mockOffers);
     });
 
@@ -85,4 +86,43 @@ describe('Async actions', () => {
       ]);
     });
   });
+
+  describe('fetchOfferAction', () => {
+    it('should dispatch "fetchOfferAction.pending", when server response 200', async() => {
+
+      const mockOffer = offer;
+
+      mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${offer.id}`).reply(200, offer);
+
+      await store.dispatch(fetchOfferAction(offer.id));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchOfferActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOfferAction.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+
+        fetchOfferAction.pending.type,
+        fetchOfferAction.fulfilled.type,
+
+      ]);
+
+      expect(fetchOfferActionFulfilled.payload)
+        .toEqual(mockOffer);
+    });
+
+    it('should dispatch "fetchOfferAction.pending", "fetchOffersAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${offer.id}`).reply(400, []);
+
+      await store.dispatch(fetchOfferAction());
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        fetchOfferAction.pending.type,
+        fetchOfferAction.rejected.type,
+      ]);
+    });
+  });
 });
+
+

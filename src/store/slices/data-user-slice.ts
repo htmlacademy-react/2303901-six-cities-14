@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import type {User, UserData} from '../../services/type-service';
-import { checkAuthAction } from '../../services/thunk/check-auth-action';
+import {checkAuthAction} from '../../services/thunk/check-auth-action';
 
 const initialState: UserData = {
   data: {
