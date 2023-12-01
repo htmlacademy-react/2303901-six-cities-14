@@ -10,7 +10,6 @@ const checkAuthAction = createAsyncThunk<User, undefined, Thunk>(
 
     return data;
   },
-
 );
 
 export {checkAuthAction};
