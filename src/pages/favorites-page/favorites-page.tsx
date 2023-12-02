@@ -41,7 +41,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
   }
 
   return (
-    <div className= {offers.length ? 'page' : 'page page--favorites-empty'}>
+    <div className= {offers.length ? 'page' : 'page page--favorites-empty'} data-testid='favorites-page'>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
