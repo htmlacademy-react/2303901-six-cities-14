@@ -14,7 +14,7 @@ type Props = {
 function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
-  function onClickLogo () {
+  function handleClickLogo () {
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
     dispatch(offerSlice.actions.addLoadOfferCard(null));
   }
@@ -27,7 +27,7 @@ function MemoizedLogotype ({className, width, height}: Props): JSX.Element {
         alt="6 cities logo"
         width={width}
         height={height}
-        onClick={onClickLogo}
+        onClick={handleClickLogo}
       />
     </Link>
   );

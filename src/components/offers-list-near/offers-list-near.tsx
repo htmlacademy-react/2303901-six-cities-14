@@ -14,7 +14,7 @@ function OffersListNearMemo ({offersPoint, offerPoint}: OfferNearProps) {
   const offers = threeOffersNear.filter((offer) => offer.id !== offerPoint.id);
 
   return (
-    <div className="container">
+    <div className="container" data-testid='Other places in the'>
       <section className="near-places places">
         <h2 className="near-places__title">
            Other places in the {offerPoint.city.name}

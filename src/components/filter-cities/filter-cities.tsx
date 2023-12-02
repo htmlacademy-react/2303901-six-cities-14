@@ -6,7 +6,7 @@ import {ButtonFilterComponent} from '../button-filter-component/button-filter-co
 function FilterCitiesMemo () {
 
   return (
-    <div className="tabs" >
+    <div className="tabs" data-testid ='filterCities'>
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {CitiesForFilter.map((city) => <ButtonFilterComponent city={city} key={city}/>)}
@@ -17,4 +17,5 @@ function FilterCitiesMemo () {
 }
 
 const FilterCities = memo(FilterCitiesMemo);
+
 export {FilterCities};

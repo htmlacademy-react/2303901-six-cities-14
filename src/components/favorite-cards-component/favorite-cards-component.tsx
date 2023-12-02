@@ -1,4 +1,4 @@
-import { DEFAULT_VALUE_NULL, SettingFavoriteCard } from '../../const';
+import {DEFAULT_VALUE_NULL, SettingFavoriteCard} from '../../const';
 import {ButtonFilterComponent} from '../button-filter-component/button-filter-component';
 import {CardOffer} from '../card-offers/card';
 import type {OfferCard} from '../../types/type-store';

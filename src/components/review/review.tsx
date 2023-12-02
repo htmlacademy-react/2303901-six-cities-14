@@ -15,7 +15,7 @@ function Review ({reviewProps}: ReviewProps) {
   const formattedDate = `${month} ${year}`;
 
   return (
-    <li className="reviews__item">
+    <li className="reviews__item" data-testid='review'>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
@@ -47,3 +47,4 @@ function Review ({reviewProps}: ReviewProps) {
 }
 
 export {Review};
+

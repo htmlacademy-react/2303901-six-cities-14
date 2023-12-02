@@ -69,7 +69,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
   }
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main " data-testid ='main-page'>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

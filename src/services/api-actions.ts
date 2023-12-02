@@ -1,29 +1,25 @@
 import type {Thunk} from './type-service';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {ApiRoute} from '../const';
-
 import type {OfferCard} from '../types/type-store';
-import {loadOffersNearSlice} from '../store/slices/load-offer-near-slice';
-import {offersFavoriteSlice} from '../store/slices/load-offers-favorite';
 import type {FavoriteStatus} from './type-service';
 
-const fetchOffersNear = createAsyncThunk<void, string | undefined, Thunk>(
+const fetchOffersNear = createAsyncThunk<OfferCard[], string | undefined, Thunk>(
   'data/fetchOfferNear',
-  async (id, {dispatch, extra: api}) => {
-
+  async (id, {extra: api}) => {
     const {data} = await api.get<OfferCard[]>(`${ApiRoute.Offers}/${id}/nearby`);
 
-    dispatch(loadOffersNearSlice.actions.addLoadOffers(data));
+    return data;
   },
 );
 
-const sendFavoriteOffer = createAsyncThunk<void, FavoriteStatus , Thunk>(
+const sendFavoriteOffer = createAsyncThunk<OfferCard, FavoriteStatus , Thunk>(
   'sendFavoriteOffer',
-  async ({id, status}, {dispatch, extra: api}) => {
+  async ({id, status}, {extra: api}) => {
 
     const {data} = await api.post<OfferCard>(`${ApiRoute.OffersFavorite}/${id}/${status}`);
 
-    dispatch(offersFavoriteSlice.actions.sendFavoriteStatus(data));
+    return data;
   },
 );
 

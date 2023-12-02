@@ -14,13 +14,13 @@ type CardOfferProps = {
 function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  function onClick () {
+  function handelClick () {
     dispatch(fetchOfferAction(offer.id));
     dispatch(fetchOffersNear(offer.id));
   }
 
   return (
-    <article className="near-places__card place-card" onClick={onClick} >
+    <article className="near-places__card place-card" onClick={handelClick} >
       <div className="near-places__image-wrapper place-card__image-wrapper">
         {(offer.isPremium) ? <div className="place-card__mark"><span>Premium</span> </div> : '' }
         <Link to={`${AppRoute.Offer}/${offer.id}`}>

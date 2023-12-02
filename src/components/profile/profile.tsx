@@ -17,7 +17,7 @@ function ProfileMemo () {
   const navigate = useNavigate();
   const currentPathname = window.location.pathname;
 
-  function onClickButtonOut () {
+  function handleClickButtonOut () {
     dispatch(authStatusSlice.actions.addUserStatus(AuthorizationStatus.NoAuth));
 
     if(statusAuth === AuthorizationStatus.Auth.toString()) {
@@ -54,7 +54,7 @@ function ProfileMemo () {
         </li>
         <li className="header__nav-item">
           <Link to={statusAuth === AuthorizationStatus.Auth.toString() ? AppRoute.Main : AppRoute.Login} className="header__nav-link">
-            <span className= {statusAuth === AuthorizationStatus.Auth.toString() ? 'header__signout' : 'header__login'} onClick={onClickButtonOut}>
+            <span className= {statusAuth === AuthorizationStatus.Auth.toString() ? 'header__signout' : 'header__login'} onClick={handleClickButtonOut}>
               { (statusAuth === AuthorizationStatus.Auth.toString()) ? 'Sign out' : 'Sign in'}
             </span>
           </Link>

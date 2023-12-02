@@ -36,7 +36,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
     login: email
   };
 
-  function onClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function handleClickButton (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     evt.preventDefault();
 
     dispatch(loginAction(authData)).unwrap().then(() => {
@@ -45,14 +45,14 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
   }
 
-  function onInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
+  function handleInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
     if (evt.target instanceof HTMLInputElement) {
       const value = evt.target.value;
       setPassword(value);
     }
   }
 
-  function onInputEmail (evt: React.ChangeEvent<HTMLInputElement>) {
+  function handleInputEmail (evt: React.ChangeEvent<HTMLInputElement>) {
     if (evt.target instanceof HTMLInputElement) {
       const value = evt.target.value;
       setEmail(value);
@@ -84,14 +84,14 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
             <form className="login__form form" action="#" method="post" >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" onChange={onInputEmail} required/>
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" onChange={handleInputEmail} required/>
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={onInputPassword} required/>
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={handleInputPassword} required/>
                 {error === null ? '' : `${error}`}
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={onClickButton} disabled={!checkPassword || !checkEmail}>Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={handleClickButton} disabled={!checkPassword || !checkEmail}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
