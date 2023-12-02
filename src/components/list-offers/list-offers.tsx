@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import { SettingCardCities } from '../../const';
+import {SettingCardCities} from '../../const';
 import type {OfferCard} from '../../types/type-store';
 import {CardOffer} from '../card-offers/card';
 
@@ -10,7 +10,7 @@ type ListOffersProps = {
 function ListOffersMemo ({offers}: ListOffersProps): JSX.Element {
 
   return(
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content " data-testid = 'list offers'>
       {offers?.map((offer) => <CardOffer key={offer.id} offer={offer} className={SettingCardCities.className} width={SettingCardCities.width} height={SettingCardCities.height}/>)}
     </div>
   );

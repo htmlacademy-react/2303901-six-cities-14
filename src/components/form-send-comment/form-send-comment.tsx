@@ -2,7 +2,7 @@ import {useState} from 'react';
 import type {FormEvent} from 'react';
 import {DEFAULT_VALUE_NULL, LengthComment} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {RatingComponent} from '../rating-component';
+import {RatingComponent} from '../rating-component/rating-component';
 import {sendComment} from '../../services/thunk/send-comment';
 import {fetchComments} from '../../services/thunk/fetch-comments';
 import {memo} from 'react';

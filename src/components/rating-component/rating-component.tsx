@@ -1,7 +1,7 @@
 import {ChangeEvent} from 'react';
 import React from 'react';
-import {useAppSelector} from '../hooks/use-store';
-import {OPTIONS} from '../const';
+import {useAppSelector} from '../../hooks/use-store';
+import {OPTIONS} from '../../const';
 
 type RatingComponentProps = {
   rating: number;
