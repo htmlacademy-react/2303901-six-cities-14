@@ -12,6 +12,7 @@ const URL_MARKER_CURRENT = 'img/pin-active.svg';
 const MAX_LENGTH_OFFERS_NEAR = 3;
 const MAX_LENGTH_OFFER_PHOTO = 6;
 const MAX_LENGTH_POINT_NEAR = 3;
+const RENAME_WORD = 1;
 
 const CURRENT_ICON = {
   iconUrl: URL_MARKER_CURRENT,
@@ -87,7 +88,6 @@ const Cities = {
 };
 
 const CitiesForFilter = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
 
 const DefaultCityToMap = {
   Paris: {
@@ -214,6 +214,7 @@ export {
   MAX_LENGTH_OFFERS_NEAR,
   MAX_LENGTH_OFFER_PHOTO,
   MAX_LENGTH_POINT_NEAR,
-  OPTIONS
+  OPTIONS,
+  RENAME_WORD
 };
 

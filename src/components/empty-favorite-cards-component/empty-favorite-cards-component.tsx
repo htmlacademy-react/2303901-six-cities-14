@@ -1,4 +1,3 @@
-
 function EmptyFavoriteCardsComponent () {
 
   return (

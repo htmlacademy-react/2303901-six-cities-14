@@ -11,7 +11,6 @@ function RedirectFavoriteComponent ({children}: RedirectProps) {
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   return AuthorizationStatus.Unknown.toString() === authStatus ? <LoadingComponent/> : children;
-
 }
 
 export {RedirectFavoriteComponent};
