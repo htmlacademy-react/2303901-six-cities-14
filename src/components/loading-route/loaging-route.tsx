@@ -5,7 +5,6 @@ function LoadingRoute ({children}: {children: JSX.Element}) {
   const stateLoad = useAppSelector((state) => state.offers.offers);
 
   return stateLoad === null ? <LoadingComponent /> : children;
-
 }
 
 export {LoadingRoute};

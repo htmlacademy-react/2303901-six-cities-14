@@ -1,5 +1,5 @@
-import { AuthorizationStatus } from '../../../const';
-import { authStatusSlice } from '../auth-status-slice';
+import {AuthorizationStatus} from '../../../const';
+import {authStatusSlice} from '../auth-status-slice';
 
 describe('auth status slice', () => {
   it('should return initial state with empty action', () => {

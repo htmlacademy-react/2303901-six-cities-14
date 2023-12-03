@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
 import {AppRoute, DEFAULT_CITY} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
-import { useAppDispatch } from '../../hooks/use-store';
+import {useAppDispatch} from '../../hooks/use-store';
 import {memo} from 'react';
-import { offerSlice } from '../../store/slices/offer-slice';
+import {offerSlice} from '../../store/slices/offer-slice';
 
 type Props = {
   className: string;

@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {store} from '../../store';
-import { ProfileNotLoggedComponent } from './profile-not-logged';
+import {ProfileNotLoggedComponent} from './profile-not-logged';
 
 describe('Component: right-section', () => {
   it('should render correctly', () => {

@@ -26,7 +26,6 @@ type ReviewUser ={
   avatarUrl: string;
 }
 
-
 type Review = {
   id: number;
   user: ReviewUser;

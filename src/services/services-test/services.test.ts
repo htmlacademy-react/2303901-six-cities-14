@@ -5,7 +5,7 @@ import {Action} from 'redux';
 import {State} from '../../types/type-store';
 import {ThunkDispatch} from 'redux-thunk';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {ApiRoute, DEFAULT_VALUE_NULL} from '../../const';
+import {ApiRoute, DEFAULT_VALUE_NULL, statusFavoriteToServer} from '../../const';
 import {checkAuthAction} from '../thunk/check-auth-action';
 import {offersMock} from '../../mock/offers/offer-mocks';
 import {fetchOffersAction} from '../thunk/fetch-offers';
@@ -16,11 +16,10 @@ import {commentMock, mockComments} from '../../mock/comments/comment';
 import {sendComment} from '../thunk/send-comment';
 import {fetchOffersFavorite} from '../thunk/fetch-offers-favorite';
 import {fetchOffersNear, sendFavoriteOffer} from '../api-actions';
-import { AuthData } from '../../types/types';
-import { loginAction } from '../thunk/login-action';
+import {AuthData} from '../../types/types';
+import {loginAction} from '../thunk/login-action';
 import * as tokenStorage from '../token';
-import { logoutAction } from '../thunk/logout-action';
-
+import {logoutAction} from '../thunk/logout-action';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>
 
@@ -50,7 +49,6 @@ describe('Async actions', () => {
     ]);
   });
 
-
   it('should dispatch "checkAuthAction.pending" and "checkAuthAction.rejected" when server response 400', async() => {
     mockAxiosAdapter.onGet(ApiRoute.Login).reply(400);
 
@@ -65,7 +63,6 @@ describe('Async actions', () => {
 
   describe('fetchOffersAction', () => {
     it('should dispatch "fetchOffersAction.pending", when server response 200', async() => {
-
       const mockOffers = [offersMock];
 
       mockAxiosAdapter.onGet(ApiRoute.Offers).reply(200, mockOffers);
@@ -100,7 +97,6 @@ describe('Async actions', () => {
 
   describe('fetchOfferAction', () => {
     it('should dispatch "fetchOfferAction.pending", when server response 200', async() => {
-
       const mockOffer = offer;
 
       mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${mockOffer.id}`).reply(200, mockOffer);
@@ -112,10 +108,8 @@ describe('Async actions', () => {
       const fetchOfferActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOfferAction.fulfilled>;
 
       expect(extractedActionsTypes).toEqual([
-
         fetchOfferAction.pending.type,
         fetchOfferAction.fulfilled.type,
-
       ]);
 
       expect(fetchOfferActionFulfilled.payload)
@@ -137,7 +131,6 @@ describe('Async actions', () => {
 
   describe('fetchCommentsAction', () => {
     it('should dispatch "fetchCommentsAction.pending", when server response 200', async() => {
-
       const comments = mockComments;
 
       mockAxiosAdapter.onGet(`${ApiRoute.Comments}/${offer.id}`).reply(200, comments);
@@ -149,7 +142,6 @@ describe('Async actions', () => {
       const fetchCommentsActionFulfilled = emittedActions[1] as ReturnType<typeof fetchComments.fulfilled>;
 
       expect(extractedActionsTypes).toEqual([
-
         fetchComments.pending.type,
         fetchComments.fulfilled.type,
       ]);
@@ -174,7 +166,6 @@ describe('Async actions', () => {
 
   describe('postCommentAction', () => {
     it('should dispatch "sendCommentAction.pending", when server response 200', async() => {
-
       mockAxiosAdapter.onPost(`${ApiRoute.Comments}/${offer.id}`, {comment: comment.comment, rating: comment.rating}).reply(200, comment);
 
       await store.dispatch(sendComment({id: offer.id, comment: comment.comment, rating: comment.rating}));
@@ -184,7 +175,6 @@ describe('Async actions', () => {
       const sendCommentActionFulfilled = emittedActions[1] as ReturnType<typeof sendComment.fulfilled>;
 
       expect(extractedActionsTypes).toEqual([
-
         sendComment.pending.type,
         sendComment.fulfilled.type,
       ]);
@@ -209,7 +199,6 @@ describe('Async actions', () => {
 
   describe('fetchOffersFavoriteAction', () => {
     it('should dispatch "fetchOffersFavoriteAction.pending", when server response 200', async() => {
-
       const mockOffers = [offersMock];
 
       mockAxiosAdapter.onGet(ApiRoute.OffersFavorite).reply(200, mockOffers);
@@ -244,7 +233,6 @@ describe('Async actions', () => {
 
   describe('postOfferFavoriteAction', () => {
     it('should dispatch "postOfferFavoriteAction.pending", when server response 201', async() => {
-
       mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offersMock[DEFAULT_VALUE_NULL].id}/${DEFAULT_VALUE_NULL}`).reply(201, offersMock);
 
       await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status: DEFAULT_VALUE_NULL}));
@@ -254,7 +242,6 @@ describe('Async actions', () => {
       const send = emittedActions[1] as ReturnType<typeof sendFavoriteOffer.fulfilled>;
 
       expect(extractedActionsTypes).toEqual([
-
         sendFavoriteOffer.pending.type,
         sendFavoriteOffer.fulfilled.type,
       ]);
@@ -264,9 +251,9 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "postOfferFavoriteAction.pending", "postOfferFavoriteAction.rejected" when server response 400', async () => {
-      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${1}`).reply(400, []);
+      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${statusFavoriteToServer.favorite}`).reply(400, []);
 
-      await store.dispatch(sendFavoriteOffer({id: offersMock[0].id, status: 1}));
+      await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status:  statusFavoriteToServer.favorite}));
 
       const actions = extractActionsTypes(store.getActions());
 
@@ -279,7 +266,6 @@ describe('Async actions', () => {
 
   describe('fetchOffersNearAction', () => {
     it('should dispatch "fetchOffersNearAction.pending", when server response 200', async() => {
-
       const mockOffers = offersMock;
 
       mockAxiosAdapter.onGet(`${ApiRoute.Offers}/${offer.id}/nearby`).reply(200, mockOffers);
@@ -326,7 +312,6 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         loginAction.pending.type,
         loginAction.fulfilled.type,
-
       ]);
     });
 
@@ -366,5 +351,3 @@ describe('Async actions', () => {
     });
   });
 });
-
-

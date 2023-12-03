@@ -3,13 +3,13 @@ import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 
-type InitialState = {
+type StateOffers = {
   offers: OfferCard[] | null;
   loadingStatus: boolean | null;
   error: null | string;
 }
 
-const initialState: InitialState = {
+const initialState: StateOffers = {
   offers: null,
   loadingStatus: null,
   error: null

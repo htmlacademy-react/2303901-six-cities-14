@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {store} from '../../store';
 
-
 describe('Component: offers list near', () => {
   it('should render correctly', () => {
     const expectedText = 'Other places in the';
