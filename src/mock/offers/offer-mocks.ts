@@ -1,50 +1,4 @@
-type OfferHost = {
-  id: number;
-  name: string;
-  isPro: boolean;
-  avatarUrl: string;
-}
-
-type OfferLocation = {
-  latitude:number;
-  longitude: number;
-  zoom: number;
-}
-
-type OfferCityLocation = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-
-}
-
-type OfferCity = {
-  name: string;
-  location :OfferCityLocation;
-}
-
-type Offer = {
-city: OfferCity;
-previewImage: string;
-images: string[];
-title: string;
-isFavorite: boolean;
-isPremium: boolean;
-rating: number;
-type: string;
-bedrooms: number;
-maxAdults: number;
-price:number;
-goods: string[];
-host: OfferHost;
-description:string;
-location: OfferLocation;
-id: string;
-}
-
-type Offers = Offer[]
-
-const offersMock: Offers = [
+const offersMock = [
   {
     city: {
       name: 'Dusseldorf',
@@ -487,7 +441,7 @@ const offersMock: Offers = [
   },
 ];
 
-const offersMockChange: Offers = [
+const offersMockChange = [
   {
     city: {
       name: 'Dusseldorf',
@@ -984,4 +938,3 @@ const offerCard = {
 };
 
 export {offersMock, offerCard, offersMockChange};
-

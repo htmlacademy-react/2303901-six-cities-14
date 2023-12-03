@@ -3,7 +3,6 @@ import {ButtonFilterComponent} from '../button-filter-component/button-filter-co
 import {CardOffer} from '../card-offers/card';
 import type {OfferCard} from '../../types/type-store';
 
-
 type props ={
   offers: OfferCard[];
 }
@@ -27,7 +26,6 @@ function FavoriteCardComponents({offers}: props) {
       <section className="favorites">
         <h1 className="favorites__title">Saved listing</h1>
         <ul className="favorites__list">
-
           {groupedFavorites && Object.entries(groupedFavorites).map(([cityName, cityOffers]) => {
             const favoriteCityOffers = cityOffers?.filter((offer) => offer.isFavorite);
 
@@ -35,7 +33,6 @@ function FavoriteCardComponents({offers}: props) {
 
               return null;
             }
-
             return (
               <li className="favorites__locations-items" key={cityName}>
                 <div className="favorites__locations locations locations--current">

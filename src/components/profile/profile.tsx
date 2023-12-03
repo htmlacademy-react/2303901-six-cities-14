@@ -21,19 +21,17 @@ function ProfileMemo () {
     dispatch(authStatusSlice.actions.addUserStatus(AuthorizationStatus.NoAuth));
 
     if(statusAuth === AuthorizationStatus.Auth.toString()) {
-
       dispatch(logoutAction()).unwrap().then(() => {
         dispatch(fetchOffersAction());
 
         if(isLoading){
+
           return <LoadingComponent/>;
         }
       }).then(() => {
-
         if(currentPathname === AppRoute.Favorites.toString()){
           navigate(AppRoute.Login);
         }
-
       });
       dispatch(dataUserSlice.actions.addUserData(null));
     }

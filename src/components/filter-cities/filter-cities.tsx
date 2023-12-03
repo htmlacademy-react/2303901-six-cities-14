@@ -1,7 +1,6 @@
-import { memo } from 'react';
+import {memo} from 'react';
 import {CitiesForFilter} from '../../const';
 import {ButtonFilterComponent} from '../button-filter-component/button-filter-component';
-
 
 function FilterCitiesMemo () {
 

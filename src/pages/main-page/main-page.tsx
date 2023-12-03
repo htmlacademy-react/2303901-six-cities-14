@@ -6,17 +6,16 @@ import {Profile} from '../../components/profile/profile';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import { CitiesPlaceComponent } from '../../components/cities-places/cities-places';
-import { NoPlacesLeftComponent } from '../../components/no-places/no-places-left';
+import {CitiesPlaceComponent} from '../../components/cities-places/cities-places';
+import {NoPlacesLeftComponent} from '../../components/no-places/no-places-left';
 import {Logotype} from '../../components/logotype/logotype';
-import {AuthorizationStatus, SettingLogoHeader, TitleDescription} from '../../const';
+import {AuthorizationStatus, DEFAULT_VALUE_NULL, SettingLogoHeader, TitleDescription} from '../../const';
 import type {OfferCard} from '../../types/type-store';
-import { NoPlacesRightComponent } from '../../components/no-places/no-places-right';
-import { fetchOffersFavorite } from '../../services/thunk/fetch-offers-favorite';
-import { ErrorMessage } from '../../components/error-message/error-message';
-import { LoadingComponent } from '../../components/loading-component/loading-component';
-import {ProfileNotLoggedComponent} from '../../components/profile-not-loggeg/profile-not-logged';
-
+import {NoPlacesRightComponent} from '../../components/no-places/no-places-right';
+import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
+import {ErrorMessage} from '../../components/error-message/error-message';
+import {LoadingComponent} from '../../components/loading-component/loading-component';
+import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/profile-not-logged';
 
 type MainPagesProps = {
   title: string;
@@ -42,9 +41,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
     dispatch(fetchOffersFavorite());
-
   },[selectedFilterCity, stateOffers]);
-
 
   const pointsOffersToMap = citiesToFilter?.map((offer) => {
     const pointsToMap = {
@@ -80,14 +77,14 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
           </div>
         </div>
       </header>
-      <main className= {`${offersFilter.length !== 0 ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty'}`}>
+      <main className= {`${offersFilter.length !== DEFAULT_VALUE_NULL ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
         <FilterCities/>
         <div className="cities">
-          <div className={`cities__places-container container ${offersFilter.length === 0 ? 'cities__places-container--empty' : ''}`}>
-            {offersFilter.length !== 0 ? <CitiesPlaceComponent/> : <NoPlacesLeftComponent/>}
+          <div className={`cities__places-container container ${offersFilter.length === DEFAULT_VALUE_NULL ? 'cities__places-container--empty' : ''}`}>
+            {offersFilter.length !== DEFAULT_VALUE_NULL ? <CitiesPlaceComponent/> : <NoPlacesLeftComponent/>}
             <div className="cities__right-section">
-              {offersFilter.length !== 0 ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : <NoPlacesRightComponent/>}
+              {offersFilter.length !== DEFAULT_VALUE_NULL ? <MapComponent pointsToMap={pointsOffersToMap} cityName={selectedFilterCity}/> : <NoPlacesRightComponent/>}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { dataUserSlice } from '../data-user-slice';
+import {dataUserSlice} from '../data-user-slice';
 
 describe('data user slice ', () => {
   it('should return initial state with empty action', () => {

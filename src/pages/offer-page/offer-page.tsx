@@ -17,10 +17,10 @@ import type {OfferCard} from '../../types/type-store';
 import type {OfferPage} from '../../types/type-store';
 import {fetchComments} from '../../services/thunk/fetch-comments';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
-import {ProfileNotLoggedComponent} from '../../components/profile-not-loggeg/profile-not-logged';
+import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/profile-not-logged';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {getRating} from '../../utils';
-import { offerSlice } from '../../store/slices/offer-slice';
+import {offerSlice} from '../../store/slices/offer-slice';
 
 type OfferPagesProps = {
   title: string;
@@ -42,7 +42,6 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   const isUserPro = statusUser ? '--pro' : '';
   const state = useAppSelector((stat) => stat.loadOffer.offer);
 
-
   useEffect(() => {
     dispatch(fetchOfferAction(id.offerId));
     dispatch(fetchComments(id.offerId));
@@ -61,7 +60,6 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
   };
 
   const points = stateOffersNear.map((point) => {
-
     const pointMap = {
       title: point.city.name,
       lat: point.location.latitude,

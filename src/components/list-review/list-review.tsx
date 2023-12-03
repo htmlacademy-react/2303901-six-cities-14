@@ -1,15 +1,11 @@
 import {Review} from '../review/review';
 import {DEFAULT_VALUE_NULL, MAX_LENGTH_REVIEW} from '../../const';
 import {useAppSelector} from '../../hooks/use-store';
-import {useEffect} from 'react';
 import type {Comment} from '../../types/type-store';
 import {memo} from 'react';
 
 function ListReviewMemo() {
   const comments = useAppSelector((state) => state.loadComments.comments);
-
-  useEffect(() => {
-  }, [comments]);
 
   function compareDates(a: Comment, b: Comment): number {
     const dateA = new Date(a.date);

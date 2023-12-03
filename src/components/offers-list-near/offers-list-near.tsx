@@ -20,9 +20,7 @@ function OffersListNearMemo ({offersPoint, offerPoint}: OfferNearProps) {
            Other places in the {offerPoint.city.name}
         </h2>
         <div className="near-places__list places__list">
-
           {offers.map((offer) => <CardOfferNear key={offer.id} offer={offer}/>)}
-
         </div>
       </section>
     </div>

@@ -1,7 +1,6 @@
 import {offersMock, offersMockChange} from '../../../mock/offers/offer-mocks';
 import {offersSlice} from '../offers-slice';
 
-
 describe('Offer Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };

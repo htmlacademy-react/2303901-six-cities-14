@@ -1,6 +1,5 @@
 import type {Reviews} from '../../types/types';
 
-
 const reviewMocks: Reviews = [
   {
     id: 1,

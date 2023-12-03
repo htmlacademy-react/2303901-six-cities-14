@@ -4,7 +4,6 @@ import {store} from '../../store';
 import {Provider} from 'react-redux';
 
 describe('Application Routing', () => {
-
   it('should render "MainPages" when user navigates to "/"', () => {
     const expectData = 'main-page';
     const expectedText = 'Cities';

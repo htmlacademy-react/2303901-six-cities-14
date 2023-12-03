@@ -9,7 +9,7 @@ import {AuthorizationRoute} from '../authorization-route/authorization-route';
 import {useAppDispatch} from '../../hooks/use-store';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 import {checkAuthAction} from '../../services/thunk/check-auth-action';
-import { RedirectFavoriteComponent } from '../redirect-favorite.tsx/redirect-favoritr';
+import {RedirectFavoriteComponent} from '../redirect-favorite.tsx/redirect-favorite.tsx';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

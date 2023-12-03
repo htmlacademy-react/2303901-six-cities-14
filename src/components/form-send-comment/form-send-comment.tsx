@@ -35,7 +35,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
       setRating(DEFAULT_VALUE_NULL);
       dispatch(fetchComments(id));
       setButton(false);
-    }) .catch(() => {
+    }).catch(() => {
 
       setButton(false);
     });

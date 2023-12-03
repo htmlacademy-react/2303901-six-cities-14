@@ -1,4 +1,3 @@
-
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Link} from 'react-router-dom';

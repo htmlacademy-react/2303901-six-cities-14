@@ -6,10 +6,8 @@ import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 import {getRating} from '../../utils';
-
-
 import {memo} from 'react';
-import { offerSlice } from '../../store/slices/offer-slice';
+import {offerSlice} from '../../store/slices/offer-slice';
 
 type CardPagesProps = {
   offer: OfferCard;
@@ -76,7 +74,6 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
-
     </article>
   );
 }

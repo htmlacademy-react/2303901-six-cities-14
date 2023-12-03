@@ -7,7 +7,6 @@ import {memo} from 'react';
 function SortListMemo () {
   const [stateSortList, setStateSortList] = useState(false);
   const [filter, setFilter] = useState('Popular');
-
   const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
   const offersCity = useAppSelector((state) => state.filterOffers.filterOffers);
   const dispatch = useAppDispatch();
@@ -40,7 +39,6 @@ function SortListMemo () {
   }
 
   function handleClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
-
     const target = evt.target as HTMLElement;
     const tabIndex: number = target.tabIndex;
     const text: string = (evt.target as HTMLElement).textContent || '';
@@ -83,7 +81,6 @@ function SortListMemo () {
         </ul>
       </form>
     ) : ''
-
   );
 }
 
