@@ -15,7 +15,7 @@ function SortListMemo () {
     setFilter('Popular');
   },[offersCity]);
 
-  function changeOfferLowToHight (offersToSort: OfferCard[]) {
+  function changeOfferLowToHigh (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);
 
     dispatch(sortOffersSlice.actions.addSortOffers(offers));
@@ -50,7 +50,7 @@ function SortListMemo () {
       case 0:
         return dispatch(sortOffersSlice.actions.addSortOffers(offersCity));
       case 1:
-        return changeOfferLowToHight(offersSort);
+        return changeOfferLowToHigh(offersSort);
       case 2:
         return changeOfferHightToLow(offersSort);
       case 3:

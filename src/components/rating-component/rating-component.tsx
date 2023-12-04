@@ -5,10 +5,10 @@ import {OPTIONS} from '../../const';
 
 type RatingComponentProps = {
   rating: number;
-  setRating: (rating: number) => void;
+  onSetRating: (rating: number) => void;
 };
 
-function RatingComponent ({rating, setRating}: RatingComponentProps) {
+function RatingComponent ({rating, onSetRating: setRating}: RatingComponentProps) {
   const isLoading = useAppSelector((state) => state.loadComment.isLoading);
   const handleChecked = (evt: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(evt.target.value));

@@ -85,10 +85,6 @@ type StateAuth = {
   isLoadingLogout: boolean;
 };
 
-type StateError = {
-  error: string | null;
-}
-
 type StateOffer = {
   offer: OfferPage | null;
   error: string | null;
@@ -115,7 +111,6 @@ export type {
   StateFilterOffers,
   StateLoadOffers,
   StateAuth,
-  StateError,
   OfferPage,
   Comment,
   StateOffer,

@@ -3,7 +3,7 @@ import {ListReview} from '../../components/list-review/list-review';
 import {Logotype} from '../../components/logotype/logotype';
 import {MapComponent} from '../../components/map/map';
 import {OffersListNear} from '../../components/offers-list-near/offers-list-near';
-import {useDocumentTitle} from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/use-document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Profile} from '../../components/profile/profile';
 import {useParams} from 'react-router-dom';
@@ -19,9 +19,10 @@ import {fetchComments} from '../../services/thunk/fetch-comments';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
 import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/profile-not-logged';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
-import {getRating} from '../../utils';
+import {getRating, setFirstLetter} from '../../utils';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {sendCommentsSlice} from '../../store/slices/send-comment-slice';
+
 
 type OfferPagesProps = {
   title: string;
@@ -88,7 +89,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+              <Logotype className={SettingLogoHeader.ClassName} width={SettingLogoHeader.Width} height={SettingLogoHeader.Height}/>
             </div>
             {checkStatus ? <Profile/> : <ProfileNotLoggedComponent/>}
           </div>
@@ -118,9 +119,9 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                 </h1>
                 <FavoriteButton
                   offer={offer as OfferCard}
-                  className={SettingFavoriteButtonOfferPage.className}
-                  width={SettingFavoriteButtonOfferPage.width}
-                  height={SettingFavoriteButtonOfferPage.height}
+                  className={SettingFavoriteButtonOfferPage.ClassName}
+                  width={SettingFavoriteButtonOfferPage.Width}
+                  height={SettingFavoriteButtonOfferPage.Height}
                 />
               </div>
               <div className="offer__rating rating">
@@ -133,7 +134,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
                 <span className="offer__rating-value rating__value">{stateOffer?.rating}</span>
               </div>
               <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">{stateOffer?.type}</li>
+                <li className="offer__feature offer__feature--entire">{setFirstLetter(stateOffer?.type || '')}</li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {stateOffer?.bedrooms} Bedroom{stateOffer?.bedrooms !== undefined && stateOffer.bedrooms >= ENDING ? 's' : ''}
                 </li>
@@ -187,7 +188,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
             />
           </section>
         </section>
-        {stateOffer && <OffersListNear offersPoint={stateOffersNear} offerPoint={stateOffer} />}
+        {stateOffer && <OffersListNear points={stateOffersNear} offerPoint={stateOffer} />}
       </main>
     </div>
   );

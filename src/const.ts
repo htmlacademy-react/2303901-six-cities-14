@@ -2,9 +2,7 @@ const DEFAULT_CITY = 'Paris';
 const URL_SERVER = 'https://14.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
-const TIMEOUT_SHOW_ERROR = 2000;
 const DEFAULT_VALUE_NULL = 0;
-const ERROR_NOT_OFFER = 'errorNotOffer';
 const ENDING = 2;
 const MAX_LENGTH_REVIEW = 10;
 const URL_MARKER_DEFAULT = 'img/pin.svg';
@@ -24,13 +22,6 @@ const DEFAULT_ICON = {
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39],
-};
-
-const DEFAULT_DESCRIPTION = {
-  title: 'Paris',
-  lat: 52.37454,
-  lng: 4.897976,
-  zoom: 13,
 };
 
 const MONTH_NAMES = [
@@ -131,7 +122,6 @@ const DefaultCityToMap = {
     lng: 10.000654,
     zoom: 13
   },
-
 };
 
 const LengthComment = {
@@ -140,45 +130,44 @@ const LengthComment = {
 } as const;
 
 const SettingLogoHeader = {
-  className: 'header',
-  width: 81,
-  height: 41,
-
+  ClassName: 'header',
+  Width: 81,
+  Height: 41,
 } as const;
 
 const SettingLogoFooter = {
-  className: 'footer',
-  width: 64,
-  height: 33,
+  ClassName: 'footer',
+  Width: 64,
+  Height: 33,
 } as const;
 
 const SettingFavoriteCard = {
-  className: 'favorites',
-  width: 150,
-  height: 110
+  ClassName: 'favorites',
+  Width: 150,
+  Height: 110,
 } as const;
 
 const SettingCardCities = {
-  className: 'cities',
-  width: 260,
-  height: 200
+  ClassName: 'cities',
+  Width: 260,
+  Height: 200,
 } as const;
 
 const SettingFavoriteButtonOfferPage = {
-  className: 'offer__bookmark-button',
-  width: 31,
-  height: 33
+  ClassName: 'offer__bookmark-button',
+  Width: 31,
+  Height: 33,
 } as const;
 
 const SettingFavoriteButtonCard = {
-  className: 'place-card__bookmark-button',
-  width: 18,
-  height: 19
+  ClassName: 'place-card__bookmark-button',
+  Width: 18,
+  Height: 19,
 } as const;
 
 const StatusFavoriteToServer = {
-  favorite: 1,
-  noFavorite: 0
+  Favorite: 1,
+  NoFavorite: 0,
 } as const;
 
 export {
@@ -189,7 +178,6 @@ export {
   URL_MARKER_DEFAULT,
   Cities,
   CITIES_FOR_FILTER,
-  DEFAULT_DESCRIPTION,
   CURRENT_ICON,
   DEFAULT_ICON,
   LengthComment,
@@ -200,8 +188,6 @@ export {
   URL_SERVER,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
-  TIMEOUT_SHOW_ERROR,
-  ERROR_NOT_OFFER,
   ENDING,
   SettingLogoHeader,
   SettingLogoFooter,

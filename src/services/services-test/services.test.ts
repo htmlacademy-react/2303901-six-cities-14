@@ -251,9 +251,9 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "postOfferFavoriteAction.pending", "postOfferFavoriteAction.rejected" when server response 400', async () => {
-      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${StatusFavoriteToServer.favorite}`).reply(400, []);
+      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${StatusFavoriteToServer.Favorite}`).reply(400, []);
 
-      await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status:  StatusFavoriteToServer.favorite}));
+      await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status:  StatusFavoriteToServer.Favorite}));
 
       const actions = extractActionsTypes(store.getActions());
 

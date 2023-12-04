@@ -1,7 +1,7 @@
 import {memo, useEffect} from 'react';
 import {MapComponent} from '../../components/map/map';
 import {FilterCities} from '../../components/filter-cities/filter-cities';
-import {useDocumentTitle} from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/use-document-title';
 import {Profile} from '../../components/profile/profile';
 import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {filterOffersSlice} from '../../store/slices/filter-offer-slice';
@@ -75,7 +75,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+              <Logotype className={SettingLogoHeader.ClassName} width={SettingLogoHeader.Width} height={SettingLogoHeader.Height}/>
             </div>
             {checkStatus ? <Profile/> : <ProfileNotLoggedComponent/>}
           </div>

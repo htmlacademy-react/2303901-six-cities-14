@@ -43,10 +43,6 @@ type CityLocationDefault = {
   zoom: number;
 };
 
-type DefaultCityType = {
-  [key: string]: CityLocationDefault;
-}
-
 type AuthData = {
   login: string;
   password: string;
@@ -65,7 +61,6 @@ export type {
   IconToMap,
   Review,
   Reviews,
-  DefaultCityType,
   CityLocationDefault,
   AuthData,
   UserDataLogin

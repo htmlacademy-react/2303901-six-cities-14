@@ -5,7 +5,8 @@ import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
 import {fetchOffersNear} from '../../services/api-actions';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
-import { getRating } from '../../utils';
+import {getRating, setFirstLetter} from '../../utils';
+
 
 type CardOfferProps = {
   offer: OfferCard;
@@ -41,9 +42,9 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
           </div>
           <FavoriteButton
             offer={offer}
-            className={SettingFavoriteButtonCard.className}
-            width={SettingFavoriteButtonCard.width}
-            height={SettingFavoriteButtonCard.height}
+            className={SettingFavoriteButtonCard.ClassName}
+            width={SettingFavoriteButtonCard.Width}
+            height={SettingFavoriteButtonCard.Height}
           />
         </div>
         <div className="place-card__rating rating">
@@ -55,7 +56,7 @@ function CardOfferNear ({offer}: CardOfferProps): JSX.Element {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{setFirstLetter(offer.type)}</p>
       </div>
     </article>
   );

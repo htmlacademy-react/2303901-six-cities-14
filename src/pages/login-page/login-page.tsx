@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
-import {useDocumentTitle} from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/use-document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {AppRoute, AuthorizationStatus, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
@@ -74,7 +74,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+              <Logotype className={SettingLogoHeader.ClassName} width={SettingLogoHeader.Width} height={SettingLogoHeader.Height}/>
             </div>
           </div>
         </div>

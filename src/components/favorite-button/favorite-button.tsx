@@ -21,7 +21,7 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const data = {
     id:  offer?.id || '',
-    status: (!offer?.isFavorite) ? StatusFavoriteToServer.favorite : StatusFavoriteToServer.noFavorite,
+    status: (!offer?.isFavorite) ? StatusFavoriteToServer.Favorite : StatusFavoriteToServer.NoFavorite,
   };
 
   const handleFavoriteButton = (): void => {
