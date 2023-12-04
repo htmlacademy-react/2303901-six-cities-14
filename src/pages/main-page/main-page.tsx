@@ -16,6 +16,7 @@ import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {ErrorMessage} from '../../components/error-message/error-message';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
 import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/profile-not-logged';
+import {checkAuthAction} from '../../services/thunk/check-auth-action';
 
 type MainPagesProps = {
   title: string;
@@ -40,8 +41,12 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
   useEffect(() => {
     dispatch(sortOffersSlice.actions.addSortOffers(citiesToFilter));
     dispatch(filterOffersSlice.actions.addFilterOffers(citiesToFilter));
-    dispatch(fetchOffersFavorite());
   },[selectedFilterCity, stateOffers]);
+
+  useEffect(() => {
+    dispatch(fetchOffersFavorite());
+    dispatch(checkAuthAction());
+  },[]);
 
   const pointsOffersToMap = citiesToFilter?.map((offer) => {
     const pointsToMap = {

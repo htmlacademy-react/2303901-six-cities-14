@@ -2,7 +2,7 @@ import type {OfferCard, OfferPage} from '../../types/type-store';
 import {offersSlice} from '../../store/slices/offers-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {sendFavoriteOffer} from '../../services/api-actions';
-import { AppRoute, AuthorizationStatus, statusFavoriteToServer} from '../../const';
+import { AppRoute, AuthorizationStatus, StatusFavoriteToServer} from '../../const';
 import {Link} from 'react-router-dom';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 
@@ -21,7 +21,7 @@ function FavoriteButton({offer, className, width, height}: ButtonProps): JSX.Ele
 
   const data = {
     id:  offer?.id || '',
-    status: (!offer?.isFavorite) ? statusFavoriteToServer.favorite : statusFavoriteToServer.noFavorite,
+    status: (!offer?.isFavorite) ? StatusFavoriteToServer.favorite : StatusFavoriteToServer.noFavorite,
   };
 
   const handleFavoriteButton = (): void => {

@@ -21,6 +21,7 @@ import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/pro
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {getRating} from '../../utils';
 import {offerSlice} from '../../store/slices/offer-slice';
+import {sendCommentsSlice} from '../../store/slices/send-comment-slice';
 
 type OfferPagesProps = {
   title: string;
@@ -47,6 +48,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
     dispatch(fetchComments(id.offerId));
     dispatch(fetchOffersNear(id.offerId));
     dispatch(fetchOffersFavorite());
+    dispatch(sendCommentsSlice.actions.addErrorStatus(false));
   },[title]);
 
   dispatch(offerSlice.actions.addLoadOfferCard(state));

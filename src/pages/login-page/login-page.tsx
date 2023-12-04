@@ -10,6 +10,9 @@ import {useEffect} from 'react';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 import '../../pages/login-page/styleLogin.css';
 import type {AuthData} from '../../types/types';
+import {authStatusSlice} from '../../store/slices/auth-status-slice';
+import {checkAuthAction} from '../../services/thunk/check-auth-action';
+
 
 type LoginPagesProps = {
   title: string;
@@ -29,6 +32,8 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
   useEffect(() => {
     const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
     dispatch(filterCitySlice.actions.changeCity(randomCity));
+    dispatch(authStatusSlice.actions.addErrorStatus(null));
+    dispatch(checkAuthAction());
   }, []);
 
   const authData: AuthData = {
@@ -40,6 +45,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
     evt.preventDefault();
 
     dispatch(loginAction(authData)).unwrap().then(() => {
+
       dispatch(fetchOffersAction());
     });
     dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));

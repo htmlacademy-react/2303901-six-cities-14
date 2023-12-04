@@ -16,7 +16,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState(DEFAULT_VALUE_NULL);
   const [button, setButton] = useState(false);
-  const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
+  const isCommentLengthValid = (comment.length >= LengthComment.Min && comment.length <= LengthComment.Max);
   const isLoading = useAppSelector((state) => state.loadComment.isLoading);
   const isValid = !(isCommentLengthValid && rating !== DEFAULT_VALUE_NULL && (isLoading === null || true));
   const errorMessage = useAppSelector((state) => state.loadComment.error);

@@ -18,7 +18,11 @@ const authStatusSlice = createSlice({
   reducers: {
     addUserStatus(state, action: PayloadAction<string>) {
       state.authStatus = action.payload;
+    },
+    addErrorStatus(state, action: PayloadAction<string | null>) {
+      state.error = action.payload;
     }
+
   },
   extraReducers(builder) {
     builder

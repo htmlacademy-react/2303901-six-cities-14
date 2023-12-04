@@ -87,7 +87,7 @@ const Cities = {
   Dusseldorf: 'Dusseldorf',
 };
 
-const CitiesForFilter = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+const CITIES_FOR_FILTER = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const DefaultCityToMap = {
   Paris: {
@@ -135,51 +135,51 @@ const DefaultCityToMap = {
 };
 
 const LengthComment = {
-  MIN: 50,
-  MAX: 300
-};
+  Min: 50,
+  Max: 300
+} as const;
 
 const SettingLogoHeader = {
   className: 'header',
   width: 81,
   height: 41,
 
-};
+} as const;
 
 const SettingLogoFooter = {
   className: 'footer',
   width: 64,
   height: 33,
-};
+} as const;
 
 const SettingFavoriteCard = {
   className: 'favorites',
   width: 150,
   height: 110
-};
+} as const;
 
 const SettingCardCities = {
   className: 'cities',
   width: 260,
   height: 200
-};
+} as const;
 
 const SettingFavoriteButtonOfferPage = {
   className: 'offer__bookmark-button',
   width: 31,
   height: 33
-};
+} as const;
 
 const SettingFavoriteButtonCard = {
   className: 'place-card__bookmark-button',
   width: 18,
   height: 19
-};
+} as const;
 
-const statusFavoriteToServer = {
+const StatusFavoriteToServer = {
   favorite: 1,
   noFavorite: 0
-};
+} as const;
 
 export {
   AppRoute,
@@ -188,7 +188,7 @@ export {
   ApiRoute,
   URL_MARKER_DEFAULT,
   Cities,
-  CitiesForFilter,
+  CITIES_FOR_FILTER,
   DEFAULT_DESCRIPTION,
   CURRENT_ICON,
   DEFAULT_ICON,
@@ -209,7 +209,7 @@ export {
   SettingCardCities,
   SettingFavoriteButtonOfferPage,
   SettingFavoriteButtonCard,
-  statusFavoriteToServer,
+  StatusFavoriteToServer,
   DEFAULT_VALUE_NULL,
   MAX_LENGTH_OFFERS_NEAR,
   MAX_LENGTH_OFFER_PHOTO,

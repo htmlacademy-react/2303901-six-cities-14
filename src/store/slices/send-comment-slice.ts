@@ -3,6 +3,7 @@ import type {Comment,StateComment} from '../../types/type-store';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {sendComment} from '../../services/thunk/send-comment';
 
+
 const initialState: StateComment = {
   comment: null,
   error: false,
@@ -12,7 +13,11 @@ const initialState: StateComment = {
 const sendCommentsSlice = createSlice({
   name: 'loadComment',
   initialState,
-  reducers: {},
+  reducers: {
+    addErrorStatus(state, action: PayloadAction<string | false>) {
+      state.error = action.payload;
+    }
+  },
   extraReducers (builder) {
     builder
       .addCase(sendComment.fulfilled, (state, action: PayloadAction<Comment>) => {
