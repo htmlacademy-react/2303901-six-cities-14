@@ -45,10 +45,11 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
     evt.preventDefault();
 
     dispatch(loginAction(authData)).unwrap().then(() => {
-
+      dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
+      dispatch(checkAuthAction());
       dispatch(fetchOffersAction());
     });
-    dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
+
   }
 
   function handleInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
@@ -67,17 +68,12 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
 
   useDocumentTitle(title);
 
-  if(authStatus === AuthorizationStatus.Auth.toString()) {
-    return '';
-  }
-
   return authStatus === AuthorizationStatus.NoAuth.toString() ? (
     <div className= "page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-
               <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
             </div>
           </div>

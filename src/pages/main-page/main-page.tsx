@@ -16,7 +16,6 @@ import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {ErrorMessage} from '../../components/error-message/error-message';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
 import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/profile-not-logged';
-import {checkAuthAction} from '../../services/thunk/check-auth-action';
 
 type MainPagesProps = {
   title: string;
@@ -31,6 +30,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
   const loading = useAppSelector((state) => state.offers.loadingStatus);
   const stateAut = useAppSelector((state) => state.authorizationStatus.authStatus);
   const checkStatus = stateAut === AuthorizationStatus.Auth.toString();
+  const isLoading = useAppSelector((state) => state.authorizationStatus.isLoadingLogout);
 
   const citiesToFilter: OfferCard[] = stateOffers?.filter((city, index) => {
     if (city.city.name === selectedFilterCity) {
@@ -45,7 +45,6 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffersFavorite());
-    dispatch(checkAuthAction());
   },[]);
 
   const pointsOffersToMap = citiesToFilter?.map((offer) => {
@@ -66,7 +65,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
     return <ErrorMessage title={TitleDescription.ErrorPage}/>;
   }
 
-  if(loading){
+  if(loading || isLoading){
     return <LoadingComponent/>;
   }
 
@@ -101,4 +100,3 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
 const MainPages = memo(MainPagesMemo);
 
 export {MainPages};
-

@@ -9,7 +9,8 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 const initialState: StateAuth = {
   authStatus: AuthorizationStatus.Unknown,
   error: null,
-  isLoading: false
+  isLoadingAuth: false,
+  isLoadingLogout: false
 };
 
 const authStatusSlice = createSlice({
@@ -22,20 +23,19 @@ const authStatusSlice = createSlice({
     addErrorStatus(state, action: PayloadAction<string | null>) {
       state.error = action.payload;
     }
-
   },
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state) => {
         state.authStatus = AuthorizationStatus.Auth;
-        state.isLoading = false;
+        state.isLoadingAuth = false;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authStatus = AuthorizationStatus.NoAuth;
-        state.isLoading = false;
+        state.isLoadingAuth = false;
       })
       .addCase(checkAuthAction.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingAuth = true;
       })
       .addCase(loginAction.fulfilled, (state) => {
         state.authStatus = AuthorizationStatus.Auth;
@@ -47,6 +47,10 @@ const authStatusSlice = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authStatus = AuthorizationStatus.NoAuth;
+        state.isLoadingLogout = false;
+      })
+      .addCase(logoutAction.pending, (state) => {
+        state.isLoadingLogout = true;
       });
   }
 });
