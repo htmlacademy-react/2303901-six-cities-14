@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import type { OfferCard } from '../../types/type-store';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import { offersSlice } from '../../store/slices/offers-slice';
+import React, {useEffect, useState} from 'react';
+import type {OfferCard} from '../../types/type-store';
+import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
+import {offersSlice} from '../../store/slices/offers-slice';
 import {Sort} from '../../const';
+import {memo} from 'react';
 
-function SortList() {
+function SortListMemo() {
   const [stateSortList, setStateSortList] = useState(false);
   const [filter, setFilter] = useState('Popular');
   const offersFilter = useAppSelector((state) => state.offers.offersFilter);
@@ -21,7 +22,7 @@ function SortList() {
     dispatch(offersSlice.actions.addStatusSort(Sort.Popular));
   }
 
-  function changeOfferLowToHight(offersToSort: OfferCard[]) {
+  function changeOfferLowToHigh(offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);
 
     dispatch(offersSlice.actions.changeOffers(offers));
@@ -48,13 +49,13 @@ function SortList() {
 
   useEffect(() => {
     switch (sorting) {
-      case 'low to high':
-        changeOfferLowToHight(offersFilter);
+      case Sort.LowToHight:
+        changeOfferLowToHigh(offersFilter);
         break;
-      case 'high to low':
+      case Sort.HighToLow:
         changeOfferHightToLow(offersFilter);
         break;
-      case 'Top rated first':
+      case Sort.TopRatedFirst:
         changeOfferTopRatedFirst(offersFilter);
         break;
       default:
@@ -75,7 +76,7 @@ function SortList() {
       case 1:
         return changeOfferPopular();
       case 2:
-        return changeOfferLowToHight(offersFilter);
+        return changeOfferLowToHigh(offersFilter);
       case 3:
         return changeOfferHightToLow(offersFilter);
       case 4:
@@ -109,4 +110,6 @@ function SortList() {
   );
 }
 
-export { SortList };
+const SortList = memo(SortListMemo);
+
+export {SortList};

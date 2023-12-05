@@ -1,4 +1,4 @@
-import { DEFAULT_CITY, Sort} from '../../../const';
+import {Sort} from '../../../const';
 import {offersMock, offersMockChange} from '../../../mock/offers/offer-mocks';
 import {offersSlice} from '../offers-slice';
 
@@ -11,10 +11,8 @@ describe('Offer Slice', () => {
       offers: null,
       loadingStatus: null,
       error: null,
-      offersSort: null,
       offersFilter:[],
       changeOffers: [],
-      city: DEFAULT_CITY,
       statusSort : Sort.Popular
     };
 
@@ -30,10 +28,8 @@ describe('Offer Slice', () => {
       offers: null,
       loadingStatus: null,
       error: null,
-      offersSort: null,
       offersFilter:[],
       changeOffers: [],
-      city: DEFAULT_CITY,
       statusSort : Sort.Popular
     };
     const result = offersSlice.reducer(undefined, emptyAction);
@@ -46,10 +42,8 @@ describe('Offer Slice', () => {
       offers: offersMock,
       loadingStatus: true,
       error: '',
-      offersSort: null,
       offersFilter:[],
       changeOffers: [],
-      city: DEFAULT_CITY,
       statusSort : Sort.Popular
     };
 
@@ -57,10 +51,8 @@ describe('Offer Slice', () => {
       offers: offersMockChange,
       loadingStatus: true,
       error: '',
-      offersSort: null,
       offersFilter:[],
       changeOffers: [],
-      city: DEFAULT_CITY,
       statusSort : Sort.Popular
     };
 
@@ -74,10 +66,8 @@ describe('Offer Slice', () => {
       offers: offersMock,
       loadingStatus: true,
       error: '',
-      offersSort: null,
       offersFilter:[],
       changeOffers: [],
-      city: DEFAULT_CITY,
       statusSort : Sort.Popular
     };
 

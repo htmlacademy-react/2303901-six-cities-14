@@ -17,15 +17,12 @@ type ButtonProps = {
 function FavoriteButtonMemo({offer, className, width, height}: ButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
-  const checkClassName = `${className}  ${offer?.isFavorite ?
-
-    'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
+  const checkClassName = `${className}  ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
 
   const data = {
     id:  offer?.id || '',
     status: (!offer?.isFavorite) ? StatusFavoriteToServer.Favorite : StatusFavoriteToServer.NoFavorite,
   };
-
 
   const handleFavoriteButton = (): void => {
     dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));

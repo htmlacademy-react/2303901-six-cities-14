@@ -14,7 +14,7 @@ import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
 import {ErrorMessage} from '../../components/error-message/error-message';
 import {LoadingComponent} from '../../components/loading-component/loading-component';
 import {ProfileNotLoggedComponent} from '../../components/profile-not-logged/profile-not-logged';
-import { offersSlice } from '../../store/slices/offers-slice';
+import {offersSlice} from '../../store/slices/offers-slice';
 
 type MainPagesProps = {
   title: string;
