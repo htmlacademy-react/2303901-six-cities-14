@@ -13,7 +13,7 @@ describe('Component: offers list near', () => {
     render(
       <Provider store={store}>
         <Router>
-          <OffersListNear points={offersMock} offerPoint={offer}/>
+          <OffersListNear offersPoint={offersMock} offerPoint={offer}/>
         </Router>
       </Provider>
     );

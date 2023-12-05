@@ -4,7 +4,6 @@ import type {OfferCard} from '../../types/type-store';
 import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
-import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 import {getRating, setFirstLetter} from '../../utils';
 import {memo} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
@@ -36,7 +35,6 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
       ...cardState,
       offerId: offer.id,
     });
-    dispatch(fetchOfferAction(offer.id));
   }
 
   return(

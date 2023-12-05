@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
 import {useDocumentTitle} from '../../hooks/use-document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {AppRoute, AuthorizationStatus, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {AppRoute, AuthorizationStatus, City, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../services/thunk/login-action';
@@ -25,7 +25,7 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
   const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
-  const cityArray = Object.values(Cities);
+  const cityArray = Object.values(City);
   const error = useAppSelector((state) => state.authorizationStatus.error);
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 

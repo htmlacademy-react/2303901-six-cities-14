@@ -69,7 +69,7 @@ enum ApiRoute {
  Logout = '/logout'
 }
 
-const Cities = {
+const City = {
   Paris: 'Paris',
   Cologne: 'Cologne',
   Brussels: 'Brussels',
@@ -176,7 +176,7 @@ export {
   TitleDescription,
   ApiRoute,
   URL_MARKER_DEFAULT,
-  Cities,
+  City,
   CITIES_FOR_FILTER,
   CURRENT_ICON,
   DEFAULT_ICON,

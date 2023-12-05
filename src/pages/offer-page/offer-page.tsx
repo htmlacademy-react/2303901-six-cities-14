@@ -52,7 +52,10 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
     dispatch(sendCommentsSlice.actions.addErrorStatus(false));
   },[title]);
 
-  dispatch(offerSlice.actions.addLoadOfferCard(state));
+  useEffect(() => {
+    dispatch(offerSlice.actions.addLoadOfferCard(state));
+  },[state]);
+
 
   const pointToMap = {
     title: stateOffer?.city.name || '',
@@ -188,7 +191,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
             />
           </section>
         </section>
-        {stateOffer && <OffersListNear points={stateOffersNear} offerPoint={stateOffer} />}
+        {stateOffer && <OffersListNear offersPoint={stateOffersNear} offerPoint={stateOffer} />}
       </main>
     </div>
   );
