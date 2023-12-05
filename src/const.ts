@@ -76,7 +76,7 @@ const City = {
   Amsterdam: 'Amsterdam',
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
-};
+} as const;
 
 const CITIES_FOR_FILTER = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
@@ -122,7 +122,7 @@ const DefaultCityToMap = {
     lng: 10.000654,
     zoom: 13
   },
-};
+} as const;
 
 const LengthComment = {
   Min: 50,
@@ -170,6 +170,13 @@ const StatusFavoriteToServer = {
   NoFavorite: 0,
 } as const;
 
+const Sort = {
+  Popular: 'Popular',
+  LowToHight: 'low to high',
+  HighToLow: 'high to low',
+  TopRatedFirst: 'Top rated first'
+} as const;
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -201,6 +208,7 @@ export {
   MAX_LENGTH_OFFER_PHOTO,
   MAX_LENGTH_POINT_NEAR,
   OPTIONS,
-  RENAME_WORD
+  RENAME_WORD,
+  Sort
 };
 

@@ -1,8 +1,6 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {offersSlice} from './slices/offers-slice';
 import {filterCitySlice} from './slices/filter-city-slice';
-import {sortOffersSlice} from './slices/sort-offers-slice';
-import {filterOffersSlice} from './slices/filter-offer-slice';
 import {createApi} from '../services/api';
 import {authStatusSlice} from './slices/auth-status-slice';
 import {dataUserSlice} from './slices/data-user-slice';
@@ -15,8 +13,6 @@ import {offersFavoriteSlice} from './slices/load-offers-favorite';
 const reducer = combineReducers({
   [offersSlice.name]: offersSlice.reducer,
   [filterCitySlice.name]: filterCitySlice.reducer,
-  [sortOffersSlice.name]: sortOffersSlice.reducer,
-  [filterOffersSlice.name]: filterOffersSlice.reducer,
   [authStatusSlice.name]: authStatusSlice.reducer,
   [dataUserSlice.name]: dataUserSlice.reducer,
   [offerSlice.name]: offerSlice.reducer,

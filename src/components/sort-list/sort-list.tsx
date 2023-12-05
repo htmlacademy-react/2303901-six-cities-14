@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import type { OfferCard } from '../../types/type-store';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import { offersSlice } from '../../store/slices/offers-slice';
+import {Sort} from '../../const';
 
 function SortList() {
   const [stateSortList, setStateSortList] = useState(false);
@@ -12,41 +13,33 @@ function SortList() {
   const city = useAppSelector((state) => state.filterCity.city);
 
   useEffect(() => {
-    setFilter('Popular');
+    setFilter(Sort.Popular);
   }, [city]);
 
   function changeOfferPopular() {
-    const sort = 'Popular';
-
-    dispatch(offersSlice.actions.changeOffers(offersFilter || []));
-    dispatch(offersSlice.actions.addStatusSort(sort));
+    dispatch(offersSlice.actions.changeOffers(offersFilter));
+    dispatch(offersSlice.actions.addStatusSort(Sort.Popular));
   }
 
   function changeOfferLowToHight(offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);
-    const sort = 'low to high';
 
-    //dispatch(offersSlice.actions.addOffersSort(offers));
     dispatch(offersSlice.actions.changeOffers(offers));
-    dispatch(offersSlice.actions.addStatusSort(sort));
+    dispatch(offersSlice.actions.addStatusSort(Sort.LowToHight));
   }
 
   function changeOfferHightToLow(offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.price - a.price);
-    const sort = 'high to low';
 
-    //dispatch(offersSlice.actions.addOffersSort(offers));
     dispatch(offersSlice.actions.changeOffers(offers));
-    dispatch(offersSlice.actions.addStatusSort(sort));
+    dispatch(offersSlice.actions.addStatusSort(Sort.HighToLow));
   }
 
   function changeOfferTopRatedFirst(offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.rating - a.rating);
-    const sort = 'Top rated first';
 
-    //dispatch(offersSlice.actions.addOffersSort(offers));
     dispatch(offersSlice.actions.changeOffers(offers));
-    dispatch(offersSlice.actions.addStatusSort(sort));
+    dispatch(offersSlice.actions.addStatusSort(Sort.TopRatedFirst));
   }
 
   function onClickSort(): void {
@@ -56,13 +49,13 @@ function SortList() {
   useEffect(() => {
     switch (sorting) {
       case 'low to high':
-        changeOfferLowToHight(offersFilter || []);
+        changeOfferLowToHight(offersFilter);
         break;
       case 'high to low':
-        changeOfferHightToLow(offersFilter || []);
+        changeOfferHightToLow(offersFilter);
         break;
       case 'Top rated first':
-        changeOfferTopRatedFirst(offersFilter || []);
+        changeOfferTopRatedFirst(offersFilter);
         break;
       default:
         changeOfferPopular();
@@ -82,11 +75,11 @@ function SortList() {
       case 1:
         return changeOfferPopular();
       case 2:
-        return changeOfferLowToHight(offersFilter || []);
+        return changeOfferLowToHight(offersFilter);
       case 3:
-        return changeOfferHightToLow(offersFilter || []);
+        return changeOfferHightToLow(offersFilter);
       case 4:
-        return changeOfferTopRatedFirst(offersFilter || []);
+        return changeOfferTopRatedFirst(offersFilter);
     }
   }
 

@@ -9,8 +9,8 @@ type StateOffers = {
   loadingStatus: boolean | null;
   error: null | string;
   offersSort: OfferCard[] | null;
-  offersFilter: OfferCard[] | null;
-  changeOffers: OfferCard[] | null;
+  offersFilter: OfferCard[];
+  changeOffers: OfferCard[];
   city: string;
   statusSort: string;
 
@@ -21,8 +21,8 @@ const initialState: StateOffers = {
   loadingStatus: null,
   error: null,
   offersSort: null,
-  offersFilter:null,
-  changeOffers: null,
+  offersFilter:[],
+  changeOffers: [],
   city: DEFAULT_CITY,
   statusSort : 'Popular'
 

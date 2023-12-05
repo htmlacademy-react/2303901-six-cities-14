@@ -4,7 +4,6 @@ import {ListOffers} from '../list-offers/list-offers';
 import {SortList} from '../sort-list/sort-list';
 import {memo} from 'react';
 
-
 function CitiesPlaceComponentMemo () {
 
   const offers = useAppSelector((state) => state.offers.offersFilter);
