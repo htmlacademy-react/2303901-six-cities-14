@@ -7,12 +7,16 @@ type StateOffers = {
   offers: OfferCard[] | null;
   loadingStatus: boolean | null;
   error: null | string;
+  offersSort: OfferCard[] | null;
+  offersFilter: OfferCard[] | null;
 }
 
 const initialState: StateOffers = {
   offers: null,
   loadingStatus: null,
-  error: null
+  error: null,
+  offersSort: null,
+  offersFilter:null
 };
 
 const offersSlice = createSlice({
@@ -29,6 +33,12 @@ const offersSlice = createSlice({
       if (foundOffer) {
         foundOffer.isFavorite = !foundOffer.isFavorite;
       }
+    },
+    addOffersSort(state, action: PayloadAction<OfferCard[]>){
+      state.offersSort = action.payload;
+    },
+    addOffersFilter(state, action: PayloadAction<OfferCard[]>){
+      state.offersFilter = action.payload;
     },
   },
   extraReducers(builder) {

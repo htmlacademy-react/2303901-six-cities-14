@@ -1,44 +1,46 @@
 import React, {useEffect, useState} from 'react';
 import type {OfferCard} from '../../types/type-store';
-import {sortOffersSlice} from '../../store/slices/sort-offers-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {memo} from 'react';
+import { offersSlice } from '../../store/slices/offers-slice';
 
-function SortListMemo () {
+
+function SortList () {
   const [stateSortList, setStateSortList] = useState(false);
   const [filter, setFilter] = useState('Popular');
-  const offersSort = useAppSelector((state) => state.sortOffers.sortOffers);
-  const offersCity = useAppSelector((state) => state.filterOffers.filterOffers);
+
+  const offersFilter = useAppSelector((state) => state.offers.offersFilter);
+  //const offersCity = useAppSelector((state) => state.filterOffers.filterOffers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setFilter('Popular');
-  },[offersCity]);
+  },[offersFilter]);
 
-  function changeOfferLowToHigh (offersToSort: OfferCard[]) {
+  function changeOfferLowToHight (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => a.price - b.price);
 
-    dispatch(sortOffersSlice.actions.addSortOffers(offers));
+    dispatch(offersSlice.actions.addOffersSort(offers));
   }
 
   function changeOfferHightToLow (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.price - a.price);
 
-    dispatch(sortOffersSlice.actions.addSortOffers(offers));
+    dispatch(offersSlice.actions.addOffersSort(offers));
   }
 
   function changeOfferTopRatedFirst (offersToSort: OfferCard[]) {
     const offers = [...offersToSort].sort((a, b) => b.rating - a.rating);
 
-    dispatch(sortOffersSlice.actions.addSortOffers(offers));
+    dispatch(offersSlice.actions.addOffersSort(offers));
   }
 
-  function handleClickSort():void {
+  function onClickSort():void {
 
     setStateSortList(!stateSortList);
   }
 
-  function handleClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
+  function onClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
+
     const target = evt.target as HTMLElement;
     const tabIndex: number = target.tabIndex;
     const text: string = (evt.target as HTMLElement).textContent || '';
@@ -48,21 +50,21 @@ function SortListMemo () {
 
     switch(tabIndex) {
       case 0:
-        return dispatch(sortOffersSlice.actions.addSortOffers(offersCity));
+        return dispatch(offersSlice.actions.addOffersFilter(offersFilter ?? []));
       case 1:
-        return changeOfferLowToHigh(offersSort);
+        return changeOfferLowToHight(offersFilter ?? []);
       case 2:
-        return changeOfferHightToLow(offersSort);
+        return changeOfferHightToLow(offersFilter ?? []);
       case 3:
-        return changeOfferTopRatedFirst(offersSort);
+        return changeOfferTopRatedFirst(offersFilter ?? []);
     }
   }
 
   return (
-    offersCity?.length ? (
+    offersFilter?.length ? (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
-        <span className="places__sorting-type" tabIndex={0} onClick={handleClickSort}>
+        <span className="places__sorting-type" tabIndex={0} onClick={onClickSort}>
           {filter}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
@@ -72,7 +74,7 @@ function SortListMemo () {
           className={`places__options places__options--custom
             stateSortList
             ${stateSortList ? 'places__options--opened' : ''}`}
-          onClick={handleClickChangeSort}
+          onClick={onClickChangeSort}
         >
           <li className="places__option places__option--active" tabIndex={0}>Popular</li>
           <li className="places__option" tabIndex={1}>Price: low to high</li>
@@ -81,9 +83,8 @@ function SortListMemo () {
         </ul>
       </form>
     ) : ''
+
   );
 }
-
-const SortList = memo(SortListMemo);
 
 export {SortList};

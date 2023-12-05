@@ -1,13 +1,10 @@
 import {memo} from 'react';
 import {SettingCardCities} from '../../const';
-import type {OfferCard} from '../../types/type-store';
 import {CardOffer} from '../card-offers/card';
+import {useAppSelector} from '../../hooks/use-store';
 
-type ListOffersProps = {
-  offers: OfferCard[] | null;
-}
-
-function ListOffersMemo ({offers}: ListOffersProps): JSX.Element {
+function ListOffersMemo (): JSX.Element {
+  const offers = useAppSelector((state) => state.offers.offersFilter);
 
   return(
     <div className="cities__places-list places__list tabs__content " data-testid = 'list offers'>
