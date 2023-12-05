@@ -40,6 +40,7 @@ function MainPagesMemo ({title}: MainPagesProps): JSX.Element {
 
   useEffect(() => {
     dispatch(offersSlice.actions.addOffersFilter(citiesToFilter));
+    dispatch(offersSlice.actions.changeOffers(citiesToFilter));
   },[selectedFilterCity, stateOffers]);
 
   useEffect(() => {

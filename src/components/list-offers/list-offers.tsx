@@ -4,7 +4,7 @@ import {CardOffer} from '../card-offers/card';
 import {useAppSelector} from '../../hooks/use-store';
 
 function ListOffersMemo (): JSX.Element {
-  const offers = useAppSelector((state) => state.offers.offersFilter);
+  const offers = useAppSelector((state) => state.offers.changeOffers);
 
   return(
     <div className="cities__places-list places__list tabs__content " data-testid = 'list offers'>

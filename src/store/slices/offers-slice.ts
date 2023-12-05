@@ -2,6 +2,7 @@ import type {OfferCard} from '../../types/type-store';
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
+import { DEFAULT_CITY } from '../../const';
 
 type StateOffers = {
   offers: OfferCard[] | null;
@@ -9,6 +10,10 @@ type StateOffers = {
   error: null | string;
   offersSort: OfferCard[] | null;
   offersFilter: OfferCard[] | null;
+  changeOffers: OfferCard[] | null;
+  city: string;
+  statusSort: string;
+
 }
 
 const initialState: StateOffers = {
@@ -16,7 +21,11 @@ const initialState: StateOffers = {
   loadingStatus: null,
   error: null,
   offersSort: null,
-  offersFilter:null
+  offersFilter:null,
+  changeOffers: null,
+  city: DEFAULT_CITY,
+  statusSort : 'Popular'
+
 };
 
 const offersSlice = createSlice({
@@ -39,6 +48,16 @@ const offersSlice = createSlice({
     },
     addOffersFilter(state, action: PayloadAction<OfferCard[]>){
       state.offersFilter = action.payload;
+    },
+    changeOffers(state, action: PayloadAction<OfferCard[]>){
+      state.changeOffers = action.payload;
+    },
+    addStatusSort(state, action: PayloadAction<string>){
+      state.statusSort = action.payload;
+    },
+
+    addCity(state, action: PayloadAction<string>){
+      state.city = action.payload;
     },
   },
   extraReducers(builder) {
