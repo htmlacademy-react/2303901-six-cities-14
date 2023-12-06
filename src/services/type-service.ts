@@ -4,11 +4,6 @@ import type {AppDispatch} from '../types/type-store';
 
 type Token = string;
 
-type DetailMessageType = {
-  type: string;
-  message: string;
-}
-
 type UserData = {
   data: User | null;
 }
@@ -32,5 +27,5 @@ type FavoriteStatus = {
   status: number;
 }
 
-export type {Token, DetailMessageType, UserData, User, Thunk, FavoriteStatus};
+export type {Token, UserData, User, Thunk, FavoriteStatus};
 

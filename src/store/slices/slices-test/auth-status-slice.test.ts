@@ -8,7 +8,8 @@ describe('auth status slice', () => {
     const expectedState = {
       authStatus: AuthorizationStatus.Unknown,
       error: null,
-      isLoading: false
+      isLoadingAuth: false,
+      isLoadingLogout: false
     };
 
     const result = authStatusSlice.reducer(expectedState, emptyAction);
@@ -22,7 +23,8 @@ describe('auth status slice', () => {
     const expectedState = {
       authStatus: AuthorizationStatus.Unknown,
       error: null,
-      isLoading: false
+      isLoadingAuth: false,
+      isLoadingLogout: false
     };
 
     const result = authStatusSlice.reducer(undefined, emptyAction);

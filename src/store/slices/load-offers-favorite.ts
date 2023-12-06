@@ -27,7 +27,6 @@ const offersFavoriteSlice = createSlice({
     addFavoriteOffers(state, action: PayloadAction<OfferCard[]>) {
       state.offers = action.payload;
     },
-
     sendFavoriteStatus(state, action: PayloadAction<OfferCard>){
       state.status = action.payload;
     }

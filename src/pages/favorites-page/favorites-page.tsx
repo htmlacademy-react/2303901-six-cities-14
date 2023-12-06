@@ -1,5 +1,5 @@
 import {Logotype} from '../../components/logotype/logotype';
-import {useDocumentTitle} from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/use-document-title';
 import {Profile} from '../../components/profile/profile';
 import {FavoriteCardComponents} from '../../components/favorite-cards-component/favorite-cards-component';
 import {AppRoute, AuthorizationStatus, SettingLogoFooter, SettingLogoHeader} from '../../const';
@@ -46,7 +46,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+              <Logotype className={SettingLogoHeader.ClassName} width={SettingLogoHeader.Width} height={SettingLogoHeader.Height}/>
             </div>
             <Profile/>
           </div>
@@ -56,7 +56,7 @@ function FavoritesPage({title}: FavoritePagesProps): JSX.Element {
         {offers.length ? <FavoriteCardComponents offers={offers}/> : <EmptyFavoriteCardsComponent/>}
       </main>
       <footer className="footer container">
-        <Logotype className={SettingLogoFooter.className} width={SettingLogoFooter.width} height={SettingLogoFooter.height}/>
+        <Logotype className={SettingLogoFooter.ClassName} width={SettingLogoFooter.Width} height={SettingLogoFooter.Height}/>
       </footer>
     </div>
   );

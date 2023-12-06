@@ -16,7 +16,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState(DEFAULT_VALUE_NULL);
   const [button, setButton] = useState(false);
-  const isCommentLengthValid = (comment.length >= LengthComment.MIN && comment.length <= LengthComment.MAX);
+  const isCommentLengthValid = (comment.length >= LengthComment.Min && comment.length <= LengthComment.Max);
   const isLoading = useAppSelector((state) => state.loadComment.isLoading);
   const isValid = !(isCommentLengthValid && rating !== DEFAULT_VALUE_NULL && (isLoading === null || true));
   const errorMessage = useAppSelector((state) => state.loadComment.error);
@@ -54,7 +54,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <RatingComponent rating={rating} setRating={getRatingFromComponent}/>
+      <RatingComponent rating={rating} onSetRating={getRatingFromComponent}/>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
@@ -69,7 +69,7 @@ function FormSendCommentMemo ({id}: PropsFormComment): JSX.Element {
           To submit review please make sure to set {''}
           <span className="reviews__star">rating</span> and describe
           your stay with at least {''}
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{LengthComment.Min} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

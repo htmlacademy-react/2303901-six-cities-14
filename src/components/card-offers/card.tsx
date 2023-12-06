@@ -4,8 +4,7 @@ import type {OfferCard} from '../../types/type-store';
 import {AppRoute, SettingFavoriteButtonCard} from '../../const';
 import {FavoriteButton} from '../favorite-button/favorite-button';
 import {useAppDispatch} from '../../hooks/use-store';
-import {fetchOfferAction} from '../../services/thunk/fetch-offer';
-import {getRating} from '../../utils';
+import {getRating, setFirstLetter} from '../../utils';
 import {memo} from 'react';
 import {offerSlice} from '../../store/slices/offer-slice';
 
@@ -36,7 +35,6 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
       ...cardState,
       offerId: offer.id,
     });
-    dispatch(fetchOfferAction(offer.id));
   }
 
   return(
@@ -58,9 +56,9 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <FavoriteButton offer={offer}
-            className={SettingFavoriteButtonCard.className}
-            width={SettingFavoriteButtonCard.width}
-            height={SettingFavoriteButtonCard.height}
+            className={SettingFavoriteButtonCard.ClassName}
+            width={SettingFavoriteButtonCard.Width}
+            height={SettingFavoriteButtonCard.Height}
           />
         </div>
         <div className="place-card__rating rating">
@@ -72,7 +70,7 @@ function CardOfferMemo ({offer, className, width, height}: CardPagesProps) : JSX
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{setFirstLetter(offer.type)}</p>
       </div>
     </article>
   );

@@ -1,20 +1,28 @@
 import {memo} from 'react';
-import {SettingCardCities} from '../../const';
-import type {OfferCard} from '../../types/type-store';
-import {CardOffer} from '../card-offers/card';
+import {SettingCardCities } from '../../const';
+import {CardOffer } from '../card-offers/card';
+import {useAppSelector } from '../../hooks/use-store';
 
-type ListOffersProps = {
-  offers: OfferCard[] | null;
-}
+function ListOffersMemo(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers.changeOffers);
 
-function ListOffersMemo ({offers}: ListOffersProps): JSX.Element {
-
-  return(
-    <div className="cities__places-list places__list tabs__content " data-testid = 'list offers'>
-      {offers?.map((offer) => <CardOffer key={offer.id} offer={offer} className={SettingCardCities.className} width={SettingCardCities.width} height={SettingCardCities.height}/>)}
+  return (
+    <div
+      className="cities__places-list places__list tabs__content"
+      data-testid="list offers"
+    >
+      {offers?.map((offer) => (
+        <CardOffer
+          key={offer.id}
+          offer={offer}
+          className={SettingCardCities.ClassName}
+          width={SettingCardCities.Width}
+          height={SettingCardCities.Height}
+        />
+      ))}
     </div>
   );
 }
 
 const ListOffers = memo(ListOffersMemo);
-export {ListOffers};
+export { ListOffers };

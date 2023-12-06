@@ -1,3 +1,4 @@
+import {Sort} from '../../../const';
 import {offersMock, offersMockChange} from '../../../mock/offers/offer-mocks';
 import {offersSlice} from '../offers-slice';
 
@@ -6,9 +7,12 @@ describe('Offer Slice', () => {
     const emptyAction = { type: '' };
 
     const expectedState = {
-      offers: offersMock,
-      loadingStatus: true,
-      error: ''
+      offers: null,
+      loadingStatus: null,
+      error: null,
+      offersFilter:[],
+      changeOffers: [],
+      statusSort : Sort.Popular
     };
 
     const result = offersSlice.reducer(expectedState, emptyAction);
@@ -22,7 +26,10 @@ describe('Offer Slice', () => {
     const expectedState = {
       offers: null,
       loadingStatus: null,
-      error: null
+      error: null,
+      offersFilter:[],
+      changeOffers: [],
+      statusSort : Sort.Popular
     };
     const result = offersSlice.reducer(undefined, emptyAction);
 
@@ -34,12 +41,18 @@ describe('Offer Slice', () => {
       offers: offersMock,
       loadingStatus: true,
       error: '',
+      offersFilter:[],
+      changeOffers: [],
+      statusSort : Sort.Popular
     };
 
     const expectedState = {
       offers: offersMockChange,
       loadingStatus: true,
       error: '',
+      offersFilter:[],
+      changeOffers: [],
+      statusSort : Sort.Popular
     };
 
     const result = offersSlice.reducer(initialState, offersSlice.actions.changeFavoriteStatus('45534534'));
@@ -52,6 +65,9 @@ describe('Offer Slice', () => {
       offers: offersMock,
       loadingStatus: true,
       error: '',
+      offersFilter:[],
+      changeOffers: [],
+      statusSort : Sort.Popular
     };
 
     const action = offersSlice.actions.changeFavoriteStatus('nonexistentId');

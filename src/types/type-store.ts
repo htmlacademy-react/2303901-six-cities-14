@@ -20,7 +20,6 @@ type OfferLocation = {
   zoom: number;
   };
 
-
 type OfferHost = {
   name: string;
   avatarUrl: string;
@@ -81,12 +80,9 @@ type StateLoadOffers = {
 type StateAuth = {
   authStatus: string;
   error: string | null;
-  isLoading: boolean;
+  isLoadingAuth: boolean;
+  isLoadingLogout: boolean;
 };
-
-type StateError = {
-  error: string | null;
-}
 
 type StateOffer = {
   offer: OfferPage | null;
@@ -114,7 +110,6 @@ export type {
   StateFilterOffers,
   StateLoadOffers,
   StateAuth,
-  StateError,
   OfferPage,
   Comment,
   StateOffer,

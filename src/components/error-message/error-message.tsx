@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {useDocumentTitle} from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/use-document-title';
 
 type OfferPagesProps = {
   title: string;

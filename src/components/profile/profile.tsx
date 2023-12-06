@@ -5,35 +5,30 @@ import {dataUserSlice} from '../../store/slices/data-user-slice';
 import {logoutAction} from '../../services/thunk/logout-action';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 import {memo} from 'react';
-import {LoadingComponent} from '../loading-component/loading-component';
-import {authStatusSlice} from '../../store/slices/auth-status-slice';
+import { offerSlice } from '../../store/slices/offer-slice';
 
 function ProfileMemo () {
   const statusAuth = useAppSelector((state) => state.authorizationStatus.authStatus);
   const user = useAppSelector((state) => state.userData.data);
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.offersFavorite.offers);
-  const isLoading = useAppSelector((state) => state.authorizationStatus.isLoading);
   const navigate = useNavigate();
   const currentPathname = window.location.pathname;
 
   function handleClickButtonOut () {
-    dispatch(authStatusSlice.actions.addUserStatus(AuthorizationStatus.NoAuth));
 
     if(statusAuth === AuthorizationStatus.Auth.toString()) {
+
       dispatch(logoutAction()).unwrap().then(() => {
         dispatch(fetchOffersAction());
-
-        if(isLoading){
-
-          return <LoadingComponent/>;
-        }
+        dispatch(dataUserSlice.actions.addUserData(null));
+        dispatch(offerSlice.actions.addLoadOfferCard(null));
       }).then(() => {
+
         if(currentPathname === AppRoute.Favorites.toString()){
           navigate(AppRoute.Login);
         }
       });
-      dispatch(dataUserSlice.actions.addUserData(null));
     }
   }
 

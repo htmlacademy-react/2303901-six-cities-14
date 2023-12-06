@@ -2,9 +2,7 @@ const DEFAULT_CITY = 'Paris';
 const URL_SERVER = 'https://14.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
-const TIMEOUT_SHOW_ERROR = 2000;
 const DEFAULT_VALUE_NULL = 0;
-const ERROR_NOT_OFFER = 'errorNotOffer';
 const ENDING = 2;
 const MAX_LENGTH_REVIEW = 10;
 const URL_MARKER_DEFAULT = 'img/pin.svg';
@@ -24,13 +22,6 @@ const DEFAULT_ICON = {
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39],
-};
-
-const DEFAULT_DESCRIPTION = {
-  title: 'Paris',
-  lat: 52.37454,
-  lng: 4.897976,
-  zoom: 13,
 };
 
 const MONTH_NAMES = [
@@ -78,16 +69,16 @@ enum ApiRoute {
  Logout = '/logout'
 }
 
-const Cities = {
+const City = {
   Paris: 'Paris',
   Cologne: 'Cologne',
   Brussels: 'Brussels',
   Amsterdam: 'Amsterdam',
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
-};
+} as const;
 
-const CitiesForFilter = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+const CITIES_FOR_FILTER = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const DefaultCityToMap = {
   Paris: {
@@ -131,55 +122,60 @@ const DefaultCityToMap = {
     lng: 10.000654,
     zoom: 13
   },
-
-};
+} as const;
 
 const LengthComment = {
-  MIN: 50,
-  MAX: 300
-};
+  Min: 50,
+  Max: 300
+} as const;
 
 const SettingLogoHeader = {
-  className: 'header',
-  width: 81,
-  height: 41,
-
-};
+  ClassName: 'header',
+  Width: 81,
+  Height: 41,
+} as const;
 
 const SettingLogoFooter = {
-  className: 'footer',
-  width: 64,
-  height: 33,
-};
+  ClassName: 'footer',
+  Width: 64,
+  Height: 33,
+} as const;
 
 const SettingFavoriteCard = {
-  className: 'favorites',
-  width: 150,
-  height: 110
-};
+  ClassName: 'favorites',
+  Width: 150,
+  Height: 110,
+} as const;
 
 const SettingCardCities = {
-  className: 'cities',
-  width: 260,
-  height: 200
-};
+  ClassName: 'cities',
+  Width: 260,
+  Height: 200,
+} as const;
 
 const SettingFavoriteButtonOfferPage = {
-  className: 'offer__bookmark-button',
-  width: 31,
-  height: 33
-};
+  ClassName: 'offer__bookmark-button',
+  Width: 31,
+  Height: 33,
+} as const;
 
 const SettingFavoriteButtonCard = {
-  className: 'place-card__bookmark-button',
-  width: 18,
-  height: 19
-};
+  ClassName: 'place-card__bookmark-button',
+  Width: 18,
+  Height: 19,
+} as const;
 
-const statusFavoriteToServer = {
-  favorite: 1,
-  noFavorite: 0
-};
+const StatusFavoriteToServer = {
+  Favorite: 1,
+  NoFavorite: 0,
+} as const;
+
+const Sort = {
+  Popular: 'Popular',
+  LowToHight: 'low to high',
+  HighToLow: 'high to low',
+  TopRatedFirst: 'Top rated first'
+} as const;
 
 export {
   AppRoute,
@@ -187,9 +183,8 @@ export {
   TitleDescription,
   ApiRoute,
   URL_MARKER_DEFAULT,
-  Cities,
-  CitiesForFilter,
-  DEFAULT_DESCRIPTION,
+  City,
+  CITIES_FOR_FILTER,
   CURRENT_ICON,
   DEFAULT_ICON,
   LengthComment,
@@ -200,8 +195,6 @@ export {
   URL_SERVER,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
-  TIMEOUT_SHOW_ERROR,
-  ERROR_NOT_OFFER,
   ENDING,
   SettingLogoHeader,
   SettingLogoFooter,
@@ -209,12 +202,12 @@ export {
   SettingCardCities,
   SettingFavoriteButtonOfferPage,
   SettingFavoriteButtonCard,
-  statusFavoriteToServer,
+  StatusFavoriteToServer,
   DEFAULT_VALUE_NULL,
   MAX_LENGTH_OFFERS_NEAR,
   MAX_LENGTH_OFFER_PHOTO,
   MAX_LENGTH_POINT_NEAR,
   OPTIONS,
-  RENAME_WORD
+  RENAME_WORD,
+  Sort
 };
-

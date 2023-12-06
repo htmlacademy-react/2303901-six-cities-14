@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {Logotype} from '../../components/logotype/logotype';
-import {useDocumentTitle} from '../../hooks/document-title';
+import {useDocumentTitle} from '../../hooks/use-document-title';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
-import {AppRoute, AuthorizationStatus, Cities, DEFAULT_CITY, SettingLogoHeader} from '../../const';
+import {AppRoute, AuthorizationStatus, City, DEFAULT_CITY, SettingLogoHeader} from '../../const';
 import {filterCitySlice} from '../../store/slices/filter-city-slice';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../services/thunk/login-action';
@@ -10,6 +10,9 @@ import {useEffect} from 'react';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
 import '../../pages/login-page/styleLogin.css';
 import type {AuthData} from '../../types/types';
+import {authStatusSlice} from '../../store/slices/auth-status-slice';
+import {checkAuthAction} from '../../services/thunk/check-auth-action';
+
 
 type LoginPagesProps = {
   title: string;
@@ -22,13 +25,15 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
   const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const city = useAppSelector((state) => state.filterCity.city);
   const dispatch = useAppDispatch();
-  const cityArray = Object.values(Cities);
+  const cityArray = Object.values(City);
   const error = useAppSelector((state) => state.authorizationStatus.error);
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
 
   useEffect(() => {
     const randomCity = cityArray[Math.floor(Math.random() * cityArray.length)];
     dispatch(filterCitySlice.actions.changeCity(randomCity));
+    dispatch(authStatusSlice.actions.addErrorStatus(null));
+    dispatch(checkAuthAction());
   }, []);
 
   const authData: AuthData = {
@@ -40,9 +45,11 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
     evt.preventDefault();
 
     dispatch(loginAction(authData)).unwrap().then(() => {
+      dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
+      dispatch(checkAuthAction());
       dispatch(fetchOffersAction());
     });
-    dispatch(filterCitySlice.actions.changeCity(DEFAULT_CITY));
+
   }
 
   function handleInputPassword (evt: React.ChangeEvent<HTMLInputElement>) {
@@ -61,18 +68,13 @@ function LoginPage ({title: title} : LoginPagesProps) : JSX.Element | string {
 
   useDocumentTitle(title);
 
-  if(authStatus === AuthorizationStatus.Auth.toString()) {
-    return '';
-  }
-
   return authStatus === AuthorizationStatus.NoAuth.toString() ? (
     <div className= "page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-
-              <Logotype className={SettingLogoHeader.className} width={SettingLogoHeader.width} height={SettingLogoHeader.height}/>
+              <Logotype className={SettingLogoHeader.ClassName} width={SettingLogoHeader.Width} height={SettingLogoHeader.Height}/>
             </div>
           </div>
         </div>

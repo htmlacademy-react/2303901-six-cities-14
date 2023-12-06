@@ -5,7 +5,7 @@ import {Action} from 'redux';
 import {State} from '../../types/type-store';
 import {ThunkDispatch} from 'redux-thunk';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {ApiRoute, DEFAULT_VALUE_NULL, statusFavoriteToServer} from '../../const';
+import {ApiRoute, DEFAULT_VALUE_NULL, StatusFavoriteToServer} from '../../const';
 import {checkAuthAction} from '../thunk/check-auth-action';
 import {offersMock} from '../../mock/offers/offer-mocks';
 import {fetchOffersAction} from '../thunk/fetch-offers';
@@ -251,9 +251,9 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "postOfferFavoriteAction.pending", "postOfferFavoriteAction.rejected" when server response 400', async () => {
-      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${statusFavoriteToServer.favorite}`).reply(400, []);
+      mockAxiosAdapter.onPost(`${ApiRoute.OffersFavorite}/${offer.id}/${StatusFavoriteToServer.Favorite}`).reply(400, []);
 
-      await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status:  statusFavoriteToServer.favorite}));
+      await store.dispatch(sendFavoriteOffer({id: offersMock[DEFAULT_VALUE_NULL].id, status:  StatusFavoriteToServer.Favorite}));
 
       const actions = extractActionsTypes(store.getActions());
 

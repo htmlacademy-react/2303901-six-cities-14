@@ -40,7 +40,7 @@ function FavoriteCardComponents({offers}: props) {
                 </div>
                 <div className="favorites__places">
                   {favoriteCityOffers?.map((offer) => (
-                    <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.className} width={SettingFavoriteCard.width} height={SettingFavoriteCard.height}/>
+                    <CardOffer key={offer.id} offer={offer} className={SettingFavoriteCard.ClassName} width={SettingFavoriteCard.Width} height={SettingFavoriteCard.Height}/>
                   ))}
                 </div>
               </li>
