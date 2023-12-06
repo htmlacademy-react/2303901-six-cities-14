@@ -29,14 +29,6 @@ const offersSlice = createSlice({
     addOfferList(state, action: PayloadAction<OfferCard[]>) {
       state.offers = action.payload;
     },
-    changeFavoriteStatus(state, action: PayloadAction<string>) {
-      const idToChange = action.payload;
-
-      const foundOffer = state.offers?.find((offer) => offer.id === idToChange);
-      if (foundOffer) {
-        foundOffer.isFavorite = !foundOffer.isFavorite;
-      }
-    },
     addOffersFilter(state, action: PayloadAction<OfferCard[]>){
       state.offersFilter = action.payload;
     },
