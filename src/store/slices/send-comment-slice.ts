@@ -3,7 +3,6 @@ import type {Comment,StateComment} from '../../types/type-store';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {sendComment} from '../../services/thunk/send-comment';
 
-
 const initialState: StateComment = {
   comment: null,
   error: false,

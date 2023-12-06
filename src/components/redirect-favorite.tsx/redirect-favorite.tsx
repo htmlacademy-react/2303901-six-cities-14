@@ -1,6 +1,6 @@
-import { AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/use-store';
-import { LoadingComponent } from '../loading-component/loading-component';
+import {AuthorizationStatus} from '../../const';
+import {useAppSelector} from '../../hooks/use-store';
+import {LoadingComponent} from '../loading-component/loading-component';
 
 type RedirectProps = {
   children: JSX.Element;

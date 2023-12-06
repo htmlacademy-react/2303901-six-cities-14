@@ -16,7 +16,6 @@ describe('Component: EmptyFavorites', () => {
         </Router>
       </Provider>
     );
-
     expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 });

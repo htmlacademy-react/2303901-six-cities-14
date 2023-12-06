@@ -1,7 +1,7 @@
-import { memo} from 'react';
-import { SettingCardCities } from '../../const';
-import { CardOffer } from '../card-offers/card';
-import { useAppSelector } from '../../hooks/use-store';
+import {memo} from 'react';
+import {SettingCardCities } from '../../const';
+import {CardOffer } from '../card-offers/card';
+import {useAppSelector } from '../../hooks/use-store';
 
 function ListOffersMemo(): JSX.Element {
   const offers = useAppSelector((state) => state.offers.changeOffers);

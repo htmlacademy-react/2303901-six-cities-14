@@ -23,7 +23,6 @@ import {getRating, setFirstLetter} from '../../utils';
 import {offerSlice} from '../../store/slices/offer-slice';
 import {sendCommentsSlice} from '../../store/slices/send-comment-slice';
 
-
 type OfferPagesProps = {
   title: string;
 }

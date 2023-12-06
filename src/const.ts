@@ -211,4 +211,3 @@ export {
   RENAME_WORD,
   Sort
 };
-

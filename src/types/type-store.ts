@@ -20,7 +20,6 @@ type OfferLocation = {
   zoom: number;
   };
 
-
 type OfferHost = {
   name: string;
   avatarUrl: string;

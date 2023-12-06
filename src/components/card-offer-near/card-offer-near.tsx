@@ -7,7 +7,6 @@ import {fetchOffersNear} from '../../services/api-actions';
 import {fetchOfferAction} from '../../services/thunk/fetch-offer';
 import {getRating, setFirstLetter} from '../../utils';
 
-
 type CardOfferProps = {
   offer: OfferCard;
 }
