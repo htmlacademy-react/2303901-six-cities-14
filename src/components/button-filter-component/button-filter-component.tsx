@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {Link} from 'react-router-dom';
 import {AppRoute, Sort} from '../../const';
 import {offersSlice} from '../../store/slices/offers-slice';
+import { fetchOffersAction } from '../../services/thunk/fetch-offers';
 
 type Props = {
   city: string;
@@ -18,6 +19,7 @@ function ButtonFilterComponent ({city}: Props) {
         onClick={() => {
           dispatch(filterCitySlice.actions.changeCity(city));
           dispatch(offersSlice.actions.addStatusSort(Sort.Popular));
+          dispatch(fetchOffersAction());
         }}
       >
         <span>{city}</span>

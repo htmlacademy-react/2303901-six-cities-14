@@ -1,11 +1,10 @@
 import type {OfferCard, OfferPage} from '../../types/type-store';
-import {offersSlice} from '../../store/slices/offers-slice';
 import {useAppDispatch, useAppSelector} from '../../hooks/use-store';
 import {sendFavoriteOffer} from '../../services/api-actions';
 import {AppRoute, AuthorizationStatus, StatusFavoriteToServer} from '../../const';
 import {Link} from 'react-router-dom';
 import {fetchOffersFavorite} from '../../services/thunk/fetch-offers-favorite';
-import {memo} from 'react';
+import {memo, useState} from 'react';
 
 type ButtonProps = {
   offer: OfferCard | OfferPage | null;
@@ -17,20 +16,25 @@ type ButtonProps = {
 function FavoriteButtonMemo({offer, className, width, height}: ButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.authorizationStatus.authStatus);
-  const checkClassName = `${className}  ${offer?.isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
+  const [isFavorite, setIsFavorite] = useState(offer?.isFavorite);
+  const checkClassName = `${className}  ${isFavorite ? 'place-card__bookmark-button--active' : 'place-card__bookmark-button'} button`;
 
   const data = {
     id:  offer?.id || '',
-    status: (!offer?.isFavorite) ? StatusFavoriteToServer.Favorite : StatusFavoriteToServer.NoFavorite,
+    status: (!isFavorite) ? StatusFavoriteToServer.Favorite : StatusFavoriteToServer.NoFavorite,
   };
 
   const handleFavoriteButton = (): void => {
-    dispatch(offersSlice.actions.changeFavoriteStatus(offer?.id ? offer.id : ''));
+
+    if(isFavorite){
+      setIsFavorite(false);
+    }else{
+      setIsFavorite(true);
+    }
 
     dispatch(sendFavoriteOffer(data)).unwrap().then(() => {
       dispatch(fetchOffersFavorite());
     });
-
   };
 
   return (
@@ -43,7 +47,7 @@ function FavoriteButtonMemo({offer, className, width, height}: ButtonProps): JSX
           <svg className="place-card__bookmark-icon" width={width} height={height}>
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
-          <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
+          <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
         </button>
       </Link>
     ) :
@@ -55,7 +59,7 @@ function FavoriteButtonMemo({offer, className, width, height}: ButtonProps): JSX
         <svg className="place-card__bookmark-icon" width={width} height={height}>
           <use xlinkHref="#icon-bookmark"></use>
         </svg>
-        <span className="visually-hidden">{offer?.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
+        <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
       </button>
   );
 }
