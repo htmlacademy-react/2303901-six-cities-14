@@ -191,7 +191,7 @@ function OfferPage ({title} : OfferPagesProps) : JSX.Element {
             />
           </section>
         </section>
-        {stateOffer && <OffersListNear point={stateOffersNear} offerPoint={stateOffer} />}
+        {stateOffer && <OffersListNear points={stateOffersNear} point={stateOffer} />}
       </main>
     </div>
   );

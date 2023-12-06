@@ -2,6 +2,7 @@ import type {OfferCard} from '../../types/type-store';
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {fetchOffersAction} from '../../services/thunk/fetch-offers';
+import {Sort} from '../../const';
 
 type StateOffers = {
   offers: OfferCard[] | null;
@@ -18,7 +19,7 @@ const initialState: StateOffers = {
   error: null,
   offersFilter:[],
   changeOffers: [],
-  statusSort : 'Popular'
+  statusSort : Sort.Popular
 };
 
 const offersSlice = createSlice({

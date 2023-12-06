@@ -10,7 +10,7 @@ function SortListMemo() {
   const [filter, setFilter] = useState('Popular');
   const offersFilter = useAppSelector((state) => state.offers.offersFilter);
   const dispatch = useAppDispatch();
-  const sorting = useAppSelector((state) => state.offers.statusSort);
+  const sortStatus = useAppSelector((state) => state.offers.statusSort);
   const city = useAppSelector((state) => state.filterCity.city);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function SortListMemo() {
   }
 
   useEffect(() => {
-    switch (sorting) {
+    switch (sortStatus) {
       case Sort.LowToHight:
         changeOfferLowToHigh(offersFilter);
         break;
@@ -62,7 +62,7 @@ function SortListMemo() {
         changeOfferPopular();
         break;
     }
-  }, [sorting, offersFilter, city]);
+  }, [sortStatus, offersFilter, city]);
 
   function onClickChangeSort(evt: React.SyntheticEvent<EventTarget, Event>) {
     const target = evt.target as HTMLElement;
